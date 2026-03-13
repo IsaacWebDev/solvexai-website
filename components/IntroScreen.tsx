@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
+import { motion } from 'framer-motion';
 
 interface IntroScreenProps {
   onEnter: () => void;
@@ -12,7 +13,7 @@ export default function IntroScreen({ onEnter }: IntroScreenProps) {
   const [showContent, setShowContent] = useState(true);
 
   useEffect(() => {
-    // Check if user has seen intro before
+    // Check if user has seen intro
     if (typeof window !== 'undefined' && localStorage.getItem('solvexai-intro-seen') === 'true') {
       onEnter();
       return;
@@ -28,7 +29,7 @@ export default function IntroScreen({ onEnter }: IntroScreenProps) {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 
-    // Matrix characters
+    // Matrix setup
     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()';
     const fontSize = 14;
     const columns = Math.floor(canvas.width / fontSize);
@@ -42,7 +43,7 @@ export default function IntroScreen({ onEnter }: IntroScreenProps) {
     // Colors (blue-purple gradient)
     const colors = ['#8B5CF6', '#3B82F6', '#00F0FF'];
 
-    // Animation loop
+    // Animation loop - NO MOUSE INTERACTION
     function draw() {
       if (!ctx || !canvas) return;
 
@@ -55,35 +56,33 @@ export default function IntroScreen({ onEnter }: IntroScreenProps) {
 
       for (let i = 0; i < drops.length; i++) {
         // Random character
-        const char = characters[Math.floor(Math.random() * characters.length)];
+        const text = characters[Math.floor(Math.random() * characters.length)];
 
-        // Random color from gradient
+        // Random color
         const color = colors[Math.floor(Math.random() * colors.length)];
         ctx.fillStyle = color;
 
-        // Draw character
-        ctx.fillText(char, i * fontSize, drops[i] * fontSize);
+        // Draw
+        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
 
-        // Reset drop when it goes off screen
+        // Reset when off screen
         if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
           drops[i] = 0;
         }
 
-        // Move drop down
+        // Move down
         drops[i]++;
       }
     }
 
-    // Start animation (60 FPS)
+    // Start animation (60 FPS) - CONTINUOUS, NO RESETS
     const interval = setInterval(draw, 1000 / 60);
 
-    // Handle window resize
+    // Handle resize ONLY (no mouse events)
     const handleResize = () => {
-      if (!canvas) return;
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
     };
-
     window.addEventListener('resize', handleResize);
 
     // Cleanup
@@ -98,67 +97,95 @@ export default function IntroScreen({ onEnter }: IntroScreenProps) {
     if (typeof window !== 'undefined') {
       localStorage.setItem('solvexai-intro-seen', 'true');
     }
-    setTimeout(onEnter, 800); // Fade out duration
+    setTimeout(onEnter, 800);
   };
 
+  // Keyboard handler
   useEffect(() => {
     const handleKeyPress = (e: KeyboardEvent) => {
       if (e.key === 'Enter') {
         handleEnter();
       }
     };
-
     window.addEventListener('keydown', handleKeyPress);
     return () => window.removeEventListener('keydown', handleKeyPress);
   }, []);
 
   return (
-    <div
-      onClick={handleEnter}
-      className="fixed inset-0 z-[9999] cursor-pointer"
-      style={{
-        opacity: showContent ? 1 : 0,
-        transition: 'opacity 0.8s ease-out'
-      }}
+    <motion.div
+      className="fixed inset-0 z-[9999]"
+      animate={{ opacity: showContent ? 1 : 0 }}
+      transition={{ duration: 0.8, ease: 'easeOut' }}
     >
-      {/* Matrix canvas background */}
+      {/* Matrix Background - NO MOUSE EVENTS */}
       <canvas
         ref={canvasRef}
         className="absolute inset-0 w-full h-full"
-        style={{ background: '#0a0a0a' }}
       />
 
-      {/* Logo + [ENTER] - centered */}
-      <div className="absolute inset-0 flex flex-col items-center justify-center gap-8 pointer-events-none">
-        {/* SolveXAI Logo */}
-        <div className="relative w-[90vw] max-w-[600px] h-[200px]">
+      {/* Content - Centered */}
+      <div className="absolute inset-0 flex flex-col items-center justify-center gap-12">
+        
+        {/* Logo */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1, ease: 'easeOut' }}
+          className="relative"
+        >
           <Image
-            src="/solvexai-logo-clean.png"
+            src="/solvexai-logo-final.png"
             alt="SolveXAI"
-            fill
+            width={600}
+            height={200}
             className="object-contain"
             priority
           />
-        </div>
+        </motion.div>
 
-        {/* [ENTER] text */}
-        <div
-          className="text-white text-2xl font-mono tracking-wider"
-          style={{
-            animation: 'pulse 2s ease-in-out infinite'
-          }}
+        {/* [ENTER] Button - 3D Glass Bubble */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 0.5, ease: 'easeOut' }}
+          onClick={handleEnter}
+          className="
+            relative px-8 py-4 rounded-full
+            bg-white/5 backdrop-blur-md
+            border border-white/20
+            shadow-[0_8px_32px_rgba(139,92,246,0.3)]
+            hover:shadow-[0_8px_48px_rgba(139,92,246,0.5)]
+            transition-all duration-300
+            cursor-pointer
+            group
+          "
         >
-          [ENTER]
-        </div>
-      </div>
+          {/* Pulsing glow effect */}
+          <motion.div
+            className="absolute inset-0 rounded-full bg-purple-500/20 blur-xl"
+            animate={{
+              scale: [1, 1.2, 1],
+              opacity: [0.3, 0.5, 0.3]
+            }}
+            transition={{
+              duration: 2,
+              repeat: Infinity,
+              ease: 'easeInOut'
+            }}
+          />
 
-      {/* CSS for pulse animation */}
-      <style jsx>{`
-        @keyframes pulse {
-          0%, 100% { opacity: 0.4; }
-          50% { opacity: 1; }
-        }
-      `}</style>
-    </div>
+          {/* Text */}
+          <span className="
+            relative z-10
+            text-white/90 text-xl font-mono tracking-wider
+            group-hover:text-white
+            transition-colors duration-300
+          ">
+            [ENTER]
+          </span>
+        </motion.div>
+
+      </div>
+    </motion.div>
   );
 }
