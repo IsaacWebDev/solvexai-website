@@ -1,0 +1,359 @@
+'use client'
+
+import React, { useState } from 'react'
+import { Navigation } from '@/components/Navigation'
+import { AnimatedGradientMesh } from '@/components/AnimatedGradientMesh'
+import Link from 'next/link'
+
+export default function TemplatesPage() {
+  const [selectedFilter, setSelectedFilter] = useState('All')
+  
+  const filters = ['All', 'Restaurants', 'Law Firms', 'Fitness', 'Real Estate', 'E-Commerce', 'Medical', 'More']
+  
+  const templates = [
+    {
+      name: 'Restaurant Delight',
+      industry: 'Restaurants',
+      price: 497,
+      features: [
+        'Hero with food photography',
+        'Digital menu with categories',
+        'Online ordering integration',
+        'Table reservation system',
+        'Instagram feed widget'
+      ],
+      includes: 'Contact forms, SEO, Mobile responsive, 1-week setup',
+      gradient: 'from-orange-600 to-red-600'
+    },
+    {
+      name: 'Law Firm Authority',
+      industry: 'Law Firms',
+      price: 797,
+      features: [
+        'Professional blue/gold theme',
+        'Case study showcase',
+        'Client intake forms',
+        'Attorney bio pages',
+        'Practice area pages'
+      ],
+      includes: 'Contact forms, SEO, Mobile responsive, 1-week setup',
+      gradient: 'from-blue-800 to-blue-600'
+    },
+    {
+      name: 'Fitness Studio Energy',
+      industry: 'Fitness',
+      price: 597,
+      features: [
+        'Vibrant orange/yellow design',
+        'Class schedule with filters',
+        'Online booking system',
+        'Trainer profile pages',
+        'Member portal login'
+      ],
+      includes: 'Contact forms, SEO, Mobile responsive, 1-week setup',
+      gradient: 'from-yellow-600 to-orange-600'
+    },
+    {
+      name: 'Real Estate Luxury',
+      industry: 'Real Estate',
+      price: 897,
+      features: [
+        'Dark theme with gold accents',
+        'Property listings (grid/map view)',
+        'Virtual tour integration',
+        'Advanced search filters',
+        'Lead capture forms'
+      ],
+      includes: 'Contact forms, SEO, Mobile responsive, 1-week setup',
+      gradient: 'from-yellow-800 to-yellow-600'
+    },
+    {
+      name: 'E-Commerce Clean',
+      industry: 'E-Commerce',
+      price: 997,
+      features: [
+        'Minimal white design',
+        'Product catalog with filters',
+        'Shopping cart & checkout',
+        'Inventory management',
+        'Order tracking'
+      ],
+      includes: 'Contact forms, SEO, Mobile responsive, 1-week setup',
+      gradient: 'from-purple-600 to-pink-600'
+    },
+    {
+      name: 'Medical Practice',
+      industry: 'Medical',
+      price: 797,
+      features: [
+        'Calming blue/white theme',
+        'Appointment booking',
+        'Patient portal',
+        'Insurance information',
+        'Service descriptions'
+      ],
+      includes: 'Contact forms, SEO, Mobile responsive, 1-week setup',
+      gradient: 'from-cyan-600 to-blue-600'
+    },
+    {
+      name: 'Construction Pro',
+      industry: 'More',
+      price: 597,
+      features: [
+        'Bold construction theme',
+        'Project portfolio',
+        'Quote request forms',
+        'Before/after galleries',
+        'Service area maps'
+      ],
+      includes: 'Contact forms, SEO, Mobile responsive, 1-week setup',
+      gradient: 'from-gray-700 to-yellow-700'
+    },
+    {
+      name: 'Creative Agency',
+      industry: 'More',
+      price: 697,
+      features: [
+        'Bold typography',
+        'Portfolio showcase',
+        'Case study pages',
+        'Client logo grid',
+        'Team member bios'
+      ],
+      includes: 'Contact forms, SEO, Mobile responsive, 1-week setup',
+      gradient: 'from-pink-600 to-purple-600'
+    }
+  ]
+  
+  const filteredTemplates = selectedFilter === 'All' 
+    ? templates 
+    : templates.filter(t => t.industry === selectedFilter)
+  
+  return (
+    <>
+      <Navigation />
+      <AnimatedGradientMesh />
+      
+      <main className="relative pt-32 pb-24 px-4">
+        <div className="max-w-7xl mx-auto">
+          {/* Hero */}
+          <div className="text-center mb-16">
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6">
+              Professional Websites, Ready in Days
+            </h1>
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+              Choose your industry. Customize your brand. Launch this week.
+            </p>
+          </div>
+          
+          {/* Filter Bar */}
+          <div className="flex flex-wrap justify-center gap-4 mb-16">
+            {filters.map((filter) => (
+              <button
+                key={filter}
+                onClick={() => setSelectedFilter(filter)}
+                className={`px-6 py-2 rounded-full font-medium transition-all duration-300 ${
+                  selectedFilter === filter
+                    ? 'bg-gradient-to-r from-purple-600 to-blue-600 text-white'
+                    : 'glass-card hover:bg-white/10'
+                }`}
+              >
+                {filter}
+              </button>
+            ))}
+          </div>
+          
+          {/* Template Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+            {filteredTemplates.map((template, index) => (
+              <TemplateCard key={index} {...template} />
+            ))}
+          </div>
+          
+          {/* Bottom CTA */}
+          <div className="glass-card rounded-2xl p-12 text-center">
+            <h2 className="text-3xl font-bold mb-4">
+              Don't see your industry? We can build it.
+            </h2>
+            <p className="text-gray-300 mb-8">
+              Request a custom template designed specifically for your business
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link href="/contact">
+                <button className="px-8 py-4 rounded-lg font-semibold bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-500 hover:to-blue-500 transition-all duration-300">
+                  Request Custom Template
+                </button>
+              </Link>
+              <Link href="/packages">
+                <button className="px-8 py-4 rounded-lg font-semibold glass-card hover:bg-white/10 transition-all duration-300">
+                  View Custom Development
+                </button>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </main>
+    </>
+  )
+}
+
+interface TemplateCardProps {
+  name: string
+  industry: string
+  price: number
+  features: string[]
+  includes: string
+  gradient: string
+}
+
+function TemplateCard({ name, industry, price, features, includes, gradient }: TemplateCardProps) {
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  
+  return (
+    <>
+      <div className="glass-card rounded-2xl overflow-hidden transition-all duration-500 transform hover:-translate-y-2 hover:shadow-2xl hover:shadow-purple-500/20 group">
+        {/* Screenshot Preview */}
+        <div 
+          className={`h-64 bg-gradient-to-br ${gradient} relative overflow-hidden cursor-pointer`}
+          onClick={() => setIsModalOpen(true)}
+        >
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div className="text-white/20 text-6xl font-bold">{name.charAt(0)}</div>
+          </div>
+          
+          {/* Hover Overlay */}
+          <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+            <span className="text-white font-semibold text-lg">View Full Details</span>
+          </div>
+        </div>
+        
+        {/* Content */}
+        <div className="p-6">
+          <div className="flex items-center justify-between mb-2">
+            <h3 className="text-2xl font-bold">{name}</h3>
+            <span className="px-3 py-1 rounded-full text-xs bg-purple-600/20 text-purple-400">
+              {industry}
+            </span>
+          </div>
+          
+          <ul className="space-y-2 mb-4 text-sm text-gray-300">
+            {features.slice(0, 4).map((feature, index) => (
+              <li key={index} className="flex items-start gap-2">
+                <span className="text-purple-400 mt-0.5">•</span>
+                {feature}
+              </li>
+            ))}
+          </ul>
+          
+          <p className="text-xs text-gray-400 mb-4 border-t border-white/10 pt-4">
+            {includes}
+          </p>
+          
+          <div className="flex items-center justify-between">
+            <span className="text-3xl font-bold gradient-text">${price}</span>
+            <div className="flex gap-2">
+              <button 
+                onClick={() => setIsModalOpen(true)}
+                className="px-4 py-2 rounded-lg text-sm font-semibold glass-card hover:bg-white/10 transition-all"
+              >
+                View Demo
+              </button>
+              <Link href="/contact">
+                <button className="px-4 py-2 rounded-lg text-sm font-semibold bg-purple-600 hover:bg-purple-500 transition-all">
+                  Buy Now
+                </button>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      {/* Modal */}
+      {isModalOpen && (
+        <TemplateModal 
+          template={{ name, industry, price, features, includes, gradient }}
+          onClose={() => setIsModalOpen(false)}
+        />
+      )}
+    </>
+  )
+}
+
+function TemplateModal({ template, onClose }: { template: TemplateCardProps; onClose: () => void }) {
+  return (
+    <div 
+      className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 overflow-y-auto"
+      onClick={onClose}
+    >
+      <div 
+        className="glass-card rounded-2xl max-w-4xl w-full p-8 my-8"
+        onClick={(e) => e.stopPropagation()}
+      >
+        {/* Close Button */}
+        <button 
+          onClick={onClose}
+          className="float-right text-gray-400 hover:text-white text-3xl leading-none"
+        >
+          ×
+        </button>
+        
+        <h2 className="text-4xl font-bold mb-4">{template.name}</h2>
+        <p className="text-gray-400 mb-8">Industry: {template.industry}</p>
+        
+        {/* Multi-page Preview Placeholder */}
+        <div className="grid grid-cols-2 gap-4 mb-8">
+          {['Home', 'About', 'Services', 'Contact'].map((page) => (
+            <div 
+              key={page}
+              className={`h-48 bg-gradient-to-br ${template.gradient} rounded-lg flex items-center justify-center`}
+            >
+              <span className="text-white/50 font-semibold">{page} Page</span>
+            </div>
+          ))}
+        </div>
+        
+        {/* Full Feature List */}
+        <h3 className="text-2xl font-bold mb-4">Complete Feature List</h3>
+        <ul className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-8">
+          {template.features.map((feature, index) => (
+            <li key={index} className="flex items-start gap-2 text-gray-300">
+              <svg className="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+              </svg>
+              {feature}
+            </li>
+          ))}
+        </ul>
+        
+        {/* What's Customizable */}
+        <h3 className="text-2xl font-bold mb-4">What's Customizable</h3>
+        <ul className="space-y-2 mb-8 text-gray-300">
+          <li>• Colors and fonts to match your brand</li>
+          <li>• Logo and branding elements</li>
+          <li>• All text and images</li>
+          <li>• Contact information and social links</li>
+        </ul>
+        
+        {/* Setup Timeline */}
+        <h3 className="text-2xl font-bold mb-4">Setup Timeline</h3>
+        <p className="text-gray-300 mb-8">
+          3-7 days from purchase to launch. We handle everything: design customization, 
+          content migration, domain setup, and testing.
+        </p>
+        
+        {/* Price & CTA */}
+        <div className="flex items-center justify-between border-t border-white/10 pt-8">
+          <div>
+            <div className="text-4xl font-bold gradient-text">${template.price}</div>
+            <div className="text-sm text-gray-400">One-time payment</div>
+          </div>
+          <Link href="/contact">
+            <button className="px-8 py-4 rounded-lg font-semibold text-lg bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-500 hover:to-blue-500 transition-all duration-300">
+              Purchase This Template
+            </button>
+          </Link>
+        </div>
+      </div>
+    </div>
+  )
+}

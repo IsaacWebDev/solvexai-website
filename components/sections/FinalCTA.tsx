@@ -1,51 +1,75 @@
 'use client'
-import { motion } from 'framer-motion'
-import { Button } from '../Button'
+
+import React from 'react'
 import Link from 'next/link'
 
 export function FinalCTA() {
   return (
     <section className="py-32 px-4">
       <div className="max-w-4xl mx-auto text-center">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-        >
-          <h2 className="text-5xl md:text-6xl font-bold text-white mb-8">
-            Ready to Automate?
-          </h2>
-          
-          <p className="text-xl md:text-2xl text-white/80 mb-12 max-w-2xl mx-auto">
-            Join businesses saving 20+ hours weekly with AI automation.
-          </p>
-          
-          <Link href="/contact">
-            <Button variant="primary">Get Started Today</Button>
-          </Link>
-        </motion.div>
+        {/* Headline */}
+        <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-8">
+          Ready to Automate Your Business?
+        </h2>
         
-        <footer className="mt-32 pt-16 border-t border-white/10">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-8">
-            <div className="text-white/60">
-              © 2025 SolveXAI. All rights reserved.
-            </div>
-            
-            <div className="flex gap-8">
-              <Link href="/services" className="text-white/60 hover:text-white transition-colors">
-                Services
-              </Link>
-              <Link href="/about" className="text-white/60 hover:text-white transition-colors">
-                About
-              </Link>
-              <Link href="/contact" className="text-white/60 hover:text-white transition-colors">
-                Contact
-              </Link>
-            </div>
-          </div>
-        </footer>
+        {/* Split CTAs */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
+          <CTAButton
+            text="I want a template"
+            subtitle="Fast & affordable"
+            href="/templates"
+          />
+          <CTAButton
+            text="I need custom work"
+            subtitle="Built exactly for you"
+            href="/contact"
+            highlighted
+          />
+          <CTAButton
+            text="Show me AI demo"
+            subtitle="24/7 receptionist"
+            href="/ai-receptionist"
+          />
+        </div>
+        
+        {/* Footer Trust Signals */}
+        <div className="flex flex-wrap justify-center gap-8 text-gray-400 text-sm">
+          <TrustSignal icon="✓" text="No hidden fees" />
+          <TrustSignal icon="✓" text="30-day support" />
+          <TrustSignal icon="✓" text="Money-back guarantee" />
+        </div>
       </div>
     </section>
+  )
+}
+
+interface CTAButtonProps {
+  text: string
+  subtitle: string
+  href: string
+  highlighted?: boolean
+}
+
+function CTAButton({ text, subtitle, href, highlighted }: CTAButtonProps) {
+  return (
+    <Link href={href}>
+      <div 
+        className={`glass-card rounded-xl p-8 transition-all duration-300 transform hover:-translate-y-2 cursor-pointer ${
+          highlighted ? 'ring-2 ring-purple-500 shadow-xl shadow-purple-500/30' : ''
+        }`}
+      >
+        <div className="text-xl font-bold mb-2">{text}</div>
+        <div className="text-sm text-gray-400">{subtitle}</div>
+      </div>
+    </Link>
+  )
+}
+
+function TrustSignal({ icon, text }: { icon: string; text: string }) {
+  return (
+    <div className="flex items-center gap-2">
+      <span className="text-green-400">{icon}</span>
+      <span>{text}</span>
+    </div>
   )
 }

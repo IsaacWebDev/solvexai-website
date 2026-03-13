@@ -8,7 +8,9 @@ export function Navigation() {
   const [isOpen, setIsOpen] = useState(false)
   
   const links = [
-    { href: '/services', label: 'Services' },
+    { href: '/templates', label: 'Templates' },
+    { href: '/packages', label: 'Packages' },
+    { href: '/ai-receptionist', label: 'AI Receptionist' },
     { href: '/about', label: 'About' },
     { href: '/contact', label: 'Contact' }
   ]

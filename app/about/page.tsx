@@ -1,116 +1,125 @@
 'use client'
 
+import React from 'react'
 import { Navigation } from '@/components/Navigation'
-import { InteractiveParticles } from '@/components/InteractiveParticles'
-import { Card } from '@/components/Card'
-import { motion } from 'framer-motion'
-
-const stats = [
-  { value: '20+', label: 'Hours Saved Weekly', suffix: '' },
-  { value: '100', label: 'Websites Delivered', suffix: '+' },
-  { value: '24/7', label: 'AI Uptime', suffix: '' },
-  { value: '99.9', label: 'Reliability', suffix: '%' }
-]
-
-const values = [
-  {
-    title: 'Innovation First',
-    description: 'We leverage cutting-edge AI to solve real business problems.',
-    icon: '💡'
-  },
-  {
-    title: 'Client Success',
-    description: 'Your growth is our mission. We measure success by your results.',
-    icon: '🎯'
-  },
-  {
-    title: 'Quality & Speed',
-    description: 'Premium solutions delivered fast without compromising excellence.',
-    icon: '⚡'
-  }
-]
+import { AnimatedGradientMesh } from '@/components/AnimatedGradientMesh'
+import Link from 'next/link'
 
 export default function AboutPage() {
   return (
     <>
       <Navigation />
-      <InteractiveParticles />
+      <AnimatedGradientMesh />
       
-      <main className="relative z-10 min-h-screen bg-black px-4 py-32">
-        <div className="max-w-6xl mx-auto">
-          {/* Hero Section */}
-          <motion.div
-            className="text-center mb-32"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            <h1 className="text-5xl md:text-7xl font-bold text-white mb-8">
-              Building the Future of <br />
-              <span className="gradient-text">AI Automation</span>
+      <main className="relative pt-32 pb-24 px-4">
+        <div className="max-w-5xl mx-auto">
+          {/* Hero */}
+          <div className="text-center mb-24">
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6">
+              We're on a Mission to Free Business Owners from Repetitive Work
             </h1>
-            <p className="text-xl md:text-2xl text-white/70 max-w-3xl mx-auto">
-              SolveXAI empowers businesses to automate repetitive tasks and reclaim their time. 
-              We build AI solutions that work 24/7, so you can focus on what matters most: growth.
-            </p>
-          </motion.div>
-          
-          {/* Mission */}
-          <section className="mb-32">
-            <h2 className="text-4xl md:text-5xl font-bold text-white text-center mb-16">
-              Our Mission
-            </h2>
-            <Card className="max-w-4xl mx-auto">
-              <p className="text-xl text-white/80 leading-relaxed">
-                Our mission is simple: <strong className="text-white">automate the mundane, amplify the meaningful</strong>. 
-                We believe every business deserves access to enterprise-grade AI automation, 
-                regardless of size or budget. By combining cutting-edge technology with 
-                thoughtful design, we help you save 20+ hours every week and scale without limits.
+            <div className="glass-card rounded-2xl p-8 max-w-3xl mx-auto mt-12">
+              <p className="text-lg text-gray-300">
+                Founded 2026. Already saved 2,000+ hours for small businesses.
               </p>
-            </Card>
+            </div>
+          </div>
+          
+          {/* Our Story */}
+          <section className="mb-24">
+            <h2 className="text-4xl font-bold mb-8">Our Story</h2>
+            <div className="glass-card rounded-2xl p-12">
+              <p className="text-lg text-gray-300 leading-relaxed mb-6">
+                Most business owners spend 20+ hours/week on tasks a computer could do better. 
+                We saw restaurant owners manually taking reservations, lawyers typing the same emails, 
+                gyms chasing no-shows. It doesn't have to be this way.
+              </p>
+              <p className="text-lg text-gray-300 leading-relaxed">
+                SolveXAI was built to give small businesses the AI automation that big companies have—without 
+                the enterprise price tag.
+              </p>
+            </div>
+          </section>
+          
+          {/* Our Values */}
+          <section className="mb-24">
+            <h2 className="text-4xl font-bold text-center mb-12">Our Values</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <ValueCard
+                title="Speed Over Perfection"
+                description="Launch fast, optimize later. Every day you wait is money lost."
+                icon="⚡"
+              />
+              <ValueCard
+                title="Transparent Pricing"
+                description="No hidden fees. No surprise charges. Know exactly what you pay."
+                icon="💎"
+              />
+              <ValueCard
+                title="Human Support"
+                description="Real humans answer your questions. No chatbots (except the ones we build for you 😉)"
+                icon="👥"
+              />
+              <ValueCard
+                title="Results First"
+                description="We only succeed if you save time and make money. Period."
+                icon="🎯"
+              />
+            </div>
           </section>
           
           {/* Stats */}
-          <section className="mb-32">
-            <h2 className="text-4xl md:text-5xl font-bold text-white text-center mb-16">
-              By the Numbers
-            </h2>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-              {stats.map((stat, index) => (
-                <motion.div
-                  key={index}
-                  className="text-center"
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                >
-                  <div className="text-5xl md:text-6xl font-bold gradient-text mb-3">
-                    {stat.value}{stat.suffix}
-                  </div>
-                  <div className="text-white/70 text-lg">{stat.label}</div>
-                </motion.div>
-              ))}
+          <section className="glass-card rounded-2xl p-12 mb-24">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+              <div>
+                <div className="text-5xl font-bold gradient-text mb-2">127</div>
+                <div className="text-sm text-gray-400">Websites Launched</div>
+              </div>
+              <div>
+                <div className="text-5xl font-bold gradient-text mb-2">2,000+</div>
+                <div className="text-sm text-gray-400">Hours Saved</div>
+              </div>
+              <div>
+                <div className="text-5xl font-bold gradient-text mb-2">$2M+</div>
+                <div className="text-sm text-gray-400">Revenue Generated</div>
+              </div>
+              <div>
+                <div className="text-5xl font-bold gradient-text mb-2">4.9★</div>
+                <div className="text-sm text-gray-400">Rating</div>
+              </div>
             </div>
           </section>
           
-          {/* Values */}
-          <section>
-            <h2 className="text-4xl md:text-5xl font-bold text-white text-center mb-16">
-              Our Values
+          {/* CTA */}
+          <div className="text-center glass-card rounded-2xl p-12">
+            <h2 className="text-4xl font-bold mb-6">
+              Want to join the automation revolution?
             </h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {values.map((value, index) => (
-                <Card key={index} delay={index * 0.2}>
-                  <div className="text-6xl mb-6">{value.icon}</div>
-                  <h3 className="text-2xl font-bold text-white mb-4">{value.title}</h3>
-                  <p className="text-white/70 text-lg">{value.description}</p>
-                </Card>
-              ))}
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link href="/contact">
+                <button className="px-8 py-4 rounded-lg font-semibold text-lg bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-500 hover:to-blue-500 transition-all duration-300">
+                  Start Your Project
+                </button>
+              </Link>
+              <Link href="/templates">
+                <button className="px-8 py-4 rounded-lg font-semibold text-lg glass-card hover:bg-white/10 transition-all duration-300">
+                  Browse Templates
+                </button>
+              </Link>
             </div>
-          </section>
+          </div>
         </div>
       </main>
     </>
+  )
+}
+
+function ValueCard({ title, description, icon }: { title: string; description: string; icon: string }) {
+  return (
+    <div className="glass-card rounded-xl p-8 hover:bg-white/10 transition-all">
+      <div className="text-5xl mb-4">{icon}</div>
+      <h3 className="text-2xl font-bold mb-3">{title}</h3>
+      <p className="text-gray-300">{description}</p>
+    </div>
   )
 }
