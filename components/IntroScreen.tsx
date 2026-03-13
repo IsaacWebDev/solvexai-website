@@ -134,7 +134,7 @@ export default function IntroScreen({ onEnter }: IntroScreenProps) {
           className="relative"
         >
           <Image
-            src="/solvexai-logo-final.png"
+            src="/solvexai-logo-ultra-clean.png"
             alt="SolveXAI"
             width={600}
             height={200}
@@ -150,7 +150,7 @@ export default function IntroScreen({ onEnter }: IntroScreenProps) {
           transition={{ duration: 1, delay: 0.5, ease: 'easeOut' }}
           onClick={handleEnter}
           className="
-            relative px-8 py-4 rounded-full
+            relative px-12 py-6 rounded-full
             bg-white/5 backdrop-blur-md
             border border-white/20
             shadow-[0_8px_32px_rgba(139,92,246,0.3)]
@@ -177,7 +177,7 @@ export default function IntroScreen({ onEnter }: IntroScreenProps) {
           {/* Text */}
           <span className="
             relative z-10
-            text-white/90 text-xl font-mono tracking-wider
+            text-white/90 text-3xl font-mono tracking-wider
             group-hover:text-white
             transition-colors duration-300
           ">

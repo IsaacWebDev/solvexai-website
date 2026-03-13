@@ -4,6 +4,9 @@ import React, { useEffect, useRef } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { LiquidGlassCard, LiquidGlassButton } from '@/components/ui'
+import dynamic from 'next/dynamic'
+
+const HolographicCard = dynamic(() => import('@/components/ui/HolographicCard'), { ssr: false })
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -15,24 +18,26 @@ export function ServicesReveal() {
     const cards = cardsRef.current.filter(Boolean)
     
     cards.forEach((card, i) => {
+      // EXPLOSIVE reveal animation (SHOCK FACTOR)
       gsap.fromTo(
         card,
         {
-          y: 100,
+          scale: 0,
+          rotation: -180,
           opacity: 0
         },
         {
-          y: 0,
+          scale: 1,
+          rotation: 0,
           opacity: 1,
-          duration: 0.8,
-          ease: 'power3.out',
+          duration: 1,
+          ease: 'back.out(2)',
           scrollTrigger: {
             trigger: card,
             start: 'top 80%',
-            end: 'bottom 20%',
-            toggleActions: 'play none none reverse'
+            once: true
           },
-          delay: i * 0.1
+          delay: i * 0.15
         }
       )
     })
