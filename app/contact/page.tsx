@@ -40,6 +40,9 @@ export default function ContactPage() {
     // Simulate API call
     await new Promise(resolve => setTimeout(resolve, 1500))
     
+    // Mark user as booked (prevents exit-intent popup)
+    localStorage.setItem('userBooked', 'true')
+    
     setIsSubmitting(false)
     setSubmitted(true)
   }
@@ -300,32 +303,45 @@ export default function ContactPage() {
             </LiquidGlassCard>
             
             {/* Right: What Happens Next */}
-            <LiquidGlassCard intensity="medium" className="p-8">
-              <h2 className="text-3xl font-bold mb-8">What Happens Next</h2>
-              
-              <div className="space-y-8">
-                <Step
-                  number="1"
-                  title="We'll email you within 2 hours"
-                  description="(Usually faster)"
-                />
-                <Step
-                  number="2"
-                  title="15-minute discovery call"
-                  description="(Understand your needs)"
-                />
-                <Step
-                  number="3"
-                  title="Custom proposal sent"
-                  description="(Clear pricing + timeline)"
-                />
-                <Step
-                  number="4"
-                  title="Kickoff within 48 hours"
-                  description="(If you approve)"
-                />
-              </div>
-            </LiquidGlassCard>
+            <div className="space-y-6">
+              <LiquidGlassCard intensity="medium" className="p-8">
+                <h2 className="text-3xl font-bold mb-8">What Happens Next</h2>
+                
+                <div className="space-y-8">
+                  <Step
+                    number="1"
+                    title="We'll email you within 2 hours"
+                    description="(Usually faster)"
+                  />
+                  <Step
+                    number="2"
+                    title="15-minute discovery call"
+                    description="(Understand your needs)"
+                  />
+                  <Step
+                    number="3"
+                    title="Custom proposal sent"
+                    description="(Clear pricing + timeline)"
+                  />
+                  <Step
+                    number="4"
+                    title="Kickoff within 48 hours"
+                    description="(If you approve)"
+                  />
+                </div>
+              </LiquidGlassCard>
+
+              {/* Maintenance Upsell */}
+              <LiquidGlassCard intensity="light" className="p-6 text-center" glowColor="#8B5CF6">
+                <h3 className="text-xl font-bold mb-2">Want ongoing support?</h3>
+                <p className="text-gray-300 text-sm mb-4">
+                  Add a maintenance plan to keep your website secure & optimized
+                </p>
+                <a href="/maintenance" className="text-purple-400 hover:text-purple-300 text-sm font-semibold">
+                  View Maintenance Plans →
+                </a>
+              </LiquidGlassCard>
+            </div>
           </div>
         </div>
       </main>

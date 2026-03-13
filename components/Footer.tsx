@@ -79,6 +79,7 @@ export default function Footer() {
               <li><Link href="/templates" className="hover:text-[#00F0FF] transition-colors">Website Templates</Link></li>
               <li><Link href="/packages" className="hover:text-[#00F0FF] transition-colors">Custom Development</Link></li>
               <li><Link href="/ai-receptionist" className="hover:text-[#00F0FF] transition-colors">AI Receptionist</Link></li>
+              <li><Link href="/maintenance" className="hover:text-[#00F0FF] transition-colors">Maintenance Plans</Link></li>
             </ul>
           </div>
 

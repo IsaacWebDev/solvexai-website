@@ -4,6 +4,7 @@ import React, { useState } from 'react'
 import { Navigation } from '@/components/Navigation'
 import { AnimatedGradientMesh } from '@/components/AnimatedGradientMesh'
 import { Phone3D } from '@/components/3d/Phone3D'
+import { GuaranteeBadge } from '@/components/GuaranteeBadge'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { containers, spacing, typography } from '@/lib/design-system'
@@ -253,6 +254,17 @@ export default function AIReceptionistPage() {
                     Get Started
                   </LiquidGlassButton>
                 </Link>
+                <div className="mt-6 flex justify-center">
+                  <GuaranteeBadge size="lg" variant="prominent">
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '4px' }}>
+                      <span style={{ fontSize: '20px' }}>🛡️</span>
+                      <span style={{ fontSize: '16px', fontWeight: '600' }}>Try risk-free for 14 days</span>
+                    </div>
+                    <span style={{ fontSize: '13px', color: '#d1d5db' }}>
+                      Not satisfied? Full refund, no questions asked.
+                    </span>
+                  </GuaranteeBadge>
+                </div>
               </div>
             </div>
           </LiquidGlassCard>

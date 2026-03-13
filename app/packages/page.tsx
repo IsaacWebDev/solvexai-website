@@ -4,6 +4,7 @@ import React from 'react'
 import { Navigation } from '@/components/Navigation'
 import { AnimatedGradientMesh } from '@/components/AnimatedGradientMesh'
 import { PricingPedestals3D } from '@/components/3d/PricingPedestals3D'
+import { GuaranteeBadge } from '@/components/GuaranteeBadge'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { containers, spacing, typography } from '@/lib/design-system'
@@ -189,8 +190,21 @@ export default function PackagesPage() {
             </table>
           </LiquidGlassCard>
           
+          {/* Maintenance Plans CTA */}
+          <LiquidGlassCard intensity="medium" className="mt-16 p-8 text-center" glowColor="#8B5CF6">
+            <h3 className="text-2xl font-bold mb-3">Need ongoing support?</h3>
+            <p className="text-gray-300 mb-6">
+              Keep your website secure, fast, and optimized with our maintenance plans
+            </p>
+            <Link href="/maintenance">
+              <LiquidGlassButton variant="secondary" size="lg">
+                See Maintenance Plans →
+              </LiquidGlassButton>
+            </Link>
+          </LiquidGlassCard>
+
           {/* Bottom CTA */}
-          <LiquidGlassCard intensity="heavy" className="mt-16 text-center p-12">
+          <LiquidGlassCard intensity="heavy" className="mt-8 text-center p-12">
             <h2 className="text-3xl font-bold mb-4">Not sure which you need?</h2>
             <p className="text-gray-300 mb-8">
               Book a free 15-minute consultation and we'll recommend the best fit
@@ -262,17 +276,28 @@ function PackageSection(props: PackageSectionProps) {
           {props.roi && <FeatureList title="ROI Example" items={props.roi} />}
           
           {/* CTAs */}
-          <div className="flex gap-4 mt-8">
-            <Link href={props.cta1Href}>
-              <LiquidGlassButton variant="primary" size="lg">
-                {props.cta1Text}
-              </LiquidGlassButton>
-            </Link>
-            <Link href={props.cta2Href}>
-              <LiquidGlassButton variant="secondary" size="lg">
-                {props.cta2Text}
-              </LiquidGlassButton>
-            </Link>
+          <div className="flex flex-col gap-4 mt-8">
+            <div className="flex gap-4">
+              <Link href={props.cta1Href}>
+                <LiquidGlassButton variant="primary" size="lg">
+                  {props.cta1Text}
+                </LiquidGlassButton>
+              </Link>
+              <Link href={props.cta2Href}>
+                <LiquidGlassButton variant="secondary" size="lg">
+                  {props.cta2Text}
+                </LiquidGlassButton>
+              </Link>
+            </div>
+            <GuaranteeBadge size="md" variant="prominent">
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <span style={{ fontSize: '18px' }}>🛡️</span>
+                <span>14-Day Money-Back Guarantee</span>
+              </div>
+              <span style={{ fontSize: '12px', color: '#d1d5db', marginTop: '4px', display: 'block' }}>
+                100% satisfaction or full refund. No questions asked.
+              </span>
+            </GuaranteeBadge>
           </div>
         </div>
       </div>

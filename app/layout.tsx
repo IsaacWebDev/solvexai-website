@@ -3,6 +3,8 @@ import { Inter } from 'next/font/google'
 import './globals.css'
 import { SmoothScroll } from '@/components/SmoothScroll'
 import { LiquidCursor, LiquidScrollProgress } from '@/components/ui'
+import AIChatWidget from '@/components/AIChatWidget'
+import { ExitIntentPopup } from '@/components/ExitIntentPopup'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -78,6 +80,8 @@ export default function RootLayout({
         <SmoothScroll />
         <LiquidCursor />
         <LiquidScrollProgress />
+        <AIChatWidget />
+        <ExitIntentPopup />
         {children}
       </body>
     </html>

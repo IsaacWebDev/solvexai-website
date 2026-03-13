@@ -4,6 +4,8 @@ import React, { useState } from 'react'
 import { Navigation } from '@/components/Navigation'
 import { AnimatedGradientMesh } from '@/components/AnimatedGradientMesh'
 import { TemplateMockup3D } from '@/components/3d/TemplateMockup3D'
+import { GuaranteeBadge } from '@/components/GuaranteeBadge'
+import { TemplatePreviewHover } from '@/components/TemplatePreviewHover'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { containers, spacing, typography } from '@/lib/design-system'
@@ -11,6 +13,7 @@ import { LiquidGlassCard, LiquidGlassButton } from '@/components/ui'
 
 export default function TemplatesPage() {
   const [selectedFilter, setSelectedFilter] = useState('All')
+  const [showBanner, setShowBanner] = useState(true)
   
   const filters = ['All', 'Restaurants', 'Law Firms', 'Fitness', 'Real Estate', 'E-Commerce', 'Medical', 'More']
   
@@ -27,7 +30,8 @@ export default function TemplatesPage() {
         'Instagram feed widget'
       ],
       includes: 'Contact forms, SEO, Mobile responsive, 1-week setup',
-      gradient: 'from-orange-600 to-red-600'
+      gradient: 'from-orange-600 to-red-600',
+      previewUrl: 'https://placeholder-restaurant-demo.vercel.app'
     },
     {
       name: 'Law Firm Authority',
@@ -41,7 +45,8 @@ export default function TemplatesPage() {
         'Practice area pages'
       ],
       includes: 'Contact forms, SEO, Mobile responsive, 1-week setup',
-      gradient: 'from-blue-800 to-blue-600'
+      gradient: 'from-blue-800 to-blue-600',
+      previewUrl: 'https://placeholder-lawfirm-demo.vercel.app'
     },
     {
       name: 'Fitness Studio Energy',
@@ -55,7 +60,8 @@ export default function TemplatesPage() {
         'Member portal login'
       ],
       includes: 'Contact forms, SEO, Mobile responsive, 1-week setup',
-      gradient: 'from-yellow-600 to-orange-600'
+      gradient: 'from-yellow-600 to-orange-600',
+      previewUrl: 'https://placeholder-fitness-demo.vercel.app'
     },
     {
       name: 'Real Estate Luxury',
@@ -69,7 +75,8 @@ export default function TemplatesPage() {
         'Lead capture forms'
       ],
       includes: 'Contact forms, SEO, Mobile responsive, 1-week setup',
-      gradient: 'from-yellow-800 to-yellow-600'
+      gradient: 'from-yellow-800 to-yellow-600',
+      previewUrl: 'https://placeholder-realestate-demo.vercel.app'
     },
     {
       name: 'E-Commerce Clean',
@@ -83,7 +90,8 @@ export default function TemplatesPage() {
         'Order tracking'
       ],
       includes: 'Contact forms, SEO, Mobile responsive, 1-week setup',
-      gradient: 'from-purple-600 to-pink-600'
+      gradient: 'from-purple-600 to-pink-600',
+      previewUrl: 'https://placeholder-ecommerce-demo.vercel.app'
     },
     {
       name: 'Medical Practice',
@@ -97,7 +105,8 @@ export default function TemplatesPage() {
         'Service descriptions'
       ],
       includes: 'Contact forms, SEO, Mobile responsive, 1-week setup',
-      gradient: 'from-cyan-600 to-blue-600'
+      gradient: 'from-cyan-600 to-blue-600',
+      previewUrl: 'https://placeholder-medical-demo.vercel.app'
     },
     {
       name: 'Construction Pro',
@@ -111,7 +120,8 @@ export default function TemplatesPage() {
         'Service area maps'
       ],
       includes: 'Contact forms, SEO, Mobile responsive, 1-week setup',
-      gradient: 'from-gray-700 to-yellow-700'
+      gradient: 'from-gray-700 to-yellow-700',
+      previewUrl: 'https://placeholder-construction-demo.vercel.app'
     },
     {
       name: 'Creative Agency',
@@ -125,7 +135,8 @@ export default function TemplatesPage() {
         'Team member bios'
       ],
       includes: 'Contact forms, SEO, Mobile responsive, 1-week setup',
-      gradient: 'from-pink-600 to-purple-600'
+      gradient: 'from-pink-600 to-purple-600',
+      previewUrl: 'https://placeholder-agency-demo.vercel.app'
     }
   ]
   
@@ -137,6 +148,42 @@ export default function TemplatesPage() {
     <>
       <Navigation />
       <AnimatedGradientMesh />
+
+      {/* Sticky Maintenance Banner */}
+      {showBanner && (
+        <motion.div
+          initial={{ y: -100, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          exit={{ y: -100, opacity: 0 }}
+          className="fixed top-20 left-0 right-0 z-40 px-4"
+        >
+          <div className="max-w-4xl mx-auto">
+            <LiquidGlassCard intensity="medium" glowColor="#8B5CF6" className="p-4">
+              <div className="flex items-center justify-between gap-4">
+                <div className="flex items-center gap-3 flex-1">
+                  <span className="text-2xl">🛡️</span>
+                  <p className="text-sm text-gray-200">
+                    <span className="font-semibold">All templates include maintenance plan option</span> — Keep your site secure & optimized
+                  </p>
+                </div>
+                <div className="flex items-center gap-3">
+                  <Link href="/maintenance">
+                    <LiquidGlassButton variant="primary" size="sm">
+                      View Plans
+                    </LiquidGlassButton>
+                  </Link>
+                  <button
+                    onClick={() => setShowBanner(false)}
+                    className="text-gray-400 hover:text-white transition-colors"
+                  >
+                    ✕
+                  </button>
+                </div>
+              </div>
+            </LiquidGlassCard>
+          </div>
+        </motion.div>
+      )}
       
       <main className="relative pt-40" style={{
         paddingBottom: spacing.section.vertical,
@@ -192,7 +239,13 @@ export default function TemplatesPage() {
           {/* Template Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
             {filteredTemplates.map((template, index) => (
-              <TemplateCard key={index} {...template} />
+              <TemplatePreviewHover 
+                key={index} 
+                previewUrl={template.previewUrl}
+                templateName={template.name}
+              >
+                <TemplateCard {...template} />
+              </TemplatePreviewHover>
             ))}
           </div>
           
@@ -230,6 +283,7 @@ interface TemplateCardProps {
   features: string[]
   includes: string
   gradient: string
+  previewUrl?: string
 }
 
 function TemplateCard({ name, industry, price, features, includes, gradient }: TemplateCardProps) {
@@ -285,8 +339,13 @@ function TemplateCard({ name, industry, price, features, includes, gradient }: T
             {includes}
           </p>
           
-          <div className="flex items-center justify-between">
-            <span className="text-3xl font-bold gradient-text">${price}</span>
+          <div className="flex items-center justify-between mb-4">
+            <div>
+              <div className="text-3xl font-bold gradient-text mb-2">${price}</div>
+              <GuaranteeBadge size="sm">
+                💯 14-Day Guarantee
+              </GuaranteeBadge>
+            </div>
             <div className="flex gap-2">
               <LiquidGlassButton 
                 variant="ghost"
