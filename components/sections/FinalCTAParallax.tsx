@@ -5,6 +5,9 @@ import Link from 'next/link'
 import { GuaranteeBadge } from '@/components/GuaranteeBadge'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import dynamic from 'next/dynamic'
+
+const JellyfishBackground = dynamic(() => import('@/components/3d/JellyfishBackground'), { ssr: false })
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -42,6 +45,9 @@ export function FinalCTAParallax() {
         padding: '4rem 2rem'
       }}
     >
+      {/* Neon Jellyfish Swimming Animation */}
+      <JellyfishBackground />
+      
       {/* Parallax Background Layer */}
       <div
         ref={bgRef}

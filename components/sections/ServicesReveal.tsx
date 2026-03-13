@@ -18,7 +18,7 @@ export function ServicesReveal() {
     const cards = cardsRef.current.filter(Boolean)
     
     cards.forEach((card, i) => {
-      // EXPLOSIVE reveal animation (SHOCK FACTOR)
+      // EXPLOSIVE reveal animation with BIDIRECTIONAL support (scroll up = reverse)
       gsap.fromTo(
         card,
         {
@@ -35,7 +35,9 @@ export function ServicesReveal() {
           scrollTrigger: {
             trigger: card,
             start: 'top 80%',
-            once: true
+            end: 'top 50%',
+            scrub: 1,  // Smooth scrubbing for bidirectional effect
+            toggleActions: 'play reverse play reverse'  // Bidirectional animation
           },
           delay: i * 0.15
         }
