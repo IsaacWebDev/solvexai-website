@@ -6,6 +6,7 @@ import { AnimatedGradientMesh } from '@/components/AnimatedGradientMesh'
 import { ContactForm3D } from '@/components/3d/ContactForm3D'
 import { motion } from 'framer-motion'
 import { containers, spacing, typography } from '@/lib/design-system'
+import { LiquidGlassCard, LiquidGlassButton } from '@/components/ui'
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -51,7 +52,7 @@ export default function ContactPage() {
         
         <main className="relative pt-32 pb-24 px-4 min-h-screen flex items-center justify-center">
           <div className="max-w-2xl mx-auto text-center">
-            <div className="glass-card rounded-2xl p-12">
+            <LiquidGlassCard intensity="medium" className="p-12">
               <div className="text-6xl mb-6">✓</div>
               <h1 className="text-4xl font-bold mb-4">Message Sent!</h1>
               <p className="text-xl text-gray-300 mb-8">
@@ -87,7 +88,7 @@ export default function ContactPage() {
                   </div>
                 </div>
               </div>
-            </div>
+            </LiquidGlassCard>
           </div>
         </main>
       </>
@@ -110,7 +111,7 @@ export default function ContactPage() {
           
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             {/* Left: Contact Form */}
-            <div className="glass-card rounded-2xl p-8">
+            <LiquidGlassCard intensity="heavy" className="p-8">
               <form onSubmit={handleSubmit} className="space-y-6">
                 {/* Name */}
                 <div>
@@ -282,7 +283,7 @@ export default function ContactPage() {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full py-4 rounded-lg font-semibold text-lg bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-500 hover:to-blue-500 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full py-4 px-8 rounded-lg font-semibold text-lg bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-500 hover:to-blue-500 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {isSubmitting ? 'Sending...' : 'Send Message'}
                 </button>
@@ -292,10 +293,10 @@ export default function ContactPage() {
               <div className="mt-8 pt-8 border-t border-white/10 text-center text-sm text-gray-400">
                 <p>Prefer email? <a href="mailto:hello@solvexai.org" className="text-purple-400 hover:text-purple-300">hello@solvexai.org</a></p>
               </div>
-            </div>
+            </LiquidGlassCard>
             
             {/* Right: What Happens Next */}
-            <div className="glass-card rounded-2xl p-8">
+            <LiquidGlassCard intensity="medium" className="p-8">
               <h2 className="text-3xl font-bold mb-8">What Happens Next</h2>
               
               <div className="space-y-8">
@@ -320,7 +321,7 @@ export default function ContactPage() {
                   description="(If you approve)"
                 />
               </div>
-            </div>
+            </LiquidGlassCard>
           </div>
         </div>
       </main>

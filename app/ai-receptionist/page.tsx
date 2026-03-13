@@ -7,6 +7,7 @@ import { Phone3D } from '@/components/3d/Phone3D'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { containers, spacing, typography } from '@/lib/design-system'
+import { LiquidGlassCard, LiquidGlassButton } from '@/components/ui'
 
 export default function AIReceptionistPage() {
   return (
@@ -40,9 +41,9 @@ export default function AIReceptionistPage() {
                 AI receptionist that sounds human, works 24/7, costs 90% less
               </p>
               <Link href="/contact">
-                <button className="px-8 py-4 rounded-lg font-semibold text-lg bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-500 hover:to-blue-500 transition-all duration-300">
+                <LiquidGlassButton variant="primary" size="lg">
                   Book Demo Call →
-                </button>
+                </LiquidGlassButton>
               </Link>
             </motion.div>
             
@@ -156,7 +157,7 @@ export default function AIReceptionistPage() {
           </section>
           
           {/* Setup Process */}
-          <section className="glass-card rounded-2xl p-12 mb-24">
+          <LiquidGlassCard intensity="medium" className="p-12 mb-24">
             <h2 className="text-4xl font-bold text-center mb-12">Setup Process</h2>
             <div className="max-w-4xl mx-auto">
               <div className="space-y-8">
@@ -173,16 +174,16 @@ export default function AIReceptionistPage() {
               </div>
               <div className="text-center mt-12">
                 <Link href="/contact">
-                  <button className="px-8 py-4 rounded-lg font-semibold text-lg bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-500 hover:to-blue-500 transition-all duration-300">
+                  <LiquidGlassButton variant="primary" size="lg">
                     Start Setup →
-                  </button>
+                  </LiquidGlassButton>
                 </Link>
               </div>
             </div>
-          </section>
+          </LiquidGlassCard>
           
           {/* Pricing */}
-          <section className="glass-card rounded-2xl p-12">
+          <LiquidGlassCard intensity="heavy" className="p-12">
             <h2 className="text-4xl font-bold text-center mb-12">Transparent Pricing</h2>
             <div className="max-w-4xl mx-auto">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
@@ -249,13 +250,13 @@ export default function AIReceptionistPage() {
               
               <div className="text-center mt-12">
                 <Link href="/contact">
-                  <button className="px-8 py-4 rounded-lg font-semibold text-lg bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-500 hover:to-blue-500 transition-all duration-300">
+                  <LiquidGlassButton variant="primary" size="lg">
                     Get Started
-                  </button>
+                  </LiquidGlassButton>
                 </Link>
               </div>
             </div>
-          </section>
+          </LiquidGlassCard>
         </div>
       </main>
     </>
@@ -264,7 +265,7 @@ export default function AIReceptionistPage() {
 
 function DemoCard({ title, duration }: { title: string; duration: string }) {
   return (
-    <div className="glass-card rounded-xl p-6 hover:bg-white/10 transition-all cursor-pointer group">
+    <LiquidGlassCard intensity="medium" className="p-6 cursor-pointer group">
       <div className="flex items-center gap-4 mb-2">
         <div className="w-12 h-12 rounded-full bg-purple-600 flex items-center justify-center group-hover:scale-110 transition-transform">
           <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
@@ -276,13 +277,13 @@ function DemoCard({ title, duration }: { title: string; duration: string }) {
           <p className="text-sm text-gray-400">{duration}</p>
         </div>
       </div>
-    </div>
+    </LiquidGlassCard>
   )
 }
 
 function FeatureCard({ number, title, subtitle, features }: { number: string; title: string; subtitle: string; features: string[] }) {
   return (
-    <div className="glass-card rounded-xl p-6">
+    <LiquidGlassCard intensity="medium" className="p-6">
       <div className="text-3xl font-bold gradient-text mb-2">{number}</div>
       <h3 className="text-xl font-bold mb-2">{title}</h3>
       <p className="text-sm text-gray-400 mb-4">{subtitle}</p>
@@ -294,7 +295,7 @@ function FeatureCard({ number, title, subtitle, features }: { number: string; ti
           </li>
         ))}
       </ul>
-    </div>
+    </LiquidGlassCard>
   )
 }
 
@@ -308,7 +309,7 @@ function ROICalculator() {
   const breakEven = Math.ceil(297 / (calls * (missed / 100) * value / 30))
   
   return (
-    <section className="glass-card rounded-2xl p-12 mb-24 bg-gradient-to-br from-purple-900/20 to-blue-900/20">
+    <LiquidGlassCard intensity="heavy" className="p-12 mb-24 bg-gradient-to-br from-purple-900/20 to-blue-900/20">
       <h2 className="text-4xl font-bold text-center mb-4">ROI Calculator</h2>
       <p className="text-center text-gray-400 mb-12">See how much you're losing without AI</p>
       
@@ -374,22 +375,22 @@ function ROICalculator() {
         
         <div className="text-center mt-8">
           <Link href="/contact">
-            <button className="px-6 py-3 rounded-lg font-semibold glass-card hover:bg-white/10 transition-all">
+            <LiquidGlassButton variant="secondary" size="md">
               Get Your Custom ROI Report
-            </button>
+            </LiquidGlassButton>
           </Link>
         </div>
       </div>
-    </section>
+    </LiquidGlassCard>
   )
 }
 
 function IndustryCard({ title, example }: { title: string; example: string }) {
   return (
-    <div className="glass-card rounded-xl p-6 hover:bg-white/10 transition-all">
+    <LiquidGlassCard intensity="light" className="p-6">
       <h3 className="font-bold mb-2">{title}</h3>
       <p className="text-sm text-gray-400">"{example}"</p>
-    </div>
+    </LiquidGlassCard>
   )
 }
 

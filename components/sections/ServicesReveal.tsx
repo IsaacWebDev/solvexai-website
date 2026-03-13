@@ -3,6 +3,7 @@
 import React, { useEffect, useRef } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { LiquidGlassCard, LiquidGlassButton } from '@/components/ui'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -97,51 +98,26 @@ export function ServicesReveal() {
         }}
       >
         {services.map((service, i) => (
-          <div
-            key={i}
-            ref={el => { cardsRef.current[i] = el }}
-            className="group cursor-pointer"
-            style={{
-              background: 'rgba(255, 255, 255, 0.05)',
-              backdropFilter: 'blur(20px)',
-              borderRadius: '24px',
-              padding: '3rem',
-              border: '1px solid rgba(255, 255, 255, 0.1)',
-              transition: 'all 0.5s cubic-bezier(0.23, 1, 0.32, 1)',
-            }}
-            onMouseEnter={(e) => {
-              gsap.to(e.currentTarget, {
-                y: -10,
-                background: 'rgba(255, 255, 255, 0.08)',
-                borderColor: 'rgba(139, 92, 246, 0.3)',
-                boxShadow: '0 30px 80px rgba(139, 92, 246, 0.2)',
-                duration: 0.3
-              })
-            }}
-            onMouseLeave={(e) => {
-              gsap.to(e.currentTarget, {
-                y: 0,
-                background: 'rgba(255, 255, 255, 0.05)',
-                borderColor: 'rgba(255, 255, 255, 0.1)',
-                boxShadow: '0 0 0 rgba(139, 92, 246, 0)',
-                duration: 0.3
-              })
-            }}
-          >
-            <div className="text-6xl mb-6">{service.icon}</div>
-            <h3 className="text-2xl font-bold mb-4">{service.title}</h3>
-            <p className="text-gray-400 mb-6 leading-relaxed">{service.description}</p>
-            <div 
-              className="text-xl font-bold"
-              style={{
-                background: 'linear-gradient(135deg, #8B5CF6, #3B82F6)',
-                backgroundClip: 'text',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-              }}
-            >
-              {service.price}
-            </div>
+          <div key={i} ref={el => { cardsRef.current[i] = el }}>
+            <LiquidGlassCard intensity="medium" className="p-12 cursor-pointer group h-full">
+              <div className="text-6xl mb-6">{service.icon}</div>
+              <h3 className="text-2xl font-bold mb-4">{service.title}</h3>
+              <p className="text-gray-400 mb-6 leading-relaxed">{service.description}</p>
+              <div 
+                className="text-xl font-bold mb-6"
+                style={{
+                  background: 'linear-gradient(135deg, #8B5CF6, #3B82F6)',
+                  backgroundClip: 'text',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                }}
+              >
+                {service.price}
+              </div>
+              <LiquidGlassButton variant="secondary" size="md">
+                Learn More →
+              </LiquidGlassButton>
+            </LiquidGlassCard>
           </div>
         ))}
       </div>

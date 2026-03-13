@@ -7,6 +7,7 @@ import { TeamOrbit3D } from '@/components/3d/TeamOrbit3D'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { containers, spacing, typography } from '@/lib/design-system'
+import { LiquidGlassCard, LiquidGlassButton } from '@/components/ui'
 
 export default function AboutPage() {
   return (
@@ -35,13 +36,15 @@ export default function AboutPage() {
             }}>
               We're on a Mission to Free Business Owners from Repetitive Work
             </h1>
-            <div className="glass-card rounded-2xl p-8" style={{ 
+            <div style={{ 
               maxWidth: containers.text,
               margin: '0 auto'
             }}>
-              <p className="text-gray-300" style={{ fontSize: typography.body }}>
-                Founded 2026. Already saved 2,000+ hours for small businesses.
-              </p>
+              <LiquidGlassCard intensity="light" className="p-8">
+                <p className="text-gray-300" style={{ fontSize: typography.body }}>
+                  Founded 2026. Already saved 2,000+ hours for small businesses.
+                </p>
+              </LiquidGlassCard>
             </div>
           </motion.div>
           
@@ -58,7 +61,7 @@ export default function AboutPage() {
           {/* Our Story */}
           <section className="mb-24">
             <h2 className="text-4xl font-bold mb-8">Our Story</h2>
-            <div className="glass-card rounded-2xl p-12">
+            <LiquidGlassCard intensity="medium" className="p-12">
               <p className="text-lg text-gray-300 leading-relaxed mb-6">
                 Most business owners spend 20+ hours/week on tasks a computer could do better. 
                 We saw restaurant owners manually taking reservations, lawyers typing the same emails, 
@@ -68,7 +71,7 @@ export default function AboutPage() {
                 SolveXAI was built to give small businesses the AI automation that big companies have—without 
                 the enterprise price tag.
               </p>
-            </div>
+            </LiquidGlassCard>
           </section>
           
           {/* Our Values */}
@@ -99,7 +102,7 @@ export default function AboutPage() {
           </section>
           
           {/* Stats */}
-          <section className="glass-card rounded-2xl p-12 mb-24">
+          <LiquidGlassCard intensity="medium" className="p-12 mb-24">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
               <div>
                 <div className="text-5xl font-bold gradient-text mb-2">127</div>
@@ -118,26 +121,26 @@ export default function AboutPage() {
                 <div className="text-sm text-gray-400">Rating</div>
               </div>
             </div>
-          </section>
+          </LiquidGlassCard>
           
           {/* CTA */}
-          <div className="text-center glass-card rounded-2xl p-12">
+          <LiquidGlassCard intensity="heavy" className="text-center p-12">
             <h2 className="text-4xl font-bold mb-6">
               Want to join the automation revolution?
             </h2>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link href="/contact">
-                <button className="px-8 py-4 rounded-lg font-semibold text-lg bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-500 hover:to-blue-500 transition-all duration-300">
+                <LiquidGlassButton variant="primary" size="lg">
                   Start Your Project
-                </button>
+                </LiquidGlassButton>
               </Link>
               <Link href="/templates">
-                <button className="px-8 py-4 rounded-lg font-semibold text-lg glass-card hover:bg-white/10 transition-all duration-300">
+                <LiquidGlassButton variant="secondary" size="lg">
                   Browse Templates
-                </button>
+                </LiquidGlassButton>
               </Link>
             </div>
-          </div>
+          </LiquidGlassCard>
         </div>
       </main>
     </>
@@ -146,10 +149,10 @@ export default function AboutPage() {
 
 function ValueCard({ title, description, icon }: { title: string; description: string; icon: string }) {
   return (
-    <div className="glass-card rounded-xl p-8 hover:bg-white/10 transition-all">
+    <LiquidGlassCard intensity="medium" className="p-8">
       <div className="text-5xl mb-4">{icon}</div>
       <h3 className="text-2xl font-bold mb-3">{title}</h3>
       <p className="text-gray-300">{description}</p>
-    </div>
+    </LiquidGlassCard>
   )
 }

@@ -7,6 +7,7 @@ import { PricingPedestals3D } from '@/components/3d/PricingPedestals3D'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { containers, spacing, typography } from '@/lib/design-system'
+import { LiquidGlassCard, LiquidGlassButton } from '@/components/ui'
 
 export default function PackagesPage() {
   return (
@@ -168,7 +169,7 @@ export default function PackagesPage() {
           />
           
           {/* Comparison Table */}
-          <div className="mt-24 glass-card rounded-2xl p-8 overflow-x-auto">
+          <LiquidGlassCard intensity="medium" className="mt-24 p-8 overflow-x-auto">
             <h2 className="text-3xl font-bold text-center mb-8">Feature Comparison</h2>
             <table className="w-full text-left">
               <thead>
@@ -187,20 +188,20 @@ export default function PackagesPage() {
                 <ComparisonRow feature="Best for" templates="Simple" custom="Complex" ai="Automation" />
               </tbody>
             </table>
-          </div>
+          </LiquidGlassCard>
           
           {/* Bottom CTA */}
-          <div className="mt-16 text-center glass-card rounded-2xl p-12">
+          <LiquidGlassCard intensity="heavy" className="mt-16 text-center p-12">
             <h2 className="text-3xl font-bold mb-4">Not sure which you need?</h2>
             <p className="text-gray-300 mb-8">
               Book a free 15-minute consultation and we'll recommend the best fit
             </p>
             <Link href="/contact">
-              <button className="px-8 py-4 rounded-lg font-semibold text-lg bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-500 hover:to-blue-500 transition-all duration-300">
+              <LiquidGlassButton variant="primary" size="lg">
                 Book Free Consultation
-              </button>
+              </LiquidGlassButton>
             </Link>
-          </div>
+          </LiquidGlassCard>
         </div>
       </main>
     </>
@@ -229,8 +230,14 @@ interface PackageSectionProps {
 }
 
 function PackageSection(props: PackageSectionProps) {
+  const glowColor = props.title.includes('Template') ? '#8B5CF6' : props.title.includes('Custom') ? '#3B82F6' : '#00F0FF'
+  
   return (
-    <div className={`glass-card rounded-2xl p-12 mb-16 ${props.highlighted ? 'ring-2 ring-purple-500' : ''}`}>
+    <LiquidGlassCard 
+      intensity="heavy" 
+      glowColor={glowColor}
+      className={`p-12 mb-16 ${props.highlighted ? 'ring-2 ring-purple-500' : ''}`}
+    >
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
         {/* Left: Header & Description */}
         <div>
@@ -258,19 +265,19 @@ function PackageSection(props: PackageSectionProps) {
           {/* CTAs */}
           <div className="flex gap-4 mt-8">
             <Link href={props.cta1Href}>
-              <button className="px-6 py-3 rounded-lg font-semibold bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-500 hover:to-blue-500 transition-all">
+              <LiquidGlassButton variant="primary" size="lg">
                 {props.cta1Text}
-              </button>
+              </LiquidGlassButton>
             </Link>
             <Link href={props.cta2Href}>
-              <button className="px-6 py-3 rounded-lg font-semibold glass-card hover:bg-white/10 transition-all">
+              <LiquidGlassButton variant="secondary" size="lg">
                 {props.cta2Text}
-              </button>
+              </LiquidGlassButton>
             </Link>
           </div>
         </div>
       </div>
-    </div>
+    </LiquidGlassCard>
   )
 }
 

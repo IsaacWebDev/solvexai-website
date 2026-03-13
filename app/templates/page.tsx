@@ -7,6 +7,7 @@ import { TemplateMockup3D } from '@/components/3d/TemplateMockup3D'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { containers, spacing, typography } from '@/lib/design-system'
+import { LiquidGlassCard, LiquidGlassButton } from '@/components/ui'
 
 export default function TemplatesPage() {
   const [selectedFilter, setSelectedFilter] = useState('All')
@@ -178,17 +179,14 @@ export default function TemplatesPage() {
           {/* Filter Bar */}
           <div className="flex flex-wrap justify-center gap-4 mb-16">
             {filters.map((filter) => (
-              <button
+              <LiquidGlassButton
                 key={filter}
+                variant={selectedFilter === filter ? 'primary' : 'ghost'}
+                size="sm"
                 onClick={() => setSelectedFilter(filter)}
-                className={`px-6 py-2 rounded-full font-medium transition-all duration-300 ${
-                  selectedFilter === filter
-                    ? 'bg-gradient-to-r from-purple-600 to-blue-600 text-white'
-                    : 'glass-card hover:bg-white/10'
-                }`}
               >
                 {filter}
-              </button>
+              </LiquidGlassButton>
             ))}
           </div>
           
@@ -200,7 +198,7 @@ export default function TemplatesPage() {
           </div>
           
           {/* Bottom CTA */}
-          <div className="glass-card rounded-2xl p-12 text-center">
+          <LiquidGlassCard intensity="heavy" className="p-12 text-center">
             <h2 className="text-3xl font-bold mb-4">
               Don't see your industry? We can build it.
             </h2>
@@ -209,17 +207,17 @@ export default function TemplatesPage() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link href="/contact">
-                <button className="px-8 py-4 rounded-lg font-semibold bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-500 hover:to-blue-500 transition-all duration-300">
+                <LiquidGlassButton variant="primary" size="lg">
                   Request Custom Template
-                </button>
+                </LiquidGlassButton>
               </Link>
               <Link href="/packages">
-                <button className="px-8 py-4 rounded-lg font-semibold glass-card hover:bg-white/10 transition-all duration-300">
+                <LiquidGlassButton variant="secondary" size="lg">
                   View Custom Development
-                </button>
+                </LiquidGlassButton>
               </Link>
             </div>
-          </div>
+          </LiquidGlassCard>
         </div>
       </main>
     </>
@@ -241,8 +239,7 @@ function TemplateCard({ name, industry, price, features, includes, gradient }: T
   
   return (
     <>
-      <div 
-        className="glass-card rounded-2xl overflow-hidden transition-all duration-500 group"
+      <div
         onMouseEnter={() => setHoveredIndex(0)}
         onMouseLeave={() => setHoveredIndex(null)}
         style={{
@@ -251,6 +248,7 @@ function TemplateCard({ name, industry, price, features, includes, gradient }: T
           transition: 'all 0.3s'
         }}
       >
+        <LiquidGlassCard intensity="medium" className="overflow-hidden transition-all duration-500 group">
         {/* Screenshot Preview */}
         <div 
           className={`h-64 bg-gradient-to-br ${gradient} relative overflow-hidden cursor-pointer`}
@@ -291,20 +289,22 @@ function TemplateCard({ name, industry, price, features, includes, gradient }: T
           <div className="flex items-center justify-between">
             <span className="text-3xl font-bold gradient-text">${price}</span>
             <div className="flex gap-2">
-              <button 
+              <LiquidGlassButton 
+                variant="ghost"
+                size="sm"
                 onClick={() => setIsModalOpen(true)}
-                className="px-4 py-2 rounded-lg text-sm font-semibold glass-card hover:bg-white/10 transition-all"
               >
                 View Demo
-              </button>
+              </LiquidGlassButton>
               <Link href="/contact">
-                <button className="px-4 py-2 rounded-lg text-sm font-semibold bg-purple-600 hover:bg-purple-500 transition-all">
+                <LiquidGlassButton variant="primary" size="sm">
                   Buy Now
-                </button>
+                </LiquidGlassButton>
               </Link>
             </div>
           </div>
         </div>
+        </LiquidGlassCard>
       </div>
       
       {/* Modal */}
@@ -324,10 +324,11 @@ function TemplateModal({ template, onClose }: { template: TemplateCardProps; onC
       className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 overflow-y-auto"
       onClick={onClose}
     >
-      <div 
-        className="glass-card rounded-2xl max-w-4xl w-full p-8 my-8"
-        onClick={(e) => e.stopPropagation()}
-      >
+      <div onClick={(e) => e.stopPropagation()}>
+        <LiquidGlassCard 
+          intensity="heavy"
+          className="max-w-4xl w-full p-8 my-8"
+        >
         {/* Close Button */}
         <button 
           onClick={onClose}
@@ -387,11 +388,12 @@ function TemplateModal({ template, onClose }: { template: TemplateCardProps; onC
             <div className="text-sm text-gray-400">One-time payment</div>
           </div>
           <Link href="/contact">
-            <button className="px-8 py-4 rounded-lg font-semibold text-lg bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-500 hover:to-blue-500 transition-all duration-300">
+            <LiquidGlassButton variant="primary" size="lg">
               Purchase This Template
-            </button>
+            </LiquidGlassButton>
           </Link>
         </div>
+        </LiquidGlassCard>
       </div>
     </div>
   )
