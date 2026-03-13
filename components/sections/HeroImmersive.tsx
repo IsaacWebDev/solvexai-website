@@ -78,7 +78,7 @@ export function HeroImmersive() {
         </p>
         
         <div className="animate-fade-in" style={{ animationDelay: '0.2s' }}>
-          <Link href="/templates">
+          <Link href="/packages">
             <button 
               className="group relative overflow-hidden rounded-full transition-all duration-500 transform hover:scale-105"
               style={{
