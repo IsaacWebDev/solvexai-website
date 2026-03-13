@@ -62,13 +62,13 @@ export default function IntroScreen({ onEnter }: IntroScreenProps) {
           animation: 'fadeIn 1s ease-in-out'
         }}>
           <img 
-            src="/logo-transparent.png" 
+            src="/solvexai-logo-transparent.png" 
             alt="SolveXAI"
             style={{
-              maxWidth: '600px',
-              width: '80vw',
+              maxWidth: '800px',
+              width: '85vw',
               height: 'auto',
-              filter: 'drop-shadow(0 0 40px rgba(139, 92, 246, 0.8))'
+              filter: 'drop-shadow(0 0 60px rgba(139, 92, 246, 0.9))'
             }}
           />
         </div>
