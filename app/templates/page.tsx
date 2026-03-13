@@ -208,10 +208,20 @@ interface TemplateCardProps {
 
 function TemplateCard({ name, industry, price, features, includes, gradient }: TemplateCardProps) {
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
   
   return (
     <>
-      <div className="glass-card rounded-2xl overflow-hidden transition-all duration-500 transform hover:-translate-y-2 hover:shadow-2xl hover:shadow-purple-500/20 group">
+      <div 
+        className="glass-card rounded-2xl overflow-hidden transition-all duration-500 group"
+        onMouseEnter={() => setHoveredIndex(0)}
+        onMouseLeave={() => setHoveredIndex(null)}
+        style={{
+          transform: hoveredIndex === 0 ? 'translateZ(50px) scale(1.05)' : 'translateZ(0) scale(1)',
+          transformStyle: 'preserve-3d',
+          transition: 'all 0.3s'
+        }}
+      >
         {/* Screenshot Preview */}
         <div 
           className={`h-64 bg-gradient-to-br ${gradient} relative overflow-hidden cursor-pointer`}

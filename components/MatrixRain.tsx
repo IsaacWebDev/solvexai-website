@@ -1,9 +1,11 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 export default function MatrixRain() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const [mouseX, setMouseX] = useState(0);
+  const [mouseY, setMouseY] = useState(0);
   
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -40,6 +42,14 @@ export default function MatrixRain() {
       '#00F0FF'  // Cyan accent
     ];
     
+    // Mouse tracking
+    const handleMouseMove = (e: MouseEvent) => {
+      setMouseX(e.clientX);
+      setMouseY(e.clientY);
+    };
+    
+    window.addEventListener('mousemove', handleMouseMove);
+    
     function draw() {
       if (!ctx || !canvas) return;
       
@@ -54,28 +64,46 @@ export default function MatrixRain() {
         // Random character
         const char = matrixArray[Math.floor(Math.random() * matrixArray.length)];
         
+        // Calculate distance from mouse
+        const charX = i * fontSize;
+        const charY = drops[i] * fontSize;
+        const distanceFromMouse = Math.sqrt(
+          Math.pow(charX - mouseX, 2) + 
+          Math.pow(charY - mouseY, 2)
+        );
+        
+        // Glow multiplier based on distance (closer = brighter)
+        const glowMultiplier = Math.max(0, 1 - (distanceFromMouse / 200));
+        
         // Color based on position (gradient from blue to purple)
         const colorIndex = Math.floor((drops[i] / canvas.height) * colors.length);
         ctx.fillStyle = colors[Math.min(colorIndex, colors.length - 1)];
         
-        // Glow effect on leading character
+        // Glow effect (stronger near mouse)
         if (drops[i] * fontSize > 0) {
-          ctx.shadowBlur = 10;
-          ctx.shadowColor = colors[colorIndex];
+          ctx.shadowBlur = 10 + (glowMultiplier * 30);
+          ctx.shadowColor = glowMultiplier > 0.5 ? '#00F0FF' : colors[colorIndex];
         } else {
           ctx.shadowBlur = 0;
         }
         
+        // Larger font near mouse
+        const fontSizeMultiplier = 1 + (glowMultiplier * 0.5);
+        ctx.font = `${fontSize * fontSizeMultiplier}px monospace`;
+        
         // Draw character
-        ctx.fillText(char, i * fontSize, drops[i] * fontSize);
+        ctx.fillText(char, charX, charY);
+        
+        // Reset font size
+        ctx.font = `${fontSize}px monospace`;
         
         // Reset drop to top randomly
         if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
           drops[i] = 0;
         }
         
-        // Move drop down
-        drops[i]++;
+        // Move drop down (faster near mouse)
+        drops[i] += 1 + (glowMultiplier * 0.5);
       }
     }
     
@@ -93,8 +121,9 @@ export default function MatrixRain() {
     return () => {
       clearInterval(interval);
       window.removeEventListener('resize', handleResize);
+      window.removeEventListener('mousemove', handleMouseMove);
     };
-  }, []);
+  }, [mouseX, mouseY]);
   
   return (
     <canvas
