@@ -100,7 +100,12 @@ export default function ContactPage() {
       <Navigation />
       <AnimatedGradientMesh />
       
-      <main className="relative pt-32 pb-24 px-4">
+      <main className="relative" style={{
+        paddingTop: spacing.section.vertical,
+        paddingBottom: spacing.section.vertical,
+        paddingLeft: spacing.section.horizontal,
+        paddingRight: spacing.section.horizontal
+      }}>
         <div className="max-w-6xl mx-auto">
           {/* Hero */}
           <div className="text-center mb-16">
