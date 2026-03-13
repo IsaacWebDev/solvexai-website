@@ -13,7 +13,7 @@ export default function HomePage() {
   const [showIntro, setShowIntro] = useState(true)
   const [fadeOut, setFadeOut] = useState(false)
   
-  // Check localStorage to see if user has visited before
+  // Check localStorage for user's first visit
   useEffect(() => {
     const hasVisited = localStorage.getItem('solvexai-visited')
     if (hasVisited === 'true') {
