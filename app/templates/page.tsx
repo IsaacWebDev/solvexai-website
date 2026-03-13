@@ -138,8 +138,7 @@ export default function TemplatesPage() {
       <Navigation />
       <AnimatedGradientMesh />
       
-      <main className="relative" style={{
-        paddingTop: spacing.section.vertical,
+      <main className="relative pt-40" style={{
         paddingBottom: spacing.section.vertical,
         paddingLeft: spacing.section.horizontal,
         paddingRight: spacing.section.horizontal
