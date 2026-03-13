@@ -1,30 +1,82 @@
 'use client'
 
+import React from 'react'
+
 export default function Home() {
   return (
-    <main className="min-h-screen bg-black text-white">
+    <main style={{ minHeight: '100vh', background: '#000', color: '#fff' }}>
       {/* HERO */}
-      <section className="h-screen flex flex-col items-center justify-center px-4">
-        <h1 className="text-6xl md:text-8xl font-bold text-center mb-8">
+      <section style={{
+        height: '100vh',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: '0 1rem'
+      }}>
+        <h1 style={{
+          fontSize: 'clamp(3rem, 8vw, 8rem)',
+          fontWeight: 'bold',
+          textAlign: 'center',
+          marginBottom: '2rem',
+          lineHeight: 1.1
+        }}>
           We save businesses{' '}
-          <span className="text-cyan-400">20+ hours/week</span>
+          <span style={{ color: '#22d3ee' }}>20+ hours/week</span>
           {' '}with AI
         </h1>
         
-        <p className="text-2xl text-gray-300 mb-12 text-center max-w-3xl">
+        <p style={{
+          fontSize: 'clamp(1.25rem, 3vw, 2rem)',
+          color: 'rgba(255,255,255,0.7)',
+          marginBottom: '3rem',
+          textAlign: 'center',
+          maxWidth: '48rem'
+        }}>
           Transform your website into a 24/7 sales machine with intelligent automation
         </p>
         
-        <div className="flex gap-6">
+        <div style={{ display: 'flex', gap: '1.5rem', flexWrap: 'wrap', justifyContent: 'center' }}>
           <a
             href="#services"
-            className="px-8 py-4 bg-gradient-to-r from-blue-600 to-cyan-400 rounded-lg text-xl font-semibold hover:scale-105 transition"
+            style={{
+              padding: '1rem 2rem',
+              background: 'linear-gradient(to right, #2563eb, #22d3ee)',
+              borderRadius: '0.5rem',
+              fontSize: '1.25rem',
+              fontWeight: '600',
+              textDecoration: 'none',
+              color: '#fff',
+              transition: 'transform 0.2s',
+              cursor: 'pointer'
+            }}
+            onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
+            onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
           >
             View Templates
           </a>
           <a
             href="#contact"
-            className="px-8 py-4 border-2 border-cyan-400 rounded-lg text-xl font-semibold hover:bg-cyan-400/10 transition"
+            style={{
+              padding: '1rem 2rem',
+              border: '2px solid #22d3ee',
+              borderRadius: '0.5rem',
+              fontSize: '1.25rem',
+              fontWeight: '600',
+              textDecoration: 'none',
+              color: '#fff',
+              transition: 'all 0.2s',
+              cursor: 'pointer',
+              background: 'transparent'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = 'rgba(34, 211, 238, 0.1)'
+              e.currentTarget.style.transform = 'scale(1.05)'
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = 'transparent'
+              e.currentTarget.style.transform = 'scale(1)'
+            }}
           >
             Book Consultation
           </a>
@@ -32,10 +84,23 @@ export default function Home() {
       </section>
       
       {/* SERVICES */}
-      <section id="services" className="min-h-screen px-4 py-24">
-        <h2 className="text-5xl font-bold text-center mb-16">Our Services</h2>
+      <section id="services" style={{ minHeight: '100vh', padding: '6rem 1rem' }}>
+        <h2 style={{
+          fontSize: 'clamp(2.5rem, 6vw, 5rem)',
+          fontWeight: 'bold',
+          textAlign: 'center',
+          marginBottom: '4rem'
+        }}>
+          Our Services
+        </h2>
         
-        <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+          gap: '2rem',
+          maxWidth: '75rem',
+          margin: '0 auto'
+        }}>
           <ServiceCard
             title="Website Templates"
             description="Industry-specific sites in 48 hours"
@@ -71,39 +136,114 @@ export default function Home() {
       </section>
       
       {/* STATS */}
-      <section className="min-h-screen px-4 py-24 flex items-center justify-center">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-5xl font-bold text-center mb-16">Why Choose Us</h2>
+      <section style={{
+        minHeight: '100vh',
+        padding: '6rem 1rem',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center'
+      }}>
+        <div style={{ maxWidth: '75rem', width: '100%' }}>
+          <h2 style={{
+            fontSize: 'clamp(2.5rem, 6vw, 5rem)',
+            fontWeight: 'bold',
+            textAlign: 'center',
+            marginBottom: '4rem'
+          }}>
+            Why Choose Us
+          </h2>
           
-          <div className="grid md:grid-cols-3 gap-12 text-center">
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+            gap: '3rem',
+            textAlign: 'center'
+          }}>
             <div>
-              <div className="text-6xl font-bold text-cyan-400 mb-4">20+</div>
-              <div className="text-xl text-gray-300">Hours Saved Weekly</div>
+              <div style={{
+                fontSize: 'clamp(3rem, 8vw, 6rem)',
+                fontWeight: 'bold',
+                color: '#22d3ee',
+                marginBottom: '1rem'
+              }}>
+                20+
+              </div>
+              <div style={{ fontSize: '1.25rem', color: 'rgba(255,255,255,0.7)' }}>
+                Hours Saved Weekly
+              </div>
             </div>
             <div>
-              <div className="text-6xl font-bold text-cyan-400 mb-4">100+</div>
-              <div className="text-xl text-gray-300">Websites Built</div>
+              <div style={{
+                fontSize: 'clamp(3rem, 8vw, 6rem)',
+                fontWeight: 'bold',
+                color: '#22d3ee',
+                marginBottom: '1rem'
+              }}>
+                100+
+              </div>
+              <div style={{ fontSize: '1.25rem', color: 'rgba(255,255,255,0.7)' }}>
+                Websites Built
+              </div>
             </div>
             <div>
-              <div className="text-6xl font-bold text-cyan-400 mb-4">24/7</div>
-              <div className="text-xl text-gray-300">AI Availability</div>
+              <div style={{
+                fontSize: 'clamp(3rem, 8vw, 6rem)',
+                fontWeight: 'bold',
+                color: '#22d3ee',
+                marginBottom: '1rem'
+              }}>
+                24/7
+              </div>
+              <div style={{ fontSize: '1.25rem', color: 'rgba(255,255,255,0.7)' }}>
+                AI Availability
+              </div>
             </div>
           </div>
         </div>
       </section>
       
       {/* CTA */}
-      <section className="min-h-screen flex items-center justify-center px-4">
-        <div className="text-center">
-          <h2 className="text-6xl font-bold mb-8">
+      <section style={{
+        minHeight: '100vh',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: '0 1rem'
+      }}>
+        <div style={{ textAlign: 'center' }}>
+          <h2 style={{
+            fontSize: 'clamp(2.5rem, 8vw, 6rem)',
+            fontWeight: 'bold',
+            marginBottom: '2rem',
+            lineHeight: 1.2
+          }}>
             Ready to transform<br />your business?
           </h2>
-          <p className="text-2xl text-gray-300 mb-12 max-w-2xl mx-auto">
+          <p style={{
+            fontSize: 'clamp(1.25rem, 3vw, 2rem)',
+            color: 'rgba(255,255,255,0.7)',
+            marginBottom: '3rem',
+            maxWidth: '40rem',
+            margin: '0 auto 3rem'
+          }}>
             Join businesses saving 20+ hours weekly with AI automation
           </p>
           <a
             href="/contact"
-            className="inline-block px-12 py-6 bg-gradient-to-r from-blue-600 to-cyan-400 rounded-lg text-2xl font-semibold hover:scale-105 transition"
+            style={{
+              display: 'inline-block',
+              padding: '1.5rem 3rem',
+              background: 'linear-gradient(to right, #2563eb, #22d3ee)',
+              borderRadius: '0.5rem',
+              fontSize: '1.5rem',
+              fontWeight: '600',
+              textDecoration: 'none',
+              color: '#fff',
+              transition: 'transform 0.2s',
+              cursor: 'pointer'
+            }}
+            onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
+            onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
           >
             Start Your Journey
           </a>
@@ -122,30 +262,62 @@ interface ServiceCardProps {
 }
 
 function ServiceCard({ title, description, price, features, featured }: ServiceCardProps) {
+  const [isHovered, setIsHovered] = React.useState(false)
+  
   return (
-    <div className={`
-      p-8 rounded-2xl border transition-all hover:scale-105
-      ${featured 
-        ? 'bg-blue-600/20 border-cyan-400' 
-        : 'bg-blue-600/10 border-cyan-400/20 hover:border-cyan-400/40'
-      }
-    `}>
-      <h3 className="text-2xl font-bold mb-4">{title}</h3>
-      <p className="text-gray-300 mb-4">{description}</p>
-      <p className="text-cyan-400 font-semibold text-xl mb-6">{price}</p>
+    <div
+      style={{
+        padding: '2rem',
+        borderRadius: '1rem',
+        border: featured ? '2px solid #22d3ee' : '2px solid rgba(34,211,238,0.2)',
+        background: featured ? 'rgba(37,99,235,0.2)' : 'rgba(37,99,235,0.1)',
+        transition: 'all 0.3s',
+        transform: isHovered ? 'scale(1.05)' : 'scale(1)',
+        cursor: 'pointer'
+      }}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      <h3 style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '1rem' }}>
+        {title}
+      </h3>
+      <p style={{ color: 'rgba(255,255,255,0.7)', marginBottom: '1rem' }}>
+        {description}
+      </p>
+      <p style={{ color: '#22d3ee', fontWeight: '600', fontSize: '1.25rem', marginBottom: '1.5rem' }}>
+        {price}
+      </p>
       
-      <ul className="space-y-2 mb-6">
+      <ul style={{ marginBottom: '1.5rem', padding: 0, listStyle: 'none' }}>
         {features.map((feature, i) => (
-          <li key={i} className="text-gray-300 flex items-start">
-            <span className="text-cyan-400 mr-2">✓</span>
+          <li key={i} style={{
+            color: 'rgba(255,255,255,0.7)',
+            display: 'flex',
+            alignItems: 'flex-start',
+            marginBottom: '0.5rem'
+          }}>
+            <span style={{ color: '#22d3ee', marginRight: '0.5rem' }}>✓</span>
             <span>{feature}</span>
           </li>
         ))}
       </ul>
       
-      <button className="w-full px-6 py-3 bg-gradient-to-r from-blue-600 to-cyan-400 rounded-lg font-semibold hover:scale-105 transition">
+      <button style={{
+        width: '100%',
+        padding: '0.75rem 1.5rem',
+        background: 'linear-gradient(to right, #2563eb, #22d3ee)',
+        borderRadius: '0.5rem',
+        fontWeight: '600',
+        color: '#fff',
+        border: 'none',
+        cursor: 'pointer',
+        fontSize: '1rem',
+        transition: 'transform 0.2s'
+      }}>
         Get Started
       </button>
     </div>
   )
 }
+
+
