@@ -1,32 +1,41 @@
 'use client'
 
 import { Navigation } from '@/components/Navigation'
-import { AnimatedGradientMesh } from '@/components/AnimatedGradientMesh'
-import { Hero } from '@/components/sections/Hero'
-import { ValueProposition } from '@/components/sections/ValueProposition'
-import { TemplateShowcase } from '@/components/sections/TemplateShowcase'
-import { HowItWorks } from '@/components/sections/HowItWorks'
-import { SocialProof } from '@/components/sections/SocialProof'
-import { PricingClarity } from '@/components/sections/PricingClarity'
-import { FinalCTA } from '@/components/sections/FinalCTA'
+import { HeroImmersive } from '@/components/sections/HeroImmersive'
+import { ServicesReveal } from '@/components/sections/ServicesReveal'
+import { TemplateShowcaseHorizontal } from '@/components/sections/TemplateShowcaseHorizontal'
+import { StatsCountUp } from '@/components/sections/StatsCountUp'
+import { FinalCTAParallax } from '@/components/sections/FinalCTAParallax'
 
 export default function HomePage() {
   return (
     <>
       <Navigation />
       
-      {/* Animated Gradient Mesh Background */}
-      <AnimatedGradientMesh />
-      
-      {/* Main Content */}
-      <main className="relative">
-        <Hero />
-        <ValueProposition />
-        <TemplateShowcase />
-        <HowItWorks />
-        <SocialProof />
-        <PricingClarity />
-        <FinalCTA />
+      {/* Main Content - No restrictive containers */}
+      <main 
+        style={{
+          width: '100%',
+          maxWidth: 'none',
+          margin: 0,
+          padding: 0,
+          position: 'relative'
+        }}
+      >
+        {/* 1. Full-screen Hero with 3D */}
+        <HeroImmersive />
+        
+        {/* 2. Services with Scroll Reveal */}
+        <ServicesReveal />
+        
+        {/* 3. Horizontal Template Showcase */}
+        <TemplateShowcaseHorizontal />
+        
+        {/* 4. Count-up Stats */}
+        <StatsCountUp />
+        
+        {/* 5. Final CTA with Parallax */}
+        <FinalCTAParallax />
       </main>
     </>
   )
