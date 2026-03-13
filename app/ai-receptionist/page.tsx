@@ -3,7 +3,10 @@
 import React, { useState } from 'react'
 import { Navigation } from '@/components/Navigation'
 import { AnimatedGradientMesh } from '@/components/AnimatedGradientMesh'
+import { Phone3D } from '@/components/3d/Phone3D'
 import Link from 'next/link'
+import { motion } from 'framer-motion'
+import { containers, spacing, typography } from '@/lib/design-system'
 
 export default function AIReceptionistPage() {
   return (
@@ -11,15 +14,29 @@ export default function AIReceptionistPage() {
       <Navigation />
       <AnimatedGradientMesh />
       
-      <main className="relative pt-32 pb-24 px-4">
-        <div className="max-w-7xl mx-auto">
+      <main className="relative" style={{
+        paddingTop: spacing.section.vertical,
+        paddingBottom: spacing.section.vertical,
+        paddingLeft: spacing.section.horizontal,
+        paddingRight: spacing.section.horizontal
+      }}>
+        <div style={{ maxWidth: containers.full, margin: '0 auto' }}>
           {/* Hero */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-24">
-            <div>
-              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center" style={{
+            marginBottom: spacing.content.gap
+          }}>
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
+            >
+              <h1 className="font-bold" style={{ 
+                fontSize: typography.h1,
+                marginBottom: spacing.element.margin
+              }}>
                 Never Miss a Customer Call Again
               </h1>
-              <p className="text-xl text-gray-300 mb-8">
+              <p className="text-gray-300 mb-8" style={{ fontSize: typography.body }}>
                 AI receptionist that sounds human, works 24/7, costs 90% less
               </p>
               <Link href="/contact">
@@ -27,15 +44,16 @@ export default function AIReceptionistPage() {
                   Book Demo Call →
                 </button>
               </Link>
-            </div>
+            </motion.div>
             
-            <div className="glass-card rounded-2xl p-8 flex items-center justify-center h-96">
-              <div className="text-center">
-                <div className="text-6xl mb-4">📞</div>
-                <div className="text-2xl font-bold mb-2">Play Demo Call</div>
-                <p className="text-gray-400 text-sm">Hear how natural it sounds</p>
-              </div>
-            </div>
+            {/* 3D Phone with Sound Waves */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 1, delay: 0.3 }}
+            >
+              <Phone3D />
+            </motion.div>
           </div>
           
           {/* Demo Calls */}

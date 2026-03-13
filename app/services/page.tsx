@@ -4,8 +4,10 @@ import { Navigation } from '@/components/Navigation'
 import { InteractiveParticles } from '@/components/InteractiveParticles'
 import { Card } from '@/components/Card'
 import { Button } from '@/components/Button'
+import { ServiceIcons3D } from '@/components/3d/ServiceIcons3D'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
+import { containers, spacing, typography } from '@/lib/design-system'
 
 const services = [
   {
@@ -73,21 +75,48 @@ export default function ServicesPage() {
       <Navigation />
       <InteractiveParticles />
       
-      <main className="relative z-10 min-h-screen bg-black px-4 py-32">
-        <div className="max-w-7xl mx-auto">
+      <main className="relative z-10 min-h-screen bg-black" style={{
+        paddingTop: spacing.section.vertical,
+        paddingBottom: spacing.section.vertical,
+        paddingLeft: spacing.section.horizontal,
+        paddingRight: spacing.section.horizontal
+      }}>
+        <div style={{ maxWidth: containers.content, margin: '0 auto' }}>
           {/* Hero */}
           <motion.div
-            className="text-center mb-20"
+            className="text-center"
+            style={{ marginBottom: spacing.content.gap }}
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <h1 className="text-5xl md:text-7xl font-bold text-white mb-6">
+            <h1 className="font-bold text-white" style={{ 
+              fontSize: typography.h1,
+              marginBottom: spacing.element.margin,
+              maxWidth: containers.text,
+              marginLeft: 'auto',
+              marginRight: 'auto'
+            }}>
               Our <span className="gradient-text">Services</span>
             </h1>
-            <p className="text-xl md:text-2xl text-white/70 max-w-3xl mx-auto">
+            <p className="text-white/70" style={{ 
+              fontSize: typography.body,
+              maxWidth: containers.text,
+              marginLeft: 'auto',
+              marginRight: 'auto'
+            }}>
               Choose the solution that fits your needs. All services include expert support and guaranteed results.
             </p>
+          </motion.div>
+          
+          {/* 3D Service Icons */}
+          <motion.div
+            style={{ marginBottom: spacing.content.gap }}
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1, delay: 0.3 }}
+          >
+            <ServiceIcons3D />
           </motion.div>
           
           {/* Services Grid */}

@@ -3,6 +3,9 @@
 import React, { useState } from 'react'
 import { Navigation } from '@/components/Navigation'
 import { AnimatedGradientMesh } from '@/components/AnimatedGradientMesh'
+import { ContactForm3D } from '@/components/3d/ContactForm3D'
+import { motion } from 'framer-motion'
+import { containers, spacing, typography } from '@/lib/design-system'
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -18,6 +21,7 @@ export default function ContactPage() {
   
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitted, setSubmitted] = useState(false)
+  const [focusedField, setFocusedField] = useState<string | null>(null)
   
   const handleCheckbox = (value: string) => {
     setFormData(prev => ({

@@ -3,7 +3,10 @@
 import React from 'react'
 import { Navigation } from '@/components/Navigation'
 import { AnimatedGradientMesh } from '@/components/AnimatedGradientMesh'
+import { PricingPedestals3D } from '@/components/3d/PricingPedestals3D'
 import Link from 'next/link'
+import { motion } from 'framer-motion'
+import { containers, spacing, typography } from '@/lib/design-system'
 
 export default function PackagesPage() {
   return (
@@ -11,17 +14,46 @@ export default function PackagesPage() {
       <Navigation />
       <AnimatedGradientMesh />
       
-      <main className="relative pt-32 pb-24 px-4">
-        <div className="max-w-7xl mx-auto">
+      <main className="relative" style={{
+        paddingTop: spacing.section.vertical,
+        paddingBottom: spacing.section.vertical,
+        paddingLeft: spacing.section.horizontal,
+        paddingRight: spacing.section.horizontal
+      }}>
+        <div style={{ maxWidth: containers.full, margin: '0 auto' }}>
           {/* Hero */}
-          <div className="text-center mb-24">
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6">
+          <motion.div 
+            className="text-center"
+            style={{ marginBottom: spacing.content.gap }}
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+          >
+            <h1 className="font-bold" style={{ 
+              fontSize: typography.h1,
+              marginBottom: spacing.element.margin
+            }}>
               Choose Your Automation Level
             </h1>
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+            <p className="text-gray-300" style={{ 
+              fontSize: typography.body,
+              maxWidth: containers.text,
+              marginLeft: 'auto',
+              marginRight: 'auto'
+            }}>
               From ready-made templates to fully custom systems
             </p>
-          </div>
+          </motion.div>
+          
+          {/* 3D Pricing Pedestals */}
+          <motion.div
+            style={{ marginBottom: spacing.content.gap }}
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1, delay: 0.3 }}
+          >
+            <PricingPedestals3D />
+          </motion.div>
           
           {/* Package 1: Templates */}
           <PackageSection
