@@ -1,283 +1,180 @@
-'use client';
+'use client'
 
-import { motion } from 'framer-motion';
-import Button from '@/components/Button';
-import ServiceCard from '@/components/ServiceCard';
+import { Navigation } from '@/components/Navigation'
+import { InteractiveParticles } from '@/components/InteractiveParticles'
+import { Card } from '@/components/Card'
+import { Button } from '@/components/Button'
+import Link from 'next/link'
+import { motion } from 'framer-motion'
+
+const services = [
+  {
+    title: 'Website Templates',
+    price: '$297+',
+    tagline: 'Launch Fast, Look Professional',
+    description: 'Pre-built, conversion-optimized website templates designed for modern businesses. Deploy in hours, not weeks.',
+    features: [
+      'Responsive Design (Mobile, Tablet, Desktop)',
+      'SEO Optimized (Meta tags, Schema, Sitemap)',
+      'Fast Loading (<2s page load)',
+      'Modern UI/UX (Animations, Micro-interactions)',
+      'Easy Customization (Colors, Fonts, Content)',
+      'Analytics Ready (Google Analytics, Tag Manager)',
+      'Contact Forms (Validation, Email integration)',
+      'Free Updates (Bug fixes, Security patches)'
+    ],
+    ideal: 'Startups, Small Businesses, Solopreneurs',
+    delivery: '1-3 days',
+    support: '30 days included'
+  },
+  {
+    title: 'Custom Development',
+    price: '$1,997+',
+    tagline: 'Your Vision, Built to Perfection',
+    description: 'Fully custom web applications tailored to your exact specifications. From concept to deployment, we build what you need.',
+    features: [
+      'Custom Features (Unique functionality for your business)',
+      'API Integration (Third-party services, CRMs, Payment)',
+      'Database Design (Scalable, secure data architecture)',
+      'Authentication (User login, roles, permissions)',
+      'Admin Dashboard (Manage content, users, analytics)',
+      'Performance Optimization (Caching, CDN, Lazy loading)',
+      'Cloud Deployment (AWS, Vercel, or your platform)',
+      'Full Support (Bug fixes, updates, maintenance)'
+    ],
+    ideal: 'Growing Businesses, SaaS, E-commerce',
+    delivery: '2-8 weeks',
+    support: '90 days included'
+  },
+  {
+    title: 'AI Receptionist',
+    price: '$1,997+',
+    tagline: '24/7 Customer Service, Zero Downtime',
+    description: 'Intelligent AI receptionist that handles customer inquiries, bookings, and support—around the clock, in natural language.',
+    features: [
+      '24/7 Availability (Never miss a customer inquiry)',
+      'Natural Conversation (GPT-4 powered, human-like)',
+      'Multi-Language Support (English, Spanish, French, more)',
+      'CRM Integration (Sync leads, contacts, conversations)',
+      'Appointment Booking (Calendar integration, reminders)',
+      'FAQs & Knowledge Base (Custom training on your business)',
+      'SMS & Email (Multi-channel communication)',
+      'Analytics Dashboard (Track conversations, conversions)'
+    ],
+    ideal: 'Service Businesses, Agencies, Healthcare',
+    delivery: '1-2 weeks',
+    support: 'Ongoing (Monthly subscription)'
+  }
+]
 
 export default function ServicesPage() {
   return (
-    <div className="relative py-20">
-      {/* Hero Section */}
-      <section className="px-4 py-24">
-        <div className="container-custom text-center">
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
+    <>
+      <Navigation />
+      <InteractiveParticles />
+      
+      <main className="relative z-10 min-h-screen bg-black px-4 py-32">
+        <div className="max-w-7xl mx-auto">
+          {/* Hero */}
+          <motion.div
+            className="text-center mb-20"
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 gradient-text"
           >
-            Our Services
-          </motion.h1>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2, duration: 0.8 }}
-            className="text-xl text-white/70 max-w-3xl mx-auto"
-          >
-            Comprehensive AI automation and web development solutions tailored to your business needs
-          </motion.p>
-        </div>
-      </section>
-
-      {/* Main Services Grid */}
-      <section className="px-4 py-12">
-        <div className="container-custom">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto mb-20">
-            <ServiceCard
-              icon="🎨"
-              title="Website Templates"
-              description="Pre-built, customizable sites for your industry"
-              price="Starting at $297"
-              features={[
-                '5 industry options',
-                'Fully responsive',
-                'SEO optimized',
-                '24/7 support'
-              ]}
-              delay={0}
-            />
-
-            <ServiceCard
-              icon="⚡"
-              title="Custom Development"
-              description="Tailored websites built for your unique needs"
-              price="Starting at $1,997"
-              features={[
-                'Bespoke design',
-                'Advanced features',
-                'Ongoing support',
-                'Performance optimized'
-              ]}
-              featured={true}
-              delay={0.1}
-            />
-
-            <ServiceCard
-              icon="🤖"
-              title="AI Receptionist"
-              description="24/7 intelligent customer support & booking"
-              price="Starting at $1,997"
-              features={[
-                'ElevenLabs voice',
-                'Smart routing',
-                'Never miss a call',
-                'CRM integration'
-              ]}
-              delay={0.2}
-            />
+            <h1 className="text-5xl md:text-7xl font-bold text-white mb-6">
+              Our <span className="gradient-text">Services</span>
+            </h1>
+            <p className="text-xl md:text-2xl text-white/70 max-w-3xl mx-auto">
+              Choose the solution that fits your needs. All services include expert support and guaranteed results.
+            </p>
+          </motion.div>
+          
+          {/* Services Grid */}
+          <div className="space-y-20">
+            {services.map((service, index) => (
+              <Card key={index} delay={index * 0.2} className="max-w-5xl mx-auto">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                  {/* Left: Title & Price */}
+                  <div className="md:col-span-1">
+                    <div className="sticky top-32">
+                      <h2 className="text-3xl md:text-4xl font-bold text-white mb-3">
+                        {service.title}
+                      </h2>
+                      <p className="text-4xl font-bold gradient-text mb-4">
+                        {service.price}
+                      </p>
+                      <p className="text-lg text-white/60 italic mb-8">
+                        {service.tagline}
+                      </p>
+                      
+                      <div className="space-y-3 text-sm text-white/70">
+                        <div>
+                          <strong className="text-white">Ideal for:</strong> {service.ideal}
+                        </div>
+                        <div>
+                          <strong className="text-white">Delivery:</strong> {service.delivery}
+                        </div>
+                        <div>
+                          <strong className="text-white">Support:</strong> {service.support}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  {/* Right: Description & Features */}
+                  <div className="md:col-span-2">
+                    <p className="text-lg text-white/80 mb-8 leading-relaxed">
+                      {service.description}
+                    </p>
+                    
+                    <h3 className="text-xl font-bold text-white mb-4">What's Included:</h3>
+                    <ul className="space-y-3 mb-8">
+                      {service.features.map((feature, i) => {
+                        const [name, desc] = feature.split(' (')
+                        return (
+                          <li key={i} className="flex items-start">
+                            <svg className="w-6 h-6 mr-3 text-green-400 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                              <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"/>
+                            </svg>
+                            <div>
+                              <strong className="text-white">{name}</strong>
+                              {desc && <span className="text-white/60"> ({desc}</span>}
+                            </div>
+                          </li>
+                        )
+                      })}
+                    </ul>
+                    
+                    <Link href="/contact">
+                      <Button variant="primary">Get Started</Button>
+                    </Link>
+                  </div>
+                </div>
+              </Card>
+            ))}
           </div>
-        </div>
-      </section>
-
-      {/* Template Details Section */}
-      <section className="px-4 py-20 bg-white/5">
-        <div className="container-custom">
+          
+          {/* CTA */}
           <motion.div
+            className="text-center mt-32"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
-            <h2 className="text-4xl md:text-5xl font-bold mb-12 text-center">
-              Website Templates
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+              Not Sure Which Service?
             </h2>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 mb-12">
-              {[
-                { name: 'Restaurant', icon: '🍽️' },
-                { name: 'Law Firm', icon: '⚖️' },
-                { name: 'Fitness', icon: '💪' },
-                { name: 'Real Estate', icon: '🏠' },
-                { name: 'E-commerce', icon: '🛍️' }
-              ].map((industry, index) => (
-                <motion.div
-                  key={industry.name}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
-                  className="glass-card p-6 text-center hover:scale-105 transition-transform cursor-pointer"
-                >
-                  <div className="text-5xl mb-4">{industry.icon}</div>
-                  <h3 className="font-semibold text-lg">{industry.name}</h3>
-                </motion.div>
-              ))}
-            </div>
-
-            <div className="glass-card p-8 max-w-4xl mx-auto">
-              <h3 className="text-2xl font-bold mb-6">Pricing Tiers</h3>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div className="text-center p-4">
-                  <h4 className="font-bold text-xl mb-2 text-[#00F0FF]">Template Only</h4>
-                  <p className="text-3xl font-bold mb-4">$297</p>
-                  <ul className="text-sm text-white/70 space-y-2">
-                    <li>✓ Full template access</li>
-                    <li>✓ Customization guide</li>
-                    <li>✓ Basic support</li>
-                  </ul>
-                </div>
-                <div className="text-center p-4 border-2 border-[#00F0FF]/30 rounded-lg">
-                  <h4 className="font-bold text-xl mb-2 text-[#00F0FF]">+ Setup</h4>
-                  <p className="text-3xl font-bold mb-4">$697</p>
-                  <ul className="text-sm text-white/70 space-y-2">
-                    <li>✓ Everything in Template</li>
-                    <li>✓ Professional setup</li>
-                    <li>✓ Custom branding</li>
-                    <li>✓ Priority support</li>
-                  </ul>
-                </div>
-                <div className="text-center p-4">
-                  <h4 className="font-bold text-xl mb-2 text-[#00F0FF]">+ SEO</h4>
-                  <p className="text-3xl font-bold mb-4">$997</p>
-                  <ul className="text-sm text-white/70 space-y-2">
-                    <li>✓ Everything in Setup</li>
-                    <li>✓ SEO optimization</li>
-                    <li>✓ Analytics setup</li>
-                    <li>✓ 3-month support</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
+            <p className="text-xl text-white/70 mb-8 max-w-2xl mx-auto">
+              Let's talk about your needs. We'll recommend the best solution for your business.
+            </p>
+            <Link href="/contact">
+              <Button variant="secondary">Contact Us</Button>
+            </Link>
           </motion.div>
         </div>
-      </section>
-
-      {/* Custom Development Section */}
-      <section className="px-4 py-20">
-        <div className="container-custom max-w-5xl">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-          >
-            <h2 className="text-4xl md:text-5xl font-bold mb-12 text-center">
-              Custom Development
-            </h2>
-
-            <div className="glass-card p-8 mb-12">
-              <h3 className="text-2xl font-bold mb-6">Our Process</h3>
-              <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-                {[
-                  { step: '01', title: 'Discovery', desc: 'Understand your needs' },
-                  { step: '02', title: 'Design', desc: 'Create mockups & wireframes' },
-                  { step: '03', title: 'Build', desc: 'Develop your website' },
-                  { step: '04', title: 'Launch', desc: 'Deploy & optimize' }
-                ].map((phase, index) => (
-                  <motion.div
-                    key={phase.step}
-                    initial={{ opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: index * 0.1 }}
-                    className="text-center"
-                  >
-                    <div className="text-4xl font-bold gradient-text mb-2">{phase.step}</div>
-                    <h4 className="font-semibold text-lg mb-2">{phase.title}</h4>
-                    <p className="text-sm text-white/60">{phase.desc}</p>
-                  </motion.div>
-                ))}
-              </div>
-            </div>
-
-            <div className="glass-card p-8">
-              <h3 className="text-2xl font-bold mb-4">Portfolio Example</h3>
-              <p className="text-white/70 mb-6">
-                <strong className="text-[#00F0FF]">Leafway</strong> - Premium cannabis club website with custom booking system,
-                member portal, and integrated payment processing. Built with Next.js and modern web technologies.
-              </p>
-              <div className="text-center">
-                <Button variant="primary" href="/contact">
-                  Request Custom Quote
-                </Button>
-              </div>
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* AI Receptionist Section */}
-      <section className="px-4 py-20 bg-white/5">
-        <div className="container-custom max-w-5xl">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-          >
-            <h2 className="text-4xl md:text-5xl font-bold mb-12 text-center">
-              AI Receptionist
-            </h2>
-
-            <div className="glass-card p-8 mb-12">
-              <h3 className="text-2xl font-bold mb-6">How It Works</h3>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div className="text-center">
-                  <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-[#0066FF] to-[#00F0FF] flex items-center justify-center text-2xl">
-                    📞
-                  </div>
-                  <h4 className="font-semibold mb-2">Customer Calls</h4>
-                  <p className="text-sm text-white/60">AI answers instantly, 24/7</p>
-                </div>
-                <div className="text-center">
-                  <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-[#0066FF] to-[#00F0FF] flex items-center justify-center text-2xl">
-                    🤖
-                  </div>
-                  <h4 className="font-semibold mb-2">Smart Routing</h4>
-                  <p className="text-sm text-white/60">Routes to right department</p>
-                </div>
-                <div className="text-center">
-                  <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-[#0066FF] to-[#00F0FF] flex items-center justify-center text-2xl">
-                    ✅
-                  </div>
-                  <h4 className="font-semibold mb-2">Books Appointment</h4>
-                  <p className="text-sm text-white/60">Syncs with your calendar</p>
-                </div>
-              </div>
-            </div>
-
-            <div className="glass-card p-8 mb-12">
-              <h3 className="text-2xl font-bold mb-6">ROI Calculator</h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div>
-                  <h4 className="font-semibold mb-4">Without AI</h4>
-                  <ul className="space-y-2 text-white/70">
-                    <li>• 20 hours/week on calls</li>
-                    <li>• $25/hour labor cost</li>
-                    <li>• = $2,000/month</li>
-                    <li>• Missed calls after hours</li>
-                  </ul>
-                </div>
-                <div className="border-l-2 border-[#00F0FF]/30 pl-8">
-                  <h4 className="font-semibold mb-4 text-[#00F0FF]">With AI</h4>
-                  <ul className="space-y-2 text-white/70">
-                    <li>• $1,997 one-time setup</li>
-                    <li>• $297/month subscription</li>
-                    <li>• = Save $1,703/month</li>
-                    <li>• Never miss a call</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-
-            <div className="text-center">
-              <Button variant="primary" size="large" href="/contact">
-                Book AI Demo
-              </Button>
-            </div>
-          </motion.div>
-        </div>
-      </section>
-    </div>
-  );
+      </main>
+    </>
+  )
 }

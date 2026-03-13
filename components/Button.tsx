@@ -1,60 +1,64 @@
-'use client';
-
-import { motion } from 'framer-motion';
-import Link from 'next/link';
+'use client'
+import { motion } from 'framer-motion'
+import { ReactNode, MouseEvent } from 'react'
 
 interface ButtonProps {
-  children: React.ReactNode;
-  variant?: 'primary' | 'secondary';
-  size?: 'default' | 'large';
-  href?: string;
-  onClick?: () => void;
-  className?: string;
+  children: ReactNode
+  href?: string
+  onClick?: () => void
+  variant?: 'primary' | 'secondary'
+  className?: string
 }
 
-export default function Button({ 
-  children, 
-  variant = 'primary', 
-  size = 'default',
-  href,
-  onClick,
-  className = ''
-}: ButtonProps) {
-  const baseStyles = 'font-semibold rounded-lg transition-all duration-300 btn-hover-scale inline-flex items-center justify-center';
+export function Button({ children, href, onClick, variant = 'primary', className = '' }: ButtonProps) {
+  const baseStyles = "relative px-8 py-4 rounded-full font-medium text-lg transition-all duration-300 overflow-hidden group"
   
-  const sizeStyles = {
-    default: 'px-8 py-3 text-base',
-    large: 'px-12 py-4 text-lg'
-  };
-
-  const variantStyles = {
-    primary: 'bg-gradient-to-r from-[#0066FF] to-[#00F0FF] text-white shadow-[0_4px_16px_rgba(0,102,255,0.3)] hover:shadow-[0_8px_24px_rgba(0,240,255,0.5)] neon-glow',
-    secondary: 'bg-transparent border-2 border-[#00F0FF]/40 text-white hover:bg-[#00F0FF]/10 hover:border-[#00F0FF] hover:shadow-[0_0_20px_rgba(0,240,255,0.3)]'
-  };
-
-  const combinedStyles = `${baseStyles} ${sizeStyles[size]} ${variantStyles[variant]} ${className}`;
-
+  const variantStyles = variant === 'primary'
+    ? "bg-gradient-to-r from-purple-600 to-blue-600 text-white hover:from-purple-500 hover:to-blue-500"
+    : "bg-white/10 backdrop-blur-sm text-white border border-white/20 hover:bg-white/20"
+  
+  const handleClick = (e: MouseEvent<HTMLAnchorElement | HTMLButtonElement>) => {
+    if (onClick) {
+      e.preventDefault()
+      onClick()
+    }
+  }
+  
   const content = (
-    <motion.span
-      whileHover={{ scale: 1.02 }}
-      whileTap={{ scale: 0.98 }}
-      className="inline-block"
-    >
-      {children}
-    </motion.span>
-  );
-
+    <>
+      <span className="relative z-10">{children}</span>
+      <motion.div
+        className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent"
+        initial={{ x: '-100%' }}
+        whileHover={{ x: '100%' }}
+        transition={{ duration: 0.6, ease: 'easeInOut' }}
+      />
+    </>
+  )
+  
   if (href) {
     return (
-      <Link href={href} className={combinedStyles}>
+      <motion.a
+        href={href}
+        className={`${baseStyles} ${variantStyles} ${className}`}
+        onClick={handleClick}
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
+        style={{ cursor: 'pointer' }}
+      >
         {content}
-      </Link>
-    );
+      </motion.a>
+    )
   }
-
+  
   return (
-    <button onClick={onClick} className={combinedStyles}>
+    <motion.button
+      className={`${baseStyles} ${variantStyles} ${className}`}
+      onClick={onClick}
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.95 }}
+    >
       {content}
-    </button>
-  );
+    </motion.button>
+  )
 }

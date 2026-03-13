@@ -165,9 +165,9 @@ function DNAHelixScene({ speed = 1, opacity = 1 }: DNAHelixProps) {
   );
 }
 
-export default function DNAHelix({ speed = 1, opacity = 1, mouseParallax = true }: DNAHelixProps) {
+export default function DNAHelix({ speed = 1, opacity = 0.3, mouseParallax = true }: DNAHelixProps) {
   return (
-    <div className="absolute inset-0 z-0" style={{ opacity }}>
+    <div className="absolute inset-0 z-0" style={{ opacity, pointerEvents: 'none' }}>
       <Canvas
         camera={{ position: [0, 0, 8], fov: 50 }}
         dpr={[1, 2]}

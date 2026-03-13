@@ -1,43 +1,23 @@
-'use client';
+'use client'
+import { motion } from 'framer-motion'
 
-import { motion } from 'framer-motion';
-
-export default function ScrollIndicator() {
+export function ScrollIndicator() {
   return (
     <motion.div
-      className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 cursor-pointer"
-      initial={{ opacity: 0, y: -20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: 1, duration: 0.8 }}
-      onClick={() => {
-        window.scrollTo({ top: window.innerHeight, behavior: 'smooth' });
-      }}
+      className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center gap-2"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ delay: 1, duration: 0.6 }}
     >
-      <span className="text-sm text-white/60 font-medium tracking-wider uppercase">
-        Scroll
-      </span>
-      
+      <span className="text-white/60 text-sm">Scroll to explore</span>
       <motion.div
-        className="w-6 h-10 rounded-full border-2 border-[#00F0FF]/40 flex items-start justify-center p-2"
-        animate={{ 
-          borderColor: ['rgba(0,240,255,0.4)', 'rgba(0,240,255,0.8)', 'rgba(0,240,255,0.4)']
-        }}
-        transition={{ 
-          duration: 2,
-          repeat: Infinity,
-          ease: 'easeInOut'
-        }}
+        animate={{ y: [0, 10, 0] }}
+        transition={{ repeat: Infinity, duration: 1.5, ease: 'easeInOut' }}
       >
-        <motion.div
-          className="w-1.5 h-1.5 rounded-full bg-[#00F0FF]"
-          animate={{ y: [0, 12, 0] }}
-          transition={{
-            duration: 2,
-            repeat: Infinity,
-            ease: 'easeInOut'
-          }}
-        />
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 5V19M12 19L19 12M12 19L5 12" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" opacity="0.6"/>
+        </svg>
       </motion.div>
     </motion.div>
-  );
+  )
 }
