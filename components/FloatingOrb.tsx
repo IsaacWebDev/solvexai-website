@@ -1,7 +1,7 @@
 'use client'
 
 import { Canvas, useFrame } from '@react-three/fiber'
-import { useRef } from 'react'
+import { useRef, Suspense } from 'react'
 import { Sphere, MeshDistortMaterial } from '@react-three/drei'
 import { Mesh } from 'three'
 
@@ -16,13 +16,14 @@ function Orb() {
   })
   
   return (
-    <Sphere ref={meshRef} args={[1, 100, 100]}>
+    <Sphere ref={meshRef} args={[2.5, 100, 100]} position={[0, 0, 0]}>
       <MeshDistortMaterial
         color="#8B5CF6"
         attach="material"
-        distort={0.3}
+        distort={0.4}
         speed={1.5}
-        roughness={0.4}
+        roughness={0.2}
+        metalness={0.8}
       />
     </Sphere>
   )
@@ -30,18 +31,28 @@ function Orb() {
 
 export function FloatingOrb() {
   return (
-    <Canvas 
-      style={{ 
-        position: 'absolute', 
-        inset: 0,
-        pointerEvents: 'none'
-      }}
-      camera={{ position: [0, 0, 5], fov: 45 }}
-    >
-      <ambientLight intensity={0.5} />
-      <pointLight position={[10, 10, 10]} intensity={1} />
-      <pointLight position={[-10, -10, -10]} intensity={0.5} color="#3B82F6" />
-      <Orb />
-    </Canvas>
+    <div style={{
+      position: 'absolute',
+      inset: 0,
+      zIndex: 1,
+      pointerEvents: 'none'
+    }}>
+      <Canvas 
+        camera={{ position: [0, 0, 8], fov: 45 }}
+        gl={{ 
+          antialias: true, 
+          alpha: true,
+          powerPreference: 'high-performance'
+        }}
+        dpr={[1, 2]}
+      >
+        <Suspense fallback={null}>
+          <ambientLight intensity={0.5} />
+          <directionalLight position={[10, 10, 5]} intensity={1} color="#8B5CF6" />
+          <pointLight position={[-10, -10, -5]} intensity={0.8} color="#3B82F6" />
+          <Orb />
+        </Suspense>
+      </Canvas>
+    </div>
   )
 }

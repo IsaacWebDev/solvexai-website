@@ -2,7 +2,19 @@
 
 import React from 'react'
 import Link from 'next/link'
-import { FloatingOrb } from '@/components/FloatingOrb'
+import dynamic from 'next/dynamic'
+
+const FloatingOrb = dynamic(() => import('@/components/FloatingOrb').then(mod => ({ default: mod.FloatingOrb })), { 
+  ssr: false,
+  loading: () => (
+    <div style={{ 
+      position: 'absolute', 
+      inset: 0, 
+      background: 'radial-gradient(circle, rgba(139, 92, 246, 0.2) 0%, transparent 70%)',
+      zIndex: 1
+    }} />
+  )
+})
 
 export function HeroImmersive() {
   return (
@@ -13,7 +25,8 @@ export function HeroImmersive() {
         width: '100vw',
         maxWidth: 'none',
         margin: 0,
-        padding: 0
+        padding: 0,
+        background: '#0a0a0a'
       }}
     >
       {/* 3D Floating Orb Background */}
