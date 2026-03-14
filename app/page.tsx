@@ -67,7 +67,7 @@ export default function HomePage() {
           animation: 'fadeInContent 0.8s ease-in'
         }}
       >
-        <div className="w-full max-w-[1920px]">
+        <div className="w-full max-w-[1920px] flex flex-col gap-20">
         {/* 1. HERO - Introduction */}
         <AppleHero />
         <SectionDivider />
