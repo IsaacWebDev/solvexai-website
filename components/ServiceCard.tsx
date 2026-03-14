@@ -26,7 +26,7 @@ export default function ServiceCard({
     <motion.div
       initial={{ opacity: 0, y: 50 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-100px' }}
+      viewport={{ margin: '-100px' }}
       transition={{ duration: 0.6, delay }}
       className={`relative ${featured ? 'md:-mt-8' : ''}`}
     >
@@ -113,7 +113,7 @@ export default function ServiceCard({
                   className="flex items-center justify-center gap-2 text-sm text-white/80"
                   initial={{ opacity: 0, x: -20 }}
                   whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
+                  viewport={{}}
                   transition={{ delay: delay + 0.2 + index * 0.1 }}
                 >
                   <svg

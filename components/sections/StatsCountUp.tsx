@@ -3,9 +3,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import dynamic from 'next/dynamic'
-
-const DNABackground = dynamic(() => import('@/components/3d/DNABackground'), { ssr: false })
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -70,9 +67,6 @@ export function StatsCountUp() {
         padding: '4rem 2rem'
       }}
     >
-      {/* DNA Helix Background - Ultra-realistic, scroll-controlled */}
-      <DNABackground />
-      
       {/* Background Gradient */}
       <div 
         className="absolute inset-0 pointer-events-none"
