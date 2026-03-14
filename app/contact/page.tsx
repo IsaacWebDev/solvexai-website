@@ -121,7 +121,7 @@ export default function ContactPage() {
       <Navigation />
       <AnimatedGradientMesh />
       
-      <main className="relative pt-48 pb-32 px-4 min-h-screen">
+      <main className="relative pt-64 pb-32 px-4 min-h-screen">
         <div className="max-w-3xl mx-auto">
           
           {/* Hero - Centered */}
@@ -438,12 +438,15 @@ export default function ContactPage() {
 
 function CheckboxOption({ label, sublabel, checked, onChange }: { label: string; sublabel: string; checked: boolean; onChange: () => void }) {
   return (
-    <label className={`flex items-center justify-between p-5 rounded-xl cursor-pointer group transition-all border-2 ${
-      checked 
-        ? 'bg-purple-600/10 border-purple-500' 
-        : 'bg-white/5 border-white/10 hover:border-white/20'
-    }`}>
-      <div className="flex items-center gap-4">
+    <label 
+      onClick={onChange}
+      className={`flex items-center justify-between p-5 rounded-xl cursor-pointer group transition-all border-2 relative z-10 ${
+        checked 
+          ? 'bg-purple-600/10 border-purple-500' 
+          : 'bg-white/5 border-white/10 hover:border-white/20'
+      }`}
+    >
+      <div className="flex items-center gap-4 pointer-events-none">
         <div className={`w-6 h-6 rounded-lg border-2 flex items-center justify-center transition-all ${
           checked 
             ? 'bg-purple-600 border-purple-600' 
@@ -466,12 +469,12 @@ function CheckboxOption({ label, sublabel, checked, onChange }: { label: string;
 
 function RadioOption({ label, sublabel, name, value, checked, onChange }: { label: string; sublabel: string; name: string; value: string; checked: boolean; onChange: (e: React.ChangeEvent<HTMLInputElement>) => void }) {
   return (
-    <label className={`flex items-center justify-between p-5 rounded-xl cursor-pointer group transition-all border-2 ${
+    <label className={`flex items-center justify-between p-5 rounded-xl cursor-pointer group transition-all border-2 relative z-10 ${
       checked 
         ? 'bg-purple-600/10 border-purple-500' 
         : 'bg-white/5 border-white/10 hover:border-white/20'
     }`}>
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-4 pointer-events-none">
         <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center transition-all ${
           checked 
             ? 'border-purple-600' 
@@ -492,7 +495,7 @@ function RadioOption({ label, sublabel, name, value, checked, onChange }: { labe
         value={value}
         checked={checked}
         onChange={onChange}
-        className="sr-only"
+        className="absolute inset-0 opacity-0 cursor-pointer z-20"
       />
     </label>
   )
