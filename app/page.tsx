@@ -5,8 +5,13 @@ import IntroScreen from '@/components/IntroScreen'
 import { Navigation } from '@/components/Navigation'
 import { HeroImmersive } from '@/components/sections/HeroImmersive'
 import { ServicesReveal } from '@/components/sections/ServicesReveal'
+import { BenefitsGrid } from '@/components/sections/BenefitsGrid'
+import { HowItWorksExpanded } from '@/components/sections/HowItWorksExpanded'
+import { UseCasesGrid } from '@/components/sections/UseCasesGrid'
 import { TemplateShowcaseHorizontal } from '@/components/sections/TemplateShowcaseHorizontal'
 import { StatsCountUp } from '@/components/sections/StatsCountUp'
+import { TestimonialsGrid } from '@/components/sections/TestimonialsGrid'
+import { FeaturesComparison } from '@/components/sections/FeaturesComparison'
 import { FinalCTAParallax } from '@/components/sections/FinalCTAParallax'
 import { RealisticJellyfishBG } from '@/components/backgrounds/RealisticJellyfishBG'
 
@@ -67,16 +72,31 @@ export default function HomePage() {
         {/* Realistic Jellyfish Background (global) */}
         <RealisticJellyfishBG />
         
-        {/* Content sections (Three Ways → Stats) */}
+        {/* Content sections */}
         <div className="relative">
-          {/* Three Ways We Transform Your Business */}
+          {/* Services (NOW 6 boxes) */}
           <ServicesReveal />
+          
+          {/* Benefits Grid (NEW - 6 boxes) */}
+          <BenefitsGrid />
+          
+          {/* How It Works (NEW - 6 steps) */}
+          <HowItWorksExpanded />
+          
+          {/* Use Cases (NEW - 8 boxes) */}
+          <UseCasesGrid />
           
           {/* Template Showcase */}
           <TemplateShowcaseHorizontal />
           
           {/* Stats */}
           <StatsCountUp />
+          
+          {/* Testimonials (NEW - 6 boxes) */}
+          <TestimonialsGrid />
+          
+          {/* Features Comparison (NEW - 12 features) */}
+          <FeaturesComparison />
         </div>
         
         {/* Ready to Automate Your Business? (separate, uses own LED jellyfish) */}
