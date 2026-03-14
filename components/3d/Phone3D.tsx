@@ -1,6 +1,6 @@
 'use client'
 
-import { Canvas, useFrame } from '@react-three/fiber'
+import { Canvas, useFrame, useLoader } from '@react-three/fiber'
 import { RoundedBox, Float } from '@react-three/drei'
 import { useRef, useState, useEffect } from 'react'
 import * as THREE from 'three'
@@ -35,6 +35,7 @@ function SoundWave({ delay, color }: SoundWaveProps) {
 
 function PhoneBody() {
   const [talking, setTalking] = useState(false)
+  const logoTexture = useLoader(THREE.TextureLoader, '/solvexai-logo-white.png')
   
   useEffect(() => {
     const interval = setInterval(() => {
@@ -47,29 +48,45 @@ function PhoneBody() {
   return (
     <group>
       <Float speed={2} rotationIntensity={0.3} floatIntensity={0.5}>
-        {/* Phone body */}
-        <RoundedBox args={[1.2, 2.5, 0.3]} radius={0.15}>
+        {/* iPhone body - black rounded rectangle */}
+        <RoundedBox args={[1.2, 2.6, 0.15]} radius={0.18}>
           <meshStandardMaterial 
-            color="#1a1a1a"
+            color="#000000"
             metalness={0.9}
-            roughness={0.2}
+            roughness={0.1}
           />
         </RoundedBox>
         
-        {/* Screen */}
-        <mesh position={[0, 0, 0.16]}>
-          <planeGeometry args={[1, 2.2]} />
+        {/* Screen with SolveXAI logo */}
+        <mesh position={[0, 0, 0.08]}>
+          <planeGeometry args={[1.1, 2.4]} />
           <meshStandardMaterial 
-            color={talking ? '#8B5CF6' : '#3B82F6'}
+            color={talking ? '#1a1a2e' : '#16213e'}
             emissive={talking ? '#8B5CF6' : '#3B82F6'}
-            emissiveIntensity={talking ? 0.5 : 0.3}
+            emissiveIntensity={0.2}
           />
         </mesh>
         
-        {/* Speaker */}
-        <mesh position={[0, 1, 0.16]}>
-          <capsuleGeometry args={[0.02, 0.3, 4, 8]} />
-          <meshStandardMaterial color="#333333" />
+        {/* SolveXAI Logo on screen */}
+        <mesh position={[0, 0, 0.09]}>
+          <planeGeometry args={[0.8, 0.4]} />
+          <meshBasicMaterial 
+            map={logoTexture} 
+            transparent 
+            opacity={0.9}
+          />
+        </mesh>
+        
+        {/* iPhone notch */}
+        <mesh position={[0, 1.15, 0.08]}>
+          <boxGeometry args={[0.25, 0.05, 0.01]} />
+          <meshStandardMaterial color="#000000" />
+        </mesh>
+        
+        {/* Camera in notch */}
+        <mesh position={[-0.08, 1.15, 0.09]}>
+          <circleGeometry args={[0.015, 16]} />
+          <meshStandardMaterial color="#1a1a1a" />
         </mesh>
       </Float>
       

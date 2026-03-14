@@ -47,19 +47,13 @@ export default function AIReceptionistPage() {
               </Link>
             </motion.div>
             
-            {/* iPhone Call Screen Mockup */}
+            {/* 3D iPhone with Sound Waves */}
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 1, delay: 0.3 }}
-              className="flex justify-center items-center"
             >
-              <img 
-                src="/iphone-mockup-call.png" 
-                alt="SolveXAI AI Receptionist Call Screen"
-                className="max-w-md w-full h-auto drop-shadow-2xl"
-                style={{ maxHeight: '600px' }}
-              />
+              <Phone3D />
             </motion.div>
           </div>
           
