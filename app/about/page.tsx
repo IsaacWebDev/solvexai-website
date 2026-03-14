@@ -15,10 +15,10 @@ export default function AboutPage() {
       <AnimatedGradientMesh />
       
       <main className="relative px-4 md:px-8 py-32 md:py-40 flex justify-center">
-        <div className="w-full max-w-6xl">
+        <div className="w-full max-w-6xl flex flex-col gap-20">
           
           {/* Hero - Perfectly Centered */}
-          <section className="py-28 flex justify-center">
+          <section className="py-16 flex justify-center">
             <motion.div 
               className="text-center max-w-5xl w-full"
               initial={{ opacity: 0, y: 30 }}
@@ -70,10 +70,10 @@ export default function AboutPage() {
           </section>
 
           {/* Section Divider */}
-          <div className="h-px bg-gradient-to-r from-transparent via-gray-500/50 to-transparent my-28" />
+          <div className="h-px bg-gradient-to-r from-transparent via-gray-500/50 to-transparent " />
           
           {/* Stats Section - Perfectly Centered */}
-          <section className="py-28">
+          <section className="py-16">
             <div className="flex justify-center">
               <div className="w-full max-w-5xl">
                 <LiquidGlassCard intensity="medium" className="p-16 md:p-20">
@@ -109,10 +109,10 @@ export default function AboutPage() {
           </section>
 
           {/* Section Divider */}
-          <div className="h-px bg-gradient-to-r from-transparent via-gray-500/50 to-transparent my-28" />
+          <div className="h-px bg-gradient-to-r from-transparent via-gray-500/50 to-transparent " />
           
           {/* Our Story - Perfectly Centered */}
-          <section className="py-28">
+          <section className="py-16">
             <h2 className="text-4xl md:text-5xl font-light text-center mb-10">Our Story</h2>
             
             {/* Story Text - Centered */}
@@ -161,10 +161,10 @@ export default function AboutPage() {
           </section>
 
           {/* Section Divider */}
-          <div className="h-px bg-gradient-to-r from-transparent via-gray-500/50 to-transparent my-28" />
+          <div className="h-px bg-gradient-to-r from-transparent via-gray-500/50 to-transparent " />
           
           {/* Our Values - Perfectly Centered */}
-          <section className="py-28">
+          <section className="py-16">
             <h2 className="text-4xl md:text-5xl font-light text-center mb-20">Our Values</h2>
             <div className="flex justify-center">
               <div className="w-full max-w-5xl">
@@ -195,22 +195,16 @@ export default function AboutPage() {
           </section>
 
           {/* Section Divider */}
-          <div className="h-px bg-gradient-to-r from-transparent via-gray-500/50 to-transparent my-28" />
+          <div className="h-px bg-gradient-to-r from-transparent via-gray-500/50 to-transparent " />
           
           {/* Meet the Team - Perfectly Centered */}
-          <section className="py-28">
+          <section className="py-16">
             <h2 className="text-4xl md:text-5xl font-light text-center mb-20">Meet the Team</h2>
             
-            {/* 3D Team Orbit - Centered & Smaller */}
-            <motion.div
-              className="mb-20 mx-auto"
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 1, delay: 0.3 }}
-              style={{ maxHeight: '350px', maxWidth: '600px' }}
-            >
+            {/* 3D Team Orbit - Hidden (broken canvas causing spacing issues) */}
+            <div className="hidden">
               <TeamOrbit3D />
-            </motion.div>
+            </div>
             
             {/* Team Member Cards - Perfectly Centered */}
             <div className="flex justify-center">
@@ -238,10 +232,10 @@ export default function AboutPage() {
           </section>
 
           {/* Section Divider */}
-          <div className="h-px bg-gradient-to-r from-transparent via-gray-500/50 to-transparent my-28" />
+          <div className="h-px bg-gradient-to-r from-transparent via-gray-500/50 to-transparent " />
           
           {/* FAQ Section - Perfectly Centered */}
-          <section className="py-28">
+          <section className="py-16">
             <h2 className="text-4xl md:text-5xl font-light text-center mb-20">Frequently Asked Questions</h2>
             <div className="flex justify-center">
               <div className="w-full max-w-4xl space-y-8">
