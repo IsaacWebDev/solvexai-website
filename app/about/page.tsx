@@ -34,8 +34,8 @@ export default function AboutPage() {
               </p>
               
               {/* Founder Context Card - Centered */}
-              <div className="mb-20">
-                <LiquidGlassCard intensity="medium" className="p-10 md:p-12">
+              <div className="mb-20 flex justify-center">
+                <LiquidGlassCard intensity="medium" className="p-10 md:p-12 max-w-4xl w-full">
                   <div className="flex flex-col md:flex-row items-center justify-center gap-8 text-center">
                     <div className="flex-shrink-0">
                       <div className="w-28 h-28 rounded-full bg-gradient-to-br from-purple-600 to-blue-600 flex items-center justify-center text-4xl font-semibold shadow-2xl">
