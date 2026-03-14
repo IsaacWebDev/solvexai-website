@@ -70,14 +70,18 @@ export function Navigation() {
             
           </div>
 
-          {/* Mobile Layout (unchanged) */}
+          {/* Mobile Layout */}
           <div className="lg:hidden flex items-center justify-between">
             {/* Logo */}
-            <Link href="/" className="flex items-center gap-3 group">
-              <div className="w-10 h-10 bg-gradient-to-br from-purple-600 to-blue-600 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
-                <span className="text-white font-bold text-xl">S</span>
-              </div>
-              <span className="text-white font-bold text-xl">SolveXAI</span>
+            <Link href="/" className="flex items-center group">
+              <Image
+                src="/logo-text-white.png"
+                alt="SolveXAI"
+                width={140}
+                height={40}
+                className="object-contain group-hover:opacity-90 transition-opacity"
+                priority
+              />
             </Link>
             
             {/* Mobile Menu Button */}
