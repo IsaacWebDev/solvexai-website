@@ -58,6 +58,7 @@ export default function HomePage() {
       {/* Main Content - Apple-Style Minimal */}
       <main 
         data-no-padding
+        className="flex justify-center"
         style={{
           width: '100%',
           maxWidth: 'none',
@@ -66,6 +67,7 @@ export default function HomePage() {
           animation: 'fadeInContent 0.8s ease-in'
         }}
       >
+        <div className="w-full max-w-[1920px]">
         {/* 1. HERO - Introduction */}
         <AppleHero />
         <SectionDivider />
@@ -88,6 +90,7 @@ export default function HomePage() {
         
         {/* 6. CTA - Close */}
         <CTAMinimal />
+        </div>
       </main>
       
       <style>{`
