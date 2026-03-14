@@ -10,7 +10,7 @@ import { TemplateShowcaseHorizontal } from '@/components/sections/TemplateShowca
 import { StatsCountUp } from '@/components/sections/StatsCountUp'
 import { FinalCTAParallax } from '@/components/sections/FinalCTAParallax'
 
-const DNABackground = dynamic(() => import('@/components/3d/DNABackground'), { ssr: false })
+const OceanBackground = dynamic(() => import('@/components/3d/OceanBackground'), { ssr: false })
 
 export default function HomePage() {
   const [showIntro, setShowIntro] = useState(true)
@@ -66,22 +66,22 @@ export default function HomePage() {
         {/* 1. Full-screen Hero with 3D */}
         <HeroImmersive />
         
-        {/* 2. Services + Stats with DNA Background (covers both sections) */}
+        {/* Unified Ocean Background (covers Three Ways → Ready to Automate) */}
         <div className="relative">
-          <DNABackground />
+          <OceanBackground />
           
-          {/* 2a. Services with Scroll Reveal */}
+          {/* Three Ways We Transform Your Business */}
           <ServicesReveal />
           
-          {/* 3. Horizontal Template Showcase */}
+          {/* Template Showcase */}
           <TemplateShowcaseHorizontal />
           
-          {/* 2b. Count-up Stats */}
+          {/* Stats */}
           <StatsCountUp />
+          
+          {/* Ready to Automate Your Business? */}
+          <FinalCTAParallax />
         </div>
-        
-        {/* 5. Final CTA with Parallax */}
-        <FinalCTAParallax />
       </main>
       
       <style>{`
