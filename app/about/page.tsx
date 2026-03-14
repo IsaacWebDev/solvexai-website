@@ -18,9 +18,9 @@ export default function AboutPage() {
         <div className="w-full max-w-6xl">
           
           {/* Hero - Perfectly Centered */}
-          <section className="mb-48">
+          <section className="mb-48 flex justify-center">
             <motion.div 
-              className="text-center max-w-5xl mx-auto"
+              className="text-center max-w-5xl w-full"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
