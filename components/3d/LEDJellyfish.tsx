@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef } from 'react';
+import { useRef, useMemo } from 'react';
 import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 import { LEDConstellation } from './LEDConstellation';
@@ -20,6 +20,7 @@ export const LEDJellyfish = ({
 }: LEDJellyfishProps) => {
   const groupRef = useRef<THREE.Group>(null);
   const time = useRef(0);
+  const previousPosition = useRef(new THREE.Vector3(...initialPosition));
   const particles = useRef<Array<{
     position: THREE.Vector3;
     velocity: THREE.Vector3;
@@ -27,144 +28,176 @@ export const LEDJellyfish = ({
     maxLife: number;
   }>>([]);
 
-  // Jellyfish constellation pattern (80 points for MAXIMUM detail)
-  const jellyfishPoints = [
+  // Generate 150-point jellyfish constellation
+  const generateJellyfishPoints = () => {
+    const points: Array<{
+      position: THREE.Vector3;
+      connections: number[];
+      isTentacle?: boolean;
+      tentacleIndex?: number;
+      segmentIndex?: number;
+      isTip?: boolean;
+    }> = [];
+
+    // === DOME (60 POINTS) ===
+    
     // Dome apex
-    { position: new THREE.Vector3(0, 1.5, 0), connections: [1, 2, 3, 4] },
+    points.push({ position: new THREE.Vector3(0, 1.5, 0), connections: [1, 2, 3, 4] });
     
-    // Dome ring 0.5 (very top, NEW - between apex and ring 1)
-    { position: new THREE.Vector3(0.25, 1.35, 0), connections: [5, 6] },
-    { position: new THREE.Vector3(0, 1.35, 0.25), connections: [6, 7] },
-    { position: new THREE.Vector3(-0.25, 1.35, 0), connections: [7, 8] },
-    { position: new THREE.Vector3(0, 1.35, -0.25), connections: [8, 5] },
+    // Ring 0.25 (very very top - 4 points)
+    const ring025Start = points.length;
+    for (let i = 0; i < 4; i++) {
+      const angle = (Math.PI / 2) * i;
+      const x = Math.cos(angle) * 0.125;
+      const z = Math.sin(angle) * 0.125;
+      const idx = points.length;
+      points.push({
+        position: new THREE.Vector3(x, 1.42, z),
+        connections: [idx + 1 === ring025Start + 4 ? ring025Start : idx + 1, idx + 4]
+      });
+    }
     
-    // Dome ring 1
-    { position: new THREE.Vector3(0.5, 1.2, 0), connections: [9, 10, 37] },
-    { position: new THREE.Vector3(0, 1.2, 0.5), connections: [10, 11, 38] },
-    { position: new THREE.Vector3(-0.5, 1.2, 0), connections: [11, 12, 39] },
-    { position: new THREE.Vector3(0, 1.2, -0.5), connections: [12, 9, 40] },
+    // Ring 0.5 (very top - 4 points)
+    const ring05Start = points.length;
+    for (let i = 0; i < 4; i++) {
+      const angle = (Math.PI / 2) * i;
+      const x = Math.cos(angle) * 0.25;
+      const z = Math.sin(angle) * 0.25;
+      const idx = points.length;
+      points.push({
+        position: new THREE.Vector3(x, 1.35, z),
+        connections: [idx + 1 === ring05Start + 4 ? ring05Start : idx + 1, idx + 4]
+      });
+    }
     
-    // Dome ring 1.5 (intermediate detail)
-    { position: new THREE.Vector3(0.75, 1.0, 0), connections: [13, 14] },
-    { position: new THREE.Vector3(0, 1.0, 0.75), connections: [14, 15] },
-    { position: new THREE.Vector3(-0.75, 1.0, 0), connections: [15, 16] },
-    { position: new THREE.Vector3(0, 1.0, -0.75), connections: [16, 13] },
+    // Helper to create ring
+    const createRing = (radius: number, y: number, nextRingOffset: number = 4) => {
+      const ringStart = points.length;
+      for (let i = 0; i < 4; i++) {
+        const angle = (Math.PI / 2) * i;
+        const x = Math.cos(angle) * radius;
+        const z = Math.sin(angle) * radius;
+        const idx = points.length;
+        points.push({
+          position: new THREE.Vector3(x, y, z),
+          connections: [
+            idx + 1 === ringStart + 4 ? ringStart : idx + 1,
+            idx + nextRingOffset
+          ]
+        });
+      }
+    };
     
-    // Dome ring 1.7 (NEW - between ring 1.5 and 2)
-    { position: new THREE.Vector3(0.85, 0.9, 0), connections: [17, 18] },
-    { position: new THREE.Vector3(0, 0.9, 0.85), connections: [18, 19] },
-    { position: new THREE.Vector3(-0.85, 0.9, 0), connections: [19, 20] },
-    { position: new THREE.Vector3(0, 0.9, -0.85), connections: [20, 17] },
+    createRing(0.5, 1.25, 4);   // Ring 0.75
+    createRing(0.5, 1.2, 4);    // Ring 1
+    createRing(0.6, 1.1, 4);    // Ring 1.25
+    createRing(0.75, 1.0, 4);   // Ring 1.5
+    createRing(0.85, 0.9, 4);   // Ring 1.7
+    createRing(0.95, 0.85, 4);  // Ring 1.85
+    createRing(1.0, 0.8, 4);    // Ring 2
+    createRing(1.05, 0.7, 4);   // Ring 2.25
+    createRing(1.1, 0.6, 4);    // Ring 2.5
     
-    // Dome ring 2
-    { position: new THREE.Vector3(1, 0.8, 0), connections: [21, 22] },
-    { position: new THREE.Vector3(0, 0.8, 1), connections: [22, 23] },
-    { position: new THREE.Vector3(-1, 0.8, 0), connections: [23, 24] },
-    { position: new THREE.Vector3(0, 0.8, -1), connections: [24, 21] },
+    // Dome bottom edge (only connects to itself, not next ring)
+    const domeBottomStart = points.length;
+    for (let i = 0; i < 4; i++) {
+      const angle = (Math.PI / 2) * i;
+      const x = Math.cos(angle) * 1.2;
+      const z = Math.sin(angle) * 1.2;
+      const idx = points.length;
+      points.push({
+        position: new THREE.Vector3(x, 0.4, z),
+        connections: [idx + 1 === domeBottomStart + 4 ? domeBottomStart : idx + 1]
+      });
+    }
     
-    // Dome ring 2.5 (NEW - between ring 2 and bottom)
-    { position: new THREE.Vector3(1.1, 0.6, 0), connections: [25, 26] },
-    { position: new THREE.Vector3(0, 0.6, 1.1), connections: [26, 27] },
-    { position: new THREE.Vector3(-1.1, 0.6, 0), connections: [27, 28] },
-    { position: new THREE.Vector3(0, 0.6, -1.1), connections: [28, 25] },
+    // === TENTACLES (108 POINTS: 12 tentacles × 9 segments) ===
     
-    // Dome bottom
-    { position: new THREE.Vector3(1.2, 0.4, 0), connections: [29, 30] },
-    { position: new THREE.Vector3(0, 0.4, 1.2), connections: [30, 31] },
-    { position: new THREE.Vector3(-1.2, 0.4, 0), connections: [31, 32] },
-    { position: new THREE.Vector3(0, 0.4, -1.2), connections: [32, 29] },
+    const tentacleAngles = [
+      0,                  // 0°
+      Math.PI / 6,        // 30°
+      Math.PI / 3,        // 60°
+      Math.PI / 2,        // 90°
+      Math.PI * 2 / 3,    // 120°
+      Math.PI * 5 / 6,    // 150°
+      Math.PI,            // 180°
+      Math.PI * 7 / 6,    // 210°
+      Math.PI * 4 / 3,    // 240°
+      Math.PI * 3 / 2,    // 270°
+      Math.PI * 5 / 3,    // 300°
+      Math.PI * 11 / 6    // 330°
+    ];
     
-    // Tentacle roots
-    { position: new THREE.Vector3(1, 0, 0), connections: [41] },
-    { position: new THREE.Vector3(0.7, 0, 0.7), connections: [42] },
-    { position: new THREE.Vector3(0, 0, 1), connections: [43] },
-    { position: new THREE.Vector3(-0.7, 0, 0.7), connections: [44] },
-    { position: new THREE.Vector3(-1, 0, 0), connections: [45] },
-    { position: new THREE.Vector3(-0.7, 0, -0.7), connections: [46] },
-    { position: new THREE.Vector3(0, 0, -1), connections: [47] },
-    { position: new THREE.Vector3(0.7, 0, -0.7), connections: [48] },
+    const tentacleSegments = [
+      0,     // Root
+      -0.3,  // Segment 1
+      -0.6,  // Segment 2
+      -0.9,  // Segment 3
+      -1.2,  // Segment 4
+      -1.5,  // Segment 5
+      -1.8,  // Segment 6
+      -2.1,  // Segment 7
+      -2.4   // Endpoint (tip)
+    ];
     
-    // Dome ring 1 to ring 1.5 connectors
-    { position: new THREE.Vector3(0.6, 1.1, 0), connections: [9] },
-    { position: new THREE.Vector3(0, 1.1, 0.6), connections: [10] },
-    { position: new THREE.Vector3(-0.6, 1.1, 0), connections: [11] },
-    { position: new THREE.Vector3(0, 1.1, -0.6), connections: [12] },
+    tentacleAngles.forEach((angle, tentacleIndex) => {
+      tentacleSegments.forEach((y, segmentIndex) => {
+        const radius = 1.0 + (segmentIndex * 0.03); // Slight spread
+        const x = Math.cos(angle) * radius;
+        const z = Math.sin(angle) * radius;
+        
+        const pointIndex = points.length;
+        
+        points.push({
+          position: new THREE.Vector3(x, y, z),
+          connections: segmentIndex < tentacleSegments.length - 1 
+            ? [pointIndex + 1] // Connect to next segment
+            : [], // Endpoint
+          isTentacle: true,
+          tentacleIndex,
+          segmentIndex,
+          isTip: segmentIndex === tentacleSegments.length - 1
+        });
+      });
+    });
     
-    // Tentacle segment at -0.5 (NEW - between root and -1)
-    { position: new THREE.Vector3(1, -0.5, 0), connections: [49] },
-    { position: new THREE.Vector3(0.7, -0.5, 0.7), connections: [50] },
-    { position: new THREE.Vector3(0, -0.5, 1), connections: [51] },
-    { position: new THREE.Vector3(-0.7, -0.5, 0.7), connections: [52] },
-    { position: new THREE.Vector3(-1, -0.5, 0), connections: [53] },
-    { position: new THREE.Vector3(-0.7, -0.5, -0.7), connections: [54] },
-    { position: new THREE.Vector3(0, -0.5, -1), connections: [55] },
-    { position: new THREE.Vector3(0.7, -0.5, -0.7), connections: [56] },
-    
-    // Tentacle segment at -1 (middle)
-    { position: new THREE.Vector3(1, -1, 0), connections: [57] },
-    { position: new THREE.Vector3(0.7, -1, 0.7), connections: [58] },
-    { position: new THREE.Vector3(0, -1, 1), connections: [59] },
-    { position: new THREE.Vector3(-0.7, -1, 0.7), connections: [60] },
-    { position: new THREE.Vector3(-1, -1, 0), connections: [61] },
-    { position: new THREE.Vector3(-0.7, -1, -0.7), connections: [62] },
-    { position: new THREE.Vector3(0, -1, -1), connections: [63] },
-    { position: new THREE.Vector3(0.7, -1, -0.7), connections: [64] },
-    
-    // Tentacle segment at -1.5 (intermediate)
-    { position: new THREE.Vector3(1, -1.5, 0), connections: [65] },
-    { position: new THREE.Vector3(0.7, -1.5, 0.7), connections: [66] },
-    { position: new THREE.Vector3(0, -1.5, 1), connections: [67] },
-    { position: new THREE.Vector3(-0.7, -1.5, 0.7), connections: [68] },
-    { position: new THREE.Vector3(-1, -1.5, 0), connections: [69] },
-    { position: new THREE.Vector3(-0.7, -1.5, -0.7), connections: [70] },
-    { position: new THREE.Vector3(0, -1.5, -1), connections: [71] },
-    { position: new THREE.Vector3(0.7, -1.5, -0.7), connections: [72] },
-    
-    // Tentacle segment at -1.75 (NEW - between -1.5 and -2)
-    { position: new THREE.Vector3(1, -1.75, 0), connections: [73] },
-    { position: new THREE.Vector3(0.7, -1.75, 0.7), connections: [74] },
-    { position: new THREE.Vector3(0, -1.75, 1), connections: [75] },
-    { position: new THREE.Vector3(-0.7, -1.75, 0.7), connections: [76] },
-    { position: new THREE.Vector3(-1, -1.75, 0), connections: [77] },
-    { position: new THREE.Vector3(-0.7, -1.75, -0.7), connections: [78] },
-    { position: new THREE.Vector3(0, -1.75, -1), connections: [79] },
-    { position: new THREE.Vector3(0.7, -1.75, -0.7), connections: [80] },
-    
-    // Tentacle ends
-    { position: new THREE.Vector3(1, -2, 0), connections: [] },
-    { position: new THREE.Vector3(0.7, -2, 0.7), connections: [] },
-    { position: new THREE.Vector3(0, -2, 1), connections: [] },
-    { position: new THREE.Vector3(-0.7, -2, 0.7), connections: [] },
-    { position: new THREE.Vector3(-1, -2, 0), connections: [] },
-    { position: new THREE.Vector3(-0.7, -2, -0.7), connections: [] },
-    { position: new THREE.Vector3(0, -2, -1), connections: [] },
-    { position: new THREE.Vector3(0.7, -2, -0.7), connections: [] },
-  ];
+    return points;
+  };
+
+  const jellyfishPoints = useMemo(generateJellyfishPoints, []);
+  
+  // Store original positions for animation
+  const originalPositions = useMemo(() => 
+    jellyfishPoints.map(p => p.position.clone()),
+    [jellyfishPoints]
+  );
+  
+  // Independent tentacle speed variations
+  const tentacleSpeedVariation = useMemo(() => [
+    1.0, 1.15, 0.9, 1.2, 0.85, 1.1, 0.95, 1.25, 0.8, 1.05, 1.12, 0.88
+  ], []);
 
   useFrame((state, delta) => {
     time.current += delta * speed;
     
     if (groupRef.current) {
-      // 1. ULTRA-REALISTIC PULSING (with variation per jellyfish)
-      const pulseVariation = 0.8 + (Math.sin(phase) * 0.4); // 0.4 to 1.2
+      // 1. ULTRA-REALISTIC PULSING
+      const pulseVariation = 0.8 + (Math.sin(phase) * 0.4);
       const pulse = Math.sin(time.current * 1.2 + phase) * pulseVariation;
       const pulseStrength = (pulse + 1) / 2; // 0 to 1
       
-      // 2. BREATHING PATTERN (inhale/exhale - slower cycle)
+      // 2. BREATHING PATTERN
       const breathCycle = Math.sin(time.current * 0.4 + phase);
-      const breathScale = 1 + (breathCycle * 0.08); // ±8% breathing
+      const breathScale = 1 + (breathCycle * 0.08);
       
-      // Combined body scaling (pulse + breathing)
+      // Combined body scaling
       const bodyScale = (1 + (pulse * 0.15)) * breathScale;
       groupRef.current.scale.set(bodyScale, bodyScale, bodyScale);
       
-      // Upward propulsion on pulse
+      // 3. MOVEMENT
       const propulsion = pulseStrength * 0.05;
-      
-      // Drift (slow fall between pulses)
       const drift = 0.01 * (1 - pulseStrength);
       
-      // 3. ORGANIC DRIFT (compound multiple frequencies - NOT just sine waves)
       const driftX = 
         Math.sin(time.current * 0.15 + phase) * 1.5 +
         Math.sin(time.current * 0.23 + phase * 1.3) * 0.8 +
@@ -175,17 +208,92 @@ export const LEDJellyfish = ({
         Math.cos(time.current * 0.29 + phase * 1.5) * 0.6 +
         Math.cos(time.current * 0.41 + phase * 0.9) * 0.3;
       
-      groupRef.current.position.x = initialPosition[0] + driftX;
-      groupRef.current.position.y = initialPosition[1] + driftY + propulsion - drift;
+      const newPosition = new THREE.Vector3(
+        initialPosition[0] + driftX,
+        initialPosition[1] + driftY + propulsion - drift,
+        initialPosition[2]
+      );
       
-      // 4. ROTATION VARIATION (more organic - 3 axes)
+      // Calculate velocity for drag effect
+      const velocity = new THREE.Vector3().subVectors(
+        groupRef.current.position,
+        previousPosition.current
+      );
+      
+      groupRef.current.position.copy(newPosition);
+      
+      // 4. ROTATION
       groupRef.current.rotation.y = Math.sin(time.current * 0.15 + phase) * 0.2;
       groupRef.current.rotation.x = Math.sin(time.current * 0.11 + phase * 1.3) * 0.1;
       groupRef.current.rotation.z = Math.sin(time.current * 0.09 + phase * 0.8) * 0.08;
       
-      // 5. BIO-LUMINESCENT PARTICLES (with emission variation)
-      // More particles when pulsing strongly
-      const emissionRate = pulseStrength > 0.6 ? 0.6 : 0.8; // Emit more when pulsing
+      // === 5. DYNAMIC TENTACLE ANIMATION ===
+      
+      const curlAmount = pulseStrength * 0.3; // Curl when pulsing
+      
+      jellyfishPoints.forEach((point, i) => {
+        const originalPos = originalPositions[i];
+        
+        if (point.isTentacle && point.tentacleIndex !== undefined && point.segmentIndex !== undefined) {
+          const tentacleIndex = point.tentacleIndex;
+          const segmentIndex = point.segmentIndex;
+          const segmentProgress = segmentIndex / 8; // 0 to 1 (9 segments = 0-8)
+          
+          // A. COMPOUND WAVE MOTION (5 frequencies)
+          const adjustedTime = time.current * tentacleSpeedVariation[tentacleIndex];
+          const waveTime = adjustedTime + tentacleIndex * 0.5 + phase;
+          
+          const wave1 = Math.sin(waveTime * 2 - segmentProgress * Math.PI * 2) * 0.15;
+          const wave2 = Math.sin(waveTime * 3.5 - segmentProgress * Math.PI * 1.5) * 0.08;
+          const wave3 = Math.sin(waveTime * 5 - segmentProgress * Math.PI) * 0.04;
+          const wave4 = Math.sin(waveTime * 7.5 - segmentProgress * Math.PI * 0.8) * 0.02;
+          const wave5 = Math.sin(waveTime * 11 - segmentProgress * Math.PI * 0.5) * 0.01;
+          
+          const totalWave = wave1 + wave2 + wave3 + wave4 + wave5;
+          
+          // B. APPLY WAVE TO X AND Z (sideways motion)
+          const waveStrength = segmentProgress * 1.5; // Stronger at tips
+          let targetX = originalPos.x + totalWave * waveStrength;
+          let targetZ = originalPos.z + totalWave * waveStrength * 0.7;
+          
+          // C. Y OSCILLATION (up/down)
+          const yWave = Math.sin(waveTime * 1.5 - segmentProgress * Math.PI) * 0.05;
+          let targetY = originalPos.y + yWave * segmentProgress;
+          
+          // D. CURL/UNFURL (tentacles curl inward when pulsing)
+          const curlFactor = curlAmount * segmentProgress * segmentProgress;
+          const centerDirection = new THREE.Vector3(
+            -originalPos.x,
+            0,
+            -originalPos.z
+          ).normalize();
+          
+          targetX += centerDirection.x * curlFactor;
+          targetZ += centerDirection.z * curlFactor;
+          targetY += curlFactor * 0.5; // Lift when curling
+          
+          // E. DRAG EFFECT (tentacles lag behind body motion)
+          const dragStrength = segmentProgress * 0.5; // Stronger at tips
+          targetX -= velocity.x * dragStrength;
+          targetY -= velocity.y * dragStrength;
+          targetZ -= velocity.z * dragStrength;
+          
+          // F. SMOOTH INTERPOLATION
+          const lerpSpeed = 0.15;
+          const targetPosition = new THREE.Vector3(targetX, targetY, targetZ);
+          point.position.lerp(targetPosition, lerpSpeed);
+          
+        } else {
+          // Dome points stay at original position (relative to body)
+          point.position.copy(originalPos);
+        }
+      });
+      
+      // Store position for next frame (drag calculation)
+      previousPosition.current.copy(groupRef.current.position);
+      
+      // 6. BIO-LUMINESCENT PARTICLES
+      const emissionRate = pulseStrength > 0.6 ? 0.6 : 0.8;
       
       if (Math.random() > emissionRate) {
         particles.current.push({
@@ -195,31 +303,46 @@ export const LEDJellyfish = ({
             -0.05,
             (Math.random() - 0.5) * 0.15
           ),
-          life: 2.5, // Longer life
+          life: 2.5,
           maxLife: 2.5
         });
       }
       
-      // Update particles
       particles.current = particles.current.filter(p => {
         p.position.add(p.velocity);
         p.life -= delta;
         return p.life > 0;
       });
       
-      // Limit particle count for performance
       if (particles.current.length > 30) {
         particles.current = particles.current.slice(-30);
       }
     }
   });
 
+  // Calculate dynamic glow intensity based on pulse and motion
+  const getDynamicGlowIntensity = () => {
+    const pulseVariation = 0.8 + (Math.sin(phase) * 0.4);
+    const pulse = Math.sin(time.current * 1.2 + phase) * pulseVariation;
+    const pulseStrength = (pulse + 1) / 2;
+    
+    // Base glow varies with pulse
+    const baseGlow = 2.5 * pulseStrength + 1.0; // 1.0 to 3.5
+    
+    return baseGlow;
+  };
+
   return (
     <group ref={groupRef} position={initialPosition}>
       <LEDConstellation
-        points={jellyfishPoints}
+        points={jellyfishPoints.map((p, i) => ({
+          position: p.position,
+          connections: p.connections,
+          // Tips glow brighter
+          glowMultiplier: p.isTip ? 1.5 : 1.0
+        }))}
         color={color}
-        glowIntensity={2.5 + Math.sin(time.current * 1.2 + phase) * 0.5}
+        glowIntensity={getDynamicGlowIntensity()}
         lineWidth={0.025}
         dotSize={0.08}
       />

@@ -8,6 +8,7 @@ import { Line } from '@react-three/drei';
 interface ConstellationPoint {
   position: THREE.Vector3;
   connections: number[];  // Indices of connected points
+  glowMultiplier?: number; // Per-point glow multiplier (for tentacle tips)
 }
 
 interface LEDConstellationProps {
@@ -28,32 +29,35 @@ export const LEDConstellation = ({
   return (
     <>
       {/* Dots (LED points) */}
-      {points.map((point, i) => (
-        <group key={`dot-${i}`} position={point.position}>
-          {/* Core dot */}
-          <mesh>
-            <sphereGeometry args={[dotSize, 16, 16]} />
-            <meshStandardMaterial
-              color={color}
-              emissive={color}
-              emissiveIntensity={glowIntensity}
-              metalness={0.8}
-              roughness={0.2}
-            />
-          </mesh>
-          
-          {/* Glow aura */}
-          <mesh scale={1.5}>
-            <sphereGeometry args={[dotSize, 16, 16]} />
-            <meshBasicMaterial
-              color={color}
-              transparent
-              opacity={0.3}
-              blending={THREE.AdditiveBlending}
-            />
-          </mesh>
-        </group>
-      ))}
+      {points.map((point, i) => {
+        const pointGlow = glowIntensity * (point.glowMultiplier || 1.0);
+        return (
+          <group key={`dot-${i}`} position={point.position}>
+            {/* Core dot */}
+            <mesh>
+              <sphereGeometry args={[dotSize, 16, 16]} />
+              <meshStandardMaterial
+                color={color}
+                emissive={color}
+                emissiveIntensity={pointGlow}
+                metalness={0.8}
+                roughness={0.2}
+              />
+            </mesh>
+            
+            {/* Glow aura */}
+            <mesh scale={1.5}>
+              <sphereGeometry args={[dotSize, 16, 16]} />
+              <meshBasicMaterial
+                color={color}
+                transparent
+                opacity={0.3 * (point.glowMultiplier || 1.0)}
+                blending={THREE.AdditiveBlending}
+              />
+            </mesh>
+          </group>
+        );
+      })}
 
       {/* Lines (connecting LED points) */}
       {points.map((point, i) =>
