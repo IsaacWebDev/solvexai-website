@@ -122,7 +122,7 @@ export default function ContactPage() {
       <AnimatedGradientMesh />
       
       <main className="relative px-4 min-h-screen flex items-center justify-center" style={{ paddingBottom: 'max(8rem, 220px)' }}>
-        <div className="max-w-6xl mx-auto w-full">
+        <div className="max-w-6xl mx-auto w-full flex flex-col gap-20">
           
           {/* Hero - Two Column Layout (Centered) */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
