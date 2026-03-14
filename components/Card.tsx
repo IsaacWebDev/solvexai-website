@@ -14,7 +14,7 @@ export function Card({ children, delay = 0, className = '' }: CardProps) {
       className={`glass-card p-8 rounded-3xl ${className}`}
       initial={{ opacity: 0, y: 50 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-100px' }}
+      viewport={{ margin: '-100px' }}
       transition={{ duration: 0.6, delay }}
       whileHover={{ 
         y: -8,
