@@ -4,8 +4,8 @@ import Link from 'next/link'
 
 export const CTAMinimal = () => {
   return (
-    <section className="py-48 px-6 relative z-10">
-      <div className="max-w-4xl mx-auto text-center">
+    <section className="py-48 px-6 relative z-10 flex justify-center">
+      <div className="max-w-4xl w-full text-center">
         
         <h2 className="text-7xl md:text-8xl font-light mb-12">
           Ready to

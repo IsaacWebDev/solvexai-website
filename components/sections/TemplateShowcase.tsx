@@ -64,8 +64,8 @@ const templates = [
 
 export const TemplateShowcase = () => {
   return (
-    <section className="py-32 px-6">
-      <div className="max-w-7xl mx-auto">
+    <section className="py-32 px-6 flex justify-center">
+      <div className="max-w-7xl w-full">
         
         {/* Header - Centered */}
         <div className="text-center mb-24">

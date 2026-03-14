@@ -87,8 +87,8 @@ const packages = [
 
 export const PricingSimple = () => {
   return (
-    <section className="py-32 px-6 relative z-10">
-      <div className="max-w-7xl mx-auto">
+    <section className="py-32 px-6 relative z-10 flex justify-center">
+      <div className="max-w-7xl w-full">
         
         {/* Header - Centered */}
         <div className="text-center mb-24">
