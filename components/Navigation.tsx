@@ -58,7 +58,7 @@ export function Navigation() {
             <div>
               <Link href="/">
                 <Image
-                  src="/solvexai-logo-final.png"
+                  src="/solvexai-logo-white.png"
                   alt="SolveXAI"
                   width={200}
                   height={60}
