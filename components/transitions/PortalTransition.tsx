@@ -12,26 +12,30 @@ interface PortalTransitionProps {
 
 export const PortalTransition = ({ isActive, onComplete }: PortalTransitionProps) => {
   const [phase, setPhase] = useState<'idle' | 'zoom' | 'warp' | 'landing' | 'complete'>('idle');
+  const phaseStartTimeRef = useRef<number>(0);
 
   useEffect(() => {
     if (!isActive) return;
 
-    // Phase sequence
+    // Phase sequence - SLOWER, MORE DRAMATIC
     const timeline = [
-      { phase: 'zoom', delay: 0, duration: 500 },        // 0-0.5s
-      { phase: 'warp', delay: 500, duration: 1000 },     // 0.5-1.5s
-      { phase: 'landing', delay: 1500, duration: 800 },  // 1.5-2.3s
-      { phase: 'complete', delay: 2300, duration: 0 }
+      { phase: 'zoom', delay: 0, duration: 700 },        // 0-0.7s (was 0.5s)
+      { phase: 'warp', delay: 700, duration: 1500 },     // 0.7-2.2s (was 1.0s)
+      { phase: 'landing', delay: 2200, duration: 800 },  // 2.2-3.0s (was 0.8s)
+      { phase: 'complete', delay: 3000, duration: 0 }
     ];
 
     timeline.forEach(({ phase, delay }) => {
-      setTimeout(() => setPhase(phase as any), delay);
+      setTimeout(() => {
+        setPhase(phase as any);
+        phaseStartTimeRef.current = Date.now();
+      }, delay);
     });
 
     // Complete transition
     setTimeout(() => {
       onComplete();
-    }, 2500);
+    }, 3200);
   }, [isActive, onComplete]);
 
   if (!isActive && phase === 'idle') return null;
@@ -45,7 +49,7 @@ export const PortalTransition = ({ isActive, onComplete }: PortalTransitionProps
     >
       {/* Code Tunnel Canvas */}
       <Canvas camera={{ position: [0, 0, 5], fov: 75 }}>
-        <CodeTunnel phase={phase} />
+        <CodeTunnel phase={phase} phaseStartTime={phaseStartTimeRef.current} />
       </Canvas>
 
       {/* Flash overlay (peak warp speed) */}
@@ -54,9 +58,30 @@ export const PortalTransition = ({ isActive, onComplete }: PortalTransitionProps
           className="absolute inset-0 bg-cyan-400"
           initial={{ opacity: 0 }}
           animate={{ opacity: [0, 0.6, 0] }}
-          transition={{ duration: 0.3, delay: 1.0 }}
+          transition={{ duration: 0.3, delay: 1.2 }}
         />
       )}
+
+      {/* GREEN TINT - Matrix Aesthetic */}
+      {phase === 'warp' && (
+        <motion.div
+          className="absolute inset-0 bg-emerald-500"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: [0, 0.15, 0] }}
+          transition={{ duration: 1.0, delay: 0.8 }}
+        />
+      )}
+
+      {/* SCANLINE EFFECT - Matrix Aesthetic */}
+      <motion.div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,255,136,0.03) 2px, rgba(0,255,136,0.03) 4px)',
+        }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: phase === 'warp' ? 0.5 : 0 }}
+        transition={{ duration: 0.5 }}
+      />
 
       {/* Vignette effect */}
       <motion.div
@@ -74,15 +99,88 @@ export const PortalTransition = ({ isActive, onComplete }: PortalTransitionProps
   );
 };
 
-// Code Tunnel 3D Effect
-const CodeTunnel = ({ phase }: { phase: string }) => {
-  const particlesRef = useRef<THREE.Points>(null);
+// Easing functions
+const easeOutQuart = (t: number): number => 1 - Math.pow(1 - t, 4);
+const easeInQuart = (t: number): number => t * t * t * t;
+
+// Helper to create text texture for Matrix characters
+const createTextTexture = (char: string, color: string): THREE.CanvasTexture => {
+  const canvas = document.createElement('canvas');
+  const ctx = canvas.getContext('2d')!;
+  canvas.width = 64;
+  canvas.height = 64;
+  
+  ctx.fillStyle = color;
+  ctx.font = 'bold 48px monospace';
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.fillText(char, 32, 32);
+  
+  return new THREE.CanvasTexture(canvas);
+};
+
+// Code Tunnel 3D Effect - MATRIX-STYLE CHARACTERS
+const CodeTunnel = ({ phase, phaseStartTime }: { phase: string; phaseStartTime: number }) => {
+  const spritesRef = useRef<THREE.Sprite[]>([]);
   const speedRef = useRef(0);
   const cameraRef = useRef<THREE.PerspectiveCamera | null>(null);
+  const texturesRef = useRef<{ char: string; texture: THREE.CanvasTexture }[]>([]);
+  const sceneRef = useRef<THREE.Group>(new THREE.Group());
 
-  // Speed curve based on phase + FOV animation
+  // Initialize Matrix character textures ONCE
+  useEffect(() => {
+    const matrixChars = '01アイウエオカキクケコサシスセソABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    
+    // Create textures for each character
+    texturesRef.current = matrixChars.split('').map(char => ({
+      char,
+      texture: createTextTexture(char, '#3B82F6') // Blue
+    }));
+
+    // Generate sprite particles
+    const particleCount = 2000;
+    const sprites: THREE.Sprite[] = [];
+
+    for (let i = 0; i < particleCount; i++) {
+      const randomChar = texturesRef.current[Math.floor(Math.random() * texturesRef.current.length)];
+      const sprite = new THREE.Sprite(
+        new THREE.SpriteMaterial({
+          map: randomChar.texture,
+          transparent: true,
+          opacity: 0.8,
+          blending: THREE.AdditiveBlending
+        })
+      );
+      
+      // Position (random cylinder distribution)
+      const angle = Math.random() * Math.PI * 2;
+      const radius = Math.random() * 15;
+      sprite.position.x = Math.cos(angle) * radius;
+      sprite.position.y = Math.sin(angle) * radius;
+      sprite.position.z = (Math.random() - 0.5) * 100;
+      
+      // Scale
+      sprite.scale.set(0.3, 0.3, 1);
+      
+      sprites.push(sprite);
+      sceneRef.current.add(sprite);
+    }
+    
+    spritesRef.current = sprites;
+
+    return () => {
+      // Cleanup
+      sprites.forEach(sprite => {
+        sprite.material.dispose();
+        sceneRef.current.remove(sprite);
+      });
+      texturesRef.current.forEach(({ texture }) => texture.dispose());
+    };
+  }, []);
+
+  // Animation loop with SMOOTH EASING
   useFrame((state, delta) => {
-    if (!particlesRef.current) return;
+    if (spritesRef.current.length === 0) return;
 
     // Camera FOV animation (fish-eye effect during warp)
     if (state.camera instanceof THREE.PerspectiveCamera) {
@@ -96,93 +194,41 @@ const CodeTunnel = ({ phase }: { phase: string }) => {
       state.camera.updateProjectionMatrix();
     }
 
-    // Adjust speed based on phase
+    // SMOOTH EASING CURVES (not linear)
     if (phase === 'zoom') {
-      speedRef.current = THREE.MathUtils.lerp(speedRef.current, 10, 0.1); // Accelerate
+      const progress = Math.min((Date.now() - phaseStartTime) / 700, 1);
+      const easedProgress = easeOutQuart(progress);
+      speedRef.current = 10 * easedProgress;
     } else if (phase === 'warp') {
-      speedRef.current = THREE.MathUtils.lerp(speedRef.current, 50, 0.05); // Max speed
+      const progress = Math.min((Date.now() - phaseStartTime) / 1500, 1);
+      const easedProgress = easeInQuart(progress);
+      speedRef.current = 10 + (40 * easedProgress); // 10 → 50
     } else if (phase === 'landing') {
-      speedRef.current = THREE.MathUtils.lerp(speedRef.current, 0, 0.08); // Decelerate
+      const progress = Math.min((Date.now() - phaseStartTime) / 800, 1);
+      const easedProgress = easeOutQuart(progress);
+      speedRef.current = 50 * (1 - easedProgress); // 50 → 0
     }
 
-    // Move particles toward camera
-    const positions = particlesRef.current.geometry.attributes.position;
-    const sizes = particlesRef.current.geometry.attributes.size;
-    
-    for (let i = 0; i < positions.count; i++) {
-      let z = positions.getZ(i);
-      z += speedRef.current * delta;
+    // Move sprites toward camera
+    spritesRef.current.forEach(sprite => {
+      sprite.position.z += speedRef.current * delta;
 
-      // Reset particles that pass camera
-      if (z > 5) {
-        z = -50;
+      // Reset sprites that pass camera
+      if (sprite.position.z > 5) {
+        sprite.position.z = -50;
+        
+        // Randomize position again
+        const angle = Math.random() * Math.PI * 2;
+        const radius = Math.random() * 15;
+        sprite.position.x = Math.cos(angle) * radius;
+        sprite.position.y = Math.sin(angle) * radius;
       }
 
-      positions.setZ(i, z);
-
       // Perspective scale (larger as they get closer)
-      const scale = THREE.MathUtils.mapLinear(z, -50, 5, 0.05, 0.3);
-      sizes.setX(i, scale);
-    }
-    
-    positions.needsUpdate = true;
-    sizes.needsUpdate = true;
+      const scale = THREE.MathUtils.mapLinear(sprite.position.z, -50, 5, 0.05, 0.3);
+      sprite.scale.set(scale, scale, 1);
+    });
   });
 
-  // Generate particles
-  const particleCount = 2000;
-  const positions = new Float32Array(particleCount * 3);
-  const colors = new Float32Array(particleCount * 3);
-  const sizes = new Float32Array(particleCount);
-
-  for (let i = 0; i < particleCount; i++) {
-    // Position (random cylinder distribution)
-    const angle = Math.random() * Math.PI * 2;
-    const radius = Math.random() * 15;
-    positions[i * 3] = Math.cos(angle) * radius;     // x
-    positions[i * 3 + 1] = Math.sin(angle) * radius; // y
-    positions[i * 3 + 2] = (Math.random() - 0.5) * 100; // z
-
-    // Color (blue/purple gradient)
-    const colorChoice = Math.random();
-    if (colorChoice > 0.5) {
-      colors[i * 3] = 0.54;     // Purple R
-      colors[i * 3 + 1] = 0.36; // Purple G
-      colors[i * 3 + 2] = 0.96; // Purple B
-    } else {
-      colors[i * 3] = 0.23;     // Blue R
-      colors[i * 3 + 1] = 0.51; // Blue G
-      colors[i * 3 + 2] = 0.96; // Blue B
-    }
-
-    // Initial size
-    sizes[i] = 0.15;
-  }
-
-  return (
-    <points ref={particlesRef}>
-      <bufferGeometry>
-        <bufferAttribute
-          attach="attributes-position"
-          args={[positions, 3]}
-        />
-        <bufferAttribute
-          attach="attributes-color"
-          args={[colors, 3]}
-        />
-        <bufferAttribute
-          attach="attributes-size"
-          args={[sizes, 1]}
-        />
-      </bufferGeometry>
-      <pointsMaterial
-        size={0.15}
-        vertexColors
-        transparent
-        opacity={0.8}
-        blending={THREE.AdditiveBlending}
-        sizeAttenuation={true}
-      />
-    </points>
-  );
+  return <primitive object={sceneRef.current} />;
 };

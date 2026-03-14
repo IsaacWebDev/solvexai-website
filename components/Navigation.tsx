@@ -44,7 +44,7 @@ export function Navigation() {
             <div className="absolute left-1/2 transform -translate-x-1/2">
               <Link href="/" className="flex items-center group">
                 <Image
-                  src="/logo-center.png"
+                  src="/logo-center-nuclear-clean.png"
                   alt="SolveXAI"
                   width={50}
                   height={50}

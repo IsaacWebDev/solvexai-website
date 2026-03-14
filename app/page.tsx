@@ -1,7 +1,6 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import dynamic from 'next/dynamic'
 import IntroScreen from '@/components/IntroScreen'
 import { Navigation } from '@/components/Navigation'
 import { HeroImmersive } from '@/components/sections/HeroImmersive'
@@ -9,8 +8,7 @@ import { ServicesReveal } from '@/components/sections/ServicesReveal'
 import { TemplateShowcaseHorizontal } from '@/components/sections/TemplateShowcaseHorizontal'
 import { StatsCountUp } from '@/components/sections/StatsCountUp'
 import { FinalCTAParallax } from '@/components/sections/FinalCTAParallax'
-
-const OceanBackground = dynamic(() => import('@/components/3d/OceanBackground'), { ssr: false })
+import { AnimatedJellyfishBG } from '@/components/backgrounds/AnimatedJellyfishBG'
 
 export default function HomePage() {
   const [showIntro, setShowIntro] = useState(true)
@@ -66,10 +64,11 @@ export default function HomePage() {
         {/* 1. Full-screen Hero with 3D */}
         <HeroImmersive />
         
-        {/* Ocean Background (covers Three Ways → Stats) */}
+        {/* Animated Jellyfish Background (global) */}
+        <AnimatedJellyfishBG />
+        
+        {/* Content sections (Three Ways → Stats) */}
         <div className="relative">
-          <OceanBackground />
-          
           {/* Three Ways We Transform Your Business */}
           <ServicesReveal />
           

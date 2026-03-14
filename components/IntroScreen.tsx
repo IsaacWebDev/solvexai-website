@@ -142,7 +142,7 @@ export default function IntroScreen({ onEnter }: IntroScreenProps) {
             className="relative"
           >
             <Image
-              src="/solvexai-logo-ultra-clean.png"
+              src="/solvexai-logo-nuclear-clean.png"
               alt="SolveXAI"
               width={600}
               height={200}
