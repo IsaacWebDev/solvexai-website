@@ -15,24 +15,20 @@ export default function AboutPage() {
       <Navigation />
       <AnimatedGradientMesh />
       
-      <main className="relative" style={{
-        paddingBottom: spacing.section.vertical,
-        paddingLeft: spacing.section.horizontal,
-        paddingRight: spacing.section.horizontal
-      }}>
-        <div style={{ maxWidth: containers.content, margin: '0 auto' }}>
+      <main className="relative px-4 md:px-8 py-24 md:py-32">
+        <div className="max-w-7xl mx-auto">
           
           {/* Hero */}
           <motion.div 
-            className="text-center mb-32"
+            className="text-center mb-40"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-light mb-8 leading-tight">
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-light mb-10 leading-tight">
               You Shouldn't Be<br />Answering Phones at 11 PM
             </h1>
-            <p className="text-xl md:text-2xl text-gray-300 mb-12 max-w-3xl mx-auto font-light leading-relaxed">
+            <p className="text-xl md:text-2xl text-gray-300 mb-16 max-w-3xl mx-auto font-light leading-relaxed">
               We automate the work that steals your evenings and weekends.<br />
               127 businesses reclaimed 2,000+ hours in 2026.
             </p>
@@ -73,28 +69,30 @@ export default function AboutPage() {
           </motion.div>
 
           {/* Section Divider */}
-          <div className="h-px bg-gradient-to-r from-transparent via-gray-500/30 to-transparent mb-32" />
+          <div className="h-px bg-gradient-to-r from-transparent via-gray-500/30 to-transparent mb-24" />
           
           {/* Stats - Moved Before Story */}
-          <section className="mb-32">
-            <LiquidGlassCard intensity="medium" className="p-12 md:p-16">
+          <section className="mb-40 text-center">
+            <div className="max-w-5xl mx-auto">
+              <LiquidGlassCard intensity="medium" className="p-12 md:p-16">
               <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 text-center">
                 <StatItem number="127" label="Websites Launched" sublabel="In 10 Months" />
                 <StatItem number="2,000+" label="Hours Saved" sublabel="For Our Clients" />
                 <StatItem number="$2M+" label="Revenue Generated" sublabel="Client Success" />
                 <StatItem number="4.9★" label="Average Rating" sublabel="Customer Reviews" />
               </div>
-            </LiquidGlassCard>
+              </LiquidGlassCard>
+            </div>
           </section>
 
           {/* Section Divider */}
-          <div className="h-px bg-gradient-to-r from-transparent via-gray-500/30 to-transparent mb-32" />
+          <div className="h-px bg-gradient-to-r from-transparent via-gray-500/30 to-transparent mb-24" />
           
           {/* Our Story - Redesigned with Split Layout */}
-          <section className="mb-32">
+          <section className="mb-40">
             <h2 className="text-4xl md:text-5xl font-light text-center mb-16">Our Story</h2>
             
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
               {/* Left: Story Text */}
               <div>
                 <LiquidGlassCard intensity="medium" className="p-10 md:p-12">
@@ -141,12 +139,12 @@ export default function AboutPage() {
           </section>
 
           {/* Section Divider */}
-          <div className="h-px bg-gradient-to-r from-transparent via-gray-500/30 to-transparent mb-32" />
+          <div className="h-px bg-gradient-to-r from-transparent via-gray-500/30 to-transparent mb-24" />
           
           {/* Our Values - Professional Icons */}
-          <section className="mb-32">
+          <section className="mb-40">
             <h2 className="text-4xl md:text-5xl font-light text-center mb-16">Our Values</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
               <ValueCard
                 title="Speed Over Perfection"
                 description="Launch fast, optimize later. Every day you wait is money lost. Average template goes live in 48 hours (not 2 weeks)."
@@ -171,10 +169,10 @@ export default function AboutPage() {
           </section>
 
           {/* Section Divider */}
-          <div className="h-px bg-gradient-to-r from-transparent via-gray-500/30 to-transparent mb-32" />
+          <div className="h-px bg-gradient-to-r from-transparent via-gray-500/30 to-transparent mb-24" />
           
           {/* Meet the Team - 3D Orbit + Profiles */}
-          <section className="mb-32">
+          <section className="mb-40">
             <h2 className="text-4xl md:text-5xl font-light text-center mb-16">Meet the Team</h2>
             
             {/* 3D Team Orbit */}
@@ -188,7 +186,7 @@ export default function AboutPage() {
             </motion.div>
             
             {/* Team Member Cards */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
               <TeamMemberCard
                 name="Isaac Senior Primo"
                 role="Co-Founder & Technical Lead"
@@ -207,12 +205,12 @@ export default function AboutPage() {
           </section>
 
           {/* Section Divider */}
-          <div className="h-px bg-gradient-to-r from-transparent via-gray-500/30 to-transparent mb-32" />
+          <div className="h-px bg-gradient-to-r from-transparent via-gray-500/30 to-transparent mb-24" />
           
           {/* FAQ Section */}
-          <section className="mb-32">
+          <section className="mb-40">
             <h2 className="text-4xl md:text-5xl font-light text-center mb-16">Frequently Asked Questions</h2>
-            <div className="max-w-3xl mx-auto space-y-6">
+            <div className="max-w-4xl mx-auto space-y-6">
               <FAQItem
                 question="Why should I trust a company founded in 2026?"
                 answer="Fair question. We're new as a company, but not new to automation. Isaac and Amun have been building AI tools for their own businesses since 2024. We've already delivered 127 websites and saved clients 2,000+ hours. Plus, we offer a 14-day money-back guarantee—no risk."
@@ -241,7 +239,8 @@ export default function AboutPage() {
           </section>
           
           {/* Final CTA */}
-          <LiquidGlassCard intensity="heavy" className="text-center p-12 md:p-16">
+          <div className="max-w-4xl mx-auto">
+            <LiquidGlassCard intensity="heavy" className="text-center p-12 md:p-16">
             <h2 className="text-4xl md:text-5xl font-light mb-6">
               Want to join the automation revolution?
             </h2>
@@ -260,7 +259,8 @@ export default function AboutPage() {
                 </LiquidGlassButton>
               </Link>
             </div>
-          </LiquidGlassCard>
+            </LiquidGlassCard>
+          </div>
         </div>
       </main>
     </>
