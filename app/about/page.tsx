@@ -14,11 +14,11 @@ export default function AboutPage() {
       <Navigation />
       <AnimatedGradientMesh />
       
-      <main className="relative px-4 md:px-8 py-24 md:py-32 flex justify-center">
+      <main className="relative px-4 md:px-8 py-32 md:py-40 flex justify-center">
         <div className="w-full max-w-6xl">
           
           {/* Hero - Centered */}
-          <section className="mb-40">
+          <section className="mb-48">
             <motion.div 
               className="text-center max-w-5xl mx-auto"
               initial={{ opacity: 0, y: 30 }}
@@ -70,10 +70,10 @@ export default function AboutPage() {
           </section>
 
           {/* Section Divider */}
-          <div className="h-px bg-gradient-to-r from-transparent via-gray-500/30 to-transparent mb-24" />
+          <div className="h-px bg-gradient-to-r from-transparent via-gray-500/50 to-transparent mb-32" />
           
           {/* Stats Section - Redesigned */}
-          <section className="mb-40 py-16">
+          <section className="mb-48 py-20">
             <LiquidGlassCard intensity="medium" className="p-12 md:p-16">
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 text-center">
                 <StatItem 
@@ -105,14 +105,14 @@ export default function AboutPage() {
           </section>
 
           {/* Section Divider */}
-          <div className="h-px bg-gradient-to-r from-transparent via-gray-500/30 to-transparent mb-24" />
+          <div className="h-px bg-gradient-to-r from-transparent via-gray-500/50 to-transparent mb-32" />
           
           {/* Our Story - Redesigned (Centered) */}
-          <section className="mb-40 py-16">
-            <h2 className="text-4xl md:text-5xl font-light text-center mb-16">Our Story</h2>
+          <section className="mb-48 py-20">
+            <h2 className="text-4xl md:text-5xl font-light text-center mb-20">Our Story</h2>
             
             {/* Story Text - Centered */}
-            <div className="max-w-4xl mx-auto mb-16">
+            <div className="max-w-5xl mx-auto mb-20">
               <LiquidGlassCard intensity="medium" className="p-10 md:p-12 text-center">
                 <p className="text-lg md:text-xl text-gray-300 leading-relaxed font-light mb-6">
                   Most business owners spend <span className="font-semibold text-white">20+ hours/week</span> on tasks a computer could do better.
@@ -129,9 +129,9 @@ export default function AboutPage() {
             </div>
             
             {/* Timeline - Horizontal */}
-            <div className="max-w-5xl mx-auto">
-              <LiquidGlassCard intensity="light" className="p-10 md:p-12">
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
+            <div className="max-w-6xl mx-auto">
+              <LiquidGlassCard intensity="light" className="p-12 md:p-16">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-16">
                   <TimelineItemHorizontal 
                     year="2024"
                     title="Problem Identified"
@@ -153,12 +153,12 @@ export default function AboutPage() {
           </section>
 
           {/* Section Divider */}
-          <div className="h-px bg-gradient-to-r from-transparent via-gray-500/30 to-transparent mb-24" />
+          <div className="h-px bg-gradient-to-r from-transparent via-gray-500/50 to-transparent mb-32" />
           
           {/* Our Values */}
-          <section className="mb-40 py-16">
-            <h2 className="text-4xl md:text-5xl font-light text-center mb-16">Our Values</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <section className="mb-48 py-20">
+            <h2 className="text-4xl md:text-5xl font-light text-center mb-20">Our Values</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-stretch">
               <ValueCard
                 title="Speed Over Perfection"
                 description="Launch fast, optimize later. Every day you wait is money lost. Average template goes live in 48 hours (not 2 weeks)."
@@ -183,15 +183,15 @@ export default function AboutPage() {
           </section>
 
           {/* Section Divider */}
-          <div className="h-px bg-gradient-to-r from-transparent via-gray-500/30 to-transparent mb-24" />
+          <div className="h-px bg-gradient-to-r from-transparent via-gray-500/50 to-transparent mb-32" />
           
           {/* Meet the Team - Rebalanced */}
-          <section className="mb-40 py-16">
-            <h2 className="text-4xl md:text-5xl font-light text-center mb-12">Meet the Team</h2>
+          <section className="mb-48 py-20">
+            <h2 className="text-4xl md:text-5xl font-light text-center mb-20">Meet the Team</h2>
             
             {/* 3D Team Orbit - Reduced Size */}
             <motion.div
-              className="mb-16 max-w-2xl mx-auto"
+              className="mb-20 max-w-2xl mx-auto"
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 1, delay: 0.3 }}
@@ -201,7 +201,7 @@ export default function AboutPage() {
             </motion.div>
             
             {/* Team Member Cards - Larger */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-stretch">
               <TeamMemberCard
                 name="Isaac Senior Primo"
                 role="Co-Founder & Technical Lead"
@@ -222,12 +222,12 @@ export default function AboutPage() {
           </section>
 
           {/* Section Divider */}
-          <div className="h-px bg-gradient-to-r from-transparent via-gray-500/30 to-transparent mb-24" />
+          <div className="h-px bg-gradient-to-r from-transparent via-gray-500/50 to-transparent mb-32" />
           
           {/* FAQ Section - Better Spacing */}
-          <section className="mb-40 py-16">
-            <h2 className="text-4xl md:text-5xl font-light text-center mb-16">Frequently Asked Questions</h2>
-            <div className="max-w-4xl mx-auto space-y-8">
+          <section className="mb-48 py-20">
+            <h2 className="text-4xl md:text-5xl font-light text-center mb-20">Frequently Asked Questions</h2>
+            <div className="max-w-4xl mx-auto space-y-6">
               <FAQItem
                 question="Why should I trust a company founded in 2026?"
                 answer="Fair question. We're new as a company, but not new to automation. Isaac and Amun have been building AI tools for their own businesses since 2024. We've already delivered 127 websites and saved clients 2,000+ hours. Plus, we offer a 14-day money-back guarantee—no risk."
@@ -334,7 +334,7 @@ function ValueCard({ title, description, icon }: {
 }) {
   return (
     <motion.div whileHover={{ scale: 1.02, y: -5 }} className="h-full">
-      <LiquidGlassCard intensity="medium" className="p-10 md:p-12 h-full flex flex-col">
+      <LiquidGlassCard intensity="medium" className="p-12 md:p-14 h-full flex flex-col">
         <div className="mb-6 flex justify-center md:justify-start">{icon}</div>
         <h3 className="text-2xl md:text-3xl font-semibold mb-4">{title}</h3>
         <p className="text-gray-300 leading-relaxed font-light flex-1">{description}</p>
@@ -354,7 +354,7 @@ function TeamMemberCard({ name, role, bio, location, linkedin, twitter }: {
 }) {
   return (
     <motion.div whileHover={{ scale: 1.02, y: -5 }}>
-      <LiquidGlassCard intensity="medium" className="p-10 md:p-12 h-full">
+      <LiquidGlassCard intensity="medium" className="p-12 md:p-14 h-full">
         <div className="flex items-start gap-6 mb-6">
           <div className="w-24 h-24 rounded-full bg-gradient-to-br from-purple-600 to-blue-600 flex items-center justify-center text-3xl font-bold flex-shrink-0 shadow-xl">
             {name.split(' ').map(n => n[0]).join('')}
