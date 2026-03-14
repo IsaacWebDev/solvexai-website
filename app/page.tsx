@@ -8,7 +8,7 @@ import { ServicesReveal } from '@/components/sections/ServicesReveal'
 import { TemplateShowcaseHorizontal } from '@/components/sections/TemplateShowcaseHorizontal'
 import { StatsCountUp } from '@/components/sections/StatsCountUp'
 import { FinalCTAParallax } from '@/components/sections/FinalCTAParallax'
-import { AnimatedJellyfishBG } from '@/components/backgrounds/AnimatedJellyfishBG'
+import { RealisticJellyfishBG } from '@/components/backgrounds/RealisticJellyfishBG'
 
 export default function HomePage() {
   const [showIntro, setShowIntro] = useState(true)
@@ -64,8 +64,8 @@ export default function HomePage() {
         {/* 1. Full-screen Hero with 3D */}
         <HeroImmersive />
         
-        {/* Animated Jellyfish Background (global) */}
-        <AnimatedJellyfishBG />
+        {/* Realistic Jellyfish Background (global) */}
+        <RealisticJellyfishBG />
         
         {/* Content sections (Three Ways → Stats) */}
         <div className="relative">
