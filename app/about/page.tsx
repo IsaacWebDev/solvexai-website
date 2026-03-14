@@ -15,8 +15,8 @@ export default function AboutPage() {
       <Navigation />
       <AnimatedGradientMesh />
       
-      <main className="relative px-4 md:px-8 py-24 md:py-32">
-        <div className="max-w-7xl mx-auto">
+      <main className="relative px-4 md:px-8 py-24 md:py-32 flex justify-center">
+        <div className="w-full max-w-7xl">
           
           {/* Hero - Centered Container */}
           <div className="max-w-6xl mx-auto">
