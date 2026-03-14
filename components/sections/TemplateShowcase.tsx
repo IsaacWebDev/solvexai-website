@@ -65,10 +65,10 @@ const templates = [
 export const TemplateShowcase = () => {
   return (
     <section className="py-32 px-6 flex justify-center">
-      <div className="max-w-7xl w-full">
+      <div className="max-w-7xl w-full flex flex-col items-center">
         
         {/* Header - Centered */}
-        <div className="text-center mb-24">
+        <div className="text-center mb-24 w-full">
           <div className="text-purple-400 text-sm uppercase tracking-wider mb-4">
             Ready-to-Deploy
           </div>
@@ -81,7 +81,7 @@ export const TemplateShowcase = () => {
         </div>
         
         {/* Template Grid - Centered */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl w-full">
           
           {templates.map((template, i) => (
             <LiquidGlassCard

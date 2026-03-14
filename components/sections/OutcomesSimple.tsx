@@ -5,10 +5,10 @@ import { LiquidGlassCard } from '@/components/ui/LiquidGlassCard'
 export const OutcomesSimple = () => {
   return (
     <section className="py-32 px-6 relative z-10 flex justify-center">
-      <div className="max-w-7xl w-full">
+      <div className="max-w-7xl w-full flex flex-col items-center">
         
         {/* Section header - Centered */}
-        <div className="text-center mb-24">
+        <div className="text-center mb-24 w-full">
           <h2 className="text-6xl md:text-7xl font-light mb-6">
             What You Get
           </h2>
@@ -18,7 +18,7 @@ export const OutcomesSimple = () => {
         </div>
         
         {/* 3 Outcomes - Centered grid with liquid glass */}
-        <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <div className="grid md:grid-cols-3 gap-8 max-w-6xl w-full">
           
           {/* Outcome 1 */}
           <LiquidGlassCard 

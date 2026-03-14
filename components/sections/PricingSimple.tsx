@@ -88,10 +88,10 @@ const packages = [
 export const PricingSimple = () => {
   return (
     <section className="py-32 px-6 relative z-10 flex justify-center">
-      <div className="max-w-7xl w-full">
+      <div className="max-w-7xl w-full flex flex-col items-center">
         
         {/* Header - Centered */}
-        <div className="text-center mb-24">
+        <div className="text-center mb-24 w-full">
           <h2 className="text-6xl md:text-7xl font-light mb-6">
             Choose Your Path
           </h2>
@@ -101,7 +101,7 @@ export const PricingSimple = () => {
         </div>
         
         {/* Centered Grid */}
-        <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <div className="grid md:grid-cols-3 gap-8 max-w-6xl w-full">
           
           {packages.map((pkg, i) => (
             <LiquidGlassCard
