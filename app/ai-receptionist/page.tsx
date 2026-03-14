@@ -3,7 +3,7 @@
 import React, { useState } from 'react'
 import { Navigation } from '@/components/Navigation'
 import { AnimatedGradientMesh } from '@/components/AnimatedGradientMesh'
-import { Phone3D } from '@/components/3d/Phone3D'
+import { PhoneMockup } from '@/components/3d/PhoneMockup'
 import { GuaranteeBadge } from '@/components/GuaranteeBadge'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
@@ -47,13 +47,13 @@ export default function AIReceptionistPage() {
               </Link>
             </motion.div>
             
-            {/* 3D iPhone with Sound Waves */}
+            {/* High-Quality iPhone Mockup with Sound Waves */}
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 1, delay: 0.3 }}
             >
-              <Phone3D />
+              <PhoneMockup />
             </motion.div>
           </div>
           
