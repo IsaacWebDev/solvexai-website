@@ -17,15 +17,15 @@ export function Navigation() {
   ]
   
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 px-4 py-4">
+    <nav className="fixed top-0 left-0 right-0 z-50 px-4 py-6">
       <div className="max-w-[1920px] mx-auto">
-        <LiquidGlassCard intensity="light" className="rounded-full px-8 py-3">
+        <LiquidGlassCard intensity="light" className="rounded-full px-10 py-4">
           
           {/* Desktop Layout */}
           <div className="hidden lg:flex items-center justify-between relative">
             
             {/* LEFT: Navigation Links + Get Started */}
-            <div className="flex items-center gap-8">
+            <div className="flex items-center gap-10">
               {links.map((link) => (
                 <Link
                   key={link.href}

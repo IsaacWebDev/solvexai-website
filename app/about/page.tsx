@@ -54,7 +54,7 @@ export default function AboutPage() {
               </div>
               
               {/* Dual CTAs */}
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <div className="flex flex-col sm:flex-row gap-6 justify-center">
                 <Link href="/contact">
                   <LiquidGlassButton variant="primary" size="lg">
                     Book Discovery Call
@@ -76,8 +76,8 @@ export default function AboutPage() {
           <section className="mb-48 py-20">
             <div className="flex justify-center">
               <div className="w-full max-w-5xl">
-                <LiquidGlassCard intensity="medium" className="p-12 md:p-16">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 text-center">
+                <LiquidGlassCard intensity="medium" className="p-16 md:p-20">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-16 text-center">
                     <StatItem 
                       icon={<WebsiteIcon />}
                       number="127" 
@@ -244,7 +244,7 @@ export default function AboutPage() {
           <section className="mb-48 py-20">
             <h2 className="text-4xl md:text-5xl font-light text-center mb-20">Frequently Asked Questions</h2>
             <div className="flex justify-center">
-              <div className="w-full max-w-4xl space-y-6">
+              <div className="w-full max-w-4xl space-y-8">
                 <FAQItem
                   question="Why should I trust a company founded in 2026?"
                   answer="Fair question. We're new as a company, but not new to automation. Isaac and Amun have been building AI tools for their own businesses since 2024. We've already delivered 127 websites and saved clients 2,000+ hours. Plus, we offer a 14-day money-back guarantee—no risk."
@@ -316,11 +316,11 @@ function StatItem({ icon, number, label, sublabel }: {
       whileHover={{ scale: 1.05, y: -5 }}
       className="transition-all"
     >
-      <div className="mb-4 flex justify-center">{icon}</div>
-      <div className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent mb-3">
+      <div className="mb-6 flex justify-center">{icon}</div>
+      <div className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent mb-4">
         {number}
       </div>
-      <div className="text-base md:text-lg text-gray-300 font-medium mb-1">{label}</div>
+      <div className="text-base md:text-lg text-gray-300 font-medium mb-2">{label}</div>
       <div className="text-sm text-gray-500">{sublabel}</div>
     </motion.div>
   )

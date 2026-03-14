@@ -194,7 +194,7 @@ export default function ContactPage() {
                     </div>
                     
                     <div>
-                      <label className="block text-lg font-light mb-4 text-gray-300">Name</label>
+                      <label className="block text-lg font-light mb-5 text-gray-300">Name</label>
                       <input
                         type="text"
                         required
@@ -206,7 +206,7 @@ export default function ContactPage() {
                     </div>
                     
                     <div>
-                      <label className="block text-lg font-light mb-4 text-gray-300">Email</label>
+                      <label className="block text-lg font-light mb-5 text-gray-300">Email</label>
                       <input
                         type="email"
                         required
@@ -218,8 +218,8 @@ export default function ContactPage() {
                     </div>
                     
                     <div>
-                      <label className="block text-lg font-light mb-6 text-gray-300">I'm interested in</label>
-                      <div className="space-y-4">
+                      <label className="block text-lg font-light mb-7 text-gray-300">I'm interested in</label>
+                      <div className="space-y-5">
                         <CheckboxOption 
                           label="Website Template" 
                           sublabel="$497-997"
@@ -449,13 +449,13 @@ function CheckboxOption({ label, sublabel, checked, onChange }: { label: string;
   return (
     <label 
       onClick={onChange}
-      className={`flex items-center justify-between p-5 rounded-xl cursor-pointer group transition-all border-2 relative z-10 ${
+      className={`flex items-center justify-between p-6 rounded-xl cursor-pointer group transition-all border-2 relative z-10 ${
         checked 
           ? 'bg-purple-600/10 border-purple-500' 
           : 'bg-white/5 border-white/10 hover:border-white/20'
       }`}
     >
-      <div className="flex items-center gap-4 pointer-events-none">
+      <div className="flex items-center gap-5 pointer-events-none">
         <div className={`w-6 h-6 rounded-lg border-2 flex items-center justify-center transition-all ${
           checked 
             ? 'bg-purple-600 border-purple-600' 
@@ -467,7 +467,7 @@ function CheckboxOption({ label, sublabel, checked, onChange }: { label: string;
             </svg>
           )}
         </div>
-        <div>
+        <div className="space-y-1">
           <div className="font-light text-lg">{label}</div>
           <div className="text-sm text-gray-400 font-light">{sublabel}</div>
         </div>
