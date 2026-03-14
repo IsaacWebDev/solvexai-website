@@ -67,6 +67,24 @@ export function ServicesReveal() {
       title: 'AI Receptionist',
       description: '24/7 phone answering, appointment booking, customer support. Never miss a call again.',
       price: 'From $297/mo'
+    },
+    {
+      icon: '💬',
+      title: 'AI Chatbots',
+      description: '24/7 customer support that actually understands your customers. Smart, contextual, always available.',
+      price: 'From $497/mo'
+    },
+    {
+      icon: '📊',
+      title: 'Analytics Dashboard',
+      description: 'Real-time insights into your automation performance. Track ROI, monitor workflows, optimize results.',
+      price: 'Included'
+    },
+    {
+      icon: '🔗',
+      title: 'API Integration',
+      description: 'Connect your existing tools seamlessly. Zapier, Make, custom APIs - we integrate with everything.',
+      price: 'From $297/mo'
     }
   ]
   
