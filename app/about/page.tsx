@@ -6,7 +6,6 @@ import { AnimatedGradientMesh } from '@/components/AnimatedGradientMesh'
 import { TeamOrbit3D } from '@/components/3d/TeamOrbit3D'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
-import { containers, spacing, typography } from '@/lib/design-system'
 import { LiquidGlassCard, LiquidGlassButton } from '@/components/ui'
 
 export default function AboutPage() {
@@ -16,26 +15,26 @@ export default function AboutPage() {
       <AnimatedGradientMesh />
       
       <main className="relative px-4 md:px-8 py-24 md:py-32 flex justify-center">
-        <div className="w-full max-w-7xl">
+        <div className="w-full max-w-6xl">
           
-          {/* Hero - Centered Container */}
-          <div className="max-w-6xl mx-auto">
+          {/* Hero - Centered */}
+          <section className="mb-40">
             <motion.div 
-              className="text-center mb-40"
+              className="text-center max-w-5xl mx-auto"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
             >
-              <h1 className="text-5xl md:text-6xl lg:text-7xl font-light mb-10 leading-tight">
+              <h1 className="text-6xl md:text-7xl font-light mb-10 leading-tight">
                 You Shouldn't Be<br />Answering Phones at 11 PM
               </h1>
-              <p className="text-xl md:text-2xl text-gray-300 mb-16 max-w-3xl mx-auto font-light leading-relaxed">
+              <p className="text-xl md:text-2xl text-gray-300 mb-16 font-light leading-relaxed">
                 We automate the work that steals your evenings and weekends.<br />
                 127 businesses reclaimed 2,000+ hours in 2026.
               </p>
               
               {/* Founder Context Card */}
-              <div className="max-w-4xl mx-auto mb-16">
+              <div className="mb-16">
                 <LiquidGlassCard intensity="medium" className="p-10 md:p-12">
                   <div className="flex flex-col md:flex-row items-center gap-8">
                     <div className="flex-shrink-0">
@@ -68,21 +67,87 @@ export default function AboutPage() {
                 </Link>
               </div>
             </motion.div>
-          </div>
+          </section>
 
           {/* Section Divider */}
           <div className="h-px bg-gradient-to-r from-transparent via-gray-500/30 to-transparent mb-24" />
           
-          {/* Stats - Moved Before Story */}
-          <section className="mb-40 text-center">
-            <div className="max-w-5xl mx-auto">
-              <LiquidGlassCard intensity="medium" className="p-12 md:p-16">
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 text-center">
-                <StatItem number="127" label="Websites Launched" sublabel="In 10 Months" />
-                <StatItem number="2,000+" label="Hours Saved" sublabel="For Our Clients" />
-                <StatItem number="$2M+" label="Revenue Generated" sublabel="Client Success" />
-                <StatItem number="4.9★" label="Average Rating" sublabel="Customer Reviews" />
+          {/* Stats Section - Redesigned */}
+          <section className="mb-40 py-16">
+            <LiquidGlassCard intensity="medium" className="p-12 md:p-16">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 text-center">
+                <StatItem 
+                  icon={<WebsiteIcon />}
+                  number="127" 
+                  label="Websites Launched" 
+                  sublabel="In 10 Months" 
+                />
+                <StatItem 
+                  icon={<ClockIcon />}
+                  number="2,000+" 
+                  label="Hours Saved" 
+                  sublabel="For Our Clients" 
+                />
+                <StatItem 
+                  icon={<DollarIcon />}
+                  number="$2M+" 
+                  label="Revenue Generated" 
+                  sublabel="Client Success" 
+                />
+                <StatItem 
+                  icon={<StarIcon />}
+                  number="4.9★" 
+                  label="Average Rating" 
+                  sublabel="Customer Reviews" 
+                />
               </div>
+            </LiquidGlassCard>
+          </section>
+
+          {/* Section Divider */}
+          <div className="h-px bg-gradient-to-r from-transparent via-gray-500/30 to-transparent mb-24" />
+          
+          {/* Our Story - Redesigned (Centered) */}
+          <section className="mb-40 py-16">
+            <h2 className="text-4xl md:text-5xl font-light text-center mb-16">Our Story</h2>
+            
+            {/* Story Text - Centered */}
+            <div className="max-w-4xl mx-auto mb-16">
+              <LiquidGlassCard intensity="medium" className="p-10 md:p-12 text-center">
+                <p className="text-lg md:text-xl text-gray-300 leading-relaxed font-light mb-6">
+                  Most business owners spend <span className="font-semibold text-white">20+ hours/week</span> on tasks a computer could do better.
+                </p>
+                <p className="text-lg md:text-xl text-gray-300 leading-relaxed font-light mb-6">
+                  We saw restaurant owners manually taking reservations, lawyers typing the same emails, 
+                  gyms chasing no-shows. <span className="font-semibold text-white">It doesn't have to be this way.</span>
+                </p>
+                <p className="text-lg md:text-xl text-gray-300 leading-relaxed font-light">
+                  SolveXAI was built to give small businesses the AI automation that big companies have—without 
+                  the enterprise price tag.
+                </p>
+              </LiquidGlassCard>
+            </div>
+            
+            {/* Timeline - Horizontal */}
+            <div className="max-w-5xl mx-auto">
+              <LiquidGlassCard intensity="light" className="p-10 md:p-12">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
+                  <TimelineItemHorizontal 
+                    year="2024"
+                    title="Problem Identified"
+                    description="Isaac and Amun both struggling with repetitive business tasks"
+                  />
+                  <TimelineItemHorizontal 
+                    year="2025"
+                    title="Building Solutions"
+                    description="Created AI tools to solve our own automation problems"
+                  />
+                  <TimelineItemHorizontal 
+                    year="2026"
+                    title="SolveXAI Founded"
+                    description="Launched publicly. 127 businesses automated in 10 months"
+                  />
+                </div>
               </LiquidGlassCard>
             </div>
           </section>
@@ -90,63 +155,10 @@ export default function AboutPage() {
           {/* Section Divider */}
           <div className="h-px bg-gradient-to-r from-transparent via-gray-500/30 to-transparent mb-24" />
           
-          {/* Our Story - Redesigned with Split Layout */}
-          <section className="mb-40">
-            <h2 className="text-4xl md:text-5xl font-light text-center mb-16">Our Story</h2>
-            
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
-              {/* Left: Story Text */}
-              <div>
-                <LiquidGlassCard intensity="medium" className="p-10 md:p-12">
-                  <div className="space-y-6">
-                    <p className="text-lg md:text-xl text-gray-300 leading-relaxed font-light">
-                      Most business owners spend <span className="font-semibold text-white">20+ hours/week</span> on tasks a computer could do better.
-                    </p>
-                    <p className="text-lg md:text-xl text-gray-300 leading-relaxed font-light">
-                      We saw restaurant owners manually taking reservations, lawyers typing the same emails, 
-                      gyms chasing no-shows. <span className="font-semibold text-white">It doesn't have to be this way.</span>
-                    </p>
-                    <p className="text-lg md:text-xl text-gray-300 leading-relaxed font-light">
-                      SolveXAI was built to give small businesses the AI automation that big companies have—without 
-                      the enterprise price tag.
-                    </p>
-                  </div>
-                </LiquidGlassCard>
-              </div>
-              
-              {/* Right: Timeline */}
-              <div>
-                <LiquidGlassCard intensity="light" className="p-10 md:p-12">
-                  <div className="space-y-8">
-                    <TimelineItem 
-                      year="2024"
-                      title="Problem Identified"
-                      description="Isaac and Amun both struggling with repetitive business tasks"
-                    />
-                    <TimelineItem 
-                      year="2025"
-                      title="Building Solutions"
-                      description="Created AI tools to solve our own automation problems"
-                    />
-                    <TimelineItem 
-                      year="2026"
-                      title="SolveXAI Founded"
-                      description="Launched publicly. 127 businesses automated in 10 months"
-                      isLast
-                    />
-                  </div>
-                </LiquidGlassCard>
-              </div>
-            </div>
-          </section>
-
-          {/* Section Divider */}
-          <div className="h-px bg-gradient-to-r from-transparent via-gray-500/30 to-transparent mb-24" />
-          
-          {/* Our Values - Professional Icons */}
-          <section className="mb-40">
+          {/* Our Values */}
+          <section className="mb-40 py-16">
             <h2 className="text-4xl md:text-5xl font-light text-center mb-16">Our Values</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <ValueCard
                 title="Speed Over Perfection"
                 description="Launch fast, optimize later. Every day you wait is money lost. Average template goes live in 48 hours (not 2 weeks)."
@@ -173,28 +185,30 @@ export default function AboutPage() {
           {/* Section Divider */}
           <div className="h-px bg-gradient-to-r from-transparent via-gray-500/30 to-transparent mb-24" />
           
-          {/* Meet the Team - 3D Orbit + Profiles */}
-          <section className="mb-40">
-            <h2 className="text-4xl md:text-5xl font-light text-center mb-16">Meet the Team</h2>
+          {/* Meet the Team - Rebalanced */}
+          <section className="mb-40 py-16">
+            <h2 className="text-4xl md:text-5xl font-light text-center mb-12">Meet the Team</h2>
             
-            {/* 3D Team Orbit */}
+            {/* 3D Team Orbit - Reduced Size */}
             <motion.div
-              className="mb-16"
+              className="mb-16 max-w-2xl mx-auto"
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 1, delay: 0.3 }}
+              style={{ maxHeight: '400px' }}
             >
               <TeamOrbit3D />
             </motion.div>
             
-            {/* Team Member Cards */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+            {/* Team Member Cards - Larger */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <TeamMemberCard
                 name="Isaac Senior Primo"
                 role="Co-Founder & Technical Lead"
                 bio="Economics student turned developer. Built automation tools to escape 15-hour work weeks. Now helps others do the same."
                 location="Bordeaux, France"
                 linkedin="#"
+                twitter="#"
               />
               <TeamMemberCard
                 name="Amun Nour"
@@ -202,6 +216,7 @@ export default function AboutPage() {
                 bio="Former restaurant owner who lost $3K/month to no-shows. Built the AI receptionist we wish we had."
                 location="Johannesburg, South Africa"
                 linkedin="#"
+                twitter="#"
               />
             </div>
           </section>
@@ -209,10 +224,10 @@ export default function AboutPage() {
           {/* Section Divider */}
           <div className="h-px bg-gradient-to-r from-transparent via-gray-500/30 to-transparent mb-24" />
           
-          {/* FAQ Section */}
-          <section className="mb-40">
+          {/* FAQ Section - Better Spacing */}
+          <section className="mb-40 py-16">
             <h2 className="text-4xl md:text-5xl font-light text-center mb-16">Frequently Asked Questions</h2>
-            <div className="max-w-4xl mx-auto space-y-6">
+            <div className="max-w-4xl mx-auto space-y-8">
               <FAQItem
                 question="Why should I trust a company founded in 2026?"
                 answer="Fair question. We're new as a company, but not new to automation. Isaac and Amun have been building AI tools for their own businesses since 2024. We've already delivered 127 websites and saved clients 2,000+ hours. Plus, we offer a 14-day money-back guarantee—no risk."
@@ -241,26 +256,26 @@ export default function AboutPage() {
           </section>
           
           {/* Final CTA */}
-          <div className="max-w-4xl mx-auto">
+          <div className="max-w-5xl mx-auto">
             <LiquidGlassCard intensity="heavy" className="text-center p-12 md:p-16">
-            <h2 className="text-4xl md:text-5xl font-light mb-6">
-              Want to join the automation revolution?
-            </h2>
-            <p className="text-gray-300 text-lg md:text-xl mb-12 font-light">
-              Join 127 businesses that reclaimed their time in 2026
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/contact">
-                <LiquidGlassButton variant="primary" size="lg">
-                  Start Your Project
-                </LiquidGlassButton>
-              </Link>
-              <Link href="/templates">
-                <LiquidGlassButton variant="secondary" size="lg">
-                  Browse Templates
-                </LiquidGlassButton>
-              </Link>
-            </div>
+              <h2 className="text-4xl md:text-5xl font-light mb-6">
+                Want to join the automation revolution?
+              </h2>
+              <p className="text-gray-300 text-lg md:text-xl mb-12 font-light">
+                Join 127 businesses that reclaimed their time in 2026
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Link href="/contact">
+                  <LiquidGlassButton variant="primary" size="lg">
+                    Start Your Project
+                  </LiquidGlassButton>
+                </Link>
+                <Link href="/templates">
+                  <LiquidGlassButton variant="secondary" size="lg">
+                    Browse Templates
+                  </LiquidGlassButton>
+                </Link>
+              </div>
             </LiquidGlassCard>
           </div>
         </div>
@@ -269,87 +284,108 @@ export default function AboutPage() {
   )
 }
 
-// Component: Stat Item
-function StatItem({ number, label, sublabel }: { number: string; label: string; sublabel: string }) {
+// Component: Stat Item with Icon
+function StatItem({ icon, number, label, sublabel }: { 
+  icon: React.ReactNode;
+  number: string; 
+  label: string; 
+  sublabel: string;
+}) {
   return (
     <motion.div
-      whileHover={{ scale: 1.05 }}
-      className="transition-transform"
+      whileHover={{ scale: 1.05, y: -5 }}
+      className="transition-all"
     >
-      <div className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent mb-2">
+      <div className="mb-4 flex justify-center">{icon}</div>
+      <div className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent mb-3">
         {number}
       </div>
-      <div className="text-sm md:text-base text-gray-300 font-medium">{label}</div>
-      <div className="text-xs text-gray-500 mt-1">{sublabel}</div>
+      <div className="text-base md:text-lg text-gray-300 font-medium mb-1">{label}</div>
+      <div className="text-sm text-gray-500">{sublabel}</div>
     </motion.div>
   )
 }
 
-// Component: Timeline Item
-function TimelineItem({ year, title, description, isLast = false }: { 
+// Component: Horizontal Timeline Item
+function TimelineItemHorizontal({ year, title, description }: { 
   year: string; 
   title: string; 
   description: string; 
-  isLast?: boolean 
 }) {
   return (
-    <div className="relative pl-8">
-      {!isLast && (
-        <div className="absolute left-0 top-8 bottom-0 w-px bg-gradient-to-b from-purple-500/50 to-transparent" />
-      )}
-      <div className="absolute left-0 top-0 w-4 h-4 rounded-full bg-gradient-to-br from-purple-600 to-blue-600 ring-4 ring-purple-600/20" />
-      <div className="text-sm text-purple-400 font-semibold mb-1">{year}</div>
-      <h3 className="text-xl font-semibold mb-2">{title}</h3>
+    <div className="text-center">
+      <div className="mb-4">
+        <div className="w-16 h-16 mx-auto rounded-full bg-gradient-to-br from-purple-600 to-blue-600 flex items-center justify-center text-2xl font-bold shadow-xl">
+          {year.slice(-2)}
+        </div>
+      </div>
+      <div className="text-sm text-purple-400 font-semibold mb-2">{year}</div>
+      <h3 className="text-xl md:text-2xl font-semibold mb-3">{title}</h3>
       <p className="text-gray-400 font-light leading-relaxed">{description}</p>
     </div>
   )
 }
 
 // Component: Value Card
-function ValueCard({ title, description, icon }: { title: string; description: string; icon: React.ReactNode }) {
+function ValueCard({ title, description, icon }: { 
+  title: string; 
+  description: string; 
+  icon: React.ReactNode 
+}) {
   return (
-    <motion.div whileHover={{ scale: 1.02 }} className="h-full">
-      <LiquidGlassCard intensity="medium" className="p-8 md:p-10 h-full">
-        <div className="mb-6">{icon}</div>
-        <h3 className="text-2xl font-semibold mb-4">{title}</h3>
-        <p className="text-gray-300 leading-relaxed font-light">{description}</p>
+    <motion.div whileHover={{ scale: 1.02, y: -5 }} className="h-full">
+      <LiquidGlassCard intensity="medium" className="p-10 md:p-12 h-full flex flex-col">
+        <div className="mb-6 flex justify-center md:justify-start">{icon}</div>
+        <h3 className="text-2xl md:text-3xl font-semibold mb-4">{title}</h3>
+        <p className="text-gray-300 leading-relaxed font-light flex-1">{description}</p>
       </LiquidGlassCard>
     </motion.div>
   )
 }
 
 // Component: Team Member Card
-function TeamMemberCard({ name, role, bio, location, linkedin }: { 
+function TeamMemberCard({ name, role, bio, location, linkedin, twitter }: { 
   name: string; 
   role: string; 
   bio: string; 
   location: string; 
-  linkedin: string 
+  linkedin: string;
+  twitter: string;
 }) {
   return (
-    <motion.div whileHover={{ scale: 1.02 }}>
-      <LiquidGlassCard intensity="medium" className="p-8 md:p-10 h-full">
-        <div className="flex items-start gap-4 mb-6">
-          <div className="w-20 h-20 rounded-full bg-gradient-to-br from-purple-600 to-blue-600 flex items-center justify-center text-2xl font-bold flex-shrink-0 shadow-xl">
+    <motion.div whileHover={{ scale: 1.02, y: -5 }}>
+      <LiquidGlassCard intensity="medium" className="p-10 md:p-12 h-full">
+        <div className="flex items-start gap-6 mb-6">
+          <div className="w-24 h-24 rounded-full bg-gradient-to-br from-purple-600 to-blue-600 flex items-center justify-center text-3xl font-bold flex-shrink-0 shadow-xl">
             {name.split(' ').map(n => n[0]).join('')}
           </div>
           <div>
-            <h3 className="text-xl font-bold mb-1">{name}</h3>
-            <p className="text-purple-400 text-sm font-medium mb-1">{role}</p>
-            <p className="text-gray-400 text-xs flex items-center gap-1">
+            <h3 className="text-2xl font-bold mb-2">{name}</h3>
+            <p className="text-purple-400 text-base font-medium mb-2">{role}</p>
+            <p className="text-gray-400 text-sm flex items-center gap-1">
               <MapPinIcon /> {location}
             </p>
           </div>
         </div>
-        <p className="text-gray-300 leading-relaxed font-light mb-6">{bio}</p>
-        <a 
-          href={linkedin} 
-          target="_blank" 
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 text-blue-400 hover:text-blue-300 text-sm transition-colors font-medium"
-        >
-          <LinkedInIcon /> Connect on LinkedIn
-        </a>
+        <p className="text-lg text-gray-300 leading-relaxed font-light mb-6">{bio}</p>
+        <div className="flex gap-4">
+          <a 
+            href={linkedin} 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 text-blue-400 hover:text-blue-300 text-sm transition-colors font-medium"
+          >
+            <LinkedInIcon /> LinkedIn
+          </a>
+          <a 
+            href={twitter} 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 text-blue-400 hover:text-blue-300 text-sm transition-colors font-medium"
+          >
+            <TwitterIcon /> Twitter
+          </a>
+        </div>
       </LiquidGlassCard>
     </motion.div>
   )
@@ -363,7 +399,7 @@ function FAQItem({ question, answer }: { question: string; answer: string }) {
     <LiquidGlassCard intensity="medium" className="overflow-hidden">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full p-6 md:p-8 text-left flex items-start justify-between gap-4 hover:bg-white/5 transition-colors"
+        className="w-full p-8 md:p-10 text-left flex items-start justify-between gap-6 hover:bg-white/5 transition-colors"
       >
         <h3 className="text-lg md:text-xl font-semibold pr-4">{question}</h3>
         <motion.span 
@@ -383,7 +419,7 @@ function FAQItem({ question, answer }: { question: string; answer: string }) {
         transition={{ duration: 0.3, ease: 'easeInOut' }}
         className="overflow-hidden"
       >
-        <div className="px-6 md:px-8 pb-6 md:pb-8 pt-0">
+        <div className="px-8 md:px-10 pb-8 md:pb-10 pt-0">
           <div className="h-px bg-gradient-to-r from-transparent via-gray-500/30 to-transparent mb-6" />
           <p className="text-gray-300 leading-relaxed font-light text-base md:text-lg">{answer}</p>
         </div>
@@ -395,7 +431,7 @@ function FAQItem({ question, answer }: { question: string; answer: string }) {
 // SVG Icons
 function ZapIcon() {
   return (
-    <svg className="w-12 h-12 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <svg className="w-14 h-14 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
     </svg>
   )
@@ -403,7 +439,7 @@ function ZapIcon() {
 
 function DiamondIcon() {
   return (
-    <svg className="w-12 h-12 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <svg className="w-14 h-14 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
     </svg>
   )
@@ -411,7 +447,7 @@ function DiamondIcon() {
 
 function UsersIcon() {
   return (
-    <svg className="w-12 h-12 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <svg className="w-14 h-14 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
     </svg>
   )
@@ -419,8 +455,41 @@ function UsersIcon() {
 
 function TargetIcon() {
   return (
-    <svg className="w-12 h-12 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <svg className="w-14 h-14 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+    </svg>
+  )
+}
+
+// Stat Icons
+function WebsiteIcon() {
+  return (
+    <svg className="w-12 h-12 text-purple-400 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
+    </svg>
+  )
+}
+
+function ClockIcon() {
+  return (
+    <svg className="w-12 h-12 text-blue-400 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+    </svg>
+  )
+}
+
+function DollarIcon() {
+  return (
+    <svg className="w-12 h-12 text-green-400 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+    </svg>
+  )
+}
+
+function StarIcon() {
+  return (
+    <svg className="w-12 h-12 text-yellow-400 mx-auto" fill="currentColor" viewBox="0 0 24 24">
+      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
     </svg>
   )
 }
@@ -435,8 +504,16 @@ function MapPinIcon() {
 
 function LinkedInIcon() {
   return (
-    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-      <path d="M6.29 18.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0020 3.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.073 4.073 0 01.8 7.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 010 16.407a11.616 11.616 0 006.29 1.84" />
+    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+      <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+    </svg>
+  )
+}
+
+function TwitterIcon() {
+  return (
+    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+      <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"/>
     </svg>
   )
 }
