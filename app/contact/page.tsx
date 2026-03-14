@@ -65,7 +65,7 @@ export default function ContactPage() {
         <Navigation />
         <AnimatedGradientMesh />
         
-        <main className="relative pt-48 pb-32 px-4 min-h-screen flex items-center justify-center">
+        <main className="relative pt-32 pb-32 px-4 min-h-screen flex items-center justify-center" style={{ paddingTop: '120px' }}>
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -121,7 +121,7 @@ export default function ContactPage() {
       <Navigation />
       <AnimatedGradientMesh />
       
-      <main className="relative pt-64 pb-32 px-4 min-h-screen">
+      <main className="relative pt-32 pb-32 px-4 min-h-screen" style={{ paddingTop: '120px' }}>
         <div className="max-w-3xl mx-auto">
           
           {/* Hero - Centered */}
