@@ -122,52 +122,57 @@ export default function ContactPage() {
       <AnimatedGradientMesh />
       
       <main className="relative pb-32 px-4 min-h-screen">
-        <div className="max-w-3xl mx-auto">
+        <div className="max-w-7xl mx-auto">
           
-          {/* Hero - Centered */}
-          <div className="text-center mb-24">
-            <motion.h1 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="text-6xl md:text-7xl lg:text-8xl font-light mb-8 leading-tight"
-            >
-              Let's Build Something<br />Amazing Together
-            </motion.h1>
+          {/* Hero - Two Column Layout */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
             
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1 }}
-              className="text-xl md:text-2xl text-gray-300 font-light"
-            >
-              Tell us about your project in 3 simple steps
-            </motion.p>
-          </div>
-          
-          {/* Progress Indicator */}
-          <div className="flex justify-center items-center gap-3 mb-16">
-            {[1, 2, 3].map((num) => (
-              <div key={num} className="flex items-center">
-                <div className={`w-12 h-12 rounded-full flex items-center justify-center text-sm font-semibold transition-all duration-300 ${
-                  step === num 
-                    ? 'bg-gradient-to-br from-purple-600 to-blue-600 text-white shadow-lg shadow-purple-500/50 scale-110' 
-                    : step > num
-                    ? 'bg-purple-600/30 text-purple-300'
-                    : 'bg-white/5 text-gray-500'
-                }`}>
-                  {num}
+            {/* Left: Headline + Subtitle */}
+            <div className="lg:sticky lg:top-32">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="space-y-8"
+              >
+                <h1 className="text-5xl md:text-6xl lg:text-7xl font-light leading-tight">
+                  Let's Build Something<br />Amazing Together
+                </h1>
+                
+                <p className="text-xl md:text-2xl text-gray-300 font-light leading-relaxed">
+                  Tell us about your project in 3 simple steps
+                </p>
+                
+                {/* Progress Indicator - Moved to left side */}
+                <div className="flex items-center gap-3 pt-8">
+                  {[1, 2, 3].map((num) => (
+                    <div key={num} className="flex items-center">
+                      <div className={`w-12 h-12 rounded-full flex items-center justify-center text-sm font-semibold transition-all duration-300 ${
+                        step === num 
+                          ? 'bg-gradient-to-br from-purple-600 to-blue-600 text-white shadow-lg shadow-purple-500/50 scale-110' 
+                          : step > num
+                          ? 'bg-purple-600/30 text-purple-300'
+                          : 'bg-white/5 text-gray-500'
+                      }`}>
+                        {num}
+                      </div>
+                      {num < 3 && (
+                        <div className={`w-12 h-0.5 mx-2 transition-all duration-300 ${
+                          step > num ? 'bg-purple-600/30' : 'bg-white/10'
+                        }`} />
+                      )}
+                    </div>
+                  ))}
                 </div>
-                {num < 3 && (
-                  <div className={`w-16 h-0.5 mx-2 transition-all duration-300 ${
-                    step > num ? 'bg-purple-600/30' : 'bg-white/10'
-                  }`} />
-                )}
-              </div>
-            ))}
-          </div>
-          
-          {/* Form Card - Centered */}
-          <LiquidGlassCard intensity="heavy" className="p-12 md:p-16">
+              </motion.div>
+            </div>
+            
+            {/* Right: Form Card */}
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.2 }}
+            >
+              <LiquidGlassCard intensity="heavy" className="p-8 md:p-12">
             <form onSubmit={handleSubmit}>
               
               <AnimatePresence mode="wait">
@@ -428,8 +433,10 @@ export default function ContactPage() {
                 </p>
               </div>
             )}
-          </LiquidGlassCard>
-          
+              </LiquidGlassCard>
+            </motion.div>
+            
+          </div>
         </div>
       </main>
     </>
