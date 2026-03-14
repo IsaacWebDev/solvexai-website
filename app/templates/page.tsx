@@ -193,12 +193,12 @@ export default function TemplatesPage() {
         </motion.div>
       )}
       
-      <main className="relative" style={{
+      <main className="relative flex justify-center" style={{
         paddingBottom: spacing.section.vertical,
         paddingLeft: spacing.section.horizontal,
         paddingRight: spacing.section.horizontal
       }}>
-        <div style={{ maxWidth: containers.full, margin: '0 auto' }}>
+        <div className="flex flex-col gap-20" style={{ maxWidth: containers.full, width: '100%' }}>
           {/* Hero */}
           <motion.div 
             className="text-center"

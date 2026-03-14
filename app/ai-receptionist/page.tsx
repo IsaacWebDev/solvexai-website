@@ -16,12 +16,12 @@ export default function AIReceptionistPage() {
       <Navigation />
       <AnimatedGradientMesh />
       
-      <main className="relative" style={{
+      <main className="relative flex justify-center" style={{
         paddingBottom: spacing.section.vertical,
         paddingLeft: spacing.section.horizontal,
         paddingRight: spacing.section.horizontal
       }}>
-        <div style={{ maxWidth: containers.full, margin: '0 auto' }}>
+        <div className="flex flex-col gap-20" style={{ maxWidth: containers.full, width: '100%' }}>
           {/* Hero */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center" style={{
             marginBottom: spacing.content.gap
