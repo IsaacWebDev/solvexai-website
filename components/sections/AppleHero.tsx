@@ -6,7 +6,7 @@ export const AppleHero = () => {
   return (
     <section className="min-h-screen flex items-center justify-center px-6 relative">
       {/* 3D Interactive Orb - Background */}
-      <div className="absolute inset-0 flex items-center justify-center opacity-30 pointer-events-none">
+      <div className="absolute inset-0 flex items-center justify-center opacity-40 pointer-events-none z-[5]">
         <FloatingOrb />
       </div>
       
