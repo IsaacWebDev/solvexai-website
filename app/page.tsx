@@ -5,10 +5,12 @@ import IntroScreen from '@/components/IntroScreen'
 import { Navigation } from '@/components/Navigation'
 import { AppleHero } from '@/components/sections/AppleHero'
 import { OutcomesSimple } from '@/components/sections/OutcomesSimple'
+import { TemplateShowcase } from '@/components/sections/TemplateShowcase'
 import { TestimonialSingle } from '@/components/sections/TestimonialSingle'
 import { PricingSimple } from '@/components/sections/PricingSimple'
 import { CTAMinimal } from '@/components/sections/CTAMinimal'
 import { RealisticJellyfishBG } from '@/components/backgrounds/RealisticJellyfishBG'
+import { SectionDivider } from '@/components/ui/SectionDivider'
 
 export default function HomePage() {
   const [showIntro, setShowIntro] = useState(true)
@@ -64,39 +66,27 @@ export default function HomePage() {
           animation: 'fadeInContent 0.8s ease-in'
         }}
       >
-        {/* 1. HERO - "The Outcome" with 3D Orb */}
+        {/* 1. HERO - Introduction */}
         <AppleHero />
+        <SectionDivider />
         
-        {/* Section Divider - Thicker */}
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="border-b border-gray-500/30 my-32" />
-        </div>
-        
-        {/* 2. THE PROMISE - "Three Outcomes" */}
+        {/* 2. OUTCOMES - Benefits (Why choose us) */}
         <OutcomesSimple />
+        <SectionDivider />
         
-        {/* Section Divider - Thicker */}
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="border-b border-gray-500/30 my-32" />
-        </div>
+        {/* 3. TEMPLATES - Products to buy (NEW) */}
+        <TemplateShowcase />
+        <SectionDivider />
         
-        {/* 3. PACKAGES - "Three Options" */}
+        {/* 4. PACKAGES - Service tiers */}
         <PricingSimple />
+        <SectionDivider />
         
-        {/* Section Divider - Thicker */}
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="border-b border-gray-500/30 my-32" />
-        </div>
-        
-        {/* 4. PROOF - "One Powerful Testimonial" */}
+        {/* 5. TESTIMONIAL - Social proof */}
         <TestimonialSingle />
+        <SectionDivider />
         
-        {/* Section Divider - Thicker */}
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="border-b border-gray-500/30 my-32" />
-        </div>
-        
-        {/* 5. FINAL CTA - "The Invitation" */}
+        {/* 6. CTA - Close */}
         <CTAMinimal />
       </main>
       
