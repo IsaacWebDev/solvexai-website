@@ -18,55 +18,57 @@ export default function AboutPage() {
       <main className="relative px-4 md:px-8 py-24 md:py-32">
         <div className="max-w-7xl mx-auto">
           
-          {/* Hero */}
-          <motion.div 
-            className="text-center mb-40"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-light mb-10 leading-tight">
-              You Shouldn't Be<br />Answering Phones at 11 PM
-            </h1>
-            <p className="text-xl md:text-2xl text-gray-300 mb-16 max-w-3xl mx-auto font-light leading-relaxed">
-              We automate the work that steals your evenings and weekends.<br />
-              127 businesses reclaimed 2,000+ hours in 2026.
-            </p>
-            
-            {/* Founder Context Card */}
-            <div className="max-w-4xl mx-auto mb-16">
-              <LiquidGlassCard intensity="medium" className="p-10 md:p-12">
-                <div className="flex flex-col md:flex-row items-center gap-8 text-left">
-                  <div className="flex-shrink-0">
-                    <div className="w-28 h-28 rounded-full bg-gradient-to-br from-purple-600 to-blue-600 flex items-center justify-center text-4xl font-semibold shadow-2xl">
-                      I+A
+          {/* Hero - Centered Container */}
+          <div className="max-w-6xl mx-auto">
+            <motion.div 
+              className="text-center mb-40"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+            >
+              <h1 className="text-5xl md:text-6xl lg:text-7xl font-light mb-10 leading-tight">
+                You Shouldn't Be<br />Answering Phones at 11 PM
+              </h1>
+              <p className="text-xl md:text-2xl text-gray-300 mb-16 max-w-3xl mx-auto font-light leading-relaxed">
+                We automate the work that steals your evenings and weekends.<br />
+                127 businesses reclaimed 2,000+ hours in 2026.
+              </p>
+              
+              {/* Founder Context Card */}
+              <div className="max-w-4xl mx-auto mb-16">
+                <LiquidGlassCard intensity="medium" className="p-10 md:p-12">
+                  <div className="flex flex-col md:flex-row items-center gap-8">
+                    <div className="flex-shrink-0">
+                      <div className="w-28 h-28 rounded-full bg-gradient-to-br from-purple-600 to-blue-600 flex items-center justify-center text-4xl font-semibold shadow-2xl">
+                        I+A
+                      </div>
+                    </div>
+                    <div className="text-center md:text-left">
+                      <p className="text-lg md:text-xl text-gray-300 leading-relaxed">
+                        <span className="font-semibold text-white">Isaac and Amun</span> met while running their own businesses in Bordeaux and Johannesburg. 
+                        Isaac spent 15 hours/week answering the same customer questions. Amun's restaurant was losing $3K/month to no-show reservations. 
+                        We built SolveXAI to fix our own problems—then realized every small business had the same ones.
+                      </p>
                     </div>
                   </div>
-                  <div>
-                    <p className="text-lg md:text-xl text-gray-300 leading-relaxed">
-                      <span className="font-semibold text-white">Isaac and Amun</span> met while running their own businesses in Bordeaux and Johannesburg. 
-                      Isaac spent 15 hours/week answering the same customer questions. Amun's restaurant was losing $3K/month to no-show reservations. 
-                      We built SolveXAI to fix our own problems—then realized every small business had the same ones.
-                    </p>
-                  </div>
-                </div>
-              </LiquidGlassCard>
-            </div>
-            
-            {/* Dual CTAs */}
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/contact">
-                <LiquidGlassButton variant="primary" size="lg">
-                  Book Discovery Call
-                </LiquidGlassButton>
-              </Link>
-              <Link href="/templates">
-                <LiquidGlassButton variant="secondary" size="lg">
-                  Browse Templates
-                </LiquidGlassButton>
-              </Link>
-            </div>
-          </motion.div>
+                </LiquidGlassCard>
+              </div>
+              
+              {/* Dual CTAs */}
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Link href="/contact">
+                  <LiquidGlassButton variant="primary" size="lg">
+                    Book Discovery Call
+                  </LiquidGlassButton>
+                </Link>
+                <Link href="/templates">
+                  <LiquidGlassButton variant="secondary" size="lg">
+                    Browse Templates
+                  </LiquidGlassButton>
+                </Link>
+              </div>
+            </motion.div>
+          </div>
 
           {/* Section Divider */}
           <div className="h-px bg-gradient-to-r from-transparent via-gray-500/30 to-transparent mb-24" />
