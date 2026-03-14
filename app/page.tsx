@@ -3,16 +3,12 @@
 import { useState, useEffect } from 'react'
 import IntroScreen from '@/components/IntroScreen'
 import { Navigation } from '@/components/Navigation'
-import { HeroImmersive } from '@/components/sections/HeroImmersive'
-import { ServicesReveal } from '@/components/sections/ServicesReveal'
-import { BenefitsGrid } from '@/components/sections/BenefitsGrid'
-import { HowItWorksExpanded } from '@/components/sections/HowItWorksExpanded'
-import { UseCasesGrid } from '@/components/sections/UseCasesGrid'
-import { TemplateShowcaseHorizontal } from '@/components/sections/TemplateShowcaseHorizontal'
-import { StatsCountUp } from '@/components/sections/StatsCountUp'
-import { TestimonialsGrid } from '@/components/sections/TestimonialsGrid'
-import { FeaturesComparison } from '@/components/sections/FeaturesComparison'
-import { FinalCTAParallax } from '@/components/sections/FinalCTAParallax'
+import { AppleHero } from '@/components/sections/AppleHero'
+import { OutcomesSimple } from '@/components/sections/OutcomesSimple'
+import { ProcessMinimal } from '@/components/sections/ProcessMinimal'
+import { TestimonialSingle } from '@/components/sections/TestimonialSingle'
+import { PricingSimple } from '@/components/sections/PricingSimple'
+import { CTAMinimal } from '@/components/sections/CTAMinimal'
 import { RealisticJellyfishBG } from '@/components/backgrounds/RealisticJellyfishBG'
 
 export default function HomePage() {
@@ -55,7 +51,10 @@ export default function HomePage() {
     <>
       <Navigation />
       
-      {/* Main Content - No restrictive containers */}
+      {/* Realistic Jellyfish Background (global) */}
+      <RealisticJellyfishBG />
+      
+      {/* Main Content - Apple-Style Minimal */}
       <main 
         style={{
           width: '100%',
@@ -66,41 +65,23 @@ export default function HomePage() {
           animation: 'fadeInContent 0.8s ease-in'
         }}
       >
-        {/* 1. Full-screen Hero with 3D */}
-        <HeroImmersive />
+        {/* 1. HERO - "The Outcome" */}
+        <AppleHero />
         
-        {/* Realistic Jellyfish Background (global) */}
-        <RealisticJellyfishBG />
+        {/* 2. THE PROMISE - "Three Outcomes" */}
+        <OutcomesSimple />
         
-        {/* Content sections */}
-        <div className="relative">
-          {/* Services (NOW 6 boxes) */}
-          <ServicesReveal />
-          
-          {/* Benefits Grid (NEW - 6 boxes) */}
-          <BenefitsGrid />
-          
-          {/* How It Works (NEW - 6 steps) */}
-          <HowItWorksExpanded />
-          
-          {/* Use Cases (NEW - 8 boxes) */}
-          <UseCasesGrid />
-          
-          {/* Template Showcase */}
-          <TemplateShowcaseHorizontal />
-          
-          {/* Stats */}
-          <StatsCountUp />
-          
-          {/* Testimonials (NEW - 6 boxes) */}
-          <TestimonialsGrid />
-          
-          {/* Features Comparison (NEW - 12 features) */}
-          <FeaturesComparison />
-        </div>
+        {/* 3. HOW - "The Process" (3 steps) */}
+        <ProcessMinimal />
         
-        {/* Ready to Automate Your Business? (separate, uses own LED jellyfish) */}
-        <FinalCTAParallax />
+        {/* 4. PROOF - "One Powerful Testimonial" */}
+        <TestimonialSingle />
+        
+        {/* 5. OFFERING - "Simple Pricing" */}
+        <PricingSimple />
+        
+        {/* 6. FINAL CTA - "The Invitation" */}
+        <CTAMinimal />
       </main>
       
       <style>{`

@@ -18,7 +18,16 @@ export default {
         },
       },
       fontFamily: {
-        sans: ['-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Inter', 'sans-serif'],
+        sans: ['-apple-system', 'BlinkMacSystemFont', 'SF Pro Display', 'system-ui', 'sans-serif'],
+      },
+      fontSize: {
+        '9xl': '8rem',    // 128px - Apple-style massive headlines
+        '10xl': '10rem',  // 160px - Ultra-large
+      },
+      fontWeight: {
+        light: '300',     // Apple body text
+        normal: '400',    // Apple default
+        semibold: '600',  // Apple emphasis
       },
       animation: {
         'pulse-glow': 'pulse-glow 2s ease-in-out infinite',
