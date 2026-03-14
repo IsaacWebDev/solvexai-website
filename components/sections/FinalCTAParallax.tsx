@@ -5,9 +5,9 @@ import Link from 'next/link'
 import { GuaranteeBadge } from '@/components/GuaranteeBadge'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import dynamic from 'next/dynamic'
-
-const JellyfishBackground = dynamic(() => import('@/components/3d/JellyfishBackground'), { ssr: false })
+import { Canvas } from '@react-three/fiber'
+import { EffectComposer, Bloom } from '@react-three/postprocessing'
+import { LEDJellyfish } from '@/components/3d/LEDJellyfish'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -45,8 +45,39 @@ export function FinalCTAParallax() {
         padding: '4rem 2rem'
       }}
     >
-      {/* Neon Jellyfish Swimming Animation */}
-      <JellyfishBackground />
+      {/* LED Constellation Jellyfish Background */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <Canvas camera={{ position: [0, 0, 20], fov: 50 }}>
+          <LEDJellyfish 
+            initialPosition={[8, 2, -5]} 
+            speed={1.0}
+            phase={0}
+            color="#8B5CF6"
+          />
+          <LEDJellyfish 
+            initialPosition={[-6, -3, -8]} 
+            speed={0.7}
+            phase={Math.PI}
+            color="#00F0FF"
+          />
+          <LEDJellyfish 
+            initialPosition={[0, 0, -10]} 
+            speed={1.3}
+            phase={Math.PI / 2}
+            color="#8B5CF6"
+          />
+          
+          <ambientLight intensity={0.3} />
+          <EffectComposer>
+            <Bloom
+              intensity={2.5}
+              luminanceThreshold={0.2}
+              luminanceSmoothing={0.9}
+              radius={0.8}
+            />
+          </EffectComposer>
+        </Canvas>
+      </div>
       
       {/* Parallax Background Layer */}
       <div

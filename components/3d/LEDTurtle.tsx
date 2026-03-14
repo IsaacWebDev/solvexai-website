@@ -86,7 +86,7 @@ export const LEDTurtle = ({
   });
 
   return (
-    <group ref={groupRef} position={initialPosition}>
+    <group ref={groupRef} position={initialPosition} scale={0.5}>
       <LEDConstellation
         points={turtlePoints}
         color="#00FF88"  // Green

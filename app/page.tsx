@@ -66,7 +66,7 @@ export default function HomePage() {
         {/* 1. Full-screen Hero with 3D */}
         <HeroImmersive />
         
-        {/* Unified Ocean Background (covers Three Ways → Ready to Automate) */}
+        {/* Ocean Background (covers Three Ways → Stats) */}
         <div className="relative">
           <OceanBackground />
           
@@ -78,10 +78,10 @@ export default function HomePage() {
           
           {/* Stats */}
           <StatsCountUp />
-          
-          {/* Ready to Automate Your Business? */}
-          <FinalCTAParallax />
         </div>
+        
+        {/* Ready to Automate Your Business? (separate, uses own LED jellyfish) */}
+        <FinalCTAParallax />
       </main>
       
       <style>{`

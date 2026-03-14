@@ -80,7 +80,7 @@ export const LEDMantaRay = ({
   });
 
   return (
-    <group ref={groupRef} position={initialPosition}>
+    <group ref={groupRef} position={initialPosition} scale={0.5}>
       <group ref={wingRef}>
         <LEDConstellation
           points={mantaPoints}

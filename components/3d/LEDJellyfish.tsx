@@ -89,7 +89,7 @@ export const LEDJellyfish = ({
   });
 
   return (
-    <group ref={groupRef} position={initialPosition}>
+    <group ref={groupRef} position={initialPosition} scale={0.5}>
       <LEDConstellation
         points={jellyfishPoints}
         color={color}
