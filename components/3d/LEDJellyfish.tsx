@@ -27,48 +27,70 @@ export const LEDJellyfish = ({
     maxLife: number;
   }>>([]);
 
-  // Jellyfish constellation pattern
+  // Jellyfish constellation pattern (50 points for enhanced detail)
   const jellyfishPoints = [
     // Dome top
     { position: new THREE.Vector3(0, 1.5, 0), connections: [1, 2, 3, 4] },
     
     // Dome ring 1
-    { position: new THREE.Vector3(0.5, 1.2, 0), connections: [5, 6] },
-    { position: new THREE.Vector3(0, 1.2, 0.5), connections: [6, 7] },
-    { position: new THREE.Vector3(-0.5, 1.2, 0), connections: [7, 8] },
-    { position: new THREE.Vector3(0, 1.2, -0.5), connections: [8, 5] },
+    { position: new THREE.Vector3(0.5, 1.2, 0), connections: [5, 6, 33] },
+    { position: new THREE.Vector3(0, 1.2, 0.5), connections: [6, 7, 34] },
+    { position: new THREE.Vector3(-0.5, 1.2, 0), connections: [7, 8, 35] },
+    { position: new THREE.Vector3(0, 1.2, -0.5), connections: [8, 5, 36] },
+    
+    // Dome ring 1.5 (NEW - intermediate detail)
+    { position: new THREE.Vector3(0.75, 1.0, 0), connections: [9, 10] },
+    { position: new THREE.Vector3(0, 1.0, 0.75), connections: [10, 11] },
+    { position: new THREE.Vector3(-0.75, 1.0, 0), connections: [11, 12] },
+    { position: new THREE.Vector3(0, 1.0, -0.75), connections: [12, 9] },
     
     // Dome ring 2
-    { position: new THREE.Vector3(1, 0.8, 0), connections: [9, 10] },
-    { position: new THREE.Vector3(0, 0.8, 1), connections: [10, 11] },
-    { position: new THREE.Vector3(-1, 0.8, 0), connections: [11, 12] },
-    { position: new THREE.Vector3(0, 0.8, -1), connections: [12, 9] },
+    { position: new THREE.Vector3(1, 0.8, 0), connections: [13, 14] },
+    { position: new THREE.Vector3(0, 0.8, 1), connections: [14, 15] },
+    { position: new THREE.Vector3(-1, 0.8, 0), connections: [15, 16] },
+    { position: new THREE.Vector3(0, 0.8, -1), connections: [16, 13] },
     
     // Dome bottom
-    { position: new THREE.Vector3(1.2, 0.4, 0), connections: [13, 14] },
-    { position: new THREE.Vector3(0, 0.4, 1.2), connections: [14, 15] },
-    { position: new THREE.Vector3(-1.2, 0.4, 0), connections: [15, 16] },
-    { position: new THREE.Vector3(0, 0.4, -1.2), connections: [16, 13] },
+    { position: new THREE.Vector3(1.2, 0.4, 0), connections: [17, 18] },
+    { position: new THREE.Vector3(0, 0.4, 1.2), connections: [18, 19] },
+    { position: new THREE.Vector3(-1.2, 0.4, 0), connections: [19, 20] },
+    { position: new THREE.Vector3(0, 0.4, -1.2), connections: [20, 17] },
     
     // Tentacle roots
-    { position: new THREE.Vector3(1, 0, 0), connections: [17] },
-    { position: new THREE.Vector3(0.7, 0, 0.7), connections: [18] },
-    { position: new THREE.Vector3(0, 0, 1), connections: [19] },
-    { position: new THREE.Vector3(-0.7, 0, 0.7), connections: [20] },
-    { position: new THREE.Vector3(-1, 0, 0), connections: [21] },
-    { position: new THREE.Vector3(-0.7, 0, -0.7), connections: [22] },
-    { position: new THREE.Vector3(0, 0, -1), connections: [23] },
-    { position: new THREE.Vector3(0.7, 0, -0.7), connections: [24] },
+    { position: new THREE.Vector3(1, 0, 0), connections: [21] },
+    { position: new THREE.Vector3(0.7, 0, 0.7), connections: [22] },
+    { position: new THREE.Vector3(0, 0, 1), connections: [23] },
+    { position: new THREE.Vector3(-0.7, 0, 0.7), connections: [24] },
+    { position: new THREE.Vector3(-1, 0, 0), connections: [25] },
+    { position: new THREE.Vector3(-0.7, 0, -0.7), connections: [26] },
+    { position: new THREE.Vector3(0, 0, -1), connections: [27] },
+    { position: new THREE.Vector3(0.7, 0, -0.7), connections: [28] },
     
     // Tentacle middle
-    { position: new THREE.Vector3(1, -1, 0), connections: [25] },
-    { position: new THREE.Vector3(0.7, -1, 0.7), connections: [26] },
-    { position: new THREE.Vector3(0, -1, 1), connections: [27] },
-    { position: new THREE.Vector3(-0.7, -1, 0.7), connections: [28] },
-    { position: new THREE.Vector3(-1, -1, 0), connections: [29] },
-    { position: new THREE.Vector3(-0.7, -1, -0.7), connections: [30] },
-    { position: new THREE.Vector3(0, -1, -1), connections: [31] },
-    { position: new THREE.Vector3(0.7, -1, -0.7), connections: [32] },
+    { position: new THREE.Vector3(1, -1, 0), connections: [29, 37] },
+    { position: new THREE.Vector3(0.7, -1, 0.7), connections: [30, 38] },
+    { position: new THREE.Vector3(0, -1, 1), connections: [31, 39] },
+    { position: new THREE.Vector3(-0.7, -1, 0.7), connections: [32, 40] },
+    { position: new THREE.Vector3(-1, -1, 0), connections: [33, 41] },
+    { position: new THREE.Vector3(-0.7, -1, -0.7), connections: [34, 42] },
+    { position: new THREE.Vector3(0, -1, -1), connections: [35, 43] },
+    { position: new THREE.Vector3(0.7, -1, -0.7), connections: [36, 44] },
+    
+    // Dome ring 1 to ring 1.5 connectors (NEW)
+    { position: new THREE.Vector3(0.6, 1.1, 0), connections: [5] },
+    { position: new THREE.Vector3(0, 1.1, 0.6), connections: [6] },
+    { position: new THREE.Vector3(-0.6, 1.1, 0), connections: [7] },
+    { position: new THREE.Vector3(0, 1.1, -0.6), connections: [8] },
+    
+    // Tentacle intermediate segments (NEW - more detail)
+    { position: new THREE.Vector3(1, -1.5, 0), connections: [45] },
+    { position: new THREE.Vector3(0.7, -1.5, 0.7), connections: [46] },
+    { position: new THREE.Vector3(0, -1.5, 1), connections: [47] },
+    { position: new THREE.Vector3(-0.7, -1.5, 0.7), connections: [48] },
+    { position: new THREE.Vector3(-1, -1.5, 0), connections: [49] },
+    { position: new THREE.Vector3(-0.7, -1.5, -0.7), connections: [50] },
+    { position: new THREE.Vector3(0, -1.5, -1), connections: [51] },
+    { position: new THREE.Vector3(0.7, -1.5, -0.7), connections: [52] },
     
     // Tentacle ends
     { position: new THREE.Vector3(1, -2, 0), connections: [] },
@@ -91,7 +113,7 @@ export const LEDJellyfish = ({
       
       // Body pulsing (expand/contract 15%)
       const bodyScale = 1 + (pulse * 0.15);
-      groupRef.current.scale.set(bodyScale * 0.5, bodyScale * 0.5, bodyScale * 0.5);
+      groupRef.current.scale.set(bodyScale * 1.0, bodyScale * 1.0, bodyScale * 1.0);
       
       // Upward propulsion on pulse
       const propulsion = pulseStrength * 0.05;

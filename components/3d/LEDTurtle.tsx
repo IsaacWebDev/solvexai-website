@@ -26,7 +26,7 @@ export const LEDTurtle = ({
   }>>([]);
   const trail = useRef<THREE.Vector3[]>([]);
 
-  // Turtle constellation pattern
+  // Turtle constellation pattern (45 points for enhanced detail)
   const turtlePoints = [
     // Head
     { position: new THREE.Vector3(1.5, 0, 0), connections: [1, 2] },
@@ -46,36 +46,62 @@ export const LEDTurtle = ({
     { position: new THREE.Vector3(1, 0.3, -0.6), connections: [4] },
     
     // Shell segments (hexagonal pattern)
-    { position: new THREE.Vector3(0.5, 0.5, 0.3), connections: [14, 15, 17] },
-    { position: new THREE.Vector3(0, 0.5, 0.5), connections: [15, 16] },
-    { position: new THREE.Vector3(-0.5, 0.5, 0.3), connections: [16, 17] },
-    { position: new THREE.Vector3(-0.5, 0.5, -0.3), connections: [17, 18] },
+    { position: new THREE.Vector3(0.5, 0.5, 0.3), connections: [14, 15, 17, 33] },
+    { position: new THREE.Vector3(0, 0.5, 0.5), connections: [15, 16, 34] },
+    { position: new THREE.Vector3(-0.5, 0.5, 0.3), connections: [16, 17, 35] },
+    { position: new THREE.Vector3(-0.5, 0.5, -0.3), connections: [17, 18, 36] },
     { position: new THREE.Vector3(0, 0.5, 0), connections: [18, 19] },  // Center
     { position: new THREE.Vector3(0, 0.5, -0.5), connections: [19, 13] },
     { position: new THREE.Vector3(0.5, 0.5, -0.3), connections: [13] },
     
     // Flippers (front left)
-    { position: new THREE.Vector3(0.8, -0.2, 1), connections: [21, 22] },
-    { position: new THREE.Vector3(1, -0.3, 1.3), connections: [22] },
+    { position: new THREE.Vector3(0.8, -0.2, 1), connections: [21, 22, 37] },
+    { position: new THREE.Vector3(1, -0.3, 1.3), connections: [22, 38] },
     { position: new THREE.Vector3(1.2, -0.4, 1.5), connections: [] },
     
     // Flippers (front right)
-    { position: new THREE.Vector3(0.8, -0.2, -1), connections: [24, 25] },
-    { position: new THREE.Vector3(1, -0.3, -1.3), connections: [25] },
+    { position: new THREE.Vector3(0.8, -0.2, -1), connections: [24, 25, 39] },
+    { position: new THREE.Vector3(1, -0.3, -1.3), connections: [25, 40] },
     { position: new THREE.Vector3(1.2, -0.4, -1.5), connections: [] },
     
     // Flippers (back left)
-    { position: new THREE.Vector3(-0.8, -0.2, 0.8), connections: [27, 28] },
-    { position: new THREE.Vector3(-1, -0.3, 1.1), connections: [28] },
+    { position: new THREE.Vector3(-0.8, -0.2, 0.8), connections: [27, 28, 41] },
+    { position: new THREE.Vector3(-1, -0.3, 1.1), connections: [28, 42] },
     { position: new THREE.Vector3(-1.2, -0.4, 1.3), connections: [] },
     
     // Flippers (back right)
-    { position: new THREE.Vector3(-0.8, -0.2, -0.8), connections: [30, 31] },
-    { position: new THREE.Vector3(-1, -0.3, -1.1), connections: [31] },
+    { position: new THREE.Vector3(-0.8, -0.2, -0.8), connections: [30, 31, 43] },
+    { position: new THREE.Vector3(-1, -0.3, -1.1), connections: [31, 44] },
     { position: new THREE.Vector3(-1.2, -0.4, -1.3), connections: [] },
     
     // Tail
     { position: new THREE.Vector3(-1.5, 0, 0), connections: [] },
+    
+    // Inner shell detail (NEW - more hexagons)
+    { position: new THREE.Vector3(0.25, 0.45, 0.15), connections: [13, 17] },
+    { position: new THREE.Vector3(-0.25, 0.45, 0.15), connections: [14, 16] },
+    { position: new THREE.Vector3(-0.25, 0.45, -0.15), connections: [16, 18] },
+    { position: new THREE.Vector3(0.25, 0.45, -0.15), connections: [13, 18] },
+    
+    // Flipper webbing detail (NEW - front left)
+    { position: new THREE.Vector3(0.9, -0.25, 1.15), connections: [21] },
+    { position: new THREE.Vector3(1.1, -0.35, 1.4), connections: [22] },
+    
+    // Flipper webbing detail (NEW - front right)
+    { position: new THREE.Vector3(0.9, -0.25, -1.15), connections: [24] },
+    { position: new THREE.Vector3(1.1, -0.35, -1.4), connections: [25] },
+    
+    // Flipper webbing detail (NEW - back left)
+    { position: new THREE.Vector3(-0.9, -0.25, 0.95), connections: [27] },
+    { position: new THREE.Vector3(-1.1, -0.35, 1.2), connections: [28] },
+    
+    // Flipper webbing detail (NEW - back right)
+    { position: new THREE.Vector3(-0.9, -0.25, -0.95), connections: [30] },
+    { position: new THREE.Vector3(-1.1, -0.35, -1.2), connections: [31] },
+    
+    // Eyes (NEW)
+    { position: new THREE.Vector3(1.6, 0.15, 0.3), connections: [] },  // Left eye
+    { position: new THREE.Vector3(1.6, 0.15, -0.3), connections: [] }, // Right eye
   ];
 
   useFrame((state, delta) => {
@@ -149,7 +175,7 @@ export const LEDTurtle = ({
   });
 
   return (
-    <group ref={groupRef} position={initialPosition} scale={0.5}>
+    <group ref={groupRef} position={initialPosition} scale={1.0}>
       <LEDConstellation
         points={turtlePoints}
         color="#00FF88"  // Green

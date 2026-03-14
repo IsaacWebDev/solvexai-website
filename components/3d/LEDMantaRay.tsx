@@ -27,45 +27,64 @@ export const LEDMantaRay = ({
   }>>([]);
   const trail = useRef<THREE.Vector3[]>([]);
 
-  // Manta ray constellation pattern
+  // Manta ray constellation pattern (35 points for enhanced detail)
   const mantaPoints = [
     // Head/Body center
     { position: new THREE.Vector3(0, 0, 2), connections: [1, 2, 3, 4] },
     
     // Body segments
-    { position: new THREE.Vector3(0, 0, 1), connections: [5, 6, 7, 8] },
-    { position: new THREE.Vector3(0, 0, 0), connections: [9, 10, 11, 12] },
-    { position: new THREE.Vector3(0, 0, -1), connections: [13, 14] },
-    { position: new THREE.Vector3(0, 0, -1.5), connections: [] },  // Tail
+    { position: new THREE.Vector3(0, 0, 1), connections: [5, 6, 7, 8, 24, 25] },
+    { position: new THREE.Vector3(0, 0, 0), connections: [9, 10, 11, 12, 26, 27] },
+    { position: new THREE.Vector3(0, 0, -1), connections: [13, 14, 28] },
+    { position: new THREE.Vector3(0, 0, -1.5), connections: [29] },  // Tail
     
     // Left wing (front to back)
-    { position: new THREE.Vector3(1, 0.1, 1.5), connections: [6, 9] },
-    { position: new THREE.Vector3(2, 0.2, 1), connections: [7, 10] },
-    { position: new THREE.Vector3(3, 0.2, 0.5), connections: [8, 11] },
+    { position: new THREE.Vector3(1, 0.1, 1.5), connections: [6, 9, 30] },
+    { position: new THREE.Vector3(2, 0.2, 1), connections: [7, 10, 31] },
+    { position: new THREE.Vector3(3, 0.2, 0.5), connections: [8, 11, 32] },
     { position: new THREE.Vector3(3.5, 0.1, 0), connections: [12] },
     
     // Left wing edge
-    { position: new THREE.Vector3(1.5, 0.2, 1.2), connections: [10] },
-    { position: new THREE.Vector3(2.5, 0.3, 0.8), connections: [11] },
-    { position: new THREE.Vector3(3.2, 0.2, 0.3), connections: [12] },
+    { position: new THREE.Vector3(1.5, 0.2, 1.2), connections: [10, 30] },
+    { position: new THREE.Vector3(2.5, 0.3, 0.8), connections: [11, 31] },
+    { position: new THREE.Vector3(3.2, 0.2, 0.3), connections: [12, 32] },
     { position: new THREE.Vector3(3.5, 0, -0.3), connections: [] },
     
     // Right wing (front to back)
-    { position: new THREE.Vector3(-1, 0.1, 1.5), connections: [14, 17] },
-    { position: new THREE.Vector3(-2, 0.2, 1), connections: [15, 18] },
-    { position: new THREE.Vector3(-3, 0.2, 0.5), connections: [16, 19] },
+    { position: new THREE.Vector3(-1, 0.1, 1.5), connections: [14, 17, 33] },
+    { position: new THREE.Vector3(-2, 0.2, 1), connections: [15, 18, 34] },
+    { position: new THREE.Vector3(-3, 0.2, 0.5), connections: [16, 19, 35] },
     { position: new THREE.Vector3(-3.5, 0.1, 0), connections: [20] },
     
     // Right wing edge
-    { position: new THREE.Vector3(-1.5, 0.2, 1.2), connections: [18] },
-    { position: new THREE.Vector3(-2.5, 0.3, 0.8), connections: [19] },
-    { position: new THREE.Vector3(-3.2, 0.2, 0.3), connections: [20] },
+    { position: new THREE.Vector3(-1.5, 0.2, 1.2), connections: [18, 33] },
+    { position: new THREE.Vector3(-2.5, 0.3, 0.8), connections: [19, 34] },
+    { position: new THREE.Vector3(-3.2, 0.2, 0.3), connections: [20, 35] },
     { position: new THREE.Vector3(-3.5, 0, -0.3), connections: [] },
     
     // Head details (eyes + mouth)
     { position: new THREE.Vector3(0.5, 0.1, 2.2), connections: [] },  // Left eye
     { position: new THREE.Vector3(-0.5, 0.1, 2.2), connections: [] }, // Right eye
     { position: new THREE.Vector3(0, -0.2, 2.5), connections: [] },   // Mouth center
+    
+    // Body spine (NEW - center ridge)
+    { position: new THREE.Vector3(0, 0.1, 0.5), connections: [1, 2] },
+    { position: new THREE.Vector3(0, 0.1, -0.5), connections: [2, 3] },
+    { position: new THREE.Vector3(0, 0.05, 1.5), connections: [0, 1] },
+    { position: new THREE.Vector3(0, 0.05, -1.25), connections: [3, 4] },
+    
+    // Tail detail (NEW - barb)
+    { position: new THREE.Vector3(0, -0.1, -1.75), connections: [] },
+    
+    // Left wing intermediate (NEW - more curves)
+    { position: new THREE.Vector3(1.5, 0.15, 1.25), connections: [5, 9] },
+    { position: new THREE.Vector3(2.75, 0.25, 0.9), connections: [6, 10] },
+    { position: new THREE.Vector3(3.35, 0.15, 0.15), connections: [7, 11] },
+    
+    // Right wing intermediate (NEW - more curves)
+    { position: new THREE.Vector3(-1.5, 0.15, 1.25), connections: [13, 17] },
+    { position: new THREE.Vector3(-2.75, 0.25, 0.9), connections: [14, 18] },
+    { position: new THREE.Vector3(-3.35, 0.15, 0.15), connections: [15, 19] },
   ];
 
   useFrame((state, delta) => {
@@ -145,7 +164,7 @@ export const LEDMantaRay = ({
   });
 
   return (
-    <group ref={groupRef} position={initialPosition} scale={0.5}>
+    <group ref={groupRef} position={initialPosition} scale={1.0}>
       <group ref={wingRef}>
         <LEDConstellation
           points={mantaPoints}
