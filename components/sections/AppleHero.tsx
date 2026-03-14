@@ -1,9 +1,17 @@
 'use client'
 
+import { FloatingOrb } from '@/components/FloatingOrb'
+
 export const AppleHero = () => {
   return (
-    <section className="min-h-screen flex items-center justify-center px-6 relative z-10">
-      <div className="max-w-5xl text-center">
+    <section className="min-h-screen flex items-center justify-center px-6 relative">
+      {/* 3D Interactive Orb - Background */}
+      <div className="absolute inset-0 flex items-center justify-center opacity-30 pointer-events-none">
+        <FloatingOrb />
+      </div>
+      
+      {/* Content - Centered */}
+      <div className="max-w-5xl text-center relative z-10">
         {/* Eyebrow */}
         <div className="text-purple-400 text-sm uppercase tracking-wider mb-6 animate-fade-in">
           AI That Works While You Sleep

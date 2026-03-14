@@ -1,11 +1,13 @@
 'use client'
 
+import { LiquidGlassCard } from '@/components/ui/LiquidGlassCard'
+
 export const OutcomesSimple = () => {
   return (
     <section className="py-32 px-6 relative z-10">
       <div className="max-w-7xl mx-auto">
         
-        {/* Section header */}
+        {/* Section header - Centered */}
         <div className="text-center mb-24">
           <h2 className="text-6xl font-light mb-6">
             What You Get
@@ -15,47 +17,56 @@ export const OutcomesSimple = () => {
           </p>
         </div>
         
-        {/* 3 outcomes (NOT features) */}
-        <div className="grid md:grid-cols-3 gap-16">
+        {/* 3 Outcomes - Centered grid with liquid glass */}
+        <div className="grid md:grid-cols-3 gap-12">
           
           {/* Outcome 1 */}
-          <div className="text-center group hover:scale-105 transition-transform duration-300">
-            <div className="text-8xl font-light text-purple-400 mb-6 group-hover:scale-110 transition-transform">
+          <LiquidGlassCard 
+            intensity="medium" 
+            className="p-12 text-center border border-gray-500/30 hover:border-purple-400/50 transition-all"
+          >
+            <div className="text-8xl font-light text-purple-400 mb-6">
               10×
             </div>
             <h3 className="text-3xl font-light mb-4">
               Faster
             </h3>
             <p className="text-gray-400 font-light leading-relaxed">
-              Complete in minutes what used to take weeks. Your AI workforce operates 24/7.
+              Complete in minutes what used to take weeks.
             </p>
-          </div>
+          </LiquidGlassCard>
           
           {/* Outcome 2 */}
-          <div className="text-center group hover:scale-105 transition-transform duration-300">
-            <div className="text-8xl font-light text-blue-400 mb-6 group-hover:scale-110 transition-transform">
+          <LiquidGlassCard 
+            intensity="medium" 
+            className="p-12 text-center border border-gray-500/30 hover:border-blue-400/50 transition-all"
+          >
+            <div className="text-8xl font-light text-blue-400 mb-6">
               70%
             </div>
             <h3 className="text-3xl font-light mb-4">
               Lower Costs
             </h3>
             <p className="text-gray-400 font-light leading-relaxed">
-              Reduce operational expenses while scaling output. No hiring, training, or overhead.
+              Reduce expenses while scaling output.
             </p>
-          </div>
+          </LiquidGlassCard>
           
           {/* Outcome 3 */}
-          <div className="text-center group hover:scale-105 transition-transform duration-300">
-            <div className="text-8xl font-light text-cyan-400 mb-6 group-hover:scale-110 transition-transform">
+          <LiquidGlassCard 
+            intensity="medium" 
+            className="p-12 text-center border border-gray-500/30 hover:border-cyan-400/50 transition-all"
+          >
+            <div className="text-8xl font-light text-cyan-400 mb-6">
               0
             </div>
             <h3 className="text-3xl font-light mb-4">
               Human Error
             </h3>
             <p className="text-gray-400 font-light leading-relaxed">
-              Precision execution every time. AI follows instructions perfectly, consistently.
+              Precision execution every single time.
             </p>
-          </div>
+          </LiquidGlassCard>
           
         </div>
       </div>

@@ -5,7 +5,6 @@ import IntroScreen from '@/components/IntroScreen'
 import { Navigation } from '@/components/Navigation'
 import { AppleHero } from '@/components/sections/AppleHero'
 import { OutcomesSimple } from '@/components/sections/OutcomesSimple'
-import { ProcessMinimal } from '@/components/sections/ProcessMinimal'
 import { TestimonialSingle } from '@/components/sections/TestimonialSingle'
 import { PricingSimple } from '@/components/sections/PricingSimple'
 import { CTAMinimal } from '@/components/sections/CTAMinimal'
@@ -65,22 +64,31 @@ export default function HomePage() {
           animation: 'fadeInContent 0.8s ease-in'
         }}
       >
-        {/* 1. HERO - "The Outcome" */}
+        {/* 1. HERO - "The Outcome" with 3D Orb */}
         <AppleHero />
+        
+        {/* Section Divider */}
+        <div className="border-b border-gray-500/20" />
         
         {/* 2. THE PROMISE - "Three Outcomes" */}
         <OutcomesSimple />
         
-        {/* 3. HOW - "The Process" (3 steps) */}
-        <ProcessMinimal />
+        {/* Section Divider */}
+        <div className="border-b border-gray-500/20" />
+        
+        {/* 3. PACKAGES - "Three Options" */}
+        <PricingSimple />
+        
+        {/* Section Divider */}
+        <div className="border-b border-gray-500/20" />
         
         {/* 4. PROOF - "One Powerful Testimonial" */}
         <TestimonialSingle />
         
-        {/* 5. OFFERING - "Simple Pricing" */}
-        <PricingSimple />
+        {/* Section Divider */}
+        <div className="border-b border-gray-500/20" />
         
-        {/* 6. FINAL CTA - "The Invitation" */}
+        {/* 5. FINAL CTA - "The Invitation" */}
         <CTAMinimal />
       </main>
       
