@@ -24,7 +24,7 @@ export const RealisticJellyfishBG = () => {
         playsInline
         preload="auto"
       >
-        <source src="/videos/jellyfish-animated.mp4" type="video/mp4" />
+        <source src="/videos/jellyfish-bg.mp4" type="video/mp4" />
       </video>
 
       {/* Subtle gradient overlay for readability */}
