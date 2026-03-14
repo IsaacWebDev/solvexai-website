@@ -31,6 +31,7 @@ export default function TemplatesPage() {
       ],
       includes: 'Contact forms, SEO, Mobile responsive, 1-week setup',
       gradient: 'from-orange-600 to-red-600',
+      image: '/template-mockups/restaurant-delight.jpg',
       previewUrl: 'https://placeholder-restaurant-demo.vercel.app'
     },
     {
@@ -46,6 +47,7 @@ export default function TemplatesPage() {
       ],
       includes: 'Contact forms, SEO, Mobile responsive, 1-week setup',
       gradient: 'from-blue-800 to-blue-600',
+      image: '/template-mockups/law-firm-authority.jpg',
       previewUrl: 'https://placeholder-lawfirm-demo.vercel.app'
     },
     {
@@ -61,6 +63,7 @@ export default function TemplatesPage() {
       ],
       includes: 'Contact forms, SEO, Mobile responsive, 1-week setup',
       gradient: 'from-yellow-600 to-orange-600',
+      image: '/template-mockups/fitness-studio-energy.jpg',
       previewUrl: 'https://placeholder-fitness-demo.vercel.app'
     },
     {
@@ -283,10 +286,11 @@ interface TemplateCardProps {
   features: string[]
   includes: string
   gradient: string
+  image?: string
   previewUrl?: string
 }
 
-function TemplateCard({ name, industry, price, features, includes, gradient }: TemplateCardProps) {
+function TemplateCard({ name, industry, price, features, includes, gradient, image }: TemplateCardProps) {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
   
@@ -304,17 +308,32 @@ function TemplateCard({ name, industry, price, features, includes, gradient }: T
         <LiquidGlassCard intensity="medium" className="overflow-hidden transition-all duration-500 group">
         {/* Screenshot Preview */}
         <div 
-          className={`h-64 bg-gradient-to-br ${gradient} relative overflow-hidden cursor-pointer`}
+          className="h-64 relative overflow-hidden cursor-pointer bg-black"
           onClick={() => setIsModalOpen(true)}
         >
-          <div className="absolute inset-0 flex items-center justify-center">
-            <div className="text-white/20 text-6xl font-bold">{name.charAt(0)}</div>
-          </div>
-          
-          {/* Hover Overlay */}
-          <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-            <span className="text-white font-semibold text-lg">View Full Details</span>
-          </div>
+          {image ? (
+            <>
+              <img 
+                src={image} 
+                alt={name}
+                className="w-full h-full object-cover"
+              />
+              {/* Hover Overlay */}
+              <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                <span className="text-white font-semibold text-lg">View Full Details</span>
+              </div>
+            </>
+          ) : (
+            <div className={`h-full bg-gradient-to-br ${gradient} relative`}>
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="text-white/20 text-6xl font-bold">{name.charAt(0)}</div>
+              </div>
+              {/* Hover Overlay */}
+              <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                <span className="text-white font-semibold text-lg">View Full Details</span>
+              </div>
+            </div>
+          )}
         </div>
         
         {/* Content */}
