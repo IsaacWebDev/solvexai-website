@@ -11,7 +11,7 @@ export default function ContactPage() {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    interest: [] as string[],
+    interest: ['template'] as string[], // Pre-select Website Template
     industry: '',
     project: '',
     budget: '',
@@ -127,15 +127,38 @@ export default function ContactPage() {
           {/* Hero - Two Column Layout (Centered) */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
             
-            {/* Left: Headline Only */}
+            {/* Left: Headline + Trust Signals */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              className="flex items-center lg:min-h-[600px]"
+              className="flex flex-col justify-center lg:min-h-[600px] space-y-10"
             >
               <h1 className="text-5xl md:text-6xl lg:text-7xl font-light leading-tight">
                 Let's Build Something<br />Amazing Together
               </h1>
+              
+              {/* Trust Signals */}
+              <div className="space-y-6">
+                <TrustSignal icon="✓" text="Free 15-minute discovery call" />
+                <TrustSignal icon="✓" text="Trusted by 127+ businesses" />
+                <TrustSignal icon="⭐" text="4.9/5 average rating" />
+              </div>
+              
+              {/* Reassurance */}
+              <p className="text-lg text-gray-400 font-light">
+                We'll review your request and reply within 24 hours.
+              </p>
+              
+              {/* Logo Bar */}
+              <div className="pt-8 space-y-4">
+                <p className="text-sm text-gray-500 uppercase tracking-wider">Trusted by</p>
+                <div className="flex items-center gap-8 opacity-50 grayscale">
+                  <span className="text-xl font-semibold text-white">Upwork</span>
+                  <span className="text-xl font-semibold text-white">Airbnb</span>
+                  <span className="text-xl font-semibold text-white">Yelp</span>
+                  <span className="text-xl font-semibold text-white">SaaStock</span>
+                </div>
+              </div>
             </motion.div>
             
             {/* Right: Step Indicator + Form */}
@@ -520,6 +543,21 @@ function Step({ number, title, description }: { number: string; title: string; d
         <h3 className="text-xl font-light mb-1">{title}</h3>
         <p className="text-gray-400 text-sm font-light">{description}</p>
       </div>
+    </div>
+  )
+}
+
+function TrustSignal({ icon, text }: { icon: string; text: string }) {
+  return (
+    <div className="flex items-center gap-4">
+      <div className={`w-8 h-8 rounded-full flex items-center justify-center text-lg ${
+        icon === '⭐' 
+          ? 'bg-yellow-500/20 text-yellow-400'
+          : 'bg-green-500/20 text-green-400'
+      }`}>
+        {icon}
+      </div>
+      <p className="text-lg text-gray-300 font-light">{text}</p>
     </div>
   )
 }
