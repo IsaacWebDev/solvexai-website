@@ -6,8 +6,6 @@ import { EffectComposer, Bloom } from '@react-three/postprocessing';
 import { Line } from '@react-three/drei';
 import * as THREE from 'three';
 import { LEDJellyfish } from './LEDJellyfish';
-import { LEDTurtle } from './LEDTurtle';
-import { LEDMantaRay } from './LEDMantaRay';
 
 interface Ripple {
   position: THREE.Vector3;
@@ -120,7 +118,7 @@ export default function OceanBackground() {
         {/* Ripple updater */}
         <RippleUpdater />
         
-        {/* JELLYFISH (Purple/Cyan) */}
+        {/* JELLYFISH ONLY (Purple & Blue) */}
         <LEDJellyfish 
           initialPosition={[8, 2, -5]} 
           speed={1.0}
@@ -131,37 +129,13 @@ export default function OceanBackground() {
           initialPosition={[-6, -3, -8]} 
           speed={0.7}
           phase={Math.PI}
-          color="#00F0FF"  // Cyan
+          color="#3B82F6"  // Blue
         />
         <LEDJellyfish 
           initialPosition={[0, 0, -10]} 
           speed={1.3}
           phase={Math.PI / 2}
           color="#8B5CF6"  // Purple
-        />
-        
-        {/* GREEN TURTLES */}
-        <LEDTurtle 
-          initialPosition={[-10, 0, -6]} 
-          speed={0.5}
-          phase={0}
-        />
-        <LEDTurtle 
-          initialPosition={[8, -2, -12]} 
-          speed={0.6}
-          phase={Math.PI / 3}
-        />
-        
-        {/* BLUE MANTA RAYS */}
-        <LEDMantaRay 
-          initialPosition={[12, 4, -8]} 
-          speed={0.4}
-          phase={0}
-        />
-        <LEDMantaRay 
-          initialPosition={[-8, -4, -15]} 
-          speed={0.45}
-          phase={Math.PI / 2}
         />
         
         {/* Water splash effect */}
