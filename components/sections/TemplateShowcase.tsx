@@ -45,6 +45,20 @@ const templates = [
     price: "$797",
     image: "/template-mockups/medical-practice.jpg",
     features: ["Appointment booking", "Patient portal", "HIPAA compliant"]
+  },
+  {
+    name: "Construction Pro",
+    subtitle: "Portfolio + Quotes",
+    price: "$597",
+    image: "/template-mockups/construction-pro.jpg",
+    features: ["Project gallery", "Quote requests", "Service area maps"]
+  },
+  {
+    name: "Creative Agency",
+    subtitle: "Portfolio + Case Studies",
+    price: "$697",
+    image: "/template-mockups/creative-agency.jpg",
+    features: ["Portfolio showcase", "Case studies", "Team profiles"]
   }
 ];
 

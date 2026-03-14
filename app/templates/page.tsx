@@ -79,6 +79,7 @@ export default function TemplatesPage() {
       ],
       includes: 'Contact forms, SEO, Mobile responsive, 1-week setup',
       gradient: 'from-yellow-800 to-yellow-600',
+      image: '/template-mockups/real-estate-luxury.jpg',
       previewUrl: 'https://placeholder-realestate-demo.vercel.app'
     },
     {
@@ -94,6 +95,7 @@ export default function TemplatesPage() {
       ],
       includes: 'Contact forms, SEO, Mobile responsive, 1-week setup',
       gradient: 'from-purple-600 to-pink-600',
+      image: '/template-mockups/e-commerce-clean.jpg',
       previewUrl: 'https://placeholder-ecommerce-demo.vercel.app'
     },
     {
@@ -109,6 +111,7 @@ export default function TemplatesPage() {
       ],
       includes: 'Contact forms, SEO, Mobile responsive, 1-week setup',
       gradient: 'from-cyan-600 to-blue-600',
+      image: '/template-mockups/medical-practice.jpg',
       previewUrl: 'https://placeholder-medical-demo.vercel.app'
     },
     {
@@ -124,6 +127,7 @@ export default function TemplatesPage() {
       ],
       includes: 'Contact forms, SEO, Mobile responsive, 1-week setup',
       gradient: 'from-gray-700 to-yellow-700',
+      image: '/template-mockups/construction-pro.jpg',
       previewUrl: 'https://placeholder-construction-demo.vercel.app'
     },
     {
@@ -139,6 +143,7 @@ export default function TemplatesPage() {
       ],
       includes: 'Contact forms, SEO, Mobile responsive, 1-week setup',
       gradient: 'from-pink-600 to-purple-600',
+      image: '/template-mockups/creative-agency.jpg',
       previewUrl: 'https://placeholder-agency-demo.vercel.app'
     }
   ]
