@@ -90,7 +90,7 @@ export function TeamOrbit3D() {
   return (
     <div style={{ 
       width: '100%', 
-      height: '600px',
+      height: '100%',
       position: 'relative'
     }}>
       <Canvas camera={{ position: [0, 5, 12], fov: 50 }}>

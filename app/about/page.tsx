@@ -201,10 +201,16 @@ export default function AboutPage() {
           <section className="py-16">
             <h2 className="text-4xl md:text-5xl font-light text-center mb-20">Meet the Team</h2>
             
-            {/* 3D Team Orbit - Hidden (broken canvas causing spacing issues) */}
-            <div className="hidden">
+            {/* 3D Team Orbit - Centered & Sized */}
+            <motion.div
+              className="mb-16 mx-auto"
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 1, delay: 0.3 }}
+              style={{ maxHeight: '400px', maxWidth: '100%', height: '400px' }}
+            >
               <TeamOrbit3D />
-            </div>
+            </motion.div>
             
             {/* Team Member Cards - Perfectly Centered */}
             <div className="flex justify-center">
