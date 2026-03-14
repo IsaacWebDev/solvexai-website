@@ -8,21 +8,21 @@ const templates = [
     name: "Restaurant Delight",
     subtitle: "Menu + Online Ordering",
     price: "$497",
-    image: "/template-mockups/restaurant-delight.png",
+    image: "/template-mockups/restaurant-delight.webp",
     features: ["Online ordering", "Reservations", "Menu management"]
   },
   {
     name: "Law Firm Authority",
     subtitle: "Case Studies + Intake",
     price: "$697",
-    image: "/template-mockups/law-firm-authority.png",
+    image: "/template-mockups/law-firm-authority.webp",
     features: ["Case studies", "Client intake", "Consultation booking"]
   },
   {
     name: "Fitness Studio Energy",
     subtitle: "Classes + Bookings",
     price: "$597",
-    image: "/template-mockups/fitness-studio-energy.png",
+    image: "/template-mockups/fitness-studio-energy.webp",
     features: ["Class schedules", "Online booking", "Memberships"]
   },
   {
