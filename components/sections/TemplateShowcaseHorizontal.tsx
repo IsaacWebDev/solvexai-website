@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import gsap from 'gsap'
 
 export function TemplateShowcaseHorizontal() {
@@ -15,6 +16,7 @@ export function TemplateShowcaseHorizontal() {
       description: 'Beautiful menu displays, online ordering system, table reservations, and delivery integration.',
       price: '497',
       gradient: 'from-orange-600 to-red-600',
+      image: '/template-previews/restaurant.jpg',
       features: ['Online Ordering', 'Reservations', 'Menu Management', 'Delivery Integration']
     },
     {
@@ -115,18 +117,35 @@ export function TemplateShowcaseHorizontal() {
                   boxShadow: '0 30px 80px rgba(0, 0, 0, 0.5)'
                 }}
               >
-                <div 
-                  className={`absolute inset-0 bg-gradient-to-br ${template.gradient} transition-transform duration-700 group-hover:scale-110`}
-                >
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="text-white/20 text-9xl font-bold">{template.name.charAt(0)}</div>
-                  </div>
-                </div>
-                
-                {/* Hover Overlay */}
-                <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                  <span className="text-white text-xl font-semibold">View Live Demo →</span>
-                </div>
+                {template.image ? (
+                  <>
+                    <Image
+                      src={template.image}
+                      alt={template.name}
+                      fill
+                      className="object-cover transition-transform duration-700 group-hover:scale-110"
+                    />
+                    {/* Hover Overlay */}
+                    <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center z-10">
+                      <span className="text-white text-xl font-semibold">View Live Demo →</span>
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <div 
+                      className={`absolute inset-0 bg-gradient-to-br ${template.gradient} transition-transform duration-700 group-hover:scale-110`}
+                    >
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <div className="text-white/20 text-9xl font-bold">{template.name.charAt(0)}</div>
+                      </div>
+                    </div>
+                    
+                    {/* Hover Overlay */}
+                    <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                      <span className="text-white text-xl font-semibold">View Live Demo →</span>
+                    </div>
+                  </>
+                )}
               </div>
               
               {/* Right: Details */}
