@@ -11,7 +11,7 @@ export default function ContactPage() {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    interest: ['template'] as string[], // Pre-select Website Template
+    interest: [] as string[], // No pre-selection
     industry: '',
     project: '',
     budget: '',
