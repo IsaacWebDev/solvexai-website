@@ -6,7 +6,15 @@ import { Line } from '@react-three/drei';
 import { EffectComposer, Bloom } from '@react-three/postprocessing';
 import * as THREE from 'three';
 
-const Jellyfish = () => {
+const Jellyfish = ({ 
+  initialPosition = [8, 0, -5], 
+  speed = 1.0,
+  phase = 0
+}: { 
+  initialPosition?: [number, number, number];
+  speed?: number;
+  phase?: number;
+}) => {
   const groupRef = useRef<THREE.Group>(null);
   const time = useRef(0);
   const [particles, setParticles] = useState<Array<{
@@ -16,15 +24,15 @@ const Jellyfish = () => {
   }>>([]);
 
   useFrame((state, delta) => {
-    time.current += delta;
+    time.current += delta * speed;  // Speed multiplier
     
     if (groupRef.current) {
-      // Floating motion (sine wave)
-      groupRef.current.position.y = Math.sin(time.current * 0.5) * 2;
-      groupRef.current.position.x = Math.cos(time.current * 0.3) * 3;
+      // Floating motion (sine wave) - use initial position as base
+      groupRef.current.position.y = initialPosition[1] + Math.sin(time.current * 0.5 + phase) * 2;
+      groupRef.current.position.x = initialPosition[0] + Math.cos(time.current * 0.3 + phase) * 3;
       
       // Gentle rotation
-      groupRef.current.rotation.y = Math.sin(time.current * 0.2) * 0.3;
+      groupRef.current.rotation.y = Math.sin(time.current * 0.2 + phase) * 0.3;
     }
 
     // Emit bioluminescent particles
@@ -80,7 +88,7 @@ const Jellyfish = () => {
   });
 
   return (
-    <group ref={groupRef} position={[8, 0, -5]}>
+    <group ref={groupRef} position={initialPosition}>
       {/* Body - ULTRA-REALISTIC with subsurface scattering */}
       <mesh geometry={bodyGeometry}>
         <meshPhysicalMaterial
@@ -210,7 +218,27 @@ export default function JellyfishBackground() {
   return (
     <div className="absolute inset-0 pointer-events-none overflow-hidden opacity-40">
       <Canvas camera={{ position: [0, 0, 20], fov: 50 }}>
-        <Jellyfish />
+        {/* Jellyfish 1 - Top Right (fast) */}
+        <Jellyfish 
+          initialPosition={[8, 2, -5]} 
+          speed={1.0}
+          phase={0}
+        />
+        
+        {/* Jellyfish 2 - Bottom Left (slow) */}
+        <Jellyfish 
+          initialPosition={[-6, -3, -8]} 
+          speed={0.7}
+          phase={Math.PI}
+        />
+        
+        {/* Jellyfish 3 - Center (medium) */}
+        <Jellyfish 
+          initialPosition={[0, 0, -10]} 
+          speed={1.3}
+          phase={Math.PI / 2}
+        />
+        
         <ambientLight intensity={0.3} />
         
         {/* Bloom Post-Processing for bioluminescent glow */}
