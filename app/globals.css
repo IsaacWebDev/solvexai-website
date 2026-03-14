@@ -42,6 +42,13 @@ main {
   overflow-x: hidden;
   overflow-y: visible;
   position: relative;
+  /* Global navbar offset - navbar is ~82px (py-4 + content + padding) + 40px breathing room */
+  padding-top: 120px;
+}
+
+/* Override for pages that need custom spacing */
+main[data-no-padding] {
+  padding-top: 0;
 }
 
 /* Glass morphism utilities */

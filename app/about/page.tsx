@@ -15,7 +15,7 @@ export default function AboutPage() {
       <Navigation />
       <AnimatedGradientMesh />
       
-      <main className="relative pt-40" style={{
+      <main className="relative" style={{
         paddingBottom: spacing.section.vertical,
         paddingLeft: spacing.section.horizontal,
         paddingRight: spacing.section.horizontal

@@ -76,7 +76,6 @@ export default function ServicesPage() {
       <InteractiveParticles />
       
       <main className="relative z-10 min-h-screen bg-black" style={{
-        paddingTop: spacing.section.vertical,
         paddingBottom: spacing.section.vertical,
         paddingLeft: spacing.section.horizontal,
         paddingRight: spacing.section.horizontal

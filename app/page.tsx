@@ -57,11 +57,11 @@ export default function HomePage() {
       
       {/* Main Content - Apple-Style Minimal */}
       <main 
+        data-no-padding
         style={{
           width: '100%',
           maxWidth: 'none',
           margin: 0,
-          padding: 0,
           position: 'relative',
           animation: 'fadeInContent 0.8s ease-in'
         }}
