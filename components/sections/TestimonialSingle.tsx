@@ -1,10 +1,14 @@
 'use client'
 
+import { LiquidGlassCard } from '@/components/ui/LiquidGlassCard'
+
 export const TestimonialSingle = () => {
   return (
     <section className="py-32 px-6 relative z-10">
-      <div className="max-w-4xl mx-auto text-center">
-        
+      <LiquidGlassCard 
+        intensity="light" 
+        className="max-w-4xl mx-auto p-16 text-center border border-gray-500/30"
+      >
         {/* Quote */}
         <blockquote className="text-4xl md:text-5xl font-light leading-relaxed mb-12">
           "SolveXAI gave us back 40 hours per week.
@@ -16,13 +20,12 @@ export const TestimonialSingle = () => {
         {/* Attribution */}
         <div className="flex items-center justify-center gap-6">
           <div className="text-6xl">👩‍💼</div>
-          <div className="text-left">
-            <div className="text-xl font-medium">Sarah Johnson</div>
+          <div className="text-center">
+            <div className="text-xl font-semibold text-white">Sarah Johnson</div>
             <div className="text-gray-400">CEO, TechStart Inc</div>
           </div>
         </div>
-        
-      </div>
+      </LiquidGlassCard>
     </section>
   )
 }

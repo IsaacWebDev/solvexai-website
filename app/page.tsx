@@ -67,26 +67,34 @@ export default function HomePage() {
         {/* 1. HERO - "The Outcome" with 3D Orb */}
         <AppleHero />
         
-        {/* Section Divider */}
-        <div className="border-b border-gray-500/20" />
+        {/* Section Divider - Thicker */}
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="border-b border-gray-500/30 my-32" />
+        </div>
         
         {/* 2. THE PROMISE - "Three Outcomes" */}
         <OutcomesSimple />
         
-        {/* Section Divider */}
-        <div className="border-b border-gray-500/20" />
+        {/* Section Divider - Thicker */}
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="border-b border-gray-500/30 my-32" />
+        </div>
         
         {/* 3. PACKAGES - "Three Options" */}
         <PricingSimple />
         
-        {/* Section Divider */}
-        <div className="border-b border-gray-500/20" />
+        {/* Section Divider - Thicker */}
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="border-b border-gray-500/30 my-32" />
+        </div>
         
         {/* 4. PROOF - "One Powerful Testimonial" */}
         <TestimonialSingle />
         
-        {/* Section Divider */}
-        <div className="border-b border-gray-500/20" />
+        {/* Section Divider - Thicker */}
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="border-b border-gray-500/30 my-32" />
+        </div>
         
         {/* 5. FINAL CTA - "The Invitation" */}
         <CTAMinimal />

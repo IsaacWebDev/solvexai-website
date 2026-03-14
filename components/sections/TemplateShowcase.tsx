@@ -1,152 +1,143 @@
-'use client'
+'use client';
 
-import React, { useRef } from 'react'
-import Link from 'next/link'
+import Image from 'next/image';
+import { LiquidGlassCard } from '@/components/ui/LiquidGlassCard';
 
-export function TemplateShowcase() {
-  const scrollRef = useRef<HTMLDivElement>(null)
-  
-  const templates = [
-    {
-      name: 'Restaurant Delight',
-      subtitle: 'Menu + Online Ordering',
-      price: '$497',
-      gradient: 'from-orange-600 to-red-600',
-      image: '/templates/restaurant.jpg'
-    },
-    {
-      name: 'Law Firm Authority',
-      subtitle: 'Case Studies + Intake Forms',
-      price: '$797',
-      gradient: 'from-blue-800 to-blue-600',
-      image: '/templates/lawfirm.jpg'
-    },
-    {
-      name: 'Fitness Studio Energy',
-      subtitle: 'Class Schedules + Bookings',
-      price: '$597',
-      gradient: 'from-yellow-600 to-orange-600',
-      image: '/templates/fitness.jpg'
-    },
-    {
-      name: 'Real Estate Luxury',
-      subtitle: 'Property Listings + Tours',
-      price: '$897',
-      gradient: 'from-yellow-800 to-yellow-600',
-      image: '/templates/realestate.jpg'
-    },
-    {
-      name: 'E-Commerce Clean',
-      subtitle: 'Product Pages + Checkout',
-      price: '$997',
-      gradient: 'from-purple-600 to-pink-600',
-      image: '/templates/ecommerce.jpg'
-    },
-    {
-      name: 'Medical Practice',
-      subtitle: 'Appointments + Patient Portal',
-      price: '$797',
-      gradient: 'from-cyan-600 to-blue-600',
-      image: '/templates/medical.jpg'
-    },
-    {
-      name: 'Construction Pro',
-      subtitle: 'Portfolio + Quote Requests',
-      price: '$597',
-      gradient: 'from-gray-700 to-yellow-700',
-      image: '/templates/construction.jpg'
-    },
-    {
-      name: 'Creative Agency',
-      subtitle: 'Portfolio + Contact',
-      price: '$697',
-      gradient: 'from-pink-600 to-purple-600',
-      image: '/templates/agency.jpg'
-    }
-  ]
-  
+const templates = [
+  {
+    name: "Restaurant Delight",
+    subtitle: "Menu + Online Ordering",
+    price: "$497",
+    image: "/template-mockups/restaurant-delight.jpg",
+    features: ["Online ordering", "Reservations", "Menu management"]
+  },
+  {
+    name: "Law Firm Authority",
+    subtitle: "Case Studies + Intake",
+    price: "$697",
+    image: "/template-mockups/law-firm-authority.jpg",
+    features: ["Case studies", "Client intake", "Consultation booking"]
+  },
+  {
+    name: "Fitness Studio Energy",
+    subtitle: "Classes + Bookings",
+    price: "$597",
+    image: "/template-mockups/fitness-studio-energy.jpg",
+    features: ["Class schedules", "Online booking", "Memberships"]
+  },
+  {
+    name: "Real Estate Luxury",
+    subtitle: "Listings + Lead Gen",
+    price: "$897",
+    image: "/template-mockups/real-estate-luxury.jpg",
+    features: ["Property listings", "Lead capture", "Virtual tours"]
+  },
+  {
+    name: "E-Commerce Clean",
+    subtitle: "Store + Checkout",
+    price: "$997",
+    image: "/template-mockups/e-commerce-clean.jpg",
+    features: ["Product catalog", "Shopping cart", "Secure checkout"]
+  },
+  {
+    name: "Medical Practice",
+    subtitle: "Appointments + Records",
+    price: "$797",
+    image: "/template-mockups/medical-practice.jpg",
+    features: ["Appointment booking", "Patient portal", "HIPAA compliant"]
+  }
+];
+
+export const TemplateShowcase = () => {
   return (
-    <section className="py-32 px-4 overflow-hidden">
+    <section className="py-32 px-6">
       <div className="max-w-7xl mx-auto">
-        {/* Section Header */}
-        <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-center mb-4">
-          Pre-Built Templates Ready to Launch
-        </h2>
-        <p className="text-xl text-gray-400 text-center mb-16">
-          Professional designs for every industry
-        </p>
         
-        {/* Horizontal Scrolling Gallery */}
-        <div 
-          ref={scrollRef}
-          className="flex gap-6 overflow-x-auto pb-8 snap-x snap-mandatory scrollbar-hide"
-          style={{
-            scrollbarWidth: 'none',
-            msOverflowStyle: 'none'
-          }}
-        >
-          {templates.map((template, index) => (
-            <TemplateCard key={index} {...template} />
-          ))}
-        </div>
-        
-        {/* View All CTA */}
-        <div className="text-center mt-12">
-          <Link href="/templates">
-            <button className="px-8 py-4 rounded-lg font-semibold text-lg glass-card hover:bg-white/10 transition-all duration-300 transform hover:scale-105">
-              View All Templates →
-            </button>
-          </Link>
-        </div>
-      </div>
-      
-      <style jsx>{`
-        .scrollbar-hide::-webkit-scrollbar {
-          display: none;
-        }
-      `}</style>
-    </section>
-  )
-}
-
-interface TemplateCardProps {
-  name: string
-  subtitle: string
-  price: string
-  gradient: string
-  image: string
-}
-
-function TemplateCard({ name, subtitle, price, gradient }: TemplateCardProps) {
-  return (
-    <div className="flex-shrink-0 w-80 snap-center group">
-      <div className="glass-card rounded-2xl overflow-hidden transition-all duration-500 transform hover:-translate-y-2 hover:shadow-2xl hover:shadow-purple-500/20">
-        {/* Screenshot Preview Placeholder */}
-        <div 
-          className={`h-64 bg-gradient-to-br ${gradient} relative overflow-hidden`}
-        >
-          <div className="absolute inset-0 flex items-center justify-center">
-            <div className="text-white/20 text-6xl font-bold">{name.charAt(0)}</div>
+        {/* Header - Centered */}
+        <div className="text-center mb-24">
+          <div className="text-purple-400 text-sm uppercase tracking-wider mb-4">
+            Ready-to-Deploy
           </div>
+          <h2 className="text-6xl md:text-7xl font-light mb-6">
+            Template Showcase
+          </h2>
+          <p className="text-2xl text-gray-400 font-light max-w-3xl mx-auto">
+            Industry-proven automation. Live in 48 hours.
+          </p>
+        </div>
+        
+        {/* Template Grid - Centered */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
           
-          {/* Hover Overlay */}
-          <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-            <span className="text-white font-semibold">View Demo →</span>
-          </div>
+          {templates.map((template, i) => (
+            <LiquidGlassCard
+              key={i}
+              intensity="medium"
+              className="group h-full flex flex-col border border-gray-500/30 hover:border-purple-400/50 transition-all overflow-hidden"
+            >
+              {/* Image Preview */}
+              <div className="relative aspect-video overflow-hidden">
+                <Image
+                  src={template.image}
+                  alt={template.name}
+                  fill
+                  className="object-cover group-hover:scale-110 transition-transform duration-500"
+                />
+                {/* Hover overlay */}
+                <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                  <span className="text-white text-lg font-semibold">
+                    View Details →
+                  </span>
+                </div>
+              </div>
+              
+              {/* Content */}
+              <div className="p-8 flex-1 flex flex-col text-center">
+                
+                {/* Name */}
+                <h3 className="text-2xl font-light mb-2">
+                  {template.name}
+                </h3>
+                
+                {/* Subtitle */}
+                <p className="text-sm text-gray-400 mb-6">
+                  {template.subtitle}
+                </p>
+                
+                {/* Features */}
+                <ul className="space-y-2 mb-6 text-left flex-1">
+                  {template.features.map((feature, j) => (
+                    <li key={j} className="flex items-center gap-2 text-sm text-gray-300">
+                      <span className="text-green-400">✓</span>
+                      {feature}
+                    </li>
+                  ))}
+                </ul>
+                
+                {/* Price */}
+                <div className="text-4xl font-light mb-6">
+                  {template.price}
+                </div>
+                
+                {/* CTA */}
+                <button className="w-full py-4 bg-white text-black rounded-full font-semibold hover:scale-105 transition-transform">
+                  Buy Now
+                </button>
+              </div>
+              
+            </LiquidGlassCard>
+          ))}
+          
         </div>
         
-        {/* Card Content */}
-        <div className="p-6">
-          <h3 className="text-xl font-bold mb-1">{name}</h3>
-          <p className="text-gray-400 text-sm mb-4">{subtitle}</p>
-          <div className="flex items-center justify-between">
-            <span className="text-2xl font-bold gradient-text">{price}</span>
-            <button className="text-sm text-gray-400 hover:text-white transition-colors">
-              View Demo →
-            </button>
-          </div>
+        {/* Bottom CTA */}
+        <div className="text-center mt-16">
+          <button className="px-12 py-5 bg-white/10 text-white rounded-full text-lg font-medium hover:bg-white/20 transition-all backdrop-blur-sm border border-white/20">
+            View All Templates →
+          </button>
         </div>
+        
       </div>
-    </div>
-  )
-}
+    </section>
+  );
+};

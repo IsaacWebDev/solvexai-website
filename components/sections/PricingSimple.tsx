@@ -7,9 +7,25 @@ const packages = [
   {
     label: "Launch Fast",
     name: "Templates",
-    description: "Industry-proven automation. Deployed in days.",
+    tagline: "Industry-proven automation. Deployed in days.",
     price: "$497",
-    features: ["8 proven templates", "Deploy in 24-48 hours", "Online ordering & booking"],
+    priceNote: "One-time payment",
+    
+    // Detailed info
+    description: "Pre-built automation workflows designed for your industry. Perfect for businesses that need results fast without custom development.",
+    
+    includes: [
+      "8 proven industry templates",
+      "Deploy in 24-48 hours",
+      "Online ordering & booking systems",
+      "Email automation",
+      "CRM integration"
+    ],
+    
+    ideal: "Restaurants, Gyms, Real Estate, Law Firms",
+    timeline: "Live in 2 days",
+    support: "Email support",
+    
     cta: "Explore Templates",
     accent: "purple-400",
     href: "/templates"
@@ -17,9 +33,25 @@ const packages = [
   {
     label: "Build Perfect",
     name: "Custom",
-    description: "Tailored AI workforce. Designed for your exact needs.",
+    tagline: "Tailored AI workforce. Designed for your exact needs.",
     price: "$1,997",
-    features: ["Fully custom build", "Unlimited workflows", "Priority support"],
+    priceNote: "One-time setup",
+    
+    // Detailed info
+    description: "Fully customized automation built from scratch for your unique business processes. Unlimited workflows, priority development, white-glove service.",
+    
+    includes: [
+      "Fully custom AI workflows",
+      "Unlimited automation tasks",
+      "Priority development queue",
+      "Dedicated success manager",
+      "90-day optimization period"
+    ],
+    
+    ideal: "E-Commerce, SaaS, Healthcare, Finance",
+    timeline: "Live in 7-10 days",
+    support: "Priority support + dedicated manager",
+    
     cta: "Start Discovery",
     accent: "blue-400",
     highlight: true,
@@ -28,9 +60,25 @@ const packages = [
   {
     label: "Always Available",
     name: "AI Receptionist",
-    description: "24/7 customer support that never sleeps.",
-    price: "$997/mo",
-    features: ["200+ calls/day", "Multi-language", "CRM integration"],
+    tagline: "24/7 customer support that never sleeps.",
+    price: "$997",
+    priceNote: "Per month",
+    
+    // Detailed info
+    description: "AI-powered phone and chat support that handles 200+ customer interactions daily. Natural conversations, instant responses, perfect for high-volume support.",
+    
+    includes: [
+      "200+ calls/chats per day",
+      "Multi-language support (10+ languages)",
+      "CRM & calendar integration",
+      "Call transcription & analytics",
+      "Custom voice & personality"
+    ],
+    
+    ideal: "Medical offices, Law firms, Service businesses",
+    timeline: "Live in 3-5 days",
+    support: "24/7 monitoring + monthly optimization",
+    
     cta: "See Demo",
     accent: "cyan-400",
     href: "/contact"
@@ -44,56 +92,111 @@ export const PricingSimple = () => {
         
         {/* Header - Centered */}
         <div className="text-center mb-24">
-          <h2 className="text-6xl font-light mb-6">
+          <h2 className="text-6xl md:text-7xl font-light mb-6">
             Choose Your Path
           </h2>
-          <p className="text-xl text-gray-400 font-light">
+          <p className="text-2xl text-gray-400 font-light max-w-3xl mx-auto">
             Templates for speed. Custom for precision. AI for support.
           </p>
         </div>
         
-        {/* 3 Packages - Grid with liquid glass */}
-        <div className="grid md:grid-cols-3 gap-8">
+        {/* Centered Grid */}
+        <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
           
           {packages.map((pkg, i) => (
             <LiquidGlassCard
               key={i}
               intensity="medium"
-              className={`p-10 text-center border transition-all ${
+              className={`h-full flex flex-col p-10 text-center border transition-all relative ${
                 pkg.highlight 
-                  ? 'border-blue-400/70 scale-105' 
+                  ? 'border-blue-400/70 scale-105 shadow-2xl shadow-blue-500/20' 
                   : 'border-gray-500/30 hover:border-purple-400/50'
               }`}
             >
-              <div className={`text-sm text-${pkg.accent} uppercase tracking-wider mb-4`}>
+              {/* Featured badge */}
+              {pkg.highlight && (
+                <div className="absolute -top-4 left-1/2 -translate-x-1/2">
+                  <div className="bg-blue-500 text-white text-xs px-4 py-1 rounded-full font-semibold">
+                    MOST POPULAR
+                  </div>
+                </div>
+              )}
+              
+              {/* Label */}
+              <div className={`text-sm text-${pkg.accent} uppercase tracking-wider mb-4 font-semibold`}>
                 {pkg.label}
               </div>
               
-              <h3 className="text-4xl font-light mb-4">
+              {/* Name */}
+              <h3 className="text-4xl md:text-5xl font-light mb-4">
                 {pkg.name}
               </h3>
               
+              {/* Tagline */}
               <p className="text-gray-400 font-light mb-6 leading-relaxed">
+                {pkg.tagline}
+              </p>
+              
+              {/* Price */}
+              <div className="mb-2">
+                <div className="text-5xl md:text-6xl font-light">
+                  {pkg.price}
+                </div>
+                <div className="text-sm text-gray-500 mt-2">
+                  {pkg.priceNote}
+                </div>
+              </div>
+              
+              {/* Divider */}
+              <div className="border-b border-gray-500/20 my-8" />
+              
+              {/* Description */}
+              <p className="text-sm text-gray-300 font-light leading-relaxed mb-6">
                 {pkg.description}
               </p>
               
-              <div className="text-5xl font-light mb-6">
-                {pkg.price}
+              {/* What's Included */}
+              <div className="text-left mb-6 flex-1">
+                <div className="text-xs text-gray-500 uppercase tracking-wider mb-3 font-semibold">
+                  What's Included
+                </div>
+                <ul className="space-y-3">
+                  {pkg.includes.map((item, j) => (
+                    <li key={j} className="flex items-start gap-3 text-sm text-gray-300">
+                      <span className="text-green-400 mt-1 flex-shrink-0">✓</span>
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
               
-              <ul className="space-y-3 mb-8 text-left">
-                {pkg.features.map((feature, j) => (
-                  <li key={j} className="flex items-center gap-3 text-gray-300">
-                    <span className="text-green-400">✓</span>
-                    {feature}
-                  </li>
-                ))}
-              </ul>
+              {/* Ideal For */}
+              <div className="text-center mb-4">
+                <div className="text-xs text-gray-500 uppercase tracking-wider mb-2">
+                  Ideal For
+                </div>
+                <div className="text-sm text-purple-400">
+                  {pkg.ideal}
+                </div>
+              </div>
               
+              {/* Timeline + Support */}
+              <div className="grid grid-cols-2 gap-4 mb-6 text-xs">
+                <div>
+                  <div className="text-gray-500 mb-1">Timeline</div>
+                  <div className="text-white font-medium">{pkg.timeline}</div>
+                </div>
+                <div>
+                  <div className="text-gray-500 mb-1">Support</div>
+                  <div className="text-white font-medium">{pkg.support}</div>
+                </div>
+              </div>
+              
+              {/* CTA Button */}
               <Link href={pkg.href}>
-                <button className={`w-full py-4 rounded-full transition-all ${
+                <button className={`w-full py-4 rounded-full transition-all font-semibold ${
                   pkg.highlight
-                    ? 'bg-white text-black hover:bg-gray-100'
+                    ? 'bg-white text-black hover:scale-105 shadow-lg'
                     : 'bg-white/5 hover:bg-white/10'
                 }`}>
                   {pkg.cta}

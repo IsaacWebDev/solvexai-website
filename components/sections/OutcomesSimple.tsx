@@ -9,29 +9,29 @@ export const OutcomesSimple = () => {
         
         {/* Section header - Centered */}
         <div className="text-center mb-24">
-          <h2 className="text-6xl font-light mb-6">
+          <h2 className="text-6xl md:text-7xl font-light mb-6">
             What You Get
           </h2>
-          <p className="text-xl text-gray-400 font-light">
+          <p className="text-2xl text-gray-400 font-light max-w-3xl mx-auto">
             Three transformations. Immediate impact.
           </p>
         </div>
         
         {/* 3 Outcomes - Centered grid with liquid glass */}
-        <div className="grid md:grid-cols-3 gap-12">
+        <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
           
           {/* Outcome 1 */}
           <LiquidGlassCard 
             intensity="medium" 
-            className="p-12 text-center border border-gray-500/30 hover:border-purple-400/50 transition-all"
+            className="h-full p-12 text-center border border-gray-500/30 hover:border-purple-400/50 transition-all hover:scale-105"
           >
             <div className="text-8xl font-light text-purple-400 mb-6">
               10×
             </div>
-            <h3 className="text-3xl font-light mb-4">
+            <h3 className="text-4xl font-light mb-4">
               Faster
             </h3>
-            <p className="text-gray-400 font-light leading-relaxed">
+            <p className="text-xl text-gray-400 font-light leading-relaxed">
               Complete in minutes what used to take weeks.
             </p>
           </LiquidGlassCard>
@@ -39,15 +39,15 @@ export const OutcomesSimple = () => {
           {/* Outcome 2 */}
           <LiquidGlassCard 
             intensity="medium" 
-            className="p-12 text-center border border-gray-500/30 hover:border-blue-400/50 transition-all"
+            className="h-full p-12 text-center border border-gray-500/30 hover:border-blue-400/50 transition-all hover:scale-105"
           >
             <div className="text-8xl font-light text-blue-400 mb-6">
               70%
             </div>
-            <h3 className="text-3xl font-light mb-4">
+            <h3 className="text-4xl font-light mb-4">
               Lower Costs
             </h3>
-            <p className="text-gray-400 font-light leading-relaxed">
+            <p className="text-xl text-gray-400 font-light leading-relaxed">
               Reduce expenses while scaling output.
             </p>
           </LiquidGlassCard>
@@ -55,15 +55,15 @@ export const OutcomesSimple = () => {
           {/* Outcome 3 */}
           <LiquidGlassCard 
             intensity="medium" 
-            className="p-12 text-center border border-gray-500/30 hover:border-cyan-400/50 transition-all"
+            className="h-full p-12 text-center border border-gray-500/30 hover:border-cyan-400/50 transition-all hover:scale-105"
           >
             <div className="text-8xl font-light text-cyan-400 mb-6">
               0
             </div>
-            <h3 className="text-3xl font-light mb-4">
+            <h3 className="text-4xl font-light mb-4">
               Human Error
             </h3>
-            <p className="text-gray-400 font-light leading-relaxed">
+            <p className="text-xl text-gray-400 font-light leading-relaxed">
               Precision execution every single time.
             </p>
           </LiquidGlassCard>
