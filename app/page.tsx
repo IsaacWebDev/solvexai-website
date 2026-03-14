@@ -84,11 +84,7 @@ export default function HomePage() {
         <PricingSimple />
         <SectionDivider />
         
-        {/* 5. TESTIMONIAL - Social proof */}
-        <TestimonialSingle />
-        <SectionDivider />
-        
-        {/* 6. CTA - Close */}
+        {/* 5. CTA - Close */}
         <CTAMinimal />
         </div>
       </main>
