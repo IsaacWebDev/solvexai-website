@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { EffectComposer, Bloom } from '@react-three/postprocessing';
 import { Line } from '@react-three/drei';
@@ -22,36 +22,11 @@ interface WaterSplashProps {
   ripples: Ripple[];
 }
 
+// Component receives ripples as props (read-only)
 const WaterSplash = ({ ripples }: WaterSplashProps) => {
-  const [activeRipples, setActiveRipples] = useState<Ripple[]>([]);
-  const ripplesRef = useRef<Ripple[]>([]);
-
-  useEffect(() => {
-    if (ripples.length > 0) {
-      setActiveRipples(prev => [...prev, ...ripples]);
-    }
-  }, [ripples]);
-
-  useEffect(() => {
-    ripplesRef.current = activeRipples;
-  }, [activeRipples]);
-
-  useFrame((state, delta) => {
-    // Update ripples
-    const updated = ripplesRef.current.map(ripple => ({
-      ...ripple,
-      radius: ripple.radius + ripple.speed * delta * 10,
-      opacity: Math.max(0, ripple.opacity - delta * 0.5)
-    })).filter(r => r.opacity > 0 && r.radius < r.maxRadius);
-
-    if (updated.length !== ripplesRef.current.length) {
-      setActiveRipples(updated);
-    }
-  });
-
   return (
     <>
-      {activeRipples.map((ripple, i) => {
+      {ripples.map((ripple, i) => {
         // Create circular wave
         const segments = 32;
         const points = [];
@@ -65,7 +40,7 @@ const WaterSplash = ({ ripples }: WaterSplashProps) => {
 
         return (
           <Line
-            key={`${i}-${ripple.position.x}-${ripple.position.y}`}
+            key={`ripple-${i}`}
             points={points}
             color={ripple.color}
             lineWidth={0.05}
@@ -80,18 +55,29 @@ const WaterSplash = ({ ripples }: WaterSplashProps) => {
 
 export default function OceanBackground() {
   const [ripples, setRipples] = useState<Ripple[]>([]);
-  const canvasRef = useRef<HTMLDivElement>(null);
 
-  const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
-    if (!canvasRef.current) return;
+  // Update ripples in useFrame (inside Canvas)
+  const RippleUpdater = () => {
+    useFrame((state, delta) => {
+      setRipples(prev => 
+        prev
+          .map(r => ({
+            ...r,
+            radius: r.radius + r.speed * delta * 10,
+            opacity: Math.max(0, r.opacity - delta * 0.5)
+          }))
+          .filter(r => r.opacity > 0 && r.radius < r.maxRadius)
+      );
+    });
+    return null;
+  };
 
-    // Get click position relative to canvas
-    const rect = canvasRef.current.getBoundingClientRect();
-    const x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
-    const y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
-
-    // Convert to 3D world position
-    const position = new THREE.Vector3(x * 10, 0, y * 10);
+  const handleClick = (event: any) => {
+    // Get pointer position from Canvas event
+    const x = event.pointer.x * 10;
+    const y = event.pointer.y * 10;
+    
+    const position = new THREE.Vector3(x, 0, y);
 
     // Create multiple ripples (splash effect)
     const newRipples: Ripple[] = [
@@ -121,16 +107,19 @@ export default function OceanBackground() {
       }
     ];
 
-    setRipples(newRipples);
+    setRipples(prev => [...prev, ...newRipples]);
   };
 
   return (
-    <div 
-      ref={canvasRef}
-      className="absolute inset-0 pointer-events-auto overflow-hidden cursor-pointer"
-      onClick={handleClick}
-    >
-      <Canvas camera={{ position: [0, 0, 20], fov: 50 }}>
+    <div className="absolute inset-0 pointer-events-none overflow-hidden">
+      <Canvas 
+        camera={{ position: [0, 0, 20], fov: 50 }}
+        onClick={handleClick}
+        style={{ cursor: 'pointer', pointerEvents: 'auto' }}
+      >
+        {/* Ripple updater */}
+        <RippleUpdater />
+        
         {/* JELLYFISH (Purple/Cyan) */}
         <LEDJellyfish 
           initialPosition={[8, 2, -5]} 

@@ -59,8 +59,11 @@ export const LEDConstellation = ({
       {points.map((point, i) =>
         point.connections.map((connIdx) => {
           if (connIdx <= i) return null; // Avoid duplicate lines
+          if (connIdx >= points.length) return null; // Prevent out-of-bounds
           
           const endPoint = points[connIdx];
+          if (!endPoint || !endPoint.position) return null; // Safety check
+          
           return (
             <Line
               key={`line-${i}-${connIdx}`}
