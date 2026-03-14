@@ -121,29 +121,38 @@ export default function ContactPage() {
       <Navigation />
       <AnimatedGradientMesh />
       
-      <main className="relative pb-32 px-4 min-h-screen">
-        <div className="max-w-7xl mx-auto">
+      <main className="relative pb-32 px-4 min-h-screen flex items-center justify-center">
+        <div className="max-w-6xl mx-auto w-full">
           
-          {/* Hero - Two Column Layout */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+          {/* Hero - Two Column Layout (Centered) */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
             
-            {/* Left: Headline + Subtitle */}
-            <div className="lg:sticky lg:top-32">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                className="space-y-8"
-              >
-                <h1 className="text-5xl md:text-6xl lg:text-7xl font-light leading-tight">
-                  Let's Build Something<br />Amazing Together
-                </h1>
-                
+            {/* Left: Headline Only */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="flex items-center lg:min-h-[600px]"
+            >
+              <h1 className="text-5xl md:text-6xl lg:text-7xl font-light leading-tight">
+                Let's Build Something<br />Amazing Together
+              </h1>
+            </motion.div>
+            
+            {/* Right: Step Indicator + Form */}
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.2 }}
+              className="space-y-8"
+            >
+              {/* Step Indicator - Above Form */}
+              <div className="space-y-6">
                 <p className="text-xl md:text-2xl text-gray-300 font-light leading-relaxed">
                   Tell us about your project in 3 simple steps
                 </p>
                 
-                {/* Progress Indicator - Moved to left side */}
-                <div className="flex items-center gap-3 pt-8">
+                {/* Progress Dots */}
+                <div className="flex items-center gap-3">
                   {[1, 2, 3].map((num) => (
                     <div key={num} className="flex items-center">
                       <div className={`w-12 h-12 rounded-full flex items-center justify-center text-sm font-semibold transition-all duration-300 ${
@@ -163,15 +172,9 @@ export default function ContactPage() {
                     </div>
                   ))}
                 </div>
-              </motion.div>
-            </div>
-            
-            {/* Right: Form Card */}
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.2 }}
-            >
+              </div>
+              
+              {/* Form Card */}
               <LiquidGlassCard intensity="heavy" className="p-8 md:p-12">
             <form onSubmit={handleSubmit}>
               
@@ -435,7 +438,6 @@ export default function ContactPage() {
             )}
               </LiquidGlassCard>
             </motion.div>
-            
           </div>
         </div>
       </main>
