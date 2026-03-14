@@ -18,7 +18,7 @@ export default function AboutPage() {
         <div className="w-full max-w-6xl">
           
           {/* Hero - Perfectly Centered */}
-          <section className="mb-48 flex justify-center">
+          <section className="py-24 flex justify-center">
             <motion.div 
               className="text-center max-w-5xl w-full"
               initial={{ opacity: 0, y: 30 }}
@@ -70,10 +70,10 @@ export default function AboutPage() {
           </section>
 
           {/* Section Divider */}
-          <div className="h-px bg-gradient-to-r from-transparent via-gray-500/50 to-transparent mb-32" />
+          <div className="h-px bg-gradient-to-r from-transparent via-gray-500/50 to-transparent my-24" />
           
           {/* Stats Section - Perfectly Centered */}
-          <section className="mb-48 py-20">
+          <section className="py-24">
             <div className="flex justify-center">
               <div className="w-full max-w-5xl">
                 <LiquidGlassCard intensity="medium" className="p-16 md:p-20">
@@ -109,10 +109,10 @@ export default function AboutPage() {
           </section>
 
           {/* Section Divider */}
-          <div className="h-px bg-gradient-to-r from-transparent via-gray-500/50 to-transparent mb-32" />
+          <div className="h-px bg-gradient-to-r from-transparent via-gray-500/50 to-transparent my-24" />
           
           {/* Our Story - Perfectly Centered */}
-          <section className="mb-48 py-20">
+          <section className="py-24">
             <h2 className="text-4xl md:text-5xl font-light text-center mb-20">Our Story</h2>
             
             {/* Story Text - Centered */}
@@ -161,10 +161,10 @@ export default function AboutPage() {
           </section>
 
           {/* Section Divider */}
-          <div className="h-px bg-gradient-to-r from-transparent via-gray-500/50 to-transparent mb-32" />
+          <div className="h-px bg-gradient-to-r from-transparent via-gray-500/50 to-transparent my-24" />
           
           {/* Our Values - Perfectly Centered */}
-          <section className="mb-48 py-20">
+          <section className="py-24">
             <h2 className="text-4xl md:text-5xl font-light text-center mb-20">Our Values</h2>
             <div className="flex justify-center">
               <div className="w-full max-w-5xl">
@@ -195,10 +195,10 @@ export default function AboutPage() {
           </section>
 
           {/* Section Divider */}
-          <div className="h-px bg-gradient-to-r from-transparent via-gray-500/50 to-transparent mb-32" />
+          <div className="h-px bg-gradient-to-r from-transparent via-gray-500/50 to-transparent my-24" />
           
           {/* Meet the Team - Perfectly Centered */}
-          <section className="mb-48 py-20">
+          <section className="py-24">
             <h2 className="text-4xl md:text-5xl font-light text-center mb-20">Meet the Team</h2>
             
             {/* 3D Team Orbit - Centered & Smaller */}
@@ -238,10 +238,10 @@ export default function AboutPage() {
           </section>
 
           {/* Section Divider */}
-          <div className="h-px bg-gradient-to-r from-transparent via-gray-500/50 to-transparent mb-32" />
+          <div className="h-px bg-gradient-to-r from-transparent via-gray-500/50 to-transparent my-24" />
           
           {/* FAQ Section - Perfectly Centered */}
-          <section className="mb-48 py-20">
+          <section className="py-24">
             <h2 className="text-4xl md:text-5xl font-light text-center mb-20">Frequently Asked Questions</h2>
             <div className="flex justify-center">
               <div className="w-full max-w-4xl space-y-8">
