@@ -19,6 +19,13 @@ export const LEDMantaRay = ({
   const groupRef = useRef<THREE.Group>(null);
   const wingRef = useRef<THREE.Group>(null);
   const time = useRef(0);
+  const particles = useRef<Array<{
+    position: THREE.Vector3;
+    velocity: THREE.Vector3;
+    life: number;
+    maxLife: number;
+  }>>([]);
+  const trail = useRef<THREE.Vector3[]>([]);
 
   // Manta ray constellation pattern
   const mantaPoints = [
@@ -64,18 +71,76 @@ export const LEDMantaRay = ({
   useFrame((state, delta) => {
     time.current += delta * speed;
     
-    if (groupRef.current) {
-      // Gliding motion
-      groupRef.current.position.x = initialPosition[0] + Math.sin(time.current * 0.2 + phase) * 6;
-      groupRef.current.position.y = initialPosition[1] + Math.cos(time.current * 0.35 + phase) * 2;
+    if (groupRef.current && wingRef.current) {
+      // ULTRA-REALISTIC WING UNDULATION
+      const waveSpeed = 2.0;
+      const wavePhase = time.current * waveSpeed + phase;
       
-      // Wing flap simulation (scale Y)
-      if (wingRef.current) {
-        wingRef.current.scale.y = 1 + Math.sin(time.current * 1.5 + phase) * 0.15;
+      // Wing wave (vertical undulation)
+      wingRef.current.scale.y = 1 + Math.sin(wavePhase) * 0.25;
+      
+      // Gliding physics
+      const lift = Math.abs(Math.sin(wavePhase)) * 0.03;
+      groupRef.current.position.y += lift;
+      
+      // Maintain altitude (gentle drift down when not flapping)
+      groupRef.current.position.y -= 0.008 * (1 - Math.abs(Math.sin(wavePhase)));
+      
+      // Forward momentum (stronger on downstroke)
+      const thrust = Math.sin(wavePhase) > 0 ? 0.06 : 0.02;
+      groupRef.current.position.x += Math.cos(groupRef.current.rotation.y) * thrust;
+      groupRef.current.position.z += Math.sin(groupRef.current.rotation.y) * thrust;
+      
+      // Banking turns (smooth S-curves)
+      const bankCycle = Math.sin(time.current * 0.15 + phase);
+      groupRef.current.rotation.y += bankCycle * 0.02;
+      groupRef.current.rotation.z = bankCycle * 0.4; // Bank angle
+      
+      // Keep within bounds (figure-8 pattern)
+      const distFromCenter = Math.sqrt(
+        groupRef.current.position.x ** 2 + 
+        groupRef.current.position.z ** 2
+      );
+      if (distFromCenter > 10) {
+        const angleToCenter = Math.atan2(-groupRef.current.position.z, -groupRef.current.position.x);
+        groupRef.current.rotation.y = angleToCenter;
       }
       
-      // Banking rotation
-      groupRef.current.rotation.z = Math.sin(time.current * 0.2 + phase) * 0.3;
+      // BIO-LUMINESCENT PARTICLES (wing tips on downstroke)
+      if (Math.sin(wavePhase) > 0 && Math.random() > 0.75) {
+        particles.current.push({
+          position: groupRef.current.position.clone().add(
+            new THREE.Vector3(
+              Math.random() > 0.5 ? 1.5 : -1.5,
+              0,
+              0.5
+            )
+          ),
+          velocity: new THREE.Vector3(
+            (Math.random() - 0.5) * 0.08,
+            -0.04,
+            (Math.random() - 0.5) * 0.08
+          ),
+          life: 2.5,
+          maxLife: 2.5
+        });
+      }
+      
+      // Update particles
+      particles.current = particles.current.filter(p => {
+        p.position.add(p.velocity);
+        p.life -= delta;
+        return p.life > 0;
+      });
+      
+      // Motion blur trail
+      trail.current.push(groupRef.current.position.clone());
+      if (trail.current.length > 10) trail.current.shift();
+      
+      // Limit particle count
+      if (particles.current.length > 25) {
+        particles.current = particles.current.slice(-25);
+      }
     }
   });
 
@@ -85,11 +150,23 @@ export const LEDMantaRay = ({
         <LEDConstellation
           points={mantaPoints}
           color="#00A3FF"  // Blue
-          glowIntensity={2.2}
+          glowIntensity={2.2 + Math.sin(time.current * 2.0 + phase) * 0.3}
           lineWidth={0.028}
           dotSize={0.085}
         />
       </group>
+      
+      {/* Render particles */}
+      {particles.current.map((particle, i) => (
+        <mesh key={i} position={particle.position}>
+          <sphereGeometry args={[0.035, 8, 8]} />
+          <meshBasicMaterial 
+            color="#00A3FF" 
+            transparent 
+            opacity={particle.life / particle.maxLife * 0.8}
+          />
+        </mesh>
+      ))}
     </group>
   );
 };

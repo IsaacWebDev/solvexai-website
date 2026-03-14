@@ -20,6 +20,12 @@ export const LEDJellyfish = ({
 }: LEDJellyfishProps) => {
   const groupRef = useRef<THREE.Group>(null);
   const time = useRef(0);
+  const particles = useRef<Array<{
+    position: THREE.Vector3;
+    velocity: THREE.Vector3;
+    life: number;
+    maxLife: number;
+  }>>([]);
 
   // Jellyfish constellation pattern
   const jellyfishPoints = [
@@ -79,24 +85,81 @@ export const LEDJellyfish = ({
     time.current += delta * speed;
     
     if (groupRef.current) {
-      // Floating motion
-      groupRef.current.position.y = initialPosition[1] + Math.sin(time.current * 0.5 + phase) * 2;
+      // ULTRA-REALISTIC PULSING
+      const pulse = Math.sin(time.current * 1.2 + phase);
+      const pulseStrength = (pulse + 1) / 2; // 0 to 1
+      
+      // Body pulsing (expand/contract 15%)
+      const bodyScale = 1 + (pulse * 0.15);
+      groupRef.current.scale.set(bodyScale * 0.5, bodyScale * 0.5, bodyScale * 0.5);
+      
+      // Upward propulsion on pulse
+      const propulsion = pulseStrength * 0.05;
+      groupRef.current.position.y += propulsion;
+      
+      // Drift (slow fall between pulses)
+      groupRef.current.position.y -= 0.01 * (1 - pulseStrength);
+      
+      // Horizontal drift
       groupRef.current.position.x = initialPosition[0] + Math.cos(time.current * 0.3 + phase) * 3;
       
-      // Gentle rotation
-      groupRef.current.rotation.y = Math.sin(time.current * 0.2 + phase) * 0.3;
+      // Gentle rotation (current flow)
+      groupRef.current.rotation.y = Math.sin(time.current * 0.15 + phase) * 0.2;
+      
+      // TENTACLE WAVE ANIMATION (compound sine waves)
+      // Note: In LED constellation, we can't animate individual points dynamically
+      // This would require shader-based or instance-based animation
+      // For now, the pulsing body creates the illusion of tentacle movement
+      
+      // BIO-LUMINESCENT PARTICLES
+      if (Math.random() > 0.85) {
+        particles.current.push({
+          position: groupRef.current.position.clone(),
+          velocity: new THREE.Vector3(
+            (Math.random() - 0.5) * 0.1,
+            -0.05,
+            (Math.random() - 0.5) * 0.1
+          ),
+          life: 2.0,
+          maxLife: 2.0
+        });
+      }
+      
+      // Update particles
+      particles.current = particles.current.filter(p => {
+        p.position.add(p.velocity);
+        p.life -= delta;
+        return p.life > 0;
+      });
+      
+      // Limit particle count for performance
+      if (particles.current.length > 20) {
+        particles.current = particles.current.slice(-20);
+      }
     }
   });
 
   return (
-    <group ref={groupRef} position={initialPosition} scale={0.5}>
+    <group ref={groupRef} position={initialPosition}>
       <LEDConstellation
         points={jellyfishPoints}
         color={color}
-        glowIntensity={2.5}
+        glowIntensity={2.5 + Math.sin(time.current * 1.2 + phase) * 0.5}
         lineWidth={0.025}
         dotSize={0.08}
       />
+      
+      {/* Render particles */}
+      {particles.current.map((particle, i) => (
+        <mesh key={i} position={particle.position}>
+          <sphereGeometry args={[0.03, 8, 8]} />
+          <meshBasicMaterial 
+            color={color} 
+            transparent 
+            opacity={particle.life / particle.maxLife}
+          />
+        </mesh>
+      ))}
     </group>
   );
 };

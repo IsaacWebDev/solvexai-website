@@ -18,6 +18,13 @@ export const LEDTurtle = ({
 }: LEDTurtleProps) => {
   const groupRef = useRef<THREE.Group>(null);
   const time = useRef(0);
+  const particles = useRef<Array<{
+    position: THREE.Vector3;
+    velocity: THREE.Vector3;
+    life: number;
+    maxLife: number;
+  }>>([]);
+  const trail = useRef<THREE.Vector3[]>([]);
 
   // Turtle constellation pattern
   const turtlePoints = [
@@ -75,13 +82,69 @@ export const LEDTurtle = ({
     time.current += delta * speed;
     
     if (groupRef.current) {
-      // Swimming motion (forward + up/down)
-      groupRef.current.position.x = initialPosition[0] + Math.sin(time.current * 0.3 + phase) * 5;
-      groupRef.current.position.y = initialPosition[1] + Math.cos(time.current * 0.4 + phase) * 1.5;
+      // ULTRA-REALISTIC FLIPPER SWIMMING
+      const strokeCycle = (time.current * 0.8 + phase) % (Math.PI * 2);
+      const isDownstroke = Math.sin(strokeCycle) > 0;
       
-      // Gentle rotation (swimming angle)
-      groupRef.current.rotation.z = Math.sin(time.current * 0.3 + phase) * 0.2;
-      groupRef.current.rotation.y = Math.sin(time.current * 0.2 + phase) * 0.4;
+      // Forward momentum (stronger during downstroke)
+      const thrust = isDownstroke ? 0.08 : 0.02;
+      const direction = new THREE.Vector3(
+        Math.cos(groupRef.current.rotation.y),
+        0,
+        Math.sin(groupRef.current.rotation.y)
+      ).normalize();
+      
+      groupRef.current.position.x += direction.x * thrust;
+      groupRef.current.position.z += direction.z * thrust;
+      
+      // Bobbing motion (natural buoyancy)
+      groupRef.current.position.y = initialPosition[1] + Math.sin(time.current * 0.6 + phase) * 1.5;
+      
+      // Banking into turns
+      const turnRate = Math.sin(time.current * 0.2 + phase) * 0.015;
+      groupRef.current.rotation.y += turnRate;
+      groupRef.current.rotation.z = -turnRate * 5; // Bank angle
+      
+      // Keep within bounds (circular path)
+      const distFromCenter = Math.sqrt(
+        groupRef.current.position.x ** 2 + 
+        groupRef.current.position.z ** 2
+      );
+      if (distFromCenter > 8) {
+        // Turn back toward center
+        const angleToCenter = Math.atan2(-groupRef.current.position.z, -groupRef.current.position.x);
+        groupRef.current.rotation.y = angleToCenter;
+      }
+      
+      // BIO-LUMINESCENT PARTICLES (from flippers)
+      if (isDownstroke && Math.random() > 0.7) {
+        particles.current.push({
+          position: groupRef.current.position.clone(),
+          velocity: new THREE.Vector3(
+            (Math.random() - 0.5) * 0.15,
+            -0.03,
+            (Math.random() - 0.5) * 0.15
+          ),
+          life: 1.5,
+          maxLife: 1.5
+        });
+      }
+      
+      // Update particles
+      particles.current = particles.current.filter(p => {
+        p.position.add(p.velocity);
+        p.life -= delta;
+        return p.life > 0;
+      });
+      
+      // Motion blur trail
+      trail.current.push(groupRef.current.position.clone());
+      if (trail.current.length > 8) trail.current.shift();
+      
+      // Limit particle count
+      if (particles.current.length > 15) {
+        particles.current = particles.current.slice(-15);
+      }
     }
   });
 
@@ -94,6 +157,18 @@ export const LEDTurtle = ({
         lineWidth={0.03}
         dotSize={0.09}
       />
+      
+      {/* Render particles */}
+      {particles.current.map((particle, i) => (
+        <mesh key={i} position={particle.position}>
+          <sphereGeometry args={[0.04, 8, 8]} />
+          <meshBasicMaterial 
+            color="#00FF88" 
+            transparent 
+            opacity={particle.life / particle.maxLife}
+          />
+        </mesh>
+      ))}
     </group>
   );
 };

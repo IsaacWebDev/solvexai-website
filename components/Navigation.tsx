@@ -40,13 +40,17 @@ export function Navigation() {
               </LiquidGlassButton>
             </div>
 
-            {/* CENTER: Logo (placeholder for Isaac's custom logo) */}
+            {/* CENTER: Logo */}
             <div className="absolute left-1/2 transform -translate-x-1/2">
               <Link href="/" className="flex items-center group">
-                {/* Placeholder - Isaac will provide logo-center.png */}
-                <div className="w-14 h-14 bg-gradient-to-br from-purple-600 to-blue-600 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
-                  <span className="text-white font-bold text-2xl">🎯</span>
-                </div>
+                <Image
+                  src="/logo-center.png"
+                  alt="SolveXAI"
+                  width={50}
+                  height={50}
+                  className="object-contain group-hover:scale-110 transition-transform"
+                  priority
+                />
               </Link>
             </div>
 
