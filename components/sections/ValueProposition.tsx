@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react'
 import Link from 'next/link'
+import * as LucideIcons from 'lucide-react'
 
 export function ValueProposition() {
   return (
@@ -15,7 +16,7 @@ export function ValueProposition() {
         {/* Service Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <ServiceCard
-            icon="🎨"
+            icon="Palette"
             title="Pre-Built Website Templates"
             headline="Launch in Days, Not Months"
             description="Professional websites designed for your industry. Restaurant menus, law firm portfolios, gym booking systems—ready to deploy with your branding."
@@ -31,7 +32,7 @@ export function ValueProposition() {
           />
           
           <ServiceCard
-            icon="⚙️"
+            icon="Settings"
             title="Custom Development"
             headline="Built Exactly How You Want It"
             description="Complex e-commerce, custom CRMs, integrations with your existing tools. We build what templates can't."
@@ -47,7 +48,7 @@ export function ValueProposition() {
           />
           
           <ServiceCard
-            icon="🤖"
+            icon="Bot"
             title="AI Receptionist"
             headline="Never Miss a Customer Again"
             description="AI answers calls, books appointments, answers FAQs in your brand's voice. Works 24/7, costs less than a part-time employee."
@@ -80,6 +81,7 @@ interface ServiceCardProps {
 
 function ServiceCard({ icon, title, headline, description, price, features, ctaText, ctaHref }: ServiceCardProps) {
   const [isHovered, setIsHovered] = useState(false)
+  const IconComponent = (LucideIcons as any)[icon];
   
   return (
     <div 
@@ -93,8 +95,8 @@ function ServiceCard({ icon, title, headline, description, price, features, ctaT
       }}
     >
       {/* Icon */}
-      <div className="text-6xl mb-6 transform transition-transform duration-300 group-hover:scale-110">
-        {icon}
+      <div className="mb-6 transform transition-transform duration-300 group-hover:scale-110">
+        {IconComponent && <IconComponent size={48} className="text-purple-400" />}
       </div>
       
       {/* Title */}

@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Phone } from 'lucide-react';
 
 export const CalendlyWidget = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -39,7 +40,7 @@ export const CalendlyWidget = () => {
         className="fixed bottom-6 right-6 z-50 bg-gradient-to-r from-purple-600 to-pink-600 text-white px-6 py-4 rounded-full font-semibold shadow-2xl hover:shadow-purple-500/50 transition-all flex items-center gap-2"
         aria-label="Book a Call"
       >
-        <span className="text-2xl">📞</span>
+        <Phone size={20} />
         <span className="hidden md:inline">Book a Call</span>
       </motion.button>
 

@@ -1,60 +1,78 @@
 'use client';
 
 import { LiquidGlassCard } from '@/components/ui/LiquidGlassCard';
+import { 
+  ShoppingCart, 
+  Stethoscope, 
+  Home, 
+  Scale, 
+  Megaphone, 
+  Briefcase, 
+  Users, 
+  MessageSquare,
+  Clock,
+  LucideIcon 
+} from 'lucide-react';
 
-const useCases = [
+const useCases: Array<{
+  industry: string;
+  icon: LucideIcon;
+  title: string;
+  description: string;
+  savings: string;
+}> = [
   {
     industry: "E-Commerce",
-    icon: "🛒",
+    icon: ShoppingCart,
     title: "Order Processing",
     description: "Automate order confirmations, inventory updates, and shipping notifications.",
     savings: "15+ hours/week"
   },
   {
     industry: "Healthcare",
-    icon: "🏥",
+    icon: Stethoscope,
     title: "Appointment Scheduling",
     description: "AI handles bookings, reminders, and rescheduling automatically.",
     savings: "20+ hours/week"
   },
   {
     industry: "Real Estate",
-    icon: "🏠",
+    icon: Home,
     title: "Lead Qualification",
     description: "Screen leads, schedule viewings, and send property details instantly.",
     savings: "12+ hours/week"
   },
   {
     industry: "Legal",
-    icon: "⚖️",
+    icon: Scale,
     title: "Document Processing",
     description: "Extract data from contracts, generate summaries, organize files.",
     savings: "18+ hours/week"
   },
   {
     industry: "Marketing",
-    icon: "📢",
+    icon: Megaphone,
     title: "Content Distribution",
     description: "Schedule posts, respond to comments, analyze engagement automatically.",
     savings: "10+ hours/week"
   },
   {
     industry: "Finance",
-    icon: "💼",
+    icon: Briefcase,
     title: "Invoice Management",
     description: "Generate, send, and track invoices. Send payment reminders automatically.",
     savings: "8+ hours/week"
   },
   {
     industry: "HR",
-    icon: "👥",
+    icon: Users,
     title: "Candidate Screening",
     description: "Review resumes, schedule interviews, send follow-ups automatically.",
     savings: "16+ hours/week"
   },
   {
     industry: "Customer Support",
-    icon: "💬",
+    icon: MessageSquare,
     title: "Ticket Resolution",
     description: "AI resolves common issues instantly. Route complex cases to humans.",
     savings: "25+ hours/week"
@@ -75,23 +93,29 @@ export const UseCasesGrid = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {useCases.map((useCase, index) => (
-            <LiquidGlassCard key={index} intensity="light" className="p-6 hover:scale-105 transition-transform duration-300">
-              <div className="text-5xl mb-4">{useCase.icon}</div>
-              <div className="text-sm text-purple-400 mb-2 font-semibold">
-                {useCase.industry}
-              </div>
-              <h3 className="text-xl font-bold mb-3 text-white">
-                {useCase.title}
-              </h3>
-              <p className="text-gray-400 text-sm mb-4 leading-relaxed">
-                {useCase.description}
-              </p>
-              <div className="text-green-400 font-bold text-sm">
-                ⏱️ Saves {useCase.savings}
-              </div>
-            </LiquidGlassCard>
-          ))}
+          {useCases.map((useCase, index) => {
+            const IconComponent = useCase.icon;
+            return (
+              <LiquidGlassCard key={index} intensity="light" className="p-6 hover:scale-105 transition-transform duration-300">
+                <div className="mb-4">
+                  <IconComponent size={40} className="text-purple-400" />
+                </div>
+                <div className="text-sm text-purple-400 mb-2 font-semibold">
+                  {useCase.industry}
+                </div>
+                <h3 className="text-xl font-bold mb-3 text-white">
+                  {useCase.title}
+                </h3>
+                <p className="text-gray-400 text-sm mb-4 leading-relaxed">
+                  {useCase.description}
+                </p>
+                <div className="text-green-400 font-bold text-sm flex items-center gap-2">
+                  <Clock size={16} />
+                  Saves {useCase.savings}
+                </div>
+              </LiquidGlassCard>
+            );
+          })}
         </div>
       </div>
     </section>

@@ -1,6 +1,7 @@
 'use client'
 
 import { LiquidGlassCard } from '@/components/ui/LiquidGlassCard'
+import { Briefcase } from 'lucide-react'
 
 export const TestimonialSingle = () => {
   return (
@@ -19,7 +20,9 @@ export const TestimonialSingle = () => {
         
         {/* Attribution */}
         <div className="flex items-center justify-center gap-6">
-          <div className="text-6xl">👩‍💼</div>
+          <div className="w-16 h-16 rounded-full bg-purple-500/20 flex items-center justify-center">
+            <Briefcase size={32} className="text-purple-400" />
+          </div>
           <div className="text-center">
             <div className="text-xl font-semibold text-white">Sarah Johnson</div>
             <div className="text-gray-400">CEO, TechStart Inc</div>

@@ -2,16 +2,27 @@
 
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { 
+  Utensils, 
+  Home, 
+  Scale, 
+  Dumbbell, 
+  ShoppingCart, 
+  Stethoscope, 
+  Hammer, 
+  Palette,
+  LucideIcon
+} from 'lucide-react';
 
 const industries = [
-  { id: 'restaurant', label: 'Restaurant Owner', emoji: '🍽️' },
-  { id: 'realtor', label: 'Real Estate Agent', emoji: '🏠' },
-  { id: 'lawyer', label: 'Law Firm', emoji: '⚖️' },
-  { id: 'fitness', label: 'Fitness Studio', emoji: '💪' },
-  { id: 'ecommerce', label: 'E-Commerce Store', emoji: '🛍️' },
-  { id: 'medical', label: 'Medical Practice', emoji: '🏥' },
-  { id: 'construction', label: 'Construction Company', emoji: '🏗️' },
-  { id: 'agency', label: 'Creative Agency', emoji: '🎨' },
+  { id: 'restaurant', label: 'Restaurant Owner', icon: Utensils },
+  { id: 'realtor', label: 'Real Estate Agent', icon: Home },
+  { id: 'lawyer', label: 'Law Firm', icon: Scale },
+  { id: 'fitness', label: 'Fitness Studio', icon: Dumbbell },
+  { id: 'ecommerce', label: 'E-Commerce Store', icon: ShoppingCart },
+  { id: 'medical', label: 'Medical Practice', icon: Stethoscope },
+  { id: 'construction', label: 'Construction Company', icon: Hammer },
+  { id: 'agency', label: 'Creative Agency', icon: Palette },
 ];
 
 interface IndustrySelectorProps {
@@ -55,7 +66,7 @@ export const IndustrySelector = ({ onIndustryChange }: IndustrySelectorProps) =>
         >
           {industries.map((industry) => (
             <option key={industry.id} value={industry.id} className="bg-gray-900">
-              {industry.emoji} {industry.label}
+              {industry.label}
             </option>
           ))}
         </select>
@@ -74,9 +85,9 @@ export const IndustrySelector = ({ onIndustryChange }: IndustrySelectorProps) =>
           key={selectedOption.id}
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
-          className="text-4xl"
+          className="flex items-center"
         >
-          {selectedOption.emoji}
+          <selectedOption.icon size={20} className="text-purple-400" />
         </motion.div>
       )}
     </motion.div>

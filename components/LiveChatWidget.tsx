@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { MessageCircle, X } from 'lucide-react';
 
 export const LiveChatWidget = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -39,7 +40,7 @@ export const LiveChatWidget = () => {
         className="fixed bottom-24 right-6 z-40 bg-blue-600 text-white p-4 rounded-full shadow-2xl hover:shadow-blue-500/50 transition-all"
         aria-label="Chat with us"
       >
-        <span className="text-2xl">💬</span>
+        <MessageCircle size={24} />
       </motion.button>
 
       {/* Chat Panel */}
@@ -62,7 +63,7 @@ export const LiveChatWidget = () => {
                 onClick={() => setIsOpen(false)}
                 className="text-white hover:bg-white/20 rounded-full p-2 transition-colors"
               >
-                ✕
+                <X size={20} />
               </button>
             </div>
 

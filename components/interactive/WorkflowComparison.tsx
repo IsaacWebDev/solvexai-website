@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { Clock, Zap, Frown, X, DollarSign, Check, Target, Bot } from 'lucide-react';
 
 const manualSteps = [
   { step: 1, task: 'Gather customer data', time: '10 min' },
@@ -43,8 +44,8 @@ export const WorkflowComparison = () => {
               <h3 className="text-3xl font-bold text-white mb-2">
                 Manual Process
               </h3>
-              <p className="text-red-400 text-lg">
-                ⏱️ Total: <span className="font-bold text-2xl">45 minutes</span>
+              <p className="text-red-400 text-lg flex items-center justify-center gap-2">
+                <Clock size={20} /> Total: <span className="font-bold text-2xl">45 minutes</span>
               </p>
             </div>
 
@@ -72,8 +73,10 @@ export const WorkflowComparison = () => {
             </div>
 
             <div className="mt-8 text-center">
-              <p className="text-gray-400 text-sm">
-                😓 Tedious • ❌ Error-prone • 💸 Expensive
+              <p className="text-gray-400 text-sm flex items-center justify-center gap-3">
+                <span className="flex items-center gap-1"><Frown size={16} /> Tedious</span>
+                <span className="flex items-center gap-1"><X size={16} /> Error-prone</span>
+                <span className="flex items-center gap-1"><DollarSign size={16} /> Expensive</span>
               </p>
             </div>
           </motion.div>
@@ -93,8 +96,8 @@ export const WorkflowComparison = () => {
               <h3 className="text-3xl font-bold text-white mb-2">
                 Automated Workflow
               </h3>
-              <p className="text-green-400 text-lg">
-                ⚡ Total: <span className="font-bold text-2xl">30 seconds</span>
+              <p className="text-green-400 text-lg flex items-center justify-center gap-2">
+                <Zap size={20} /> Total: <span className="font-bold text-2xl">30 seconds</span>
               </p>
             </div>
 
@@ -105,7 +108,9 @@ export const WorkflowComparison = () => {
               transition={{ delay: 0.3 }}
               className="bg-gradient-to-br from-green-900/30 to-blue-900/30 border border-green-500/50 rounded-xl p-12 flex flex-col items-center justify-center min-h-[340px]"
             >
-              <div className="text-8xl mb-6">🤖</div>
+              <div className="mb-6">
+                <Bot size={80} className="text-green-400" />
+              </div>
               <p className="text-2xl font-bold text-white mb-4">
                 1 Click
               </p>
@@ -117,8 +122,10 @@ export const WorkflowComparison = () => {
             </motion.div>
 
             <div className="mt-8 text-center">
-              <p className="text-gray-400 text-sm">
-                ⚡ Instant • ✅ Accurate • 🎯 Consistent
+              <p className="text-gray-400 text-sm flex items-center justify-center gap-3">
+                <span className="flex items-center gap-1"><Zap size={16} /> Instant</span>
+                <span className="flex items-center gap-1"><Check size={16} /> Accurate</span>
+                <span className="flex items-center gap-1"><Target size={16} /> Consistent</span>
               </p>
             </div>
           </motion.div>

@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { Bot, Clock, Circle, Globe } from 'lucide-react';
 
 export const LiveCounter = () => {
   const [tasksAutomated, setTasksAutomated] = useState(27384);
@@ -50,7 +51,9 @@ export const LiveCounter = () => {
             
             {/* Tasks Automated */}
             <div className="text-center md:pr-8 pb-8 md:pb-0">
-              <div className="text-4xl mb-4">🤖</div>
+              <div className="mb-4 flex justify-center">
+                <Bot size={40} className="text-purple-400" />
+              </div>
               <p className="text-6xl md:text-7xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent mb-2">
                 <AnimatedNumber value={tasksAutomated} />
               </p>
@@ -58,15 +61,17 @@ export const LiveCounter = () => {
                 Tasks automated this month
               </p>
               <div className="mt-4 inline-block">
-                <span className="bg-green-500/20 text-green-400 px-3 py-1 rounded-full text-sm font-semibold animate-pulse">
-                  🔥 Live
+                <span className="bg-green-500/20 text-green-400 px-3 py-1 rounded-full text-sm font-semibold animate-pulse flex items-center gap-2">
+                  <Circle size={12} className="fill-current" /> Live
                 </span>
               </div>
             </div>
 
             {/* Hours Saved */}
             <div className="text-center md:pl-8 pt-8 md:pt-0">
-              <div className="text-4xl mb-4">⏱️</div>
+              <div className="mb-4 flex justify-center">
+                <Clock size={40} className="text-blue-400" />
+              </div>
               <p className="text-6xl md:text-7xl font-bold bg-gradient-to-r from-blue-400 to-green-400 bg-clip-text text-transparent mb-2">
                 <AnimatedNumber value={hoursSaved} />
               </p>
