@@ -5,6 +5,7 @@ import { Navigation } from '@/components/Navigation'
 import { AnimatedGradientMesh } from '@/components/AnimatedGradientMesh'
 import { PhoneMockup } from '@/components/3d/PhoneMockup'
 import { GuaranteeBadge } from '@/components/GuaranteeBadge'
+import { Shield } from 'lucide-react'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { containers, spacing, typography } from '@/lib/design-system'
@@ -256,8 +257,8 @@ export default function AIReceptionistPage() {
                 </Link>
                 <div className="mt-6 flex justify-center">
                   <GuaranteeBadge size="lg" variant="prominent">
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '4px' }}>
-                      <span style={{ fontSize: '20px' }}>🛡️</span>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '4px' }}>
+                      <Shield className="w-5 h-5 text-purple-400" />
                       <span style={{ fontSize: '16px', fontWeight: '600' }}>Try risk-free for 14 days</span>
                     </div>
                     <span style={{ fontSize: '13px', color: '#d1d5db' }}>

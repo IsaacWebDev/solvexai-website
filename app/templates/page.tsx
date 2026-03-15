@@ -7,7 +7,7 @@ import { TemplateMockup3D } from '@/components/3d/TemplateMockup3D'
 import { GuaranteeBadge } from '@/components/GuaranteeBadge'
 import { TemplatePreviewHover } from '@/components/TemplatePreviewHover'
 import { IndustrySelector } from '@/components/interactive/IndustrySelector'
-import { X } from 'lucide-react'
+import { X, Shield } from 'lucide-react'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { containers, spacing, typography } from '@/lib/design-system'
@@ -171,7 +171,7 @@ export default function TemplatesPage() {
             <LiquidGlassCard intensity="medium" glowColor="#8B5CF6" className="p-4">
               <div className="flex items-center justify-between gap-4">
                 <div className="flex items-center gap-3 flex-1">
-                  <span className="text-2xl">🛡️</span>
+                  <Shield className="w-5 h-5 text-purple-400" />
                   <p className="text-sm text-gray-200">
                     <span className="font-semibold">All templates include maintenance plan option</span> — Keep your site secure & optimized
                   </p>
