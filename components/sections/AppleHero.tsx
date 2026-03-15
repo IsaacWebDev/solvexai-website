@@ -56,9 +56,24 @@ export const AppleHero = () => {
           </button>
         </div>
         
-        {/* Scroll indicator */}
-        <div className="mt-24 text-gray-600 text-sm animate-bounce-slow">
-          ↓ Scroll to explore
+        {/* Scroll indicator - Enhanced */}
+        <div className="mt-24 flex flex-col items-center gap-3 animate-bounce-slow">
+          <div className="text-white text-base font-medium tracking-wide">
+            Scroll to explore
+          </div>
+          <svg 
+            className="w-6 h-6 text-purple-400" 
+            fill="none" 
+            stroke="currentColor" 
+            viewBox="0 0 24 24"
+          >
+            <path 
+              strokeLinecap="round" 
+              strokeLinejoin="round" 
+              strokeWidth={2} 
+              d="M19 14l-7 7m0 0l-7-7m7 7V3"
+            />
+          </svg>
         </div>
       </div>
 
