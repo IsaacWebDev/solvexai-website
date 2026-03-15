@@ -9,6 +9,7 @@ import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { containers, spacing, typography } from '@/lib/design-system'
 import { LiquidGlassCard, LiquidGlassButton } from '@/components/ui'
+import { Palette, Settings, Bot, Shield } from 'lucide-react'
 
 export default function PackagesPage() {
   return (
@@ -58,7 +59,7 @@ export default function PackagesPage() {
           
           {/* Package 1: Templates */}
           <PackageSection
-            icon="🎨"
+            icon={<Palette className="w-16 h-16" style={{ color: '#8B5CF6' }} />}
             title="Website Templates"
             headline="Professional Websites, Zero Hassle"
             price="$297-$997"
@@ -94,7 +95,7 @@ export default function PackagesPage() {
           
           {/* Package 2: Custom */}
           <PackageSection
-            icon="⚙️"
+            icon={<Settings className="w-16 h-16" style={{ color: '#3B82F6' }} />}
             title="Custom Development"
             headline="Built Exactly How You Imagine It"
             price="$1,997-$7,997"
@@ -131,7 +132,7 @@ export default function PackagesPage() {
           
           {/* Package 3: AI Receptionist */}
           <PackageSection
-            icon="🤖"
+            icon={<Bot className="w-16 h-16" style={{ color: '#00F0FF' }} />}
             title="AI Receptionist"
             headline="24/7 AI That Sounds Human"
             price="$1,997 setup + $297/mo"
@@ -222,7 +223,7 @@ export default function PackagesPage() {
 }
 
 interface PackageSectionProps {
-  icon: string
+  icon: React.ReactNode
   title: string
   headline: string
   price: string
@@ -254,7 +255,7 @@ function PackageSection(props: PackageSectionProps) {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
         {/* Left: Header & Description */}
         <div>
-          <div className="text-6xl mb-6">{props.icon}</div>
+          <div className="mb-6">{props.icon}</div>
           <h2 className="text-4xl font-bold mb-4 gradient-text">{props.headline}</h2>
           
           <div className="mb-8">
@@ -291,7 +292,7 @@ function PackageSection(props: PackageSectionProps) {
             </div>
             <GuaranteeBadge size="md" variant="prominent">
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <span style={{ fontSize: '18px' }}>🛡️</span>
+                <Shield className="w-5 h-5" style={{ color: '#10b981' }} />
                 <span>14-Day Money-Back Guarantee</span>
               </div>
               <span style={{ fontSize: '12px', color: '#d1d5db', marginTop: '4px', display: 'block' }}>
