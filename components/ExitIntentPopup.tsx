@@ -33,9 +33,9 @@ const STORAGE_KEYS = {
 };
 
 const DISMISS_COOLDOWN_MS = 7 * 24 * 60 * 60 * 1000; // 7 days
-const MIN_TIME_ON_PAGE_MS = 5000; // 5 seconds
+const MIN_TIME_ON_PAGE_MS = 7500; // 7.5 seconds (increased by 50%)
 const MOBILE_SCROLL_THRESHOLD = 100; // pixels from top
-const MOBILE_PAUSE_DURATION_MS = 2000; // 2 seconds
+const MOBILE_PAUSE_DURATION_MS = 3000; // 3 seconds (increased by 50%)
 
 export const ExitIntentPopup: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
