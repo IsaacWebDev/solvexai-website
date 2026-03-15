@@ -7,7 +7,7 @@ import { TemplateMockup3D } from '@/components/3d/TemplateMockup3D'
 import { GuaranteeBadge } from '@/components/GuaranteeBadge'
 import { TemplatePreviewHover } from '@/components/TemplatePreviewHover'
 import { IndustrySelector } from '@/components/interactive/IndustrySelector'
-import { X, Shield } from 'lucide-react'
+import { X, Shield, ShieldCheck } from 'lucide-react'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { containers, spacing, typography } from '@/lib/design-system'
@@ -385,7 +385,10 @@ function TemplateCard({ name, industry, price, features, includes, gradient, ima
             <div>
               <div className="text-3xl font-bold gradient-text mb-2">${price}</div>
               <GuaranteeBadge size="sm">
-                💯 14-Day Guarantee
+                <span className="flex items-center gap-1.5">
+                  <ShieldCheck className="w-4 h-4" />
+                  14-Day Guarantee
+                </span>
               </GuaranteeBadge>
             </div>
             <div className="flex gap-2">

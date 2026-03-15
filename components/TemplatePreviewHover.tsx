@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { Zap } from 'lucide-react'
 
 interface TemplatePreviewHoverProps {
   previewUrl?: string
@@ -82,7 +83,7 @@ export function TemplatePreviewHover({
       {/* Live Preview Badge */}
       {previewUrl && (
         <div className="absolute top-4 right-4 z-10 px-3 py-1 rounded-full text-xs font-semibold bg-gradient-to-r from-purple-600 to-pink-600 text-white shadow-lg flex items-center gap-1.5">
-          <span className="text-sm">⚡</span>
+          <Zap className="w-3.5 h-3.5" />
           Live Preview
         </div>
       )}
