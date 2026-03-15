@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import { motion } from 'framer-motion'
 import { LiquidGlassCard } from '@/components/ui/LiquidGlassCard'
 
 const packages = [
@@ -101,18 +102,24 @@ export const PricingSimple = () => {
         </div>
         
         {/* Centered Grid */}
-        <div className="grid md:grid-cols-3 gap-8 max-w-6xl w-full">
+        <div className="grid md:grid-cols-3 gap-8 max-w-6xl w-full" style={{ perspective: '1000px' }}>
           
           {packages.map((pkg, i) => (
-            <LiquidGlassCard
+            <motion.div
               key={i}
-              intensity="medium"
-              className={`h-full flex flex-col p-10 text-center border transition-all relative ${
-                pkg.highlight 
-                  ? 'border-blue-400/70 scale-105 shadow-2xl shadow-blue-500/20' 
-                  : 'border-gray-500/30 hover:border-purple-400/50'
-              }`}
+              initial={{ opacity: 0, rotateY: 90 }}
+              whileInView={{ opacity: 1, rotateY: 0 }}
+              viewport={{ once: true, margin: '-100px' }}
+              transition={{ duration: 0.6, delay: i * 0.15 }}
             >
+              <LiquidGlassCard
+                intensity="medium"
+                className={`h-full flex flex-col p-10 text-center border transition-all relative ${
+                  pkg.highlight 
+                    ? 'border-blue-400/70 scale-105 shadow-2xl shadow-blue-500/20' 
+                    : 'border-gray-500/30 hover:border-purple-400/50'
+                }`}
+              >
               {/* Featured badge */}
               {pkg.highlight && (
                 <div className="absolute -top-4 left-1/2 -translate-x-1/2">
@@ -203,6 +210,7 @@ export const PricingSimple = () => {
                 </button>
               </Link>
             </LiquidGlassCard>
+            </motion.div>
           ))}
           
         </div>

@@ -6,6 +6,7 @@ import { AnimatedGradientMesh } from '@/components/AnimatedGradientMesh'
 import { TemplateMockup3D } from '@/components/3d/TemplateMockup3D'
 import { GuaranteeBadge } from '@/components/GuaranteeBadge'
 import { TemplatePreviewHover } from '@/components/TemplatePreviewHover'
+import { IndustrySelector } from '@/components/interactive/IndustrySelector'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { containers, spacing, typography } from '@/lib/design-system'
@@ -210,7 +211,7 @@ export default function TemplatesPage() {
             <h1 className="font-bold mb-6" style={{ fontSize: typography.h1 }}>
               Professional Websites, Ready in Days
             </h1>
-            <p className="text-gray-300" style={{ 
+            <p className="text-gray-300 mb-8" style={{ 
               fontSize: typography.body,
               maxWidth: containers.text,
               marginLeft: 'auto',
@@ -218,6 +219,22 @@ export default function TemplatesPage() {
             }}>
               Choose your industry. Customize your brand. Launch this week.
             </p>
+            
+            {/* Industry Selector */}
+            <IndustrySelector onIndustryChange={(industry) => {
+              // Map industry IDs to filter names
+              const industryMap: Record<string, string> = {
+                restaurant: 'Restaurants',
+                realtor: 'Real Estate',
+                lawyer: 'Law Firms',
+                fitness: 'Fitness',
+                ecommerce: 'E-Commerce',
+                medical: 'Medical',
+                construction: 'More',
+                agency: 'More',
+              };
+              setSelectedFilter(industryMap[industry] || 'All');
+            }} />
           </motion.div>
           
           {/* 3D Template Mockups */}

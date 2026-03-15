@@ -4,13 +4,17 @@ import { useState, useEffect } from 'react'
 import IntroScreen from '@/components/IntroScreen'
 import { Navigation } from '@/components/Navigation'
 import { AppleHero } from '@/components/sections/AppleHero'
+import { LiveCounter } from '@/components/interactive/LiveCounter'
 import { OutcomesSimple } from '@/components/sections/OutcomesSimple'
+import { ROICalculator } from '@/components/interactive/ROICalculator'
+import { WorkflowComparison } from '@/components/interactive/WorkflowComparison'
 import { TemplateShowcase } from '@/components/sections/TemplateShowcase'
-import { TestimonialSingle } from '@/components/sections/TestimonialSingle'
 import { PricingSimple } from '@/components/sections/PricingSimple'
+import { ComparisonTable } from '@/components/sections/ComparisonTable'
 import { CTAMinimal } from '@/components/sections/CTAMinimal'
 import { RealisticJellyfishBG } from '@/components/backgrounds/RealisticJellyfishBG'
 import { SectionDivider } from '@/components/ui/SectionDivider'
+import { StickyBookCallButton } from '@/components/StickyBookCallButton'
 
 export default function HomePage() {
   const [showIntro, setShowIntro] = useState(true)
@@ -51,6 +55,7 @@ export default function HomePage() {
   return (
     <>
       <Navigation />
+      <StickyBookCallButton />
       
       {/* Realistic Jellyfish Background (global) */}
       <RealisticJellyfishBG />
@@ -72,19 +77,35 @@ export default function HomePage() {
         <AppleHero />
         <SectionDivider />
         
-        {/* 2. OUTCOMES - Benefits (Why choose us) */}
+        {/* 2. LIVE COUNTER - Social proof */}
+        <LiveCounter />
+        <SectionDivider />
+        
+        {/* 3. OUTCOMES - Benefits (Why choose us) */}
         <OutcomesSimple />
         <SectionDivider />
         
-        {/* 3. TEMPLATES - Products to buy (NEW) */}
+        {/* 4. ROI CALCULATOR - Interactive engagement */}
+        <ROICalculator />
+        <SectionDivider />
+        
+        {/* 5. WORKFLOW COMPARISON - Before/After */}
+        <WorkflowComparison />
+        <SectionDivider />
+        
+        {/* 6. TEMPLATES - Products to buy */}
         <TemplateShowcase />
         <SectionDivider />
         
-        {/* 4. PACKAGES - Service tiers */}
+        {/* 7. PACKAGES - Service tiers */}
         <PricingSimple />
         <SectionDivider />
         
-        {/* 5. CTA - Close */}
+        {/* 8. COMPARISON TABLE - Why SolveXAI */}
+        <ComparisonTable />
+        <SectionDivider />
+        
+        {/* 9. CTA - Close */}
         <CTAMinimal />
         </div>
       </main>

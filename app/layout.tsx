@@ -1,10 +1,15 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
+import { Analytics } from '@vercel/analytics/react'
 import './globals.css'
 import { SmoothScroll } from '@/components/SmoothScroll'
 import { LiquidCursor, LiquidScrollProgress } from '@/components/ui'
 import AIChatWidget from '@/components/AIChatWidget'
-import { ExitIntentPopup } from '@/components/ExitIntentPopup'
+import { ExitIntentPopupNew } from '@/components/ExitIntentPopupNew'
+import { CalendlyWidget } from '@/components/CalendlyWidget'
+import { LiveChatWidget } from '@/components/LiveChatWidget'
+import { FloatingActionMenu } from '@/components/FloatingActionMenu'
+import { CursorGlow } from '@/components/effects/CursorGlow'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -80,9 +85,13 @@ export default function RootLayout({
         <SmoothScroll />
         <LiquidCursor />
         <LiquidScrollProgress />
-        <AIChatWidget />
-        <ExitIntentPopup />
+        <CursorGlow />
+        <CalendlyWidget />
+        <LiveChatWidget />
+        <FloatingActionMenu />
+        <ExitIntentPopupNew />
         {children}
+        <Analytics />
       </body>
     </html>
   )

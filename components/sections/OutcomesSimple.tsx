@@ -1,6 +1,41 @@
 'use client'
 
+import { motion, useInView } from 'framer-motion'
+import { useRef, useState, useEffect } from 'react'
 import { LiquidGlassCard } from '@/components/ui/LiquidGlassCard'
+
+const CountUp = ({ end, suffix = '' }: { end: number; suffix?: string }) => {
+  const [count, setCount] = useState(0)
+  const ref = useRef(null)
+  const isInView = useInView(ref, { once: true, margin: '-100px' })
+
+  useEffect(() => {
+    if (!isInView) return
+
+    let start = 0
+    const duration = 2000 // 2 seconds
+    const increment = end / (duration / 16) // 60fps
+
+    const timer = setInterval(() => {
+      start += increment
+      if (start >= end) {
+        setCount(end)
+        clearInterval(timer)
+      } else {
+        setCount(Math.floor(start))
+      }
+    }, 16)
+
+    return () => clearInterval(timer)
+  }, [isInView, end])
+
+  return (
+    <span ref={ref}>
+      {count}
+      {suffix}
+    </span>
+  )
+}
 
 export const OutcomesSimple = () => {
   return (
@@ -26,7 +61,7 @@ export const OutcomesSimple = () => {
             className="h-full p-12 text-center border border-gray-500/30 hover:border-purple-400/50 transition-all hover:scale-105"
           >
             <div className="text-8xl font-light text-purple-400 mb-6">
-              10×
+              <CountUp end={10} suffix="×" />
             </div>
             <h3 className="text-4xl font-light mb-4">
               Faster
@@ -42,7 +77,7 @@ export const OutcomesSimple = () => {
             className="h-full p-12 text-center border border-gray-500/30 hover:border-blue-400/50 transition-all hover:scale-105"
           >
             <div className="text-8xl font-light text-blue-400 mb-6">
-              70%
+              <CountUp end={70} suffix="%" />
             </div>
             <h3 className="text-4xl font-light mb-4">
               Lower Costs
@@ -58,7 +93,7 @@ export const OutcomesSimple = () => {
             className="h-full p-12 text-center border border-gray-500/30 hover:border-cyan-400/50 transition-all hover:scale-105"
           >
             <div className="text-8xl font-light text-cyan-400 mb-6">
-              0
+              <CountUp end={0} />
             </div>
             <h3 className="text-4xl font-light mb-4">
               Human Error
