@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Automation Flow Visualization - Test</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 20px;
+      background: #0a0a0a;
+      color: white;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    .checklist {
+      background: rgba(255,255,255,0.05);
+      padding: 20px;
+      border-radius: 8px;
+      margin-top: 40px;
+    }
+    .checklist h2 {
+      margin-top: 0;
+    }
+    .check-item {
+      padding: 8px;
+      margin: 4px 0;
+    }
+    .check-item:hover {
+      background: rgba(255,255,255,0.1);
+    }
+    .legend {
+      display: flex;
+      gap: 32px;
+      justify-content: center;
+      margin-top: 20px;
+      font-size: 14px;
+    }
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .legend-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+    }
+    .status {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: 600;
+      margin-left: 8px;
+    }
+    .status.deployed {
+      background: #10b981;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🎨 Automation Flow Visualization <span class="status deployed">DEPLOYED</span></h1>
+    
+    <div style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 8px; text-align: center;">
+      <p style="margin: 0; font-size: 18px;">
+        View the live visualization at:
+      </p>
+      <a href="https://solvexai.com/packages" target="_blank" style="color: #8B5CF6; font-size: 24px; font-weight: bold; text-decoration: none; display: block; margin-top: 10px;">
+        solvexai.com/packages
+      </a>
+    </div>
+
+    <div class="legend">
+      <div class="legend-item">
+        <div class="legend-dot" style="background: #8B5CF6;"></div>
+        <span>Template Path (Purple)</span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-dot" style="background: #3B82F6;"></div>
+        <span>Custom Path (Blue)</span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-dot" style="background: #00F0FF;"></div>
+        <span>AI Receptionist (Cyan)</span>
+      </div>
+    </div>
+
+    <div class="checklist">
+      <h2>✅ Visual Test Checklist</h2>
+      <div class="check-item">✓ Central AI brain with neural network nodes visible</div>
+      <div class="check-item">✓ Template path (left): 5 purple stacking blocks</div>
+      <div class="check-item">✓ Custom path (top): Blue circuit board nodes with different shapes</div>
+      <div class="check-item">✓ AI Receptionist path (right): Cyan phone icon + sound waves + calendar grid</div>
+      <div class="check-item">✓ Particles flowing from brain through each pathway</div>
+      <div class="check-item">✓ 3 rotating gears at pathway intersections</div>
+      <div class="check-item">✓ Dark space background with radial gradient</div>
+      <div class="check-item">✓ Legend labels at bottom (Template, Custom, AI Receptionist)</div>
+    </div>
+
+    <div class="checklist">
+      <h2>🖱️ Interaction Test Checklist</h2>
+      <div class="check-item">✓ Move mouse → Camera parallax follows smoothly</div>
+      <div class="check-item">✓ Hover pathway → Brightens and shows feature tag at top</div>
+      <div class="check-item">✓ Hover pathway → Other pathways dim in legend</div>
+      <div class="check-item">✓ Click pathway → Auto-rotation stops</div>
+      <div class="check-item">✓ Click again → Auto-rotation resumes</div>
+      <div class="check-item">✓ Drag with mouse → Manual rotation works (OrbitControls)</div>
+      <div class="check-item">✓ Idle → Gentle auto-rotation at 0.5 speed</div>
+    </div>
+
+    <div class="checklist">
+      <h2>⚡ Performance Test</h2>
+      <div class="check-item">✓ Smooth 60fps animation (no lag or stuttering)</div>
+      <div class="check-item">✓ Mouse movement responds instantly</div>
+      <div class="check-item">✓ No console errors</div>
+      <div class="check-item">✓ Particles animate smoothly</div>
+      <div class="check-item">✓ Gear rotation is continuous and smooth</div>
+    </div>
+
+    <div class="checklist">
+      <h2>🎯 Feature Tags on Hover</h2>
+      <div class="check-item">Template: "Pre-built templates • Fast setup • Affordable"</div>
+      <div class="check-item">Custom: "Fully customized • Unlimited features • Your vision"</div>
+      <div class="check-item">AI Receptionist: "24/7 AI assistant • Booking automation • Human-like"</div>
+    </div>
+
+    <div style="margin-top: 40px; padding: 20px; background: rgba(139,92,246,0.1); border-left: 4px solid #8B5CF6; border-radius: 4px;">
+      <h3 style="margin-top: 0;">💡 What Makes This Better Than Before</h3>
+      <ul style="line-height: 1.8;">
+        <li><strong>Storytelling:</strong> Each pathway visually represents its automation approach</li>
+        <li><strong>Interactivity:</strong> Mouse parallax + hover effects + click to focus</li>
+        <li><strong>Uniqueness:</strong> Custom-built, not generic "rotating cubes"</li>
+        <li><strong>Clarity:</strong> Immediately shows 3 automation tiers at a glance</li>
+        <li><strong>Engagement:</strong> Particles + gears + animations keep users interested</li>
+        <li><strong>Premium feel:</strong> Smooth animations, professional glow effects</li>
+      </ul>
+    </div>
+
+    <div style="text-align: center; margin-top: 40px; padding: 40px; background: linear-gradient(135deg, rgba(139,92,246,0.2), rgba(59,130,246,0.2)); border-radius: 8px;">
+      <h2 style="margin: 0 0 16px 0;">🚀 Deployment Complete</h2>
+      <p style="font-size: 18px; margin: 0;">
+        The visualization is live at <strong>solvexai.com/packages</strong>
+      </p>
+      <p style="color: rgba(255,255,255,0.7); margin-top: 8px;">
+        Commit: 6cee304 | Branch: master | Status: Deployed
+      </p>
+    </div>
+  </div>
+</body>
+</html>

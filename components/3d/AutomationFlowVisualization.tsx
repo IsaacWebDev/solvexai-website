@@ -494,8 +494,7 @@ export function AutomationFlowVisualization() {
       width: '100%', 
       height: '600px',
       position: 'relative',
-      background: 'radial-gradient(circle at center, rgba(16,16,32,0.95), rgba(0,0,0,1))',
-      borderRadius: '16px',
+      background: 'transparent',
       overflow: 'hidden'
     }}
     onMouseEnter={(e) => {
