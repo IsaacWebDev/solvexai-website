@@ -6,7 +6,6 @@ import { SmoothScroll } from '@/components/SmoothScroll'
 import { LiquidCursor, LiquidScrollProgress } from '@/components/ui'
 import AIChatWidget from '@/components/AIChatWidget'
 import { ExitIntentPopupNew } from '@/components/ExitIntentPopupNew'
-import { CalendlyWidget } from '@/components/CalendlyWidget'
 import { LiveChatWidget } from '@/components/LiveChatWidget'
 import { FloatingActionMenu } from '@/components/FloatingActionMenu'
 import { CursorGlow } from '@/components/effects/CursorGlow'
@@ -86,7 +85,6 @@ export default function RootLayout({
         <LiquidCursor />
         <LiquidScrollProgress />
         <CursorGlow />
-        <CalendlyWidget />
         <LiveChatWidget />
         <FloatingActionMenu />
         <ExitIntentPopupNew />
