@@ -111,14 +111,11 @@ function OrbitPath({ radius }: { radius: number }) {
   const lineGeometry = new THREE.BufferGeometry().setFromPoints(points)
   
   return (
-    <line geometry={lineGeometry}>
-      <lineBasicMaterial 
-        color="#ffffff" 
-        transparent 
-        opacity={0.15} 
-        linewidth={1}
-      />
-    </line>
+    <primitive object={new THREE.Line(lineGeometry, new THREE.LineBasicMaterial({ 
+      color: "#ffffff", 
+      transparent: true, 
+      opacity: 0.15 
+    }))} />
   )
 }
 
