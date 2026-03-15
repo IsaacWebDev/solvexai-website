@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Phone } from 'lucide-react';
 
 export const StickyBookCallButton = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -38,9 +39,10 @@ export const StickyBookCallButton = () => {
         >
           <button
             onClick={openCalendly}
-            className="bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 text-white px-8 py-4 rounded-full font-bold text-lg shadow-2xl hover:shadow-purple-500/50 hover:scale-105 transition-all animate-pulse-glow"
+            className="bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 text-white px-8 py-4 rounded-full font-bold text-lg shadow-2xl hover:shadow-purple-500/50 hover:scale-105 transition-all animate-pulse-glow flex items-center gap-2"
           >
-            📞 Book Your Free Discovery Call
+            <Phone className="w-5 h-5" />
+            Book Your Free Discovery Call
           </button>
         </motion.div>
       )}

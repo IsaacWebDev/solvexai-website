@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Phone, MessageCircle, Mail } from 'lucide-react';
 
 export const FloatingActionMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -9,7 +10,8 @@ export const FloatingActionMenu = () => {
   const actions = [
     {
       label: 'Book Call',
-      icon: '📞',
+      Icon: Phone,
+      color: 'text-pink-500',
       action: () => {
         // @ts-ignore - Calendly global
         if (window.Calendly) {
@@ -20,7 +22,8 @@ export const FloatingActionMenu = () => {
     },
     {
       label: 'Live Chat',
-      icon: '💬',
+      Icon: MessageCircle,
+      color: 'text-purple-500',
       action: () => {
         // Trigger chat widget (implementation depends on LiveChatWidget)
         const chatButton = document.querySelector('[aria-label="Chat with us"]') as HTMLElement;
@@ -29,7 +32,8 @@ export const FloatingActionMenu = () => {
     },
     {
       label: 'Email Us',
-      icon: '📧',
+      Icon: Mail,
+      color: 'text-blue-500',
       action: () => {
         window.location.href = 'mailto:contact@solvexai.com';
       },
@@ -48,23 +52,26 @@ export const FloatingActionMenu = () => {
             transition={{ type: 'spring', stiffness: 300, damping: 20 }}
             className="absolute bottom-20 right-0 flex flex-col gap-3 items-end"
           >
-            {actions.map((item, i) => (
-              <motion.button
-                key={i}
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: 20 }}
-                transition={{ delay: i * 0.05 }}
-                onClick={() => {
-                  item.action();
-                  setIsOpen(false);
-                }}
-                className="flex items-center gap-3 bg-gray-900 border border-gray-700 hover:border-purple-500 text-white px-5 py-3 rounded-full shadow-xl hover:scale-105 transition-all group"
-              >
-                <span className="text-2xl">{item.icon}</span>
-                <span className="font-semibold text-sm whitespace-nowrap">{item.label}</span>
-              </motion.button>
-            ))}
+            {actions.map((item, i) => {
+              const IconComponent = item.Icon;
+              return (
+                <motion.button
+                  key={i}
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: 20 }}
+                  transition={{ delay: i * 0.05 }}
+                  onClick={() => {
+                    item.action();
+                    setIsOpen(false);
+                  }}
+                  className="flex items-center gap-2 bg-gray-900 border border-gray-700 hover:border-purple-500 text-white px-5 py-3 rounded-full shadow-xl hover:scale-105 transition-all group"
+                >
+                  <IconComponent className={`w-5 h-5 ${item.color}`} />
+                  <span className="font-semibold text-sm whitespace-nowrap">{item.label}</span>
+                </motion.button>
+              );
+            })}
           </motion.div>
         )}
       </AnimatePresence>

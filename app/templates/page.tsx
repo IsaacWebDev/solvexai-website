@@ -7,6 +7,7 @@ import { TemplateMockup3D } from '@/components/3d/TemplateMockup3D'
 import { GuaranteeBadge } from '@/components/GuaranteeBadge'
 import { TemplatePreviewHover } from '@/components/TemplatePreviewHover'
 import { IndustrySelector } from '@/components/interactive/IndustrySelector'
+import { X } from 'lucide-react'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { containers, spacing, typography } from '@/lib/design-system'
@@ -185,7 +186,7 @@ export default function TemplatesPage() {
                     onClick={() => setShowBanner(false)}
                     className="text-gray-400 hover:text-white transition-colors"
                   >
-                    ✕
+                    <X className="w-5 h-5" />
                   </button>
                 </div>
               </div>
