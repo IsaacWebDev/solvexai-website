@@ -1,0 +1,181 @@
+**TEAM B - PART 1: Testimonial Section + Animated Workflow Diagram + Advanced Pricing**
+
+**Project:** SolveXAI Premium Upgrades
+**Location:** C:\Users\isaac\.openclaw\workspace\solvexai-website
+
+**Your Tasks (20h total):**
+
+### 1. Testimonial Carousel (5h)
+**Goal:** Professional testimonial section with auto-rotating carousel
+
+**File to Create:**
+- `components/testimonials/TestimonialCarousel.tsx`
+
+**Requirements:**
+- Carousel library: embla-carousel-react (already installed)
+- Layout: 3-4 testimonials visible at once (desktop), 1 (mobile)
+- Auto-rotate: every 5 seconds
+- Manual controls: prev/next arrows + dot indicators
+
+**Each Testimonial Card:**
+- Avatar image (circle, 60px)
+- Client name + title/company
+- 5-star rating (gold stars)
+- Quote text (2-3 lines)
+- Client logo (company badge)
+- Clay card design (use ClayCard component from TEAM A)
+
+**Sample Testimonials:**
+1. Sarah Chen, CTO at TechFlow Inc
+   Rating: 5/5
+   Quote: "SolveXAI reduced our support costs by 60% in the first month. The AI handles complex queries better than our human team."
+   
+2. Marcus Rodriguez, Founder at StartupHub
+   Rating: 5/5
+   Quote: "Game-changing automation. Our response time went from 4 hours to 30 seconds. Customers love it."
+   
+3. Emily Watson, VP Operations at RetailPro
+   Rating: 5/5
+   Quote: "The ROI was immediate. We scaled our support from 10 to 10,000 conversations without hiring anyone."
+   
+4. David Kim, CEO at FinanceAI
+   Rating: 5/5
+   Quote: "Best investment we made this year. The AI understands context better than most support agents."
+
+**Animations:**
+- Slide transition: smooth 500ms ease
+- Hover: slight lift effect
+- Star animation: subtle pulse on render
+
+**Integration:**
+- Add after LiveCounter section on homepage
+
+### 2. Animated Workflow Diagram (5h)
+**Goal:** "How It Works" section with animated step-by-step flow
+
+**File to Create:**
+- `components/workflow/AnimatedWorkflow.tsx`
+
+**Requirements:**
+- 3 steps in horizontal flow (desktop), vertical (mobile)
+- Animated arrows between steps (GSAP)
+- Step cards with icons + descriptions
+
+**Steps:**
+1. **Problem**
+   Icon: 😰 frustrated customer
+   Title: "Customer Asks Question"
+   Description: "Your customer needs help, 24/7"
+   
+2. **Solution**
+   Icon: 🤖 AI bot
+   Title: "AI Analyzes and Responds"
+   Description: "SolveXAI instantly understands and answers"
+   
+   Arrow Animation: →→→ (sliding, looping)
+   
+3. **Result**
+   Icon: ✅ happy customer
+   Title: "Instant Resolution"
+   Description: "Happy customer, zero wait time"
+
+**Animations (GSAP):**
+- Steps: stagger fade-in on scroll (100ms delay each)
+- Arrows: continuous sliding animation (1.5s loop)
+- Icons: subtle bounce on reveal
+- Hover: card lifts + arrow speeds up
+
+**Styling:**
+- Use ClayCard for step containers
+- Modern, clean layout
+- Accent colors: blue (#0066FF) and cyan (#00F0FF)
+
+**Integration:**
+- Add after WorkflowComparison section on homepage
+
+### 3. Advanced Pricing (10h)
+**Goal:** Comparison matrix with annual/monthly toggle + feature comparison
+
+**File to Create:**
+- `components/pricing/AdvancedPricing.tsx`
+
+**Requirements:**
+
+**Toggle Switch:**
+- Monthly vs Annual
+- Show savings badge: "Save 20%" on annual
+- Smooth toggle animation
+
+**3 Pricing Tiers:**
+
+1. **Starter** - $49/month ($470/year)
+   - 1,000 conversations/month
+   - Email support
+   - Basic analytics
+   - 1 team member
+   
+2. **Professional** - $149/month ($1,430/year) **[MOST POPULAR]**
+   - 10,000 conversations/month
+   - Priority support
+   - Advanced analytics
+   - 5 team members
+   - Custom branding
+   - API access
+   
+3. **Enterprise** - Custom pricing
+   - Unlimited conversations
+   - Dedicated account manager
+   - White-label solution
+   - Unlimited team members
+   - SLA guarantee
+   - Custom integrations
+
+**Feature Comparison Table:**
+- All features listed (rows)
+- 3 tiers (columns)
+- Checkmarks ✓ / X marks for features
+- Expandable sections for detail
+
+**Design:**
+- Use ClayCard for pricing cards
+- Highlight "Most Popular" with accent border + badge
+- Hover: lift effect + subtle glow
+- Mobile: stack vertically
+
+**Animations:**
+- Cards: stagger fade-in (150ms each)
+- Toggle: smooth slide (200ms)
+- Feature rows: fade in on scroll
+
+**Integration:**
+- Replace current PricingSimple component on homepage
+
+---
+
+**Design Tokens Available:**
+- `lib/claymorph-styles.ts`
+- `lib/theme-config.ts`
+- `lib/animation-presets.ts` → gsapPresets, carouselConfig
+
+**Tech Stack:**
+- React 19 + TypeScript
+- Tailwind CSS 4
+- Framer Motion (animations)
+- GSAP (workflow arrows)
+- embla-carousel-react (testimonials)
+
+**Acceptance Criteria:**
+- ✅ All components render without errors
+- ✅ Dark mode support
+- ✅ Mobile responsive
+- ✅ Auto-rotate works (5s interval)
+- ✅ Animations are smooth (60fps)
+- ✅ Pricing toggle works seamlessly
+
+**Deliverables:**
+1. All component files created
+2. Components tested and working
+3. Integration-ready
+4. Git commit: 'feat(sections): testimonials + workflow + advanced pricing'
+
+**Start immediately. Auto-announce when complete.**

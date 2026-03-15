@@ -40,6 +40,7 @@ function InteractiveOrb() {
   const [target, setTarget] = useState({ x: 0, y: 0 })
   const [ripples, setRipples] = useState<number[]>([])
   const [isHovered, setIsHovered] = useState(false)
+  const [pulse, setPulse] = useState(0)
   
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -52,25 +53,37 @@ function InteractiveOrb() {
     window.addEventListener('mousemove', handleMouseMove)
     return () => window.removeEventListener('mousemove', handleMouseMove)
   }, [])
+
+  // Pulsing animation every 2 seconds
+  useEffect(() => {
+    const pulseInterval = setInterval(() => {
+      setPulse(p => p + 1)
+    }, 2000)
+    
+    return () => clearInterval(pulseInterval)
+  }, [])
   
   useFrame((state) => {
     if (meshRef.current) {
-      // Smooth follow mouse with spring physics
+      // Smooth follow mouse with spring physics (lerp for smoothness)
       const currentPos = meshRef.current.position
       const targetPos = new Vector3(target.x * 2, target.y * 2, 0)
       
-      currentPos.lerp(targetPos, 0.05)
+      currentPos.lerp(targetPos, 0.05) // Smooth cursor following
       
       // Gentle rotation
       meshRef.current.rotation.x = state.clock.elapsedTime * 0.1
       meshRef.current.rotation.y = state.clock.elapsedTime * 0.15
       
-      // Pulsing effect when hovered
+      // Pulsing effect (independent of hover, every 2s)
+      const pulseScale = 1 + Math.sin(state.clock.elapsedTime * Math.PI) * 0.08
+      
+      // Combine pulsing with hover effect
       if (isHovered) {
-        const scale = 1 + Math.sin(state.clock.elapsedTime * 2) * 0.05
-        meshRef.current.scale.set(scale, scale, scale)
+        const hoverScale = 1 + Math.sin(state.clock.elapsedTime * 2) * 0.05
+        meshRef.current.scale.set(pulseScale * hoverScale, pulseScale * hoverScale, pulseScale * hoverScale)
       } else {
-        meshRef.current.scale.lerp(new Vector3(1, 1, 1), 0.1)
+        meshRef.current.scale.set(pulseScale, pulseScale, pulseScale)
       }
     }
   })
@@ -98,6 +111,17 @@ function InteractiveOrb() {
           roughness={0.2}
           metalness={0.8}
         />
+      </Sphere>
+      
+      {/* Multi-layer glow */}
+      <Sphere args={[2.7, 64, 64]}>
+        <meshBasicMaterial color="#8B5CF6" transparent opacity={0.1} />
+      </Sphere>
+      <Sphere args={[2.9, 64, 64]}>
+        <meshBasicMaterial color="#7C3AED" transparent opacity={0.05} />
+      </Sphere>
+      <Sphere args={[3.2, 64, 64]}>
+        <meshBasicMaterial color="#6D28D9" transparent opacity={0.03} />
       </Sphere>
       
       {/* Ripple rings */}

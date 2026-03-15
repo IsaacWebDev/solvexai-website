@@ -1,0 +1,164 @@
+**TEAM C: Dark Mode + Advanced Claymorphism Site-Wide**
+
+**Project:** SolveXAI Premium Upgrades
+**Location:** C:\Users\isaac\.openclaw\workspace\solvexai-website
+
+**Your Tasks (26h total):**
+
+### 1. Dark Mode Implementation (14h)
+**Goal:** Full theme switcher with smooth transitions and persistent preference
+
+**Files to Create:**
+- `components/theme/ThemeProvider.tsx`
+- `components/theme/ThemeSwitcher.tsx`
+
+**Files to Edit:**
+- `app/layout.tsx` (wrap with ThemeProvider)
+- All existing components for dark mode support
+
+**Requirements:**
+
+**ThemeProvider:**
+- Use next-themes library (already installed)
+- Wrap entire app in layout.tsx
+- System preference detection
+- localStorage persistence
+- Smooth theme transitions (200ms)
+
+**ThemeSwitcher Component:**
+- Toggle button (sun/moon icons)
+- Position: top-right of navigation
+- Smooth icon transition
+- Tooltip: "Toggle theme"
+- Accessible (keyboard + screen reader)
+
+**CSS Variables Setup:**
+- Use theme-config.ts tokens
+- Apply to :root and [data-theme="dark"]
+- All color values as CSS custom properties
+- Transition on all theme-dependent properties
+
+**Component Updates for Dark Mode:**
+Update these existing components:
+1. `components/Navigation.tsx`
+2. `components/sections/AppleHero.tsx`
+3. `components/sections/OutcomesSimple.tsx`
+4. `components/sections/TemplateShowcase.tsx`
+5. `components/sections/PricingSimple.tsx`
+6. `components/sections/ComparisonTable.tsx`
+7. `components/sections/CTAMinimal.tsx`
+8. `components/interactive/LiveCounter.tsx`
+9. `components/interactive/ROICalculator.tsx`
+10. `components/interactive/WorkflowComparison.tsx`
+
+**Dark Mode Color Palette:**
+- Background: #0A0A0A (primary), #141419 (secondary), #1E1E23 (tertiary)
+- Text: #FFFFFF (primary), #A0AEC0 (secondary), #718096 (tertiary)
+- Borders: rgba(255, 255, 255, 0.1)
+- Accents: #0066FF (blue), #00F0FF (cyan) - same as light mode
+
+**Acceptance Criteria:**
+- ✅ Theme toggles instantly (<200ms)
+- ✅ No flash of wrong theme on page load
+- ✅ Preference persists across sessions
+- ✅ All components readable in both themes
+- ✅ No color contrast issues (WCAG AA)
+- ✅ Smooth transitions on all elements
+
+### 2. Advanced Claymorphism Site-Wide (12h)
+**Goal:** Apply clay aesthetic to all existing cards/components + create Tailwind plugin
+
+**Files to Create:**
+- `plugins/claymorphism.ts` (Tailwind plugin)
+
+**Files to Edit:**
+- `tailwind.config.ts` (add plugin + clay utilities)
+- All component files using cards/containers
+
+**Tailwind Plugin:**
+Create custom utilities:
+- `.clay-card-sm`, `.clay-card-md`, `.clay-card-lg`, `.clay-card-xl`
+- `.clay-hover` (hover lift effect)
+- `.clay-active` (press effect)
+- `.clay-glow` (subtle glow on hover)
+
+**Plugin Configuration:**
+```typescript
+// Generates:
+// - Multi-layer box shadows
+// - Border radius presets
+// - Hover/active transforms
+// - Light/dark theme variants
+```
+
+**Components to Update with Clay System:**
+
+**Priority 1 (High Visibility):**
+1. AppleHero - hero container
+2. OutcomesSimple - outcome cards
+3. TemplateShowcase - template cards
+4. PricingSimple - pricing cards
+5. ComparisonTable - table container
+
+**Priority 2 (Interactive):**
+6. ROICalculator - calculator card
+7. WorkflowComparison - comparison cards
+8. LiveCounter - counter container
+
+**Priority 3 (New Components from TEAM A/B):**
+9. TestimonialCarousel - testimonial cards
+10. AnimatedWorkflow - workflow step cards
+11. AdvancedPricing - pricing cards
+12. TrustBadges - badge containers
+
+**Clay Application Strategy:**
+- Replace current card styles with clay utilities
+- Maintain existing layout/spacing
+- Add hover/active states where missing
+- Ensure consistency across all components
+
+**Testing Checklist:**
+- [ ] All cards have clay shadow in light mode
+- [ ] All cards have clay shadow in dark mode
+- [ ] Hover effects work on all interactive elements
+- [ ] Active/pressed states feel responsive
+- [ ] No visual inconsistencies between components
+- [ ] Mobile: clay effects don't cause performance issues
+
+**Performance Requirements:**
+- No layout shift when applying clay styles
+- Smooth 60fps animations
+- Shadow rendering optimized (use will-change sparingly)
+
+---
+
+**Design Tokens Available:**
+- `lib/claymorph-styles.ts` → Complete clay design system
+- `lib/theme-config.ts` → Theme variables and config
+- `lib/animation-presets.ts` → Animation utilities
+
+**Tech Stack:**
+- React 19 + TypeScript
+- Tailwind CSS 4
+- next-themes (dark mode)
+- Framer Motion (animations)
+
+**Acceptance Criteria:**
+- ✅ Dark mode works perfectly
+- ✅ Theme switcher visible and functional
+- ✅ All components updated for dark mode
+- ✅ Claymorphism applied site-wide
+- ✅ Tailwind plugin working
+- ✅ No console errors
+- ✅ Performance maintained (Lighthouse >90)
+
+**Deliverables:**
+1. ThemeProvider + ThemeSwitcher components
+2. Tailwind claymorphism plugin
+3. All components updated (dark mode + clay)
+4. Testing report
+5. Git commits:
+   - 'feat(theme): dark mode with next-themes and smooth transitions'
+   - 'feat(design): advanced claymorphism site-wide with Tailwind plugin'
+
+**Start immediately. Auto-announce when complete.**
