@@ -3,7 +3,7 @@
 import React from 'react'
 import { Navigation } from '@/components/Navigation'
 import { AnimatedGradientMesh } from '@/components/AnimatedGradientMesh'
-import { PricingPedestals3D } from '@/components/3d/PricingPedestals3D'
+import { OrbitalAutomation3D } from '@/components/3d/OrbitalAutomation3D'
 import { GuaranteeBadge } from '@/components/GuaranteeBadge'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
@@ -47,14 +47,14 @@ export default function PackagesPage() {
             </p>
           </motion.div>
           
-          {/* 3D Pricing Pedestals */}
+          {/* 3D Orbital Automation Visualization */}
           <motion.div
             style={{ marginBottom: spacing.content.gap }}
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1, delay: 0.3 }}
           >
-            <PricingPedestals3D />
+            <OrbitalAutomation3D />
           </motion.div>
           
           {/* Package 1: Templates */}
