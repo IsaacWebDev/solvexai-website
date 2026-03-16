@@ -128,8 +128,8 @@ export function InteractiveSpaceBackground() {
         className="fixed top-1/2 pointer-events-none"
         style={{
           right: '25%',
-          x: useTransform(structureX, (value) => (value - window.innerWidth) * 0.015),
-          y: useTransform(structureY, (value) => (value - window.innerHeight / 2) * 0.015),
+          x: useTransform(structureX, (value) => mounted ? (value - window.innerWidth) * 0.015 : 0),
+          y: useTransform(structureY, (value) => mounted ? (value - window.innerHeight / 2) * 0.015 : 0),
           translateY: '-50%',
           rotate: structureRotate,
           width: '45vw',
