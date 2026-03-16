@@ -14,6 +14,7 @@ import { ComparisonTable } from '@/components/sections/ComparisonTable'
 import { CTAMinimal } from '@/components/sections/CTAMinimal'
 import { RealisticJellyfishBG } from '@/components/backgrounds/RealisticJellyfishBG'
 import { InteractiveSpaceBackground } from '@/components/backgrounds/InteractiveSpaceBackground'
+import { SpaceHeroBackground } from '@/components/backgrounds/SpaceHeroBackground'
 import { SectionDivider } from '@/components/ui/SectionDivider'
 import { StickyBookCallButton } from '@/components/StickyBookCallButton'
 
@@ -58,8 +59,8 @@ export default function HomePage() {
       <Navigation />
       <StickyBookCallButton />
       
-      {/* Realistic Jellyfish Background (global) */}
-      <RealisticJellyfishBG />
+      {/* Space Hero Background (global) */}
+      <SpaceHeroBackground />
       
       {/* Main Content - Apple-Style Minimal */}
       <main 
