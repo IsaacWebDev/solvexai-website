@@ -58,8 +58,8 @@ export default function HomePage() {
       <Navigation />
       <StickyBookCallButton />
       
-      {/* Interactive Space Background (global) */}
-      <InteractiveSpaceBackground />
+      {/* Realistic Jellyfish Background (global) */}
+      <RealisticJellyfishBG />
       
       {/* Main Content - Apple-Style Minimal */}
       <main 
