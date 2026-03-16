@@ -61,8 +61,8 @@ export default function HomePage() {
       <Navigation />
       <StickyBookCallButton />
       
-      {/* Immersive Jellyfish Background (global) */}
-      <ImmersiveJellyfishBG />
+      {/* Realistic Jellyfish Background (global) */}
+      <RealisticJellyfishBG />
       
       {/* Main Content - Apple-Style Minimal */}
       <main 
