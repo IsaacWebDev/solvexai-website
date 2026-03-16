@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react'
 import { Navigation } from '@/components/Navigation'
-import { AnimatedGradientMesh } from '@/components/AnimatedGradientMesh'
+import { VideoBackground } from '@/components/VideoBackground'
 import { TemplateMockup3D } from '@/components/3d/TemplateMockup3D'
 import { GuaranteeBadge } from '@/components/GuaranteeBadge'
 import { TemplatePreviewHover } from '@/components/TemplatePreviewHover'
@@ -157,7 +157,7 @@ export default function TemplatesPage() {
   return (
     <>
       <Navigation />
-      <AnimatedGradientMesh />
+      <VideoBackground />
 
       {/* Sticky Maintenance Banner */}
       {showBanner && (

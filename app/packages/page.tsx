@@ -3,7 +3,7 @@
 import React from 'react'
 import { Navigation } from '@/components/Navigation'
 import { AnimatedGradientMesh } from '@/components/AnimatedGradientMesh'
-import { AutomationFlowVisualization } from '@/components/3d/AutomationFlowVisualization'
+import { Interactive3DOrb } from '@/components/Interactive3DOrb'
 import { GuaranteeBadge } from '@/components/GuaranteeBadge'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
@@ -54,7 +54,7 @@ export default function PackagesPage() {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1, delay: 0.3 }}
           >
-            <AutomationFlowVisualization />
+            <Interactive3DOrb />
           </motion.div>
           
           {/* Package 1: Templates */}

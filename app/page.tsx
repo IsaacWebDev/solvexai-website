@@ -12,9 +12,11 @@ import { TemplateShowcase } from '@/components/sections/TemplateShowcase'
 import { PricingSimple } from '@/components/sections/PricingSimple'
 import { ComparisonTable } from '@/components/sections/ComparisonTable'
 import { CTAMinimal } from '@/components/sections/CTAMinimal'
+import { GalaxyBackground } from '@/components/GalaxyBackground'
 import { RealisticJellyfishBG } from '@/components/backgrounds/RealisticJellyfishBG'
 import { InteractiveSpaceBackground } from '@/components/backgrounds/InteractiveSpaceBackground'
 import { SpaceHeroBackground } from '@/components/backgrounds/SpaceHeroBackground'
+import { ImmersiveJellyfishBG } from '@/components/backgrounds/ImmersiveJellyfishBG'
 import { SectionDivider } from '@/components/ui/SectionDivider'
 import { StickyBookCallButton } from '@/components/StickyBookCallButton'
 
@@ -59,8 +61,8 @@ export default function HomePage() {
       <Navigation />
       <StickyBookCallButton />
       
-      {/* Space Hero Background (global) */}
-      <SpaceHeroBackground />
+      {/* Immersive Jellyfish Background (global) */}
+      <ImmersiveJellyfishBG />
       
       {/* Main Content - Apple-Style Minimal */}
       <main 
