@@ -17,6 +17,7 @@ import { RealisticJellyfishBG } from '@/components/backgrounds/RealisticJellyfis
 import { InteractiveSpaceBackground } from '@/components/backgrounds/InteractiveSpaceBackground'
 import { SpaceHeroBackground } from '@/components/backgrounds/SpaceHeroBackground'
 import { ImmersiveJellyfishBG } from '@/components/backgrounds/ImmersiveJellyfishBG'
+import { ScrollControlledJellyfish } from '@/components/backgrounds/ScrollControlledJellyfish'
 import { SectionDivider } from '@/components/ui/SectionDivider'
 import { StickyBookCallButton } from '@/components/StickyBookCallButton'
 
@@ -61,8 +62,8 @@ export default function HomePage() {
       <Navigation />
       <StickyBookCallButton />
       
-      {/* Realistic Jellyfish Background (global) */}
-      <RealisticJellyfishBG />
+      {/* Scroll-Controlled Jellyfish Background (global) */}
+      <ScrollControlledJellyfish />
       
       {/* Main Content - Apple-Style Minimal */}
       <main 
