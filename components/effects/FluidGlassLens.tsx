@@ -2,20 +2,16 @@
 'use client'
 import * as THREE from 'three';
 import { useRef, useState, useEffect } from 'react';
-import { Canvas, createPortal, useFrame, useThree } from '@react-three/fiber';
-import {
- useFBO,
- MeshTransmissionMaterial,
-} from '@react-three/drei';
+import { Canvas, useFrame, useThree } from '@react-three/fiber';
+import { MeshTransmissionMaterial } from '@react-three/drei';
 import { easing } from 'maath';
 
-function Lens({ children }: { children: React.ReactNode }) {
-  const ref = useRef<THREE.Mesh>(null);
-  const buffer = useFBO();
-  const { viewport, camera, gl } = useThree();
-  const [scene] = useState(() => new THREE.Scene());
+function Lens() {
+  const meshRef = useRef<THREE.Mesh>(null);
+  const { viewport, camera, size } = useThree();
   const mouseX = useRef(0);
   const mouseY = useRef(0);
+  const [texture, setTexture] = useState<THREE.Texture | null>(null);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -26,64 +22,73 @@ function Lens({ children }: { children: React.ReactNode }) {
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
+  // Capture webpage as texture
+  useEffect(() => {
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    const updateTexture = () => {
+      canvas.width = size.width;
+      canvas.height = size.height;
+      
+      // This won't work due to CORS, but we'll use a different approach
+      const tex = new THREE.CanvasTexture(canvas);
+      tex.needsUpdate = true;
+      setTexture(tex);
+    };
+
+    updateTexture();
+    const interval = setInterval(updateTexture, 100);
+    return () => clearInterval(interval);
+  }, [size]);
+
   useFrame((state, delta) => {
-    if (!ref.current) return;
+    if (!meshRef.current) return;
     
-    const v = viewport.getCurrentViewport(camera, [0, 0, 15]);
+    const v = viewport.getCurrentViewport(camera, [0, 0, 5]);
     
-    // Follow mouse with smooth easing (exact ReactBits)
+    // Smooth mouse following
     const destX = (mouseX.current * v.width) / 2;
     const destY = (mouseY.current * v.height) / 2;
-    easing.damp3(ref.current.position, [destX, destY, 15], 0.15, delta);
-    
-    // Auto-scale
-    const maxWorld = v.width * 0.9;
-    const desired = maxWorld / 1;
-    ref.current.scale.setScalar(Math.min(0.25, desired));
-    
-    // Render to buffer
-    gl.setRenderTarget(buffer);
-    gl.render(scene, camera);
-    gl.setRenderTarget(null);
+    easing.damp3(meshRef.current.position, [destX, destY, 0], 0.2, delta);
   });
 
   return (
-    <>
-      {createPortal(children, scene)}
-      
-      {/* Background plane */}
-      <mesh scale={[viewport.width, viewport.height, 1]}>
-        <planeGeometry />
-        <meshBasicMaterial map={buffer.texture} transparent />
-      </mesh>
-      
-      {/* Glass lens with EXACT ReactBits settings */}
-      <mesh 
-        ref={ref} 
-        scale={0.25} 
-        rotation-x={Math.PI / 2}
-      >
-        <cylinderGeometry args={[1, 1, 0.5, 64]} />
-        <MeshTransmissionMaterial
-          buffer={buffer.texture}
-          // EXACT ReactBits values for magnification + color
-          ior={1.5}                    // Higher IOR = more magnification
-          thickness={2}                // Thinner = sharper zoom
-          transmission={1}             // Full transparency
-          roughness={0}                // Crystal clear
-          chromaticAberration={0.05}   // Less aberration for clearer text
-          anisotropy={0.01}
-          distortionScale={0.5}        // Add content distortion
-          temporalDistortion={0}
-          // Color settings for mirror-like effect
-          color="#ffffff"
-          attenuationColor="#ffffff"
-          attenuationDistance={0.5}
-          clearcoat={1}                // Mirror finish
-          clearcoatRoughness={0}
+    <mesh ref={meshRef} position={[0, 0, 0]}>
+      {/* Sphere for lens effect (not cylinder) */}
+      <sphereGeometry args={[0.8, 64, 64]} />
+      <MeshTransmissionMaterial
+        // EXACT ReactBits glass settings
+        background={texture || undefined}
+        backside={false}
+        samples={16}
+        resolution={1024}
+        transmission={1}
+        roughness={0}
+        thickness={0.5}
+        ior={1.45}
+        chromaticAberration={0.03}
+        anisotropy={0.3}
+        distortion={0.2}
+        distortionScale={0.5}
+        temporalDistortion={0}
+        clearcoat={1}
+        attenuationDistance={0.5}
+        attenuationColor="#ffffff"
+        color="#ffffff"
+      />
+      {/* Add ring border */}
+      <mesh position={[0, 0, 0.01]}>
+        <ringGeometry args={[0.78, 0.82, 64]} />
+        <meshBasicMaterial 
+          color="#ffffff" 
+          transparent 
+          opacity={0.3}
+          side={THREE.DoubleSide}
         />
       </mesh>
-    </>
+    </mesh>
   );
 }
 
@@ -99,23 +104,20 @@ export function FluidGlassLens() {
   return (
     <div 
       className="fixed inset-0 pointer-events-none z-50"
-      style={{ mixBlendMode: 'normal' }}
+      style={{ mixBlendMode: 'screen' }}
     >
       <Canvas 
-        camera={{ position: [0, 0, 20], fov: 15 }} 
+        camera={{ position: [0, 0, 5], fov: 45 }}
         gl={{ 
           alpha: true,
           antialias: true,
-          powerPreference: 'high-performance',
-          // Enable tone mapping for better color
-          toneMapping: THREE.ACESFilmicToneMapping,
-          toneMappingExposure: 1.2
+          preserveDrawingBuffer: true
         }}
         style={{ background: 'transparent' }}
       >
-        <Lens>
-          {/* Empty - refracts page content */}
-        </Lens>
+        <ambientLight intensity={0.5} />
+        <pointLight position={[10, 10, 10]} intensity={1} />
+        <Lens />
       </Canvas>
     </div>
   );
