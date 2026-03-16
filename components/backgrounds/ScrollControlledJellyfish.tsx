@@ -81,7 +81,6 @@ export function ScrollControlledJellyfish() {
         className="w-full h-full object-cover"
         style={{ 
           filter: 'none',
-          imageRendering: 'high-quality',
         }}
       >
         <source src="/videos/jellyfish-bg.mp4?v=3" type="video/mp4" />
