@@ -82,7 +82,7 @@ export function ScrollControlledJellyfish() {
           filter: 'brightness(0.8) contrast(1.1)',
         }}
       >
-        <source src="/videos/jellyfish-bg.mp4" type="video/mp4" />
+        <source src="/videos/jellyfish-bg.mp4?v=2" type="video/mp4" />
       </video>
       
       {/* Subtle overlay */}
