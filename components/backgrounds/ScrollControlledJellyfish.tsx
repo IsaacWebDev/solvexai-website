@@ -80,10 +80,11 @@ export function ScrollControlledJellyfish() {
         preload="auto"
         className="w-full h-full object-cover"
         style={{ 
-          filter: 'brightness(0.8) contrast(1.1)',
+          filter: 'none',
+          imageRendering: 'high-quality',
         }}
       >
-        <source src="/videos/jellyfish-bg.mp4?v=2" type="video/mp4" />
+        <source src="/videos/jellyfish-bg.mp4?v=3" type="video/mp4" />
       </video>
       
       {/* Subtle overlay */}
