@@ -1,3 +1,5 @@
+import { Trophy, Handshake, Sparkles } from 'lucide-react'
+
 export default function About() {
   return (
     <main className="min-h-screen pt-24 pb-20 px-4 bg-light">
@@ -25,17 +27,23 @@ export default function About() {
           <h2 className="font-heading font-bold text-4xl mb-12 text-center">Our Values</h2>
           <div className="grid md:grid-cols-3 gap-12">
             <div className="text-center">
-              <div className="text-5xl mb-4">🏆</div>
+              <div className="flex justify-center mb-4">
+                <Trophy className="w-12 h-12 text-yellow-400" />
+              </div>
               <h3 className="font-heading font-bold text-2xl mb-3">Excellence</h3>
               <p className="text-light/80">Uncompromising standards in every detail</p>
             </div>
             <div className="text-center">
-              <div className="text-5xl mb-4">🤝</div>
+              <div className="flex justify-center mb-4">
+                <Handshake className="w-12 h-12 text-blue-400" />
+              </div>
               <h3 className="font-heading font-bold text-2xl mb-3">Trust</h3>
               <p className="text-light/80">Discretion and integrity in all relationships</p>
             </div>
             <div className="text-center">
-              <div className="text-5xl mb-4">✨</div>
+              <div className="flex justify-center mb-4">
+                <Sparkles className="w-12 h-12 text-purple-400" />
+              </div>
               <h3 className="font-heading font-bold text-2xl mb-3">Innovation</h3>
               <p className="text-light/80">Leading the market with cutting-edge strategies</p>
             </div>

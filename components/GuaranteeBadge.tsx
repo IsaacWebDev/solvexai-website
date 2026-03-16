@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useState } from 'react'
+import { Shield } from 'lucide-react'
 
 interface GuaranteeBadgeProps {
   size?: 'sm' | 'md' | 'lg'
@@ -80,7 +81,7 @@ export function GuaranteeBadge({
       >
         {children || (
           <>
-            <span style={{ fontSize: config.iconSize }}>🛡️</span>
+            <Shield className="w-5 h-5 text-green-400" />
             <span>14-Day Money-Back Guarantee</span>
           </>
         )}

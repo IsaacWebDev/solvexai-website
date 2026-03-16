@@ -1,5 +1,6 @@
 'use client'
 import { ReactNode } from 'react'
+import { Check, Lock, Zap, Star } from 'lucide-react'
 
 interface SkeuomorphicBadgeProps {
   icon: ReactNode
@@ -62,22 +63,22 @@ export function TrustBadgeSet() {
   return (
     <div className="flex flex-wrap gap-6 justify-center items-center">
       <SkeuomorphicBadge
-        icon="✓"
+        icon={<Check className="w-8 h-8 text-green-600" />}
         title="30-Day Guarantee"
         subtitle="Money Back"
       />
       <SkeuomorphicBadge
-        icon="🔒"
+        icon={<Lock className="w-8 h-8 text-blue-600" />}
         title="Enterprise Security"
         subtitle="SSL Encrypted"
       />
       <SkeuomorphicBadge
-        icon="⚡"
+        icon={<Zap className="w-8 h-8 text-yellow-600" />}
         title="AI-Powered"
         subtitle="Latest Tech"
       />
       <SkeuomorphicBadge
-        icon="⭐"
+        icon={<Star className="w-8 h-8 fill-purple-600 text-purple-600" />}
         title="2-Year Track Record"
         subtitle="127+ Clients"
       />

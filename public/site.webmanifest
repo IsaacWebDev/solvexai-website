@@ -1,0 +1,30 @@
+{
+  "name": "SolveXAI - Professional Website Templates & AI Automation",
+  "short_name": "SolveXAI",
+  "description": "Industry-proven website templates and AI automation. Launch your professional site in 48 hours.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0F0F14",
+  "theme_color": "#8B5CF6",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": [
+    "business",
+    "productivity",
+    "utilities"
+  ],
+  "screenshots": []
+}

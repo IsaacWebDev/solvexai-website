@@ -3,6 +3,7 @@
 import React, { useEffect, useRef } from 'react'
 import Link from 'next/link'
 import { GuaranteeBadge } from '@/components/GuaranteeBadge'
+import { Shield } from 'lucide-react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
@@ -153,7 +154,7 @@ export function FinalCTAParallax() {
         <div className="mt-12 flex justify-center">
           <GuaranteeBadge size="lg" variant="prominent">
             <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '4px' }}>
-              <span style={{ fontSize: '20px' }}>🛡️</span>
+              <Shield className="w-5 h-5 text-green-400" />
               <span style={{ fontSize: '16px', fontWeight: '600' }}>All services backed by 14-day guarantee</span>
             </div>
             <span style={{ fontSize: '13px', color: '#d1d5db' }}>

@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { Check, X } from 'lucide-react';
 
 const comparisonData = [
   { feature: 'Delivery Time', solvexai: '2-7 days', upwork: '2-6 weeks', fiverr: '1-4 weeks' },
@@ -63,9 +64,9 @@ export const ComparisonTable = () => {
                   <td className="py-6 px-6 text-center bg-purple-900/10">
                     {typeof row.solvexai === 'boolean' ? (
                       row.solvexai ? (
-                        <span className="text-green-400 text-2xl">✓</span>
+                        <Check className="w-6 h-6 text-green-400 mx-auto" />
                       ) : (
-                        <span className="text-red-400 text-2xl">✗</span>
+                        <X className="w-6 h-6 text-red-400 mx-auto" />
                       )
                     ) : (
                       <span className="text-white font-semibold">{row.solvexai}</span>
@@ -76,9 +77,9 @@ export const ComparisonTable = () => {
                   <td className="py-6 px-6 text-center">
                     {typeof row.upwork === 'boolean' ? (
                       row.upwork ? (
-                        <span className="text-green-400 text-2xl">✓</span>
+                        <Check className="w-6 h-6 text-green-400 mx-auto" />
                       ) : (
-                        <span className="text-red-400 text-2xl">✗</span>
+                        <X className="w-6 h-6 text-red-400 mx-auto" />
                       )
                     ) : (
                       <span className="text-gray-400">{row.upwork}</span>
@@ -89,9 +90,9 @@ export const ComparisonTable = () => {
                   <td className="py-6 px-6 text-center">
                     {typeof row.fiverr === 'boolean' ? (
                       row.fiverr ? (
-                        <span className="text-green-400 text-2xl">✓</span>
+                        <Check className="w-6 h-6 text-green-400 mx-auto" />
                       ) : (
-                        <span className="text-red-400 text-2xl">✗</span>
+                        <X className="w-6 h-6 text-red-400 mx-auto" />
                       )
                     ) : (
                       <span className="text-gray-400">{row.fiverr}</span>
@@ -117,27 +118,27 @@ export const ComparisonTable = () => {
               <div className="grid grid-cols-3 gap-4 text-center text-sm">
                 <div>
                   <p className="text-gray-500 mb-2">SolveXAI</p>
-                  <p className="font-semibold text-white">
+                  <div className="font-semibold text-white flex justify-center">
                     {typeof row.solvexai === 'boolean' 
-                      ? (row.solvexai ? '✓' : '✗') 
+                      ? (row.solvexai ? <Check className="w-5 h-5 text-green-400" /> : <X className="w-5 h-5 text-red-400" />) 
                       : row.solvexai}
-                  </p>
+                  </div>
                 </div>
                 <div>
                   <p className="text-gray-500 mb-2">Upwork</p>
-                  <p className="text-gray-400">
+                  <div className="text-gray-400 flex justify-center">
                     {typeof row.upwork === 'boolean' 
-                      ? (row.upwork ? '✓' : '✗') 
+                      ? (row.upwork ? <Check className="w-5 h-5 text-green-400" /> : <X className="w-5 h-5 text-red-400" />) 
                       : row.upwork}
-                  </p>
+                  </div>
                 </div>
                 <div>
                   <p className="text-gray-500 mb-2">Fiverr</p>
-                  <p className="text-gray-400">
+                  <div className="text-gray-400 flex justify-center">
                     {typeof row.fiverr === 'boolean' 
-                      ? (row.fiverr ? '✓' : '✗') 
+                      ? (row.fiverr ? <Check className="w-5 h-5 text-green-400" /> : <X className="w-5 h-5 text-red-400" />) 
                       : row.fiverr}
-                  </p>
+                  </div>
                 </div>
               </div>
             </motion.div>

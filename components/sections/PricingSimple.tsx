@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { LiquidGlassCard } from '@/components/ui/LiquidGlassCard'
+import { Check } from 'lucide-react'
 
 const packages = [
   {
@@ -170,7 +171,7 @@ export const PricingSimple = () => {
                 <ul className="space-y-3">
                   {pkg.includes.map((item, j) => (
                     <li key={j} className="flex items-start gap-3 text-sm text-gray-300">
-                      <span className="text-green-400 mt-1 flex-shrink-0">✓</span>
+                      <Check className="w-4 h-4 text-green-400 mt-1 flex-shrink-0" />
                       <span>{item}</span>
                     </li>
                   ))}

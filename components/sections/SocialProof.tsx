@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useState, useEffect } from 'react'
+import { Star } from 'lucide-react'
 
 export function SocialProof() {
   const [currentTestimonial, setCurrentTestimonial] = useState(0)
@@ -43,16 +44,16 @@ export function SocialProof() {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-16 mt-12">
           <StatCard value="127" label="Websites Launched" />
           <StatCard value="$2M+" label="Revenue Generated" />
-          <StatCard value="4.9★" label="Average Rating" />
+          <StatCard value="4.9" label="Average Rating" icon={<Star className="w-6 h-6 fill-yellow-400 text-yellow-400 inline-block ml-1" />} />
           <StatCard value="24/7" label="Uptime" />
         </div>
         
         {/* Testimonial Carousel */}
         <div className="max-w-3xl mx-auto">
           <div className="glass-card rounded-2xl p-12 text-center min-h-64 flex flex-col justify-center">
-            <div className="mb-6">
+            <div className="mb-6 flex justify-center gap-1">
               {[...Array(testimonials[currentTestimonial].rating)].map((_, i) => (
-                <span key={i} className="text-yellow-400 text-2xl">★</span>
+                <Star key={i} className="w-6 h-6 fill-yellow-400 text-yellow-400" />
               ))}
             </div>
             
@@ -92,11 +93,11 @@ export function SocialProof() {
   )
 }
 
-function StatCard({ value, label }: { value: string; label: string }) {
+function StatCard({ value, label, icon }: { value: string; label: string; icon?: React.ReactNode }) {
   return (
     <div className="text-center">
-      <div className="text-4xl md:text-5xl font-bold gradient-text mb-2">
-        {value}
+      <div className="text-4xl md:text-5xl font-bold gradient-text mb-2 flex items-center justify-center">
+        {value}{icon}
       </div>
       <div className="text-sm text-gray-400">
         {label}

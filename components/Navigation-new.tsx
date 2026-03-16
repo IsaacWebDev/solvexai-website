@@ -4,6 +4,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
 import { LiquidGlassCard, LiquidGlassButton } from '@/components/ui'
+import { Target } from 'lucide-react'
 
 export function Navigation() {
   const [isOpen, setIsOpen] = useState(false)
@@ -45,7 +46,7 @@ export function Navigation() {
               <Link href="/" className="flex items-center group">
                 {/* Placeholder - Isaac will provide logo-center.png */}
                 <div className="w-14 h-14 bg-gradient-to-br from-purple-600 to-blue-600 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
-                  <span className="text-white font-bold text-2xl">🎯</span>
+                  <Target className="w-8 h-8 text-white" />
                 </div>
               </Link>
             </div>

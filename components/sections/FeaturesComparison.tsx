@@ -1,20 +1,21 @@
 'use client';
 
 import { LiquidGlassCard } from '@/components/ui/LiquidGlassCard';
+import { Check } from 'lucide-react';
 
 const features = [
-  { icon: "✅", title: "No-Code Setup", description: "Launch in days, not months" },
-  { icon: "✅", title: "White-Label Option", description: "Brand it as your own" },
-  { icon: "✅", title: "Unlimited Workflows", description: "No restrictions on automation" },
-  { icon: "✅", title: "Priority Support", description: "Direct access to our team" },
-  { icon: "✅", title: "Custom Training", description: "We train AI on your data" },
-  { icon: "✅", title: "API Access", description: "Full programmatic control" },
-  { icon: "✅", title: "Multi-User Accounts", description: "Collaborate with your team" },
-  { icon: "✅", title: "Advanced Analytics", description: "Track every metric" },
-  { icon: "✅", title: "SOC 2 Compliant", description: "Enterprise security" },
-  { icon: "✅", title: "99.9% Uptime SLA", description: "Always available" },
-  { icon: "✅", title: "Free Migrations", description: "We handle the switch" },
-  { icon: "✅", title: "Money-Back Guarantee", description: "30-day full refund" }
+  { title: "No-Code Setup", description: "Launch in days, not months" },
+  { title: "White-Label Option", description: "Brand it as your own" },
+  { title: "Unlimited Workflows", description: "No restrictions on automation" },
+  { title: "Priority Support", description: "Direct access to our team" },
+  { title: "Custom Training", description: "We train AI on your data" },
+  { title: "API Access", description: "Full programmatic control" },
+  { title: "Multi-User Accounts", description: "Collaborate with your team" },
+  { title: "Advanced Analytics", description: "Track every metric" },
+  { title: "SOC 2 Compliant", description: "Enterprise security" },
+  { title: "99.9% Uptime SLA", description: "Always available" },
+  { title: "Free Migrations", description: "We handle the switch" },
+  { title: "Money-Back Guarantee", description: "30-day full refund" }
 ];
 
 export const FeaturesComparison = () => {
@@ -34,7 +35,7 @@ export const FeaturesComparison = () => {
           {features.map((feature, index) => (
             <LiquidGlassCard key={index} intensity="light" className="p-6">
               <div className="flex items-start gap-4">
-                <span className="text-3xl flex-shrink-0">{feature.icon}</span>
+                <Check className="w-7 h-7 text-green-400 flex-shrink-0" />
                 <div>
                   <h3 className="text-lg font-bold text-white mb-1">
                     {feature.title}

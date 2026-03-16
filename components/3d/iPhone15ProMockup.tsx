@@ -4,30 +4,16 @@ import { useRef, useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { Phone, MessageCircle } from 'lucide-react'
 
-export function PhoneMockup() {
+export function iPhone15ProMockup() {
   const [talking, setTalking] = useState(false)
-  const [screenOn, setScreenOn] = useState(false)
   
-  // Start with screen off, then turn on after 3-5 seconds
   useEffect(() => {
-    const wakeDelay = 3000 + Math.random() * 2000 // 3-5 seconds
-    const wakeTimer = setTimeout(() => {
-      setScreenOn(true)
-    }, wakeDelay)
-    
-    return () => clearTimeout(wakeTimer)
-  }, [])
-  
-  // Talking animation
-  useEffect(() => {
-    if (!screenOn) return
-    
     const interval = setInterval(() => {
       setTalking(prev => !prev)
     }, 3000)
     
     return () => clearInterval(interval)
-  }, [screenOn])
+  }, [])
   
   return (
     <div className="relative w-full h-[700px] flex items-center justify-center">
@@ -124,48 +110,37 @@ export function PhoneMockup() {
               )}
             </div>
             
-            {/* Status Bar - with better safe area */}
-            <div className="absolute top-0 left-0 right-0 px-10 pt-3 pb-2 flex items-center justify-between text-white text-xs font-semibold z-10">
+            {/* Status Bar */}
+            <div className="absolute top-0 left-0 right-0 px-8 pt-2 pb-2 flex items-center justify-between text-white text-xs font-semibold z-10">
               <div className="flex items-center gap-1">
                 <span style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display"' }}>9:41</span>
               </div>
-              <div className="flex items-center gap-1.5 pr-2">
+              <div className="flex items-center gap-2">
                 {/* Signal */}
                 <div className="flex items-end gap-0.5">
-                  {[6, 9, 12, 15].map((h, i) => (
-                    <div key={i} className="w-0.5 bg-white rounded-sm" style={{ height: `${h}px` }} />
+                  {[8, 12, 16, 20].map((h, i) => (
+                    <div key={i} className="w-1 bg-white rounded-sm" style={{ height: `${h}px` }} />
                   ))}
                 </div>
                 {/* WiFi */}
-                <svg className="w-3.5 h-3.5 fill-white" viewBox="0 0 24 24">
+                <svg className="w-4 h-4 fill-white" viewBox="0 0 24 24">
                   <path d="M1 9l2 2c4.97-4.97 13.03-4.97 18 0l2-2C16.93 2.93 7.08 2.93 1 9zm8 8l3 3 3-3c-1.65-1.66-4.34-1.66-6 0zm-4-4l2 2c2.76-2.76 7.24-2.76 10 0l2-2C15.14 9.14 8.87 9.14 5 13z"/>
                 </svg>
                 {/* Battery */}
                 <div className="flex items-center gap-0.5">
-                  <div className="w-5 h-2.5 border border-white rounded-sm flex items-center px-0.5">
+                  <div className="w-6 h-3 border border-white rounded-sm flex items-center px-0.5">
                     <div className="w-full h-full bg-white rounded-sm" />
                   </div>
-                  <div className="w-0.5 h-1 bg-white rounded-r-sm" />
+                  <div className="w-0.5 h-1.5 bg-white rounded-r-sm" />
                 </div>
               </div>
             </div>
             
-            {/* Black Screen (when off) */}
-            {!screenOn && (
-              <div className="absolute inset-0 bg-black" />
-            )}
-            
-            {/* Incoming Call Screen (when on) */}
-            {screenOn && (
-            <motion.div 
-              className="absolute inset-0 flex flex-col items-center justify-between pt-24 pb-20 px-10"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.5 }}
-            >
+            {/* Incoming Call Screen */}
+            <div className="absolute inset-0 flex flex-col items-center justify-between pt-24 pb-12 px-6">
               {/* Caller Info */}
               <div className="flex flex-col items-center text-center">
-                <div className="text-xs text-gray-400 mb-6 tracking-wide mt-2">Incoming Call</div>
+                <div className="text-sm text-gray-400 mb-8 tracking-wide">Incoming Call</div>
                 
                 {/* Avatar with Animated Ring */}
                 <div className="relative mb-6">
@@ -223,35 +198,36 @@ export function PhoneMockup() {
                   </button>
                 </div>
                 
-                {/* Decline / Accept (Icon only, no text) */}
-                <div className="flex items-center justify-center gap-20">
-                  <button className="transform hover:scale-110 transition-transform">
+                {/* Decline / Accept */}
+                <div className="flex items-center justify-between px-4">
+                  <button className="flex flex-col items-center gap-2 text-white">
                     <div 
-                      className="w-16 h-16 rounded-full flex items-center justify-center"
+                      className="w-16 h-16 rounded-full flex items-center justify-center transform hover:scale-105 transition-transform"
                       style={{
                         background: '#FF3B30',
-                        boxShadow: '0 8px 30px rgba(255, 59, 48, 0.5)'
+                        boxShadow: '0 8px 30px rgba(255, 59, 48, 0.4)'
                       }}
                     >
                       <Phone className="w-7 h-7 rotate-135" />
                     </div>
+                    <span className="text-sm font-medium">Decline</span>
                   </button>
                   
-                  <button className="transform hover:scale-110 transition-transform">
+                  <button className="flex flex-col items-center gap-2 text-white">
                     <div 
-                      className="w-16 h-16 rounded-full flex items-center justify-center"
+                      className="w-16 h-16 rounded-full flex items-center justify-center transform hover:scale-105 transition-transform"
                       style={{
                         background: '#34C759',
-                        boxShadow: '0 8px 30px rgba(52, 199, 89, 0.5)'
+                        boxShadow: '0 8px 30px rgba(52, 199, 89, 0.4)'
                       }}
                     >
                       <Phone className="w-7 h-7" />
                     </div>
+                    <span className="text-sm font-medium">Accept</span>
                   </button>
                 </div>
               </div>
-            </motion.div>
-            )}
+            </div>
             
             {/* Screen Glass Reflection */}
             <div 

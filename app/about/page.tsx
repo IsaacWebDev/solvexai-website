@@ -98,7 +98,7 @@ export default function AboutPage() {
                     />
                     <StatItem 
                       icon={<StarIcon />}
-                      number="4.9★" 
+                      number="4.9" 
                       label="Average Rating" 
                       sublabel="Customer Reviews" 
                     />

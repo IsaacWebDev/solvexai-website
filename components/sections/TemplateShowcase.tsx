@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { useState } from 'react';
 import { LiquidGlassCard } from '@/components/ui/LiquidGlassCard';
+import { Check, Star } from 'lucide-react';
 
 const templates = [
   {
@@ -11,7 +12,7 @@ const templates = [
     subtitle: "Listings + Lead Gen",
     price: "$897",
     image: "/template-mockups/real-estate-luxury.jpg",
-    features: ["✓ Mobile responsive", "✓ 2-day delivery", "✓ Free support"],
+    features: ["Mobile responsive", "2-day delivery", "Free support"],
     demoUrl: "https://real-estate-demo.vercel.app",
     isBestSeller: true
   },
@@ -20,7 +21,7 @@ const templates = [
     subtitle: "Store + Checkout",
     price: "$997",
     image: "/template-mockups/e-commerce-clean.jpg",
-    features: ["✓ Mobile responsive", "✓ 2-day delivery", "✓ Free support"],
+    features: ["Mobile responsive", "2-day delivery", "Free support"],
     demoUrl: "https://ecommerce-demo.vercel.app",
     isBestSeller: true
   },
@@ -29,7 +30,7 @@ const templates = [
     subtitle: "Appointments + Records",
     price: "$797",
     image: "/template-mockups/medical-practice.jpg",
-    features: ["✓ Mobile responsive", "✓ 2-day delivery", "✓ Free support"],
+    features: ["Mobile responsive", "2-day delivery", "Free support"],
     demoUrl: "https://medical-demo.vercel.app",
     isBestSeller: true
   },
@@ -38,7 +39,7 @@ const templates = [
     subtitle: "Menu + Online Ordering",
     price: "$497",
     image: "/template-mockups/restaurant-delight.jpg",
-    features: ["✓ Mobile responsive", "✓ 3-day delivery", "✓ Free support"],
+    features: ["Mobile responsive", "3-day delivery", "Free support"],
     demoUrl: "https://restaurant-demo.vercel.app"
   },
   {
@@ -46,7 +47,7 @@ const templates = [
     subtitle: "Case Studies + Intake",
     price: "$697",
     image: "/template-mockups/law-firm-authority.jpg",
-    features: ["✓ Mobile responsive", "✓ 3-day delivery", "✓ Free support"],
+    features: ["Mobile responsive", "3-day delivery", "Free support"],
     demoUrl: "https://lawfirm-demo.vercel.app"
   },
   {
@@ -54,7 +55,7 @@ const templates = [
     subtitle: "Classes + Bookings",
     price: "$597",
     image: "/template-mockups/fitness-studio-energy.jpg",
-    features: ["✓ Mobile responsive", "✓ 3-day delivery", "✓ Free support"],
+    features: ["Mobile responsive", "3-day delivery", "Free support"],
     demoUrl: "https://fitness-demo.vercel.app"
   },
   {
@@ -62,7 +63,7 @@ const templates = [
     subtitle: "Portfolio + Quotes",
     price: "$597",
     image: "/template-mockups/construction-pro.jpg",
-    features: ["✓ Mobile responsive", "✓ 3-day delivery", "✓ Free support"],
+    features: ["Mobile responsive", "3-day delivery", "Free support"],
     demoUrl: "https://construction-demo.vercel.app"
   },
   {
@@ -70,7 +71,7 @@ const templates = [
     subtitle: "Portfolio + Case Studies",
     price: "$697",
     image: "/template-mockups/creative-agency.jpg",
-    features: ["✓ Mobile responsive", "✓ 3-day delivery", "✓ Free support"],
+    features: ["Mobile responsive", "3-day delivery", "Free support"],
     demoUrl: "https://agency-demo.vercel.app"
   }
 ];
@@ -121,8 +122,8 @@ export const TemplateShowcase = () => {
               >
                 {/* Best Seller Badge */}
                 {template.isBestSeller && (
-                  <div className="absolute top-4 right-4 z-10 bg-gradient-to-r from-yellow-500 via-purple-500 to-pink-500 text-white px-3 py-1 rounded-full text-xs font-bold shadow-lg">
-                    🔥 Best Seller
+                  <div className="absolute top-4 right-4 z-10 bg-gradient-to-r from-yellow-500 via-purple-500 to-pink-500 text-white px-3 py-1 rounded-full text-xs font-bold shadow-lg flex items-center gap-1">
+                    <Star className="w-3 h-3 fill-white" /> Best Seller
                   </div>
                 )}
 
@@ -171,8 +172,8 @@ export const TemplateShowcase = () => {
                   <ul className="space-y-2 mb-6 text-left flex-1">
                     {template.features.map((feature, j) => (
                       <li key={j} className="flex items-center gap-2 text-sm text-gray-300">
-                        <span className="text-green-400">{feature.split(' ')[0]}</span>
-                        <span>{feature.substring(2)}</span>
+                        <Check className="w-4 h-4 text-green-400 flex-shrink-0" />
+                        <span>{feature}</span>
                       </li>
                     ))}
                   </ul>

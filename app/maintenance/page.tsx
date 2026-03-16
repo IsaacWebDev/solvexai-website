@@ -7,13 +7,14 @@ import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { containers, spacing, typography } from '@/lib/design-system'
 import { LiquidGlassCard, LiquidGlassButton } from '@/components/ui'
+import { Shield, Rocket, Zap, Check, X, Gem } from 'lucide-react'
 
 const maintenancePlans = [
   {
     name: 'Peace of Mind',
     price: 97,
     priceAnnual: 82,
-    icon: '🛡️',
+    icon: Shield,
     gradient: 'from-purple-500/20 to-purple-600/10',
     glowColor: '#8B5CF6',
     popular: false,
@@ -31,7 +32,7 @@ const maintenancePlans = [
     name: 'Growth Partner',
     price: 297,
     priceAnnual: 252,
-    icon: '🚀',
+    icon: Rocket,
     gradient: 'from-blue-500/20 to-blue-600/10',
     glowColor: '#3B82F6',
     popular: true,
@@ -50,7 +51,7 @@ const maintenancePlans = [
     name: 'Full Stack',
     price: 497,
     priceAnnual: 422,
-    icon: '⚡',
+    icon: Zap,
     gradient: 'from-cyan-500/20 to-cyan-600/10',
     glowColor: '#00F0FF',
     popular: false,
@@ -68,14 +69,14 @@ const maintenancePlans = [
 ]
 
 const comparisonFeatures = [
-  { name: 'Security Updates', peace: '✓', growth: '✓', full: '✓' },
+  { name: 'Security Updates', peace: true, growth: true, full: true },
   { name: 'Content Changes', peace: '2 hrs/mo', growth: '5 hrs/mo', full: 'Unlimited' },
-  { name: 'SEO Optimization', peace: '−', growth: '✓', full: '✓' },
-  { name: 'Analytics Reports', peace: '−', growth: 'Monthly', full: 'Weekly' },
-  { name: 'AI Receptionist', peace: '−', growth: '−', full: '✓' },
+  { name: 'SEO Optimization', peace: false, growth: true, full: true },
+  { name: 'Analytics Reports', peace: false, growth: 'Monthly', full: 'Weekly' },
+  { name: 'AI Receptionist', peace: false, growth: false, full: true },
   { name: 'Response Time', peace: '24hr', growth: '4hr', full: '1hr' },
-  { name: 'Account Manager', peace: '−', growth: '−', full: '✓' },
-  { name: 'Strategy Calls', peace: '−', growth: '−', full: 'Weekly' }
+  { name: 'Account Manager', peace: false, growth: false, full: true },
+  { name: 'Strategy Calls', peace: false, growth: false, full: 'Weekly' }
 ]
 
 const faqs = [
@@ -143,7 +144,10 @@ export default function MaintenancePage() {
             style={{ marginBottom: spacing.content.gap }}
           >
             <LiquidGlassCard intensity="medium" glowColor="#8B5CF6" className="p-8 text-center">
-              <h3 className="text-2xl font-bold mb-2">💎 Bundle & Save</h3>
+              <div className="flex items-center justify-center gap-3 mb-2">
+                <Gem className="w-6 h-6 text-purple-400" />
+                <h3 className="text-2xl font-bold">Bundle & Save</h3>
+              </div>
               <p className="text-gray-300 text-lg">
                 Buy any template + maintenance plan together and <span className="text-purple-400 font-bold">save $200</span>
               </p>
@@ -211,7 +215,9 @@ export default function MaintenancePage() {
                     </div>
                   )}
                   
-                  <div className="text-5xl mb-4">{plan.icon}</div>
+                  <div className="mb-4">
+                    <plan.icon className="w-12 h-12 mx-auto" style={{ color: plan.glowColor }} />
+                  </div>
                   <h3 className="text-2xl font-bold mb-2">{plan.name}</h3>
                   
                   <div className="mb-6">
@@ -231,7 +237,7 @@ export default function MaintenancePage() {
                   <ul className="space-y-3 mb-8 flex-grow">
                     {plan.features.map((feature, i) => (
                       <li key={i} className="flex items-start gap-2 text-gray-300">
-                        <span className="text-purple-400 mt-1">✓</span>
+                        <Check className="w-5 h-5 text-purple-400 flex-shrink-0 mt-0.5" />
                         <span>{feature}</span>
                       </li>
                     ))}
@@ -272,9 +278,21 @@ export default function MaintenancePage() {
                   {comparisonFeatures.map((feature, index) => (
                     <tr key={index} className="border-b border-white/5">
                       <td className="py-4 pr-8 font-medium text-white">{feature.name}</td>
-                      <td className="py-4 px-4">{feature.peace}</td>
-                      <td className="py-4 px-4">{feature.growth}</td>
-                      <td className="py-4 pl-4">{feature.full}</td>
+                      <td className="py-4 px-4">
+                        {typeof feature.peace === 'boolean' 
+                          ? (feature.peace ? <Check className="w-5 h-5 text-green-400" /> : <X className="w-5 h-5 text-gray-600" />)
+                          : feature.peace}
+                      </td>
+                      <td className="py-4 px-4">
+                        {typeof feature.growth === 'boolean' 
+                          ? (feature.growth ? <Check className="w-5 h-5 text-green-400" /> : <X className="w-5 h-5 text-gray-600" />)
+                          : feature.growth}
+                      </td>
+                      <td className="py-4 pl-4">
+                        {typeof feature.full === 'boolean' 
+                          ? (feature.full ? <Check className="w-5 h-5 text-green-400" /> : <X className="w-5 h-5 text-gray-600" />)
+                          : feature.full}
+                      </td>
                     </tr>
                   ))}
                 </tbody>

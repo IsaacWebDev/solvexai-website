@@ -13,6 +13,7 @@
  */
 
 import { useState } from "react";
+import { Gem } from "lucide-react";
 import {
   LiquidGlassCard,
   LiquidGlassButton,
@@ -38,8 +39,9 @@ export default function LiquidGlassShowcase() {
       <div className="container mx-auto px-4 py-20">
         {/* Header */}
         <div className="text-center mb-16">
-          <h1 className="text-6xl font-bold mb-4">
-            💎 Liquid Glass Components
+          <h1 className="text-6xl font-bold mb-4 flex items-center justify-center gap-4">
+            <Gem className="w-12 h-12 text-cyan-400" />
+            Liquid Glass Components
           </h1>
           <p className="text-gray-400 text-xl">
             Premium frosted glass design system

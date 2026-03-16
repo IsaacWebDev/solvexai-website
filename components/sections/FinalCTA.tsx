@@ -2,6 +2,7 @@
 
 import React from 'react'
 import Link from 'next/link'
+import { Check } from 'lucide-react'
 
 export function FinalCTA() {
   return (
@@ -34,9 +35,9 @@ export function FinalCTA() {
         
         {/* Footer Trust Signals */}
         <div className="flex flex-wrap justify-center gap-8 text-gray-400 text-sm">
-          <TrustSignal icon="✓" text="No hidden fees" />
-          <TrustSignal icon="✓" text="30-day support" />
-          <TrustSignal icon="✓" text="Money-back guarantee" />
+          <TrustSignal text="No hidden fees" />
+          <TrustSignal text="30-day support" />
+          <TrustSignal text="Money-back guarantee" />
         </div>
       </div>
     </section>
@@ -65,10 +66,10 @@ function CTAButton({ text, subtitle, href, highlighted }: CTAButtonProps) {
   )
 }
 
-function TrustSignal({ icon, text }: { icon: string; text: string }) {
+function TrustSignal({ text }: { text: string }) {
   return (
     <div className="flex items-center gap-2">
-      <span className="text-green-400">{icon}</span>
+      <Check className="w-4 h-4 text-green-400" />
       <span>{text}</span>
     </div>
   )

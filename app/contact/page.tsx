@@ -5,6 +5,7 @@ import { Navigation } from '@/components/Navigation'
 import { AnimatedGradientMesh } from '@/components/AnimatedGradientMesh'
 import { motion, AnimatePresence } from 'framer-motion'
 import { LiquidGlassCard } from '@/components/ui'
+import { Check, Star } from 'lucide-react'
 
 export default function ContactPage() {
   const [step, setStep] = useState(1)
@@ -76,9 +77,9 @@ export default function ContactPage() {
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
                 transition={{ delay: 0.2, type: "spring" }}
-                className="text-8xl mb-8"
+                className="mb-8 flex justify-center"
               >
-                ✓
+                <Check className="w-24 h-24 text-green-400" />
               </motion.div>
               
               <h1 className="text-5xl md:text-6xl font-light mb-6">Message Sent</h1>
@@ -139,9 +140,9 @@ export default function ContactPage() {
               
               {/* Trust Signals */}
               <div className="space-y-6">
-                <TrustSignal icon="✓" text="Free 15-minute discovery call" />
-                <TrustSignal icon="✓" text="Trusted by 127+ businesses" />
-                <TrustSignal icon="⭐" text="4.9/5 average rating" />
+                <TrustSignal icon="check" text="Free 15-minute discovery call" />
+                <TrustSignal icon="check" text="Trusted by 127+ businesses" />
+                <TrustSignal icon="star" text="4.9/5 average rating" />
               </div>
               
               {/* Reassurance */}
@@ -547,15 +548,19 @@ function Step({ number, title, description }: { number: string; title: string; d
   )
 }
 
-function TrustSignal({ icon, text }: { icon: string; text: string }) {
+function TrustSignal({ icon, text }: { icon: 'check' | 'star'; text: string }) {
   return (
     <div className="flex items-center gap-4">
-      <div className={`w-8 h-8 rounded-full flex items-center justify-center text-lg ${
-        icon === '⭐' 
+      <div className={`w-8 h-8 rounded-full flex items-center justify-center ${
+        icon === 'star' 
           ? 'bg-yellow-500/20 text-yellow-400'
           : 'bg-green-500/20 text-green-400'
       }`}>
-        {icon}
+        {icon === 'star' ? (
+          <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />
+        ) : (
+          <Check className="w-5 h-5 text-green-400" />
+        )}
       </div>
       <p className="text-lg text-gray-300 font-light">{text}</p>
     </div>
