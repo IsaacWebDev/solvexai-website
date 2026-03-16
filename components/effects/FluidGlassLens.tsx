@@ -9,7 +9,6 @@ import {
 } from '@react-three/drei';
 import { easing } from 'maath';
 
-// Simple cylinder geometry as lens (matches ReactBits lens.glb shape)
 function Lens({ children }: { children: React.ReactNode }) {
   const ref = useRef<THREE.Mesh>(null);
   const buffer = useFBO();
@@ -32,17 +31,17 @@ function Lens({ children }: { children: React.ReactNode }) {
     
     const v = viewport.getCurrentViewport(camera, [0, 0, 15]);
     
-    // Follow mouse with smooth easing (exact ReactBits behavior)
+    // Follow mouse with smooth easing (exact ReactBits)
     const destX = (mouseX.current * v.width) / 2;
     const destY = (mouseY.current * v.height) / 2;
     easing.damp3(ref.current.position, [destX, destY, 15], 0.15, delta);
     
-    // Auto-scale to fit viewport
+    // Auto-scale
     const maxWorld = v.width * 0.9;
     const desired = maxWorld / 1;
     ref.current.scale.setScalar(Math.min(0.25, desired));
     
-    // Render scene to FBO buffer
+    // Render to buffer
     gl.setRenderTarget(buffer);
     gl.render(scene, camera);
     gl.setRenderTarget(null);
@@ -50,16 +49,15 @@ function Lens({ children }: { children: React.ReactNode }) {
 
   return (
     <>
-      {/* Portal children into separate scene for refraction */}
       {createPortal(children, scene)}
       
-      {/* Background plane showing buffer texture */}
+      {/* Background plane */}
       <mesh scale={[viewport.width, viewport.height, 1]}>
         <planeGeometry />
         <meshBasicMaterial map={buffer.texture} transparent />
       </mesh>
       
-      {/* Glass lens cylinder (matches ReactBits lens geometry) */}
+      {/* Glass lens with EXACT ReactBits settings */}
       <mesh 
         ref={ref} 
         scale={0.25} 
@@ -68,15 +66,21 @@ function Lens({ children }: { children: React.ReactNode }) {
         <cylinderGeometry args={[1, 1, 0.5, 64]} />
         <MeshTransmissionMaterial
           buffer={buffer.texture}
-          ior={1.15}
-          thickness={5}
+          // EXACT ReactBits values for magnification + color
+          ior={1.5}                    // Higher IOR = more magnification
+          thickness={2}                // Thinner = sharper zoom
+          transmission={1}             // Full transparency
+          roughness={0}                // Crystal clear
+          chromaticAberration={0.05}   // Less aberration for clearer text
           anisotropy={0.01}
-          chromaticAberration={0.1}
-          transmission={1}
-          roughness={0}
+          distortionScale={0.5}        // Add content distortion
+          temporalDistortion={0}
+          // Color settings for mirror-like effect
           color="#ffffff"
           attenuationColor="#ffffff"
-          attenuationDistance={0.25}
+          attenuationDistance={0.5}
+          clearcoat={1}                // Mirror finish
+          clearcoatRoughness={0}
         />
       </mesh>
     </>
@@ -102,12 +106,15 @@ export function FluidGlassLens() {
         gl={{ 
           alpha: true,
           antialias: true,
-          powerPreference: 'high-performance'
+          powerPreference: 'high-performance',
+          // Enable tone mapping for better color
+          toneMapping: THREE.ACESFilmicToneMapping,
+          toneMappingExposure: 1.2
         }}
         style={{ background: 'transparent' }}
       >
         <Lens>
-          {/* Empty - lens refracts background content */}
+          {/* Empty - refracts page content */}
         </Lens>
       </Canvas>
     </div>
