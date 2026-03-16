@@ -80,7 +80,9 @@ export function ImmersiveJellyfishBG() {
       <motion.div
         className="absolute inset-0 pointer-events-none"
         style={{
-          background: `radial-gradient(circle at ${smoothMouseX.get ? smoothMouseX.get() : 50}px ${smoothMouseY.get ? smoothMouseY.get() : 50}px, rgba(139, 92, 246, 0.15), transparent 40%)`,
+          background: useTransform([smoothMouseX, smoothMouseY], ([x, y]) => 
+            `radial-gradient(circle at ${x}px ${y}px, rgba(139, 92, 246, 0.15), transparent 40%)`
+          ),
           mixBlendMode: 'screen'
         }}
       />
