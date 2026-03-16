@@ -27,7 +27,8 @@ export function ScrollControlledJellyfish() {
       
       if (timeDelta > 0) {
         // Calculate scroll velocity
-        scrollVelocity.current = Math.abs(latest - scrollYProgress.getPrevious()) / timeDelta
+        const prev = scrollYProgress.getPrevious() ?? 0
+        scrollVelocity.current = Math.abs(latest - prev) / timeDelta
         lastScrollTime.current = now
       }
 
