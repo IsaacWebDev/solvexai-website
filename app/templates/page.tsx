@@ -6,6 +6,7 @@ import { AnimatedGradientMesh } from '@/components/AnimatedGradientMesh'
 import { GuaranteeBadge } from '@/components/GuaranteeBadge'
 import { TemplatePreviewHover } from '@/components/TemplatePreviewHover'
 import { IndustrySelector } from '@/components/interactive/IndustrySelector'
+import { EmailBeforeAfter } from '@/components/interactive/BeforeAfterSlider'
 import { X, Shield, ShieldCheck } from 'lucide-react'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
@@ -236,8 +237,18 @@ export default function TemplatesPage() {
               setSelectedFilter(industryMap[industry] || 'All');
             }} />
           </motion.div>
-          
 
+          {/* Sarah Chen's Transformation */}
+          <section className="flex justify-center w-full" style={{ marginBottom: spacing.content.gap }}>
+            <motion.div
+              className="w-full max-w-7xl"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+            >
+              <EmailBeforeAfter />
+            </motion.div>
+          </section>
           
           {/* Filter Bar */}
           <div className="flex flex-wrap justify-center gap-4 mb-16">

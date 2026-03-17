@@ -49,14 +49,16 @@ export default function PackagesPage() {
           </motion.div>
           
           {/* Calculate Your Time Back */}
-          <motion.div
-            style={{ marginBottom: spacing.content.gap }}
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1, delay: 0.3 }}
-          >
-            <ROIPlayground />
-          </motion.div>
+          <section className="flex justify-center w-full" style={{ marginBottom: spacing.content.gap }}>
+            <motion.div
+              className="w-full max-w-7xl"
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 1, delay: 0.3 }}
+            >
+              <ROIPlayground />
+            </motion.div>
+          </section>
           
           {/* Package 1: Templates */}
           <PackageSection
