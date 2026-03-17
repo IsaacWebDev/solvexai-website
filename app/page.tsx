@@ -20,6 +20,9 @@ import { ImmersiveJellyfishBG } from '@/components/backgrounds/ImmersiveJellyfis
 import { ScrollControlledJellyfish } from '@/components/backgrounds/ScrollControlledJellyfish'
 import { SectionDivider } from '@/components/ui/SectionDivider'
 import { StickyBookCallButton } from '@/components/StickyBookCallButton'
+import dynamic from 'next/dynamic'
+
+const GhostCursor = dynamic(() => import('@/components/effects/GhostCursor'), { ssr: false })
 
 export default function HomePage() {
   const [showIntro, setShowIntro] = useState(true)
@@ -64,6 +67,21 @@ export default function HomePage() {
       
       {/* Scroll-Controlled Jellyfish Background (global) */}
       <ScrollControlledJellyfish />
+      
+      {/* Ghost Cursor Effect */}
+      <GhostCursor
+        color="#8B5CF6"
+        brightness={2}
+        edgeIntensity={0}
+        trailLength={50}
+        inertia={0.5}
+        grainIntensity={0.05}
+        bloomStrength={0.1}
+        bloomRadius={1}
+        bloomThreshold={0.025}
+        fadeDelayMs={1000}
+        fadeDurationMs={1500}
+      />
       
       {/* Main Content - Apple-Style Minimal */}
       <main 

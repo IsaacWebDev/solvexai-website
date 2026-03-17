@@ -1,0 +1,12 @@
+.ghost-cursor-container {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.ghost-cursor-container canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
