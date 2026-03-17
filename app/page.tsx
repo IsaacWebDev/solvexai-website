@@ -61,7 +61,7 @@ export default function HomePage() {
   }
   
   return (
-    <>
+    <div style={{ position: 'relative', minHeight: '100vh' }}>
       <Navigation />
       <StickyBookCallButton />
       
@@ -144,6 +144,6 @@ export default function HomePage() {
           }
         }
       `}</style>
-    </>
+    </div>
   )
 }
