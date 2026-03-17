@@ -289,24 +289,26 @@ function TemplatePlanet({
     // Rotate orbit container - this makes planets orbit
     orbitContainerRef.current.rotation.y = state.clock.elapsedTime * template.orbit.speed
     
-    // Calculate position based on orbit type and static angle
+    // Calculate DYNAMIC position based on orbit type, base angle + time
+    const currentAngle = baseAngle + (state.clock.elapsedTime * template.orbit.speed)
     let x = 0, y = 0, z = 0
     
     if (template.orbit.type === 'top') {
       // Top arc - semi-circle above center
-      x = Math.cos(baseAngle) * template.orbit.radius
-      y = 1.5 + Math.abs(Math.sin(baseAngle)) * 0.5
-      z = Math.sin(baseAngle) * template.orbit.radius
+      const topAngle = Math.PI + ((currentAngle) % Math.PI)
+      x = Math.cos(topAngle) * template.orbit.radius
+      y = 1.5 + Math.abs(Math.sin(topAngle)) * 0.5
+      z = Math.sin(topAngle) * template.orbit.radius
     } else if (template.orbit.type === 'main') {
       // Main horizontal ring at y=0
-      x = Math.cos(baseAngle) * template.orbit.radius
+      x = Math.cos(currentAngle) * template.orbit.radius
       y = 0
-      z = Math.sin(baseAngle) * template.orbit.radius
+      z = Math.sin(currentAngle) * template.orbit.radius
     } else if (template.orbit.type === 'side') {
-      // Side vertical ring
-      x = Math.sin(baseAngle) * template.orbit.radius * 0.3
-      y = Math.cos(baseAngle) * template.orbit.radius
-      z = Math.sin(baseAngle) * template.orbit.radius
+      // Side vertical ring - NOW ANIMATED
+      x = Math.sin(currentAngle) * template.orbit.radius * 0.3
+      y = Math.cos(currentAngle) * template.orbit.radius
+      z = Math.sin(currentAngle) * template.orbit.radius
     }
     
     planetGroupRef.current.position.set(x, y, z)
