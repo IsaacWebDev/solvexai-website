@@ -298,271 +298,202 @@ function OrbitRing({ radius, type }: { radius: number, type: 'top' | 'main' | 's
 }
 
 function PlanetIcon({ icon, isHovered, isActive }: { icon: Template['icon'], isHovered: boolean, isActive: boolean }) {
-  const iconGeometry = useMemo(() => {
+  const extrudedGeometry = useMemo(() => {
     const shape = new THREE.Shape()
     
-    // Create simple icon shapes
+    // Create BOLD icon shapes with solid fills
     switch (icon) {
       case 'restaurant': // Fork & Knife
         // Fork
-        shape.moveTo(-0.03, 0.06)
-        shape.lineTo(-0.03, -0.06)
-        shape.moveTo(-0.04, 0.04)
-        shape.lineTo(-0.04, 0.06)
-        shape.moveTo(-0.02, 0.04)
-        shape.lineTo(-0.02, 0.06)
-        // Knife
-        shape.moveTo(0.03, 0.06)
-        shape.lineTo(0.03, -0.04)
-        shape.lineTo(0.02, -0.06)
-        shape.lineTo(0.04, -0.06)
-        shape.lineTo(0.03, -0.04)
+        shape.moveTo(-0.08, 0.12)
+        shape.lineTo(-0.08, -0.12)
+        shape.lineTo(-0.05, -0.12)
+        shape.lineTo(-0.05, -0.04)
+        shape.lineTo(-0.04, -0.04)
+        shape.lineTo(-0.04, 0.12)
+        shape.closePath()
+        // Knife (separate shape)
+        const knife = new THREE.Shape()
+        knife.moveTo(0.04, 0.12)
+        knife.lineTo(0.04, -0.08)
+        knife.lineTo(0.02, -0.12)
+        knife.lineTo(0.08, -0.12)
+        knife.lineTo(0.08, -0.08)
+        knife.lineTo(0.06, -0.08)
+        knife.lineTo(0.06, 0.12)
+        knife.closePath()
+        shape.holes.push(knife)
         break
-      case 'law': // Scales
-        shape.moveTo(-0.05, 0)
-        shape.lineTo(0.05, 0)
-        shape.moveTo(0, 0)
-        shape.lineTo(0, 0.06)
-        shape.moveTo(-0.04, -0.03)
-        shape.lineTo(-0.02, 0)
-        shape.lineTo(-0.06, 0)
-        shape.lineTo(-0.04, -0.03)
-        shape.moveTo(0.04, -0.03)
-        shape.lineTo(0.02, 0)
-        shape.lineTo(0.06, 0)
-        shape.lineTo(0.04, -0.03)
+      case 'law': // Scales (simplified solid)
+        // Base
+        shape.moveTo(-0.12, 0.02)
+        shape.lineTo(-0.12, -0.02)
+        shape.lineTo(0.12, -0.02)
+        shape.lineTo(0.12, 0.02)
+        shape.closePath()
+        // Center post
+        const post = new THREE.Shape()
+        post.moveTo(-0.02, 0.02)
+        post.lineTo(-0.02, 0.12)
+        post.lineTo(0.02, 0.12)
+        post.lineTo(0.02, 0.02)
+        post.closePath()
+        shape.holes.push(post)
         break
       case 'fitness': // Dumbbell
-        shape.moveTo(-0.06, 0.02)
-        shape.lineTo(-0.06, -0.02)
-        shape.lineTo(-0.04, -0.02)
-        shape.lineTo(-0.04, 0.02)
-        shape.lineTo(-0.06, 0.02)
-        shape.moveTo(-0.04, 0)
-        shape.lineTo(0.04, 0)
-        shape.moveTo(0.04, 0.02)
-        shape.lineTo(0.04, -0.02)
-        shape.lineTo(0.06, -0.02)
-        shape.lineTo(0.06, 0.02)
-        shape.lineTo(0.04, 0.02)
+        // Left weight
+        shape.moveTo(-0.12, 0.05)
+        shape.lineTo(-0.12, -0.05)
+        shape.lineTo(-0.08, -0.05)
+        shape.lineTo(-0.08, 0.05)
+        shape.closePath()
+        // Bar
+        const bar = new THREE.Shape()
+        bar.moveTo(-0.08, 0.02)
+        bar.lineTo(-0.08, -0.02)
+        bar.lineTo(0.08, -0.02)
+        bar.lineTo(0.08, 0.02)
+        bar.closePath()
+        shape.holes.push(bar)
+        // Right weight
+        const rightWeight = new THREE.Shape()
+        rightWeight.moveTo(0.08, 0.05)
+        rightWeight.lineTo(0.08, -0.05)
+        rightWeight.lineTo(0.12, -0.05)
+        rightWeight.lineTo(0.12, 0.05)
+        rightWeight.closePath()
+        shape.holes.push(rightWeight)
         break
       case 'medical': // Plus/Cross
-        shape.moveTo(-0.05, 0.015)
-        shape.lineTo(-0.015, 0.015)
-        shape.lineTo(-0.015, 0.05)
-        shape.lineTo(0.015, 0.05)
-        shape.lineTo(0.015, 0.015)
-        shape.lineTo(0.05, 0.015)
-        shape.lineTo(0.05, -0.015)
-        shape.lineTo(0.015, -0.015)
-        shape.lineTo(0.015, -0.05)
-        shape.lineTo(-0.015, -0.05)
-        shape.lineTo(-0.015, -0.015)
-        shape.lineTo(-0.05, -0.015)
-        shape.lineTo(-0.05, 0.015)
+        // Horizontal bar
+        shape.moveTo(-0.12, 0.035)
+        shape.lineTo(-0.12, -0.035)
+        shape.lineTo(0.12, -0.035)
+        shape.lineTo(0.12, 0.035)
+        shape.closePath()
+        // Vertical bar
+        const vertical = new THREE.Shape()
+        vertical.moveTo(-0.035, -0.12)
+        vertical.lineTo(-0.035, 0.12)
+        vertical.lineTo(0.035, 0.12)
+        vertical.lineTo(0.035, -0.12)
+        vertical.closePath()
+        shape.holes.push(vertical)
         break
       case 'construction': // Hammer
-        shape.moveTo(-0.02, -0.06)
-        shape.lineTo(0.02, -0.02)
-        shape.lineTo(0.06, -0.04)
-        shape.lineTo(0.04, -0.06)
-        shape.lineTo(0.02, -0.02)
-        shape.lineTo(-0.04, 0.04)
-        shape.lineTo(-0.06, 0.02)
-        shape.lineTo(-0.02, -0.06)
+        // Hammer head
+        shape.moveTo(-0.02, 0.08)
+        shape.lineTo(-0.02, 0.12)
+        shape.lineTo(0.12, 0.12)
+        shape.lineTo(0.12, 0.04)
+        shape.lineTo(0.08, 0.04)
+        shape.lineTo(0.08, 0.08)
+        shape.closePath()
+        // Handle
+        const handle = new THREE.Shape()
+        handle.moveTo(-0.02, -0.12)
+        handle.lineTo(-0.02, 0.08)
+        handle.lineTo(0.02, 0.08)
+        handle.lineTo(0.02, -0.12)
+        handle.closePath()
+        shape.holes.push(handle)
         break
-      case 'agency': // Star
-        for (let i = 0; i < 5; i++) {
-          const angle = (i * 4 * Math.PI) / 5 - Math.PI / 2
-          const x = Math.cos(angle) * 0.05
-          const y = Math.sin(angle) * 0.05
+      case 'agency': // Star (5-pointed)
+        const outerRadius = 0.12
+        const innerRadius = 0.05
+        for (let i = 0; i < 10; i++) {
+          const angle = (i * Math.PI) / 5 - Math.PI / 2
+          const radius = i % 2 === 0 ? outerRadius : innerRadius
+          const x = Math.cos(angle) * radius
+          const y = Math.sin(angle) * radius
           if (i === 0) shape.moveTo(x, y)
           else shape.lineTo(x, y)
         }
         shape.closePath()
         break
       case 'ecommerce': // Shopping cart
-        shape.moveTo(-0.06, 0.04)
-        shape.lineTo(-0.04, -0.02)
-        shape.lineTo(0.04, -0.02)
-        shape.lineTo(0.06, 0.04)
-        shape.lineTo(-0.06, 0.04)
-        shape.moveTo(-0.03, -0.05)
-        shape.arc(0, 0, 0.01, 0, Math.PI * 2, false)
-        shape.moveTo(0.03, -0.05)
-        shape.arc(0, 0, 0.01, 0, Math.PI * 2, false)
-        break
-      case 'realestate': // House
-        shape.moveTo(0, 0.06)
-        shape.lineTo(-0.05, 0)
-        shape.lineTo(-0.05, -0.06)
-        shape.lineTo(0.05, -0.06)
-        shape.lineTo(0.05, 0)
-        shape.lineTo(0, 0.06)
-        shape.moveTo(-0.02, -0.06)
-        shape.lineTo(-0.02, -0.03)
-        shape.lineTo(0.02, -0.03)
-        shape.lineTo(0.02, -0.06)
-        break
-      default: // Service - Gear
-        const teeth = 8
-        for (let i = 0; i < teeth * 2; i++) {
-          const angle = (i * Math.PI) / teeth
-          const r = i % 2 === 0 ? 0.05 : 0.04
-          const x = Math.cos(angle) * r
-          const y = Math.sin(angle) * r
-          if (i === 0) shape.moveTo(x, y)
-          else shape.lineTo(x, y)
-        }
-        shape.closePath()
-    }
-    
-    return new THREE.ShapeGeometry(shape)
-  }, [icon])
-  
-  const extrudedGeometry = useMemo(() => {
-    const shape = new THREE.Shape()
-    
-    // Create larger, bolder icon shapes
-    switch (icon) {
-      case 'restaurant': // Fork & Knife - larger
-        // Fork tines
-        shape.moveTo(-0.06, 0.12)
-        shape.lineTo(-0.06, -0.12)
-        shape.moveTo(-0.08, 0.08)
-        shape.lineTo(-0.08, 0.12)
-        shape.moveTo(-0.04, 0.08)
-        shape.lineTo(-0.04, 0.12)
-        // Knife
-        shape.moveTo(0.06, 0.12)
-        shape.lineTo(0.06, -0.08)
-        shape.lineTo(0.04, -0.12)
-        shape.lineTo(0.08, -0.12)
-        shape.lineTo(0.06, -0.08)
-        break
-      case 'law': // Scales - larger
-        shape.moveTo(-0.1, 0)
-        shape.lineTo(0.1, 0)
-        shape.moveTo(0, 0)
-        shape.lineTo(0, 0.12)
-        // Left scale
-        shape.moveTo(-0.08, -0.06)
-        shape.lineTo(-0.04, 0)
-        shape.lineTo(-0.12, 0)
-        shape.closePath()
-        // Right scale
-        shape.moveTo(0.08, -0.06)
-        shape.lineTo(0.04, 0)
-        shape.lineTo(0.12, 0)
-        shape.closePath()
-        break
-      case 'fitness': // Dumbbell - larger
-        shape.moveTo(-0.12, 0.04)
-        shape.lineTo(-0.12, -0.04)
-        shape.lineTo(-0.08, -0.04)
-        shape.lineTo(-0.08, 0.04)
-        shape.closePath()
-        shape.moveTo(0.08, 0.04)
-        shape.lineTo(0.08, -0.04)
-        shape.lineTo(0.12, -0.04)
-        shape.lineTo(0.12, 0.04)
-        shape.closePath()
-        // Bar
-        shape.moveTo(-0.08, 0.015)
-        shape.lineTo(0.08, 0.015)
-        shape.lineTo(0.08, -0.015)
-        shape.lineTo(-0.08, -0.015)
-        shape.closePath()
-        break
-      case 'medical': // Plus - larger
-        shape.moveTo(-0.1, 0.03)
-        shape.lineTo(-0.03, 0.03)
-        shape.lineTo(-0.03, 0.1)
-        shape.lineTo(0.03, 0.1)
-        shape.lineTo(0.03, 0.03)
-        shape.lineTo(0.1, 0.03)
-        shape.lineTo(0.1, -0.03)
-        shape.lineTo(0.03, -0.03)
-        shape.lineTo(0.03, -0.1)
-        shape.lineTo(-0.03, -0.1)
-        shape.lineTo(-0.03, -0.03)
-        shape.lineTo(-0.1, -0.03)
-        shape.closePath()
-        break
-      case 'construction': // Hammer - larger
-        shape.moveTo(-0.04, -0.12)
-        shape.lineTo(0.04, -0.04)
-        shape.lineTo(0.12, -0.08)
-        shape.lineTo(0.08, -0.12)
-        shape.closePath()
-        // Handle
-        shape.moveTo(-0.01, -0.04)
-        shape.lineTo(0.01, -0.04)
-        shape.lineTo(0.01, 0.12)
-        shape.lineTo(-0.01, 0.12)
-        shape.closePath()
-        break
-      case 'agency': // Star - larger
-        for (let i = 0; i < 5; i++) {
-          const angle = (i * 4 * Math.PI) / 5 - Math.PI / 2
-          const x = Math.cos(angle) * 0.1
-          const y = Math.sin(angle) * 0.1
-          if (i === 0) shape.moveTo(x, y)
-          else shape.lineTo(x, y)
-        }
-        shape.closePath()
-        break
-      case 'ecommerce': // Cart - larger
+        // Cart body
         shape.moveTo(-0.12, 0.08)
         shape.lineTo(-0.08, -0.04)
         shape.lineTo(0.08, -0.04)
+        shape.lineTo(0.10, 0.02)
         shape.lineTo(0.12, 0.08)
         shape.closePath()
+        // Handle
+        const cartHandle = new THREE.Shape()
+        cartHandle.moveTo(-0.14, 0.08)
+        cartHandle.lineTo(-0.12, 0.08)
+        cartHandle.lineTo(-0.10, 0.12)
+        cartHandle.lineTo(-0.12, 0.12)
+        cartHandle.closePath()
+        shape.holes.push(cartHandle)
         break
-      case 'realestate': // House - larger
+      case 'realestate': // House
+        // Roof triangle
         shape.moveTo(0, 0.12)
-        shape.lineTo(-0.1, 0)
-        shape.lineTo(-0.1, -0.12)
-        shape.lineTo(0.1, -0.12)
-        shape.lineTo(0.1, 0)
+        shape.lineTo(-0.12, 0)
+        shape.lineTo(0.12, 0)
         shape.closePath()
+        // House body
+        const body = new THREE.Shape()
+        body.moveTo(-0.10, 0)
+        body.lineTo(-0.10, -0.12)
+        body.lineTo(0.10, -0.12)
+        body.lineTo(0.10, 0)
+        body.closePath()
+        shape.holes.push(body)
         // Door
-        shape.moveTo(-0.04, -0.12)
-        shape.lineTo(-0.04, -0.06)
-        shape.lineTo(0.04, -0.06)
-        shape.lineTo(0.04, -0.12)
-        shape.closePath()
+        const door = new THREE.Shape()
+        door.moveTo(-0.03, -0.12)
+        door.lineTo(-0.03, -0.06)
+        door.lineTo(0.03, -0.06)
+        door.lineTo(0.03, -0.12)
+        door.closePath()
+        body.holes.push(door)
         break
-      default: // Gear - larger
+      default: // Service - Gear
         const teeth = 8
+        const outerR = 0.12
+        const innerR = 0.08
         for (let i = 0; i < teeth * 2; i++) {
           const angle = (i * Math.PI) / teeth
-          const r = i % 2 === 0 ? 0.1 : 0.08
+          const r = i % 2 === 0 ? outerR : innerR
           const x = Math.cos(angle) * r
           const y = Math.sin(angle) * r
           if (i === 0) shape.moveTo(x, y)
           else shape.lineTo(x, y)
         }
         shape.closePath()
+        // Inner circle hole
+        const innerCircle = new THREE.Shape()
+        const circlePoints = 32
+        for (let i = 0; i <= circlePoints; i++) {
+          const angle = (i / circlePoints) * Math.PI * 2
+          const x = Math.cos(angle) * 0.04
+          const y = Math.sin(angle) * 0.04
+          if (i === 0) innerCircle.moveTo(x, y)
+          else innerCircle.lineTo(x, y)
+        }
+        shape.holes.push(innerCircle)
     }
     
     return new THREE.ExtrudeGeometry(shape, {
-      depth: 0.02,
+      depth: 0.04,
       bevelEnabled: true,
-      bevelThickness: 0.005,
-      bevelSize: 0.005,
-      bevelSegments: 2
+      bevelThickness: 0.01,
+      bevelSize: 0.01,
+      bevelSegments: 3
     })
   }, [icon])
   
   return (
     <mesh geometry={extrudedGeometry}>
       <meshStandardMaterial
-        color="white"
-        emissive="white"
-        emissiveIntensity={isHovered || isActive ? 0.8 : 0.4}
-        metalness={0.3}
-        roughness={0.4}
+        color="#ffffff"
+        emissive="#ffffff"
+        emissiveIntensity={isHovered || isActive ? 1.2 : 0.6}
+        metalness={0.1}
+        roughness={0.3}
       />
     </mesh>
   )
@@ -586,49 +517,53 @@ function TemplatePlanet({
   totalInOrbit: number
 }) {
   const orbitContainerRef = useRef<THREE.Group>(null)
-  const planetRef = useRef<THREE.Group>(null)
+  const planetGroupRef = useRef<THREE.Group>(null)
   const meshRef = useRef<THREE.Mesh>(null)
   const ringRef = useRef<THREE.Mesh>(null)
-  const iconRef = useRef<THREE.Group>(null)
+  const iconGroupRef = useRef<THREE.Group>(null)
   
-  // Calculate fixed position on orbit
-  const orbitPosition = useMemo(() => {
-    const baseAngle = (index / totalInOrbit) * (template.orbit.type === 'top' ? Math.PI : 2 * Math.PI)
-    
-    if (template.orbit.type === 'top') {
-      return {
-        x: Math.cos(Math.PI + baseAngle) * template.orbit.radius,
-        y: 1.5 + Math.abs(Math.sin(Math.PI + baseAngle)) * 0.5,
-        z: Math.sin(Math.PI + baseAngle) * template.orbit.radius
-      }
-    } else if (template.orbit.type === 'main') {
-      return {
-        x: Math.cos(baseAngle) * template.orbit.radius,
-        y: 0,
-        z: Math.sin(baseAngle) * template.orbit.radius
-      }
-    } else {
-      return {
-        x: Math.sin(baseAngle) * template.orbit.radius * 0.3,
-        y: Math.cos(baseAngle) * template.orbit.radius,
-        z: Math.sin(baseAngle) * template.orbit.radius
-      }
-    }
-  }, [index, totalInOrbit, template.orbit])
+  // Calculate ANGLE on orbit (not position)
+  const baseAngle = useMemo(() => {
+    return (index / totalInOrbit) * (template.orbit.type === 'top' ? Math.PI : 2 * Math.PI)
+  }, [index, totalInOrbit, template.orbit.type])
   
   useFrame((state) => {
-    // Rotate the orbit container continuously
-    if (orbitContainerRef.current) {
-      orbitContainerRef.current.rotation.y = state.clock.elapsedTime * template.orbit.speed
+    if (!orbitContainerRef.current || !planetGroupRef.current || !iconGroupRef.current) return
+    
+    // Rotate the entire orbit
+    orbitContainerRef.current.rotation.y = state.clock.elapsedTime * template.orbit.speed
+    
+    // Calculate planet position based on orbit type
+    let x = 0, y = 0, z = 0
+    
+    if (template.orbit.type === 'top') {
+      // Semi-circle above
+      const angle = Math.PI + baseAngle
+      x = Math.cos(angle) * template.orbit.radius
+      y = 1.5 + Math.abs(Math.sin(angle)) * 0.5
+      z = Math.sin(angle) * template.orbit.radius
+    } else if (template.orbit.type === 'main') {
+      // Full circle
+      x = Math.cos(baseAngle) * template.orbit.radius
+      y = 0
+      z = Math.sin(baseAngle) * template.orbit.radius
+    } else {
+      // Side orbit (vertical)
+      x = Math.sin(baseAngle) * template.orbit.radius * 0.3
+      y = Math.cos(baseAngle) * template.orbit.radius
+      z = Math.sin(baseAngle) * template.orbit.radius
     }
     
-    // Keep planet facing camera
-    if (planetRef.current) {
-      planetRef.current.rotation.y = -state.clock.elapsedTime * template.orbit.speed
-    }
+    planetGroupRef.current.position.set(x, y, z)
     
+    // Counter-rotate planet to face camera
+    planetGroupRef.current.rotation.y = -orbitContainerRef.current.rotation.y
+    
+    // Planet self-rotation
     if (meshRef.current) {
       meshRef.current.rotation.y += 0.01
+      
+      // Scale on hover/active
       if (isHovered || isActive) {
         const targetScale = 1.3
         meshRef.current.scale.lerp(
@@ -640,19 +575,21 @@ function TemplatePlanet({
       }
     }
     
+    // Ring rotation
     if (ringRef.current) {
       ringRef.current.rotation.z += 0.02
     }
     
     // Keep icon facing camera
-    if (iconRef.current) {
-      iconRef.current.lookAt(0, iconRef.current.position.y, 10)
+    if (iconGroupRef.current) {
+      const camera = state.camera
+      iconGroupRef.current.lookAt(camera.position)
     }
   })
   
   return (
     <group ref={orbitContainerRef}>
-      <group ref={planetRef} position={[orbitPosition.x, orbitPosition.y, orbitPosition.z]}>
+      <group ref={planetGroupRef}>
         {/* Planet orbit ring */}
         <mesh ref={ringRef} rotation={[Math.PI / 2, 0, 0]}>
           <ringGeometry args={[0.35, 0.38, 32]} />
@@ -704,8 +641,8 @@ function TemplatePlanet({
           />
         )}
         
-        {/* Planet Icon - positioned in front and always facing camera */}
-        <group ref={iconRef} position={[0, 0, 0.26]}>
+        {/* Icon - positioned OUTSIDE sphere and always faces camera */}
+        <group ref={iconGroupRef} position={[0, 0, 0.35]}>
           <PlanetIcon icon={template.icon} isHovered={isHovered} isActive={isActive} />
         </group>
       </group>
@@ -741,25 +678,11 @@ function TemplateGalaxyScene({
     return groups
   }, [])
   
-  // Get unique orbit configurations
-  const orbitConfigs = useMemo(() => {
-    const configs: Array<{ radius: number, type: 'top' | 'main' | 'side' }> = []
-    const seen = new Set<string>()
-    
-    templates.forEach(t => {
-      const key = `${t.orbit.type}-${t.orbit.radius}`
-      if (!seen.has(key)) {
-        seen.add(key)
-        configs.push({ radius: t.orbit.radius, type: t.orbit.type })
-      }
-    })
-    
-    return configs
-  }, [])
-  
   return (
     <group>
-      <ambientLight intensity={0.1} />
+      <ambientLight intensity={0.3} />
+      <directionalLight position={[5, 5, 5]} intensity={0.5} />
+      <directionalLight position={[-5, -5, -5]} intensity={0.3} />
       
       <SolvexAICore />
       
@@ -845,113 +768,4 @@ export function TemplateGalaxy() {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 10 }}
-          className="absolute bottom-24 left-1/2 -translate-x-1/2 pointer-events-none"
-        >
-          <div className="px-6 py-3 rounded-xl backdrop-blur-xl bg-black/80 border border-cyan-500/30">
-            <p className="text-white font-semibold text-lg">{hoveredTemplate.name}</p>
-          </div>
-        </motion.div>
-      )}
-      
-      {/* Template preview card */}
-      <AnimatePresence>
-        {selectedTemplate && (
-          <>
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="absolute inset-0 bg-black/60 backdrop-blur-md z-10"
-              onClick={closeCard}
-            />
-            
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8, y: 50 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.8, y: 50 }}
-              transition={{ type: 'spring', damping: 20, stiffness: 200 }}
-              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20"
-            >
-              <div
-                className="relative p-10 rounded-3xl backdrop-blur-3xl border-2 shadow-2xl"
-                style={{
-                  background: 'linear-gradient(135deg, rgba(5, 10, 25, 0.95), rgba(10, 15, 35, 0.95))',
-                  borderColor: selectedTemplate.color,
-                  minWidth: '500px',
-                  maxWidth: '600px',
-                  boxShadow: `0 0 60px ${selectedTemplate.color}50, 0 25px 80px rgba(0,0,0,0.6)`
-                }}
-              >
-                <motion.button
-                  whileHover={{ scale: 1.1, rotate: 90 }}
-                  whileTap={{ scale: 0.9 }}
-                  onClick={closeCard}
-                  className="absolute top-5 right-5 text-white/40 hover:text-white transition-colors text-3xl leading-none"
-                >
-                  ×
-                </motion.button>
-                
-                <div className="mb-6">
-                  <div 
-                    className="w-16 h-16 rounded-2xl mb-4"
-                    style={{ 
-                      background: `linear-gradient(135deg, ${selectedTemplate.color}, ${selectedTemplate.color}80)`,
-                      boxShadow: `0 8px 32px ${selectedTemplate.color}60`
-                    }}
-                  />
-                  
-                  <h3 className="text-3xl font-bold mb-3" style={{ color: selectedTemplate.color }}>
-                    {selectedTemplate.name}
-                  </h3>
-                  
-                  <p className="text-gray-300 text-base leading-relaxed">
-                    {selectedTemplate.description}
-                  </p>
-                </div>
-                
-                <div className="flex gap-4">
-                  <motion.a
-                    href={selectedTemplate.path}
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    className="flex-1 px-6 py-3 rounded-xl font-bold transition-all text-white text-center shadow-lg"
-                    style={{
-                      background: `linear-gradient(135deg, ${selectedTemplate.color}, ${selectedTemplate.color}dd)`,
-                      boxShadow: `0 8px 24px ${selectedTemplate.color}60`
-                    }}
-                  >
-                    View Demo
-                  </motion.a>
-                  
-                  <motion.a
-                    href="/contact"
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    className="flex-1 px-6 py-3 rounded-xl font-bold transition-all text-white text-center border-2"
-                    style={{
-                      borderColor: selectedTemplate.color,
-                      background: 'rgba(0,0,0,0.3)'
-                    }}
-                  >
-                    Use Template
-                  </motion.a>
-                </div>
-              </div>
-            </motion.div>
-          </>
-        )}
-      </AnimatePresence>
-      
-      {/* Instructions */}
-      <div className="absolute bottom-12 left-1/2 -translate-x-1/2 text-center">
-        <motion.p 
-          className="text-sm text-gray-400 font-medium"
-          animate={{ opacity: [0.5, 1, 0.5] }}
-          transition={{ duration: 2, repeat: Infinity }}
-        >
-          Hover over planets to explore templates • Click to view details
-        </motion.p>
-      </div>
-    </div>
-  )
-}
+          className="absolute bottom-24 left-1/2
