@@ -97,10 +97,10 @@ export default function HomePage() {
           
           <section className="py-20 px-6 relative z-10">
             <div className="text-center mb-12">
-              <h2 className="text-5xl font-bold mb-4 gradient-text">
+              <h2 className="text-5xl font-bold gradient-text">
                 Template Showcase
               </h2>
-              <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+              <p className="text-gray-400 text-lg max-w-2xl mx-auto mt-4">
                 Explore our industry-specific templates in 3D
               </p>
             </div>
