@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Inter, Geist } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/react'
 import './globals.css'
 import { SmoothScroll } from '@/components/SmoothScroll'
@@ -9,6 +9,9 @@ import { ExitIntentPopupNew } from '@/components/ExitIntentPopupNew'
 import { LiveChatWidget } from '@/components/LiveChatWidget'
 import { FloatingActionMenu } from '@/components/FloatingActionMenu'
 import { CursorGlow } from '@/components/effects/CursorGlow'
+import { cn } from "@/lib/utils";
+
+const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
 const inter = Inter({
   subsets: ['latin'],
@@ -75,7 +78,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={inter.variable}>
+    <html lang="en" className={cn("font-sans", geist.variable)}>
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />

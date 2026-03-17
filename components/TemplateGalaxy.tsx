@@ -420,13 +420,149 @@ function PlanetIcon({ icon, isHovered, isActive }: { icon: Template['icon'], isH
     return new THREE.ShapeGeometry(shape)
   }, [icon])
   
+  const extrudedGeometry = useMemo(() => {
+    const shape = new THREE.Shape()
+    
+    // Create larger, bolder icon shapes
+    switch (icon) {
+      case 'restaurant': // Fork & Knife - larger
+        // Fork tines
+        shape.moveTo(-0.06, 0.12)
+        shape.lineTo(-0.06, -0.12)
+        shape.moveTo(-0.08, 0.08)
+        shape.lineTo(-0.08, 0.12)
+        shape.moveTo(-0.04, 0.08)
+        shape.lineTo(-0.04, 0.12)
+        // Knife
+        shape.moveTo(0.06, 0.12)
+        shape.lineTo(0.06, -0.08)
+        shape.lineTo(0.04, -0.12)
+        shape.lineTo(0.08, -0.12)
+        shape.lineTo(0.06, -0.08)
+        break
+      case 'law': // Scales - larger
+        shape.moveTo(-0.1, 0)
+        shape.lineTo(0.1, 0)
+        shape.moveTo(0, 0)
+        shape.lineTo(0, 0.12)
+        // Left scale
+        shape.moveTo(-0.08, -0.06)
+        shape.lineTo(-0.04, 0)
+        shape.lineTo(-0.12, 0)
+        shape.closePath()
+        // Right scale
+        shape.moveTo(0.08, -0.06)
+        shape.lineTo(0.04, 0)
+        shape.lineTo(0.12, 0)
+        shape.closePath()
+        break
+      case 'fitness': // Dumbbell - larger
+        shape.moveTo(-0.12, 0.04)
+        shape.lineTo(-0.12, -0.04)
+        shape.lineTo(-0.08, -0.04)
+        shape.lineTo(-0.08, 0.04)
+        shape.closePath()
+        shape.moveTo(0.08, 0.04)
+        shape.lineTo(0.08, -0.04)
+        shape.lineTo(0.12, -0.04)
+        shape.lineTo(0.12, 0.04)
+        shape.closePath()
+        // Bar
+        shape.moveTo(-0.08, 0.015)
+        shape.lineTo(0.08, 0.015)
+        shape.lineTo(0.08, -0.015)
+        shape.lineTo(-0.08, -0.015)
+        shape.closePath()
+        break
+      case 'medical': // Plus - larger
+        shape.moveTo(-0.1, 0.03)
+        shape.lineTo(-0.03, 0.03)
+        shape.lineTo(-0.03, 0.1)
+        shape.lineTo(0.03, 0.1)
+        shape.lineTo(0.03, 0.03)
+        shape.lineTo(0.1, 0.03)
+        shape.lineTo(0.1, -0.03)
+        shape.lineTo(0.03, -0.03)
+        shape.lineTo(0.03, -0.1)
+        shape.lineTo(-0.03, -0.1)
+        shape.lineTo(-0.03, -0.03)
+        shape.lineTo(-0.1, -0.03)
+        shape.closePath()
+        break
+      case 'construction': // Hammer - larger
+        shape.moveTo(-0.04, -0.12)
+        shape.lineTo(0.04, -0.04)
+        shape.lineTo(0.12, -0.08)
+        shape.lineTo(0.08, -0.12)
+        shape.closePath()
+        // Handle
+        shape.moveTo(-0.01, -0.04)
+        shape.lineTo(0.01, -0.04)
+        shape.lineTo(0.01, 0.12)
+        shape.lineTo(-0.01, 0.12)
+        shape.closePath()
+        break
+      case 'agency': // Star - larger
+        for (let i = 0; i < 5; i++) {
+          const angle = (i * 4 * Math.PI) / 5 - Math.PI / 2
+          const x = Math.cos(angle) * 0.1
+          const y = Math.sin(angle) * 0.1
+          if (i === 0) shape.moveTo(x, y)
+          else shape.lineTo(x, y)
+        }
+        shape.closePath()
+        break
+      case 'ecommerce': // Cart - larger
+        shape.moveTo(-0.12, 0.08)
+        shape.lineTo(-0.08, -0.04)
+        shape.lineTo(0.08, -0.04)
+        shape.lineTo(0.12, 0.08)
+        shape.closePath()
+        break
+      case 'realestate': // House - larger
+        shape.moveTo(0, 0.12)
+        shape.lineTo(-0.1, 0)
+        shape.lineTo(-0.1, -0.12)
+        shape.lineTo(0.1, -0.12)
+        shape.lineTo(0.1, 0)
+        shape.closePath()
+        // Door
+        shape.moveTo(-0.04, -0.12)
+        shape.lineTo(-0.04, -0.06)
+        shape.lineTo(0.04, -0.06)
+        shape.lineTo(0.04, -0.12)
+        shape.closePath()
+        break
+      default: // Gear - larger
+        const teeth = 8
+        for (let i = 0; i < teeth * 2; i++) {
+          const angle = (i * Math.PI) / teeth
+          const r = i % 2 === 0 ? 0.1 : 0.08
+          const x = Math.cos(angle) * r
+          const y = Math.sin(angle) * r
+          if (i === 0) shape.moveTo(x, y)
+          else shape.lineTo(x, y)
+        }
+        shape.closePath()
+    }
+    
+    return new THREE.ExtrudeGeometry(shape, {
+      depth: 0.02,
+      bevelEnabled: true,
+      bevelThickness: 0.005,
+      bevelSize: 0.005,
+      bevelSegments: 2
+    })
+  }, [icon])
+  
   return (
-    <mesh geometry={iconGeometry}>
-      <meshBasicMaterial
+    <mesh geometry={extrudedGeometry}>
+      <meshStandardMaterial
         color="white"
-        transparent
-        opacity={isHovered || isActive ? 1 : 0.85}
-        side={THREE.DoubleSide}
+        emissive="white"
+        emissiveIntensity={isHovered || isActive ? 0.8 : 0.4}
+        metalness={0.3}
+        roughness={0.4}
       />
     </mesh>
   )
@@ -449,35 +585,46 @@ function TemplatePlanet({
   index: number
   totalInOrbit: number
 }) {
+  const orbitContainerRef = useRef<THREE.Group>(null)
   const planetRef = useRef<THREE.Group>(null)
   const meshRef = useRef<THREE.Mesh>(null)
   const ringRef = useRef<THREE.Mesh>(null)
+  const iconRef = useRef<THREE.Group>(null)
+  
+  // Calculate fixed position on orbit
+  const orbitPosition = useMemo(() => {
+    const baseAngle = (index / totalInOrbit) * (template.orbit.type === 'top' ? Math.PI : 2 * Math.PI)
+    
+    if (template.orbit.type === 'top') {
+      return {
+        x: Math.cos(Math.PI + baseAngle) * template.orbit.radius,
+        y: 1.5 + Math.abs(Math.sin(Math.PI + baseAngle)) * 0.5,
+        z: Math.sin(Math.PI + baseAngle) * template.orbit.radius
+      }
+    } else if (template.orbit.type === 'main') {
+      return {
+        x: Math.cos(baseAngle) * template.orbit.radius,
+        y: 0,
+        z: Math.sin(baseAngle) * template.orbit.radius
+      }
+    } else {
+      return {
+        x: Math.sin(baseAngle) * template.orbit.radius * 0.3,
+        y: Math.cos(baseAngle) * template.orbit.radius,
+        z: Math.sin(baseAngle) * template.orbit.radius
+      }
+    }
+  }, [index, totalInOrbit, template.orbit])
   
   useFrame((state) => {
+    // Rotate the orbit container continuously
+    if (orbitContainerRef.current) {
+      orbitContainerRef.current.rotation.y = state.clock.elapsedTime * template.orbit.speed
+    }
+    
+    // Keep planet facing camera
     if (planetRef.current) {
-      const baseOffset = (index / totalInOrbit) * (template.orbit.type === 'top' ? Math.PI : 2 * Math.PI)
-      const time = state.clock.elapsedTime * template.orbit.speed
-      
-      if (template.orbit.type === 'top') {
-        // Top arc - semi-circle above center
-        // Animate from π to 2π (top half only)
-        const angle = Math.PI + (time % Math.PI) + baseOffset
-        planetRef.current.position.x = Math.cos(angle) * template.orbit.radius
-        planetRef.current.position.y = 1.5 + Math.abs(Math.sin(angle)) * 0.5 // Elevated arc
-        planetRef.current.position.z = Math.sin(angle) * template.orbit.radius
-      } else if (template.orbit.type === 'main') {
-        // Main horizontal ring
-        const angle = time + baseOffset
-        planetRef.current.position.x = Math.cos(angle) * template.orbit.radius
-        planetRef.current.position.y = 0
-        planetRef.current.position.z = Math.sin(angle) * template.orbit.radius
-      } else {
-        // Vertical side ring (rotated 90° on Y axis)
-        const angle = time + baseOffset
-        planetRef.current.position.x = Math.sin(angle) * template.orbit.radius * 0.3 // Slight X offset
-        planetRef.current.position.y = Math.cos(angle) * template.orbit.radius
-        planetRef.current.position.z = Math.sin(angle) * template.orbit.radius
-      }
+      planetRef.current.rotation.y = -state.clock.elapsedTime * template.orbit.speed
     }
     
     if (meshRef.current) {
@@ -496,62 +643,71 @@ function TemplatePlanet({
     if (ringRef.current) {
       ringRef.current.rotation.z += 0.02
     }
+    
+    // Keep icon facing camera
+    if (iconRef.current) {
+      iconRef.current.lookAt(0, iconRef.current.position.y, 10)
+    }
   })
   
   return (
-    <group ref={planetRef}>
-      {/* Planet orbit ring */}
-      <mesh ref={ringRef} rotation={[Math.PI / 2, 0, 0]}>
-        <ringGeometry args={[0.35, 0.38, 32]} />
-        <meshBasicMaterial
-          color={template.color}
-          transparent
-          opacity={isHovered || isActive ? 0.5 : 0.2}
-          side={THREE.DoubleSide}
-        />
-      </mesh>
-      
-      {/* Planet sphere */}
-      <mesh
-        ref={meshRef}
-        onPointerOver={(e) => { e.stopPropagation(); onHover(template.id) }}
-        onPointerOut={() => onHover(null)}
-        onClick={(e) => { e.stopPropagation(); onClick(template) }}
-      >
-        <sphereGeometry args={[0.25, 32, 32]} />
-        <meshPhysicalMaterial
-          color={template.color}
-          emissive={template.color}
-          emissiveIntensity={isHovered || isActive ? 1.5 : 0.5}
-          metalness={0.8}
-          roughness={0.2}
-          clearcoat={1}
-          clearcoatRoughness={0.1}
-        />
-      </mesh>
-      
-      {/* Planet glow */}
-      <mesh>
-        <sphereGeometry args={[0.35, 24, 24]} />
-        <meshBasicMaterial
-          color={template.color}
-          transparent
-          opacity={isHovered || isActive ? 0.4 : 0.2}
-          depthWrite={false}
-        />
-      </mesh>
-      
-      {(isHovered || isActive) && (
-        <pointLight
-          color={template.color}
-          intensity={3}
-          distance={4}
-        />
-      )}
-      
-      {/* Planet Icon */}
-      <group>
-        <PlanetIcon icon={template.icon} isHovered={isHovered} isActive={isActive} />
+    <group ref={orbitContainerRef}>
+      <group ref={planetRef} position={[orbitPosition.x, orbitPosition.y, orbitPosition.z]}>
+        {/* Planet orbit ring */}
+        <mesh ref={ringRef} rotation={[Math.PI / 2, 0, 0]}>
+          <ringGeometry args={[0.35, 0.38, 32]} />
+          <meshBasicMaterial
+            color={template.color}
+            transparent
+            opacity={isHovered || isActive ? 0.5 : 0.2}
+            side={THREE.DoubleSide}
+          />
+        </mesh>
+        
+        {/* Planet sphere */}
+        <mesh
+          ref={meshRef}
+          onPointerOver={(e) => { e.stopPropagation(); onHover(template.id) }}
+          onPointerOut={() => onHover(null)}
+          onClick={(e) => { e.stopPropagation(); onClick(template) }}
+        >
+          <sphereGeometry args={[0.25, 32, 32]} />
+          <meshPhysicalMaterial
+            color={template.color}
+            emissive={template.color}
+            emissiveIntensity={isHovered || isActive ? 1.5 : 0.5}
+            metalness={0.8}
+            roughness={0.2}
+            clearcoat={1}
+            clearcoatRoughness={0.1}
+            transparent
+            opacity={0.85}
+          />
+        </mesh>
+        
+        {/* Planet glow */}
+        <mesh>
+          <sphereGeometry args={[0.35, 24, 24]} />
+          <meshBasicMaterial
+            color={template.color}
+            transparent
+            opacity={isHovered || isActive ? 0.4 : 0.2}
+            depthWrite={false}
+          />
+        </mesh>
+        
+        {(isHovered || isActive) && (
+          <pointLight
+            color={template.color}
+            intensity={3}
+            distance={4}
+          />
+        )}
+        
+        {/* Planet Icon - positioned in front and always facing camera */}
+        <group ref={iconRef} position={[0, 0, 0.26]}>
+          <PlanetIcon icon={template.icon} isHovered={isHovered} isActive={isActive} />
+        </group>
       </group>
     </group>
   )
