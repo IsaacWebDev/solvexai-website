@@ -95,8 +95,8 @@ export default function HomePage() {
           <AutomationScanner />
           <SectionDivider />
           
-          <section className="pt-20 pb-8 px-6 relative z-10">
-            <div className="text-center mb-12">
+          <section className="pt-20 pb-0 px-6 relative z-10">
+            <div className="text-center mb-8">
               <div className="inline-block">
                 <h2 className="text-5xl font-bold gradient-text">
                   Template Showcase
@@ -109,7 +109,7 @@ export default function HomePage() {
             <TemplateGalaxy />
           </section>
           
-          <div style={{ marginTop: '2rem' }}>
+          <div style={{ marginTop: '1rem' }}>
             <PricingSimple />
           </div>
           <SectionDivider />
