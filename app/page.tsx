@@ -6,7 +6,7 @@ import { Navigation } from '@/components/Navigation'
 import { AppleHero } from '@/components/sections/AppleHero'
 import { LiveCounter } from '@/components/interactive/LiveCounter'
 import { OutcomesSimple } from '@/components/sections/OutcomesSimple'
-import { TemplateShowcase } from '@/components/sections/TemplateShowcase'
+import { Interactive3DOrb } from '@/components/Interactive3DOrb'
 import { PricingSimple } from '@/components/sections/PricingSimple'
 import { ComparisonTable } from '@/components/sections/ComparisonTable'
 import { CTAMinimal } from '@/components/sections/CTAMinimal'
@@ -95,7 +95,7 @@ export default function HomePage() {
           <AutomationScanner />
           <SectionDivider />
           
-          <TemplateShowcase />
+          <Interactive3DOrb />
           <SectionDivider />
           
           <PricingSimple />
