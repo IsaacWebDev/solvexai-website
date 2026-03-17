@@ -4,6 +4,7 @@ import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import { useRef, useState, useMemo, useEffect } from 'react'
 import * as THREE from 'three'
 import { motion, AnimatePresence } from 'framer-motion'
+import { Text } from '@react-three/drei'
 
 interface Template {
   id: string
@@ -20,6 +21,19 @@ interface OrbitConfig {
   type: 'top' | 'main' | 'side'
   radius: number
   speed: number
+}
+
+// Icon unicode mapping
+const ICON_MAP: Record<Template['icon'], string> = {
+  restaurant: '🍴',
+  law: '⚖️',
+  fitness: '💪',
+  ecommerce: '🛒',
+  medical: '⚕️',
+  construction: '🔨',
+  agency: '⭐',
+  service: '⚙️',
+  realestate: '🏠'
 }
 
 const templates: (Template & { orbit: OrbitConfig })[] = [
@@ -259,7 +273,7 @@ function OrbitRing({ radius, type }: { radius: number, type: 'top' | 'main' | 's
         0
       )
       const pts = curve.getPoints(50)
-      points = pts.map(p => new THREE.Vector3(p.x, 1, p.y))
+      points = pts.map(p => new THREE.Vector3(p.x, 1.5, p.y))
     } else if (type === 'main') {
       // Full circular orbit
       const curve = new THREE.EllipseCurve(
@@ -289,7 +303,7 @@ function OrbitRing({ radius, type }: { radius: number, type: 'top' | 'main' | 's
     const material = new THREE.LineBasicMaterial({
       color: '#00d0ff',
       transparent: true,
-      opacity: type === 'main' ? 0.2 : 0.12
+      opacity: type === 'main' ? 0.25 : 0.15
     })
     return new THREE.LineLoop(geometry, material)
   }, [radius, type])
@@ -297,205 +311,29 @@ function OrbitRing({ radius, type }: { radius: number, type: 'top' | 'main' | 's
   return <primitive object={line} />
 }
 
-function PlanetIcon({ icon, isHovered, isActive }: { icon: Template['icon'], isHovered: boolean, isActive: boolean }) {
-  const extrudedGeometry = useMemo(() => {
-    const shape = new THREE.Shape()
-    
-    // Create BOLD icon shapes with solid fills
-    switch (icon) {
-      case 'restaurant': // Fork & Knife
-        // Fork
-        shape.moveTo(-0.08, 0.12)
-        shape.lineTo(-0.08, -0.12)
-        shape.lineTo(-0.05, -0.12)
-        shape.lineTo(-0.05, -0.04)
-        shape.lineTo(-0.04, -0.04)
-        shape.lineTo(-0.04, 0.12)
-        shape.closePath()
-        // Knife (separate shape)
-        const knife = new THREE.Shape()
-        knife.moveTo(0.04, 0.12)
-        knife.lineTo(0.04, -0.08)
-        knife.lineTo(0.02, -0.12)
-        knife.lineTo(0.08, -0.12)
-        knife.lineTo(0.08, -0.08)
-        knife.lineTo(0.06, -0.08)
-        knife.lineTo(0.06, 0.12)
-        knife.closePath()
-        shape.holes.push(knife)
-        break
-      case 'law': // Scales (simplified solid)
-        // Base
-        shape.moveTo(-0.12, 0.02)
-        shape.lineTo(-0.12, -0.02)
-        shape.lineTo(0.12, -0.02)
-        shape.lineTo(0.12, 0.02)
-        shape.closePath()
-        // Center post
-        const post = new THREE.Shape()
-        post.moveTo(-0.02, 0.02)
-        post.lineTo(-0.02, 0.12)
-        post.lineTo(0.02, 0.12)
-        post.lineTo(0.02, 0.02)
-        post.closePath()
-        shape.holes.push(post)
-        break
-      case 'fitness': // Dumbbell
-        // Left weight
-        shape.moveTo(-0.12, 0.05)
-        shape.lineTo(-0.12, -0.05)
-        shape.lineTo(-0.08, -0.05)
-        shape.lineTo(-0.08, 0.05)
-        shape.closePath()
-        // Bar
-        const bar = new THREE.Shape()
-        bar.moveTo(-0.08, 0.02)
-        bar.lineTo(-0.08, -0.02)
-        bar.lineTo(0.08, -0.02)
-        bar.lineTo(0.08, 0.02)
-        bar.closePath()
-        shape.holes.push(bar)
-        // Right weight
-        const rightWeight = new THREE.Shape()
-        rightWeight.moveTo(0.08, 0.05)
-        rightWeight.lineTo(0.08, -0.05)
-        rightWeight.lineTo(0.12, -0.05)
-        rightWeight.lineTo(0.12, 0.05)
-        rightWeight.closePath()
-        shape.holes.push(rightWeight)
-        break
-      case 'medical': // Plus/Cross
-        // Horizontal bar
-        shape.moveTo(-0.12, 0.035)
-        shape.lineTo(-0.12, -0.035)
-        shape.lineTo(0.12, -0.035)
-        shape.lineTo(0.12, 0.035)
-        shape.closePath()
-        // Vertical bar
-        const vertical = new THREE.Shape()
-        vertical.moveTo(-0.035, -0.12)
-        vertical.lineTo(-0.035, 0.12)
-        vertical.lineTo(0.035, 0.12)
-        vertical.lineTo(0.035, -0.12)
-        vertical.closePath()
-        shape.holes.push(vertical)
-        break
-      case 'construction': // Hammer
-        // Hammer head
-        shape.moveTo(-0.02, 0.08)
-        shape.lineTo(-0.02, 0.12)
-        shape.lineTo(0.12, 0.12)
-        shape.lineTo(0.12, 0.04)
-        shape.lineTo(0.08, 0.04)
-        shape.lineTo(0.08, 0.08)
-        shape.closePath()
-        // Handle
-        const handle = new THREE.Shape()
-        handle.moveTo(-0.02, -0.12)
-        handle.lineTo(-0.02, 0.08)
-        handle.lineTo(0.02, 0.08)
-        handle.lineTo(0.02, -0.12)
-        handle.closePath()
-        shape.holes.push(handle)
-        break
-      case 'agency': // Star (5-pointed)
-        const outerRadius = 0.12
-        const innerRadius = 0.05
-        for (let i = 0; i < 10; i++) {
-          const angle = (i * Math.PI) / 5 - Math.PI / 2
-          const radius = i % 2 === 0 ? outerRadius : innerRadius
-          const x = Math.cos(angle) * radius
-          const y = Math.sin(angle) * radius
-          if (i === 0) shape.moveTo(x, y)
-          else shape.lineTo(x, y)
-        }
-        shape.closePath()
-        break
-      case 'ecommerce': // Shopping cart
-        // Cart body
-        shape.moveTo(-0.12, 0.08)
-        shape.lineTo(-0.08, -0.04)
-        shape.lineTo(0.08, -0.04)
-        shape.lineTo(0.10, 0.02)
-        shape.lineTo(0.12, 0.08)
-        shape.closePath()
-        // Handle
-        const cartHandle = new THREE.Shape()
-        cartHandle.moveTo(-0.14, 0.08)
-        cartHandle.lineTo(-0.12, 0.08)
-        cartHandle.lineTo(-0.10, 0.12)
-        cartHandle.lineTo(-0.12, 0.12)
-        cartHandle.closePath()
-        shape.holes.push(cartHandle)
-        break
-      case 'realestate': // House
-        // Roof triangle
-        shape.moveTo(0, 0.12)
-        shape.lineTo(-0.12, 0)
-        shape.lineTo(0.12, 0)
-        shape.closePath()
-        // House body
-        const body = new THREE.Shape()
-        body.moveTo(-0.10, 0)
-        body.lineTo(-0.10, -0.12)
-        body.lineTo(0.10, -0.12)
-        body.lineTo(0.10, 0)
-        body.closePath()
-        shape.holes.push(body)
-        // Door
-        const door = new THREE.Shape()
-        door.moveTo(-0.03, -0.12)
-        door.lineTo(-0.03, -0.06)
-        door.lineTo(0.03, -0.06)
-        door.lineTo(0.03, -0.12)
-        door.closePath()
-        body.holes.push(door)
-        break
-      default: // Service - Gear
-        const teeth = 8
-        const outerR = 0.12
-        const innerR = 0.08
-        for (let i = 0; i < teeth * 2; i++) {
-          const angle = (i * Math.PI) / teeth
-          const r = i % 2 === 0 ? outerR : innerR
-          const x = Math.cos(angle) * r
-          const y = Math.sin(angle) * r
-          if (i === 0) shape.moveTo(x, y)
-          else shape.lineTo(x, y)
-        }
-        shape.closePath()
-        // Inner circle hole
-        const innerCircle = new THREE.Shape()
-        const circlePoints = 32
-        for (let i = 0; i <= circlePoints; i++) {
-          const angle = (i / circlePoints) * Math.PI * 2
-          const x = Math.cos(angle) * 0.04
-          const y = Math.sin(angle) * 0.04
-          if (i === 0) innerCircle.moveTo(x, y)
-          else innerCircle.lineTo(x, y)
-        }
-        shape.holes.push(innerCircle)
-    }
-    
-    return new THREE.ExtrudeGeometry(shape, {
-      depth: 0.04,
-      bevelEnabled: true,
-      bevelThickness: 0.01,
-      bevelSize: 0.01,
-      bevelSegments: 3
-    })
-  }, [icon])
+function PlanetIcon({ 
+  icon, 
+  isHovered, 
+  isActive 
+}: { 
+  icon: Template['icon']
+  isHovered: boolean
+  isActive: boolean 
+}) {
+  const emoji = ICON_MAP[icon]
   
   return (
-    <mesh geometry={extrudedGeometry}>
-      <meshStandardMaterial
-        color="#ffffff"
-        emissive="#ffffff"
-        emissiveIntensity={isHovered || isActive ? 1.2 : 0.6}
-        metalness={0.1}
-        roughness={0.3}
-      />
-    </mesh>
+    <Text
+      fontSize={0.4}
+      color="#ffffff"
+      anchorX="center"
+      anchorY="middle"
+      outlineWidth={0.02}
+      outlineColor="#000000"
+      outlineOpacity={0.8}
+    >
+      {emoji}
+    </Text>
   )
 }
 
@@ -522,33 +360,38 @@ function TemplatePlanet({
   const ringRef = useRef<THREE.Mesh>(null)
   const iconGroupRef = useRef<THREE.Group>(null)
   
-  // Calculate ANGLE on orbit (not position)
+  // Calculate static angle position on orbit
   const baseAngle = useMemo(() => {
-    return (index / totalInOrbit) * (template.orbit.type === 'top' ? Math.PI : 2 * Math.PI)
+    if (template.orbit.type === 'top') {
+      // Distribute evenly across top semi-circle (π to 2π)
+      return Math.PI + (index / totalInOrbit) * Math.PI
+    } else {
+      // Full circle distribution
+      return (index / totalInOrbit) * 2 * Math.PI
+    }
   }, [index, totalInOrbit, template.orbit.type])
   
   useFrame((state) => {
     if (!orbitContainerRef.current || !planetGroupRef.current || !iconGroupRef.current) return
     
-    // Rotate the entire orbit
+    // Rotate the ENTIRE orbit container - this makes planets orbit
     orbitContainerRef.current.rotation.y = state.clock.elapsedTime * template.orbit.speed
     
-    // Calculate planet position based on orbit type
+    // Set planet position based on static angle and orbit type
     let x = 0, y = 0, z = 0
     
     if (template.orbit.type === 'top') {
-      // Semi-circle above
-      const angle = Math.PI + baseAngle
-      x = Math.cos(angle) * template.orbit.radius
-      y = 1.5 + Math.abs(Math.sin(angle)) * 0.5
-      z = Math.sin(angle) * template.orbit.radius
+      // Top semi-circle arc
+      x = Math.cos(baseAngle) * template.orbit.radius
+      y = 1.5 + Math.abs(Math.sin(baseAngle)) * 0.5
+      z = Math.sin(baseAngle) * template.orbit.radius
     } else if (template.orbit.type === 'main') {
-      // Full circle
+      // Main horizontal ring
       x = Math.cos(baseAngle) * template.orbit.radius
       y = 0
       z = Math.sin(baseAngle) * template.orbit.radius
     } else {
-      // Side orbit (vertical)
+      // Side vertical ring
       x = Math.sin(baseAngle) * template.orbit.radius * 0.3
       y = Math.cos(baseAngle) * template.orbit.radius
       z = Math.sin(baseAngle) * template.orbit.radius
@@ -556,23 +399,19 @@ function TemplatePlanet({
     
     planetGroupRef.current.position.set(x, y, z)
     
-    // Counter-rotate planet to face camera
+    // Counter-rotate planet group so it doesn't spin with orbit
     planetGroupRef.current.rotation.y = -orbitContainerRef.current.rotation.y
     
-    // Planet self-rotation
+    // Planet gentle self-rotation
     if (meshRef.current) {
-      meshRef.current.rotation.y += 0.01
+      meshRef.current.rotation.y += 0.005
       
-      // Scale on hover/active
-      if (isHovered || isActive) {
-        const targetScale = 1.3
-        meshRef.current.scale.lerp(
-          new THREE.Vector3(targetScale, targetScale, targetScale),
-          0.1
-        )
-      } else {
-        meshRef.current.scale.lerp(new THREE.Vector3(1, 1, 1), 0.1)
-      }
+      // Scale animation on hover/active
+      const targetScale = (isHovered || isActive) ? 1.4 : 1.0
+      meshRef.current.scale.lerp(
+        new THREE.Vector3(targetScale, targetScale, targetScale),
+        0.15
+      )
     }
     
     // Ring rotation
@@ -580,70 +419,74 @@ function TemplatePlanet({
       ringRef.current.rotation.z += 0.02
     }
     
-    // Keep icon facing camera
+    // Icon ALWAYS faces camera - this is critical
     if (iconGroupRef.current) {
-      const camera = state.camera
-      iconGroupRef.current.lookAt(camera.position)
+      iconGroupRef.current.lookAt(state.camera.position)
     }
   })
   
   return (
     <group ref={orbitContainerRef}>
       <group ref={planetGroupRef}>
-        {/* Planet orbit ring */}
+        {/* Planet selection ring */}
         <mesh ref={ringRef} rotation={[Math.PI / 2, 0, 0]}>
-          <ringGeometry args={[0.35, 0.38, 32]} />
+          <ringGeometry args={[0.38, 0.42, 32]} />
           <meshBasicMaterial
             color={template.color}
             transparent
-            opacity={isHovered || isActive ? 0.5 : 0.2}
+            opacity={isHovered || isActive ? 0.6 : 0.25}
             side={THREE.DoubleSide}
           />
         </mesh>
         
-        {/* Planet sphere */}
+        {/* Planet sphere - CLICKABLE */}
         <mesh
           ref={meshRef}
           onPointerOver={(e) => { e.stopPropagation(); onHover(template.id) }}
           onPointerOut={() => onHover(null)}
           onClick={(e) => { e.stopPropagation(); onClick(template) }}
         >
-          <sphereGeometry args={[0.25, 32, 32]} />
+          <sphereGeometry args={[0.28, 32, 32]} />
           <meshPhysicalMaterial
             color={template.color}
             emissive={template.color}
-            emissiveIntensity={isHovered || isActive ? 1.5 : 0.5}
-            metalness={0.8}
-            roughness={0.2}
+            emissiveIntensity={isHovered || isActive ? 0.8 : 0.4}
+            metalness={0.7}
+            roughness={0.3}
             clearcoat={1}
             clearcoatRoughness={0.1}
             transparent
-            opacity={0.85}
+            opacity={0.9}
           />
         </mesh>
         
-        {/* Planet glow */}
+        {/* Planet outer glow */}
         <mesh>
-          <sphereGeometry args={[0.35, 24, 24]} />
+          <sphereGeometry args={[0.38, 24, 24]} />
           <meshBasicMaterial
             color={template.color}
             transparent
-            opacity={isHovered || isActive ? 0.4 : 0.2}
+            opacity={isHovered || isActive ? 0.35 : 0.15}
             depthWrite={false}
           />
         </mesh>
         
+        {/* Hover/active light */}
         {(isHovered || isActive) && (
           <pointLight
             color={template.color}
-            intensity={3}
-            distance={4}
+            intensity={4}
+            distance={5}
           />
         )}
         
-        {/* Icon - positioned OUTSIDE sphere and always faces camera */}
-        <group ref={iconGroupRef} position={[0, 0, 0.35]}>
-          <PlanetIcon icon={template.icon} isHovered={isHovered} isActive={isActive} />
+        {/* Icon - positioned WELL IN FRONT of sphere, billboard facing camera */}
+        <group ref={iconGroupRef} position={[0, 0, 0.55]}>
+          <PlanetIcon 
+            icon={template.icon} 
+            isHovered={isHovered} 
+            isActive={isActive} 
+          />
         </group>
       </group>
     </group>
@@ -680,13 +523,19 @@ function TemplateGalaxyScene({
   
   return (
     <group>
-      <ambientLight intensity={0.3} />
-      <directionalLight position={[5, 5, 5]} intensity={0.5} />
-      <directionalLight position={[-5, -5, -5]} intensity={0.3} />
+      <ambientLight intensity={0.4} />
+      <directionalLight position={[5, 5, 5]} intensity={0.6} />
+      <directionalLight position={[-5, -5, -5]} intensity={0.4} />
+      <pointLight position={[0, 10, 0]} intensity={0.5} color="#ffffff" />
       
       <SolvexAICore />
       
       <EnergyParticles />
+      
+      {/* Orbit path visualizations */}
+      <OrbitRing radius={4.5} type="top" />
+      <OrbitRing radius={3.2} type="main" />
+      <OrbitRing radius={3.8} type="side" />
       
       {/* Top orbit planets */}
       {orbitGroups.top.map((template, i) => (
@@ -768,4 +617,79 @@ export function TemplateGalaxy() {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 10 }}
-          className="absolute bottom-24 left-1/2
+          className="absolute bottom-24 left-1/2 -translate-x-1/2 
+                     bg-black/80 backdrop-blur-sm border border-cyan-500/30 
+                     px-6 py-3 rounded-lg pointer-events-none z-10"
+        >
+          <p className="text-white font-medium text-sm">{hoveredTemplate.name}</p>
+        </motion.div>
+      )}
+      
+      {/* Template detail card */}
+      <AnimatePresence>
+        {selectedTemplate && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.9, y: 20 }}
+            className="absolute bottom-8 left-1/2 -translate-x-1/2 
+                       bg-gradient-to-br from-gray-900/95 to-black/95 
+                       backdrop-blur-lg border border-cyan-500/40 
+                       rounded-2xl p-8 max-w-md w-full shadow-2xl z-20"
+          >
+            <button
+              onClick={closeCard}
+              className="absolute top-4 right-4 text-gray-400 hover:text-white 
+                         transition-colors text-2xl leading-none"
+            >
+              ×
+            </button>
+            
+            <div className="flex items-center gap-4 mb-4">
+              <div
+                className="w-16 h-16 rounded-full flex items-center justify-center text-3xl"
+                style={{ 
+                  backgroundColor: selectedTemplate.color + '20',
+                  border: `2px solid ${selectedTemplate.color}`
+                }}
+              >
+                {ICON_MAP[selectedTemplate.icon]}
+              </div>
+              <div>
+                <h3 className="text-2xl font-bold text-white mb-1">
+                  {selectedTemplate.name}
+                </h3>
+                <p className="text-sm text-gray-400">
+                  Professional Template
+                </p>
+              </div>
+            </div>
+            
+            <p className="text-gray-300 mb-6 leading-relaxed">
+              {selectedTemplate.description}
+            </p>
+            
+            <div className="flex gap-3">
+              <a
+                href={selectedTemplate.path}
+                className="flex-1 bg-gradient-to-r from-cyan-500 to-purple-500 
+                           text-white px-6 py-3 rounded-lg font-semibold 
+                           hover:shadow-lg hover:shadow-cyan-500/50 
+                           transition-all duration-300 text-center"
+              >
+                View Template
+              </a>
+              <button
+                onClick={closeCard}
+                className="px-6 py-3 border border-gray-600 text-gray-300 
+                           rounded-lg hover:bg-gray-800 transition-colors"
+              >
+                Close
+              </button>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  )
+}
