@@ -268,7 +268,6 @@ export function AIAvatar() {
         <Sheet 
           isOpen={isOpen} 
           onClose={() => setIsOpen(false)}
-          detent="content-height"
           snapPoints={[600, 400, 0]}
         >
           <Sheet.Container>
