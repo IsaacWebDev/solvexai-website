@@ -69,18 +69,7 @@ export default function HomePage() {
       <ScrollControlledJellyfish />
       
       {/* Fluid Glass Lens Effect */}
-      <div className="fixed inset-0 pointer-events-none z-50">
-        <FluidGlass 
-          mode="lens"
-          lensProps={{
-            scale: 0.25,
-            ior: 1.15,
-            thickness: 2,
-            chromaticAberration: 0.05,
-            anisotropy: 0.01
-          }}
-        />
-      </div>
+      <FluidGlass />
       
       {/* Main Content - Apple-Style Minimal */}
       <main 

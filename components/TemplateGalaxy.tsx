@@ -13,6 +13,7 @@ interface Template {
   color: string
   orbitRadius: number
   orbitSpeed: number
+  icon: 'restaurant' | 'law' | 'fitness' | 'ecommerce' | 'medical' | 'construction' | 'agency' | 'service' | 'realestate'
 }
 
 interface OrbitConfig {
@@ -31,7 +32,8 @@ const templates: (Template & { orbit: OrbitConfig })[] = [
     color: '#d4af37',
     orbitRadius: 4.5,
     orbitSpeed: 0.2,
-    orbit: { type: 'top', radius: 4.5, speed: 0.2 }
+    orbit: { type: 'top', radius: 4.5, speed: 0.2 },
+    icon: 'restaurant'
   },
   {
     id: 'construction',
@@ -41,7 +43,8 @@ const templates: (Template & { orbit: OrbitConfig })[] = [
     color: '#FDB927',
     orbitRadius: 4.5,
     orbitSpeed: 0.2,
-    orbit: { type: 'top', radius: 4.5, speed: 0.2 }
+    orbit: { type: 'top', radius: 4.5, speed: 0.2 },
+    icon: 'construction'
   },
   {
     id: 'law',
@@ -51,7 +54,8 @@ const templates: (Template & { orbit: OrbitConfig })[] = [
     color: '#1B3A4B',
     orbitRadius: 4.5,
     orbitSpeed: 0.2,
-    orbit: { type: 'top', radius: 4.5, speed: 0.2 }
+    orbit: { type: 'top', radius: 4.5, speed: 0.2 },
+    icon: 'law'
   },
   
   // Main Orbit (4 planets - full circle)
@@ -63,7 +67,8 @@ const templates: (Template & { orbit: OrbitConfig })[] = [
     color: '#2563eb',
     orbitRadius: 3.2,
     orbitSpeed: 0.18,
-    orbit: { type: 'main', radius: 3.2, speed: 0.18 }
+    orbit: { type: 'main', radius: 3.2, speed: 0.18 },
+    icon: 'fitness'
   },
   {
     id: 'real-estate',
@@ -73,7 +78,8 @@ const templates: (Template & { orbit: OrbitConfig })[] = [
     color: '#C9A961',
     orbitRadius: 3.2,
     orbitSpeed: 0.18,
-    orbit: { type: 'main', radius: 3.2, speed: 0.18 }
+    orbit: { type: 'main', radius: 3.2, speed: 0.18 },
+    icon: 'realestate'
   },
   {
     id: 'agency',
@@ -83,7 +89,8 @@ const templates: (Template & { orbit: OrbitConfig })[] = [
     color: '#667eea',
     orbitRadius: 3.2,
     orbitSpeed: 0.18,
-    orbit: { type: 'main', radius: 3.2, speed: 0.18 }
+    orbit: { type: 'main', radius: 3.2, speed: 0.18 },
+    icon: 'agency'
   },
   {
     id: 'medical',
@@ -93,7 +100,8 @@ const templates: (Template & { orbit: OrbitConfig })[] = [
     color: '#4A90E2',
     orbitRadius: 3.2,
     orbitSpeed: 0.18,
-    orbit: { type: 'main', radius: 3.2, speed: 0.18 }
+    orbit: { type: 'main', radius: 3.2, speed: 0.18 },
+    icon: 'medical'
   },
   
   // Side Orbit (2 planets - vertical tilted ring)
@@ -105,7 +113,8 @@ const templates: (Template & { orbit: OrbitConfig })[] = [
     color: '#1a1a1a',
     orbitRadius: 3.8,
     orbitSpeed: 0.22,
-    orbit: { type: 'side', radius: 3.8, speed: 0.22 }
+    orbit: { type: 'side', radius: 3.8, speed: 0.22 },
+    icon: 'ecommerce'
   },
   {
     id: 'service',
@@ -115,7 +124,8 @@ const templates: (Template & { orbit: OrbitConfig })[] = [
     color: '#00c0ff',
     orbitRadius: 3.8,
     orbitSpeed: 0.22,
-    orbit: { type: 'side', radius: 3.8, speed: 0.22 }
+    orbit: { type: 'side', radius: 3.8, speed: 0.22 },
+    icon: 'service'
   }
 ]
 
@@ -287,6 +297,141 @@ function OrbitRing({ radius, type }: { radius: number, type: 'top' | 'main' | 's
   return <primitive object={line} />
 }
 
+function PlanetIcon({ icon, isHovered, isActive }: { icon: Template['icon'], isHovered: boolean, isActive: boolean }) {
+  const iconGeometry = useMemo(() => {
+    const shape = new THREE.Shape()
+    
+    // Create simple icon shapes
+    switch (icon) {
+      case 'restaurant': // Fork & Knife
+        // Fork
+        shape.moveTo(-0.03, 0.06)
+        shape.lineTo(-0.03, -0.06)
+        shape.moveTo(-0.04, 0.04)
+        shape.lineTo(-0.04, 0.06)
+        shape.moveTo(-0.02, 0.04)
+        shape.lineTo(-0.02, 0.06)
+        // Knife
+        shape.moveTo(0.03, 0.06)
+        shape.lineTo(0.03, -0.04)
+        shape.lineTo(0.02, -0.06)
+        shape.lineTo(0.04, -0.06)
+        shape.lineTo(0.03, -0.04)
+        break
+      case 'law': // Scales
+        shape.moveTo(-0.05, 0)
+        shape.lineTo(0.05, 0)
+        shape.moveTo(0, 0)
+        shape.lineTo(0, 0.06)
+        shape.moveTo(-0.04, -0.03)
+        shape.lineTo(-0.02, 0)
+        shape.lineTo(-0.06, 0)
+        shape.lineTo(-0.04, -0.03)
+        shape.moveTo(0.04, -0.03)
+        shape.lineTo(0.02, 0)
+        shape.lineTo(0.06, 0)
+        shape.lineTo(0.04, -0.03)
+        break
+      case 'fitness': // Dumbbell
+        shape.moveTo(-0.06, 0.02)
+        shape.lineTo(-0.06, -0.02)
+        shape.lineTo(-0.04, -0.02)
+        shape.lineTo(-0.04, 0.02)
+        shape.lineTo(-0.06, 0.02)
+        shape.moveTo(-0.04, 0)
+        shape.lineTo(0.04, 0)
+        shape.moveTo(0.04, 0.02)
+        shape.lineTo(0.04, -0.02)
+        shape.lineTo(0.06, -0.02)
+        shape.lineTo(0.06, 0.02)
+        shape.lineTo(0.04, 0.02)
+        break
+      case 'medical': // Plus/Cross
+        shape.moveTo(-0.05, 0.015)
+        shape.lineTo(-0.015, 0.015)
+        shape.lineTo(-0.015, 0.05)
+        shape.lineTo(0.015, 0.05)
+        shape.lineTo(0.015, 0.015)
+        shape.lineTo(0.05, 0.015)
+        shape.lineTo(0.05, -0.015)
+        shape.lineTo(0.015, -0.015)
+        shape.lineTo(0.015, -0.05)
+        shape.lineTo(-0.015, -0.05)
+        shape.lineTo(-0.015, -0.015)
+        shape.lineTo(-0.05, -0.015)
+        shape.lineTo(-0.05, 0.015)
+        break
+      case 'construction': // Hammer
+        shape.moveTo(-0.02, -0.06)
+        shape.lineTo(0.02, -0.02)
+        shape.lineTo(0.06, -0.04)
+        shape.lineTo(0.04, -0.06)
+        shape.lineTo(0.02, -0.02)
+        shape.lineTo(-0.04, 0.04)
+        shape.lineTo(-0.06, 0.02)
+        shape.lineTo(-0.02, -0.06)
+        break
+      case 'agency': // Star
+        for (let i = 0; i < 5; i++) {
+          const angle = (i * 4 * Math.PI) / 5 - Math.PI / 2
+          const x = Math.cos(angle) * 0.05
+          const y = Math.sin(angle) * 0.05
+          if (i === 0) shape.moveTo(x, y)
+          else shape.lineTo(x, y)
+        }
+        shape.closePath()
+        break
+      case 'ecommerce': // Shopping cart
+        shape.moveTo(-0.06, 0.04)
+        shape.lineTo(-0.04, -0.02)
+        shape.lineTo(0.04, -0.02)
+        shape.lineTo(0.06, 0.04)
+        shape.lineTo(-0.06, 0.04)
+        shape.moveTo(-0.03, -0.05)
+        shape.arc(0, 0, 0.01, 0, Math.PI * 2, false)
+        shape.moveTo(0.03, -0.05)
+        shape.arc(0, 0, 0.01, 0, Math.PI * 2, false)
+        break
+      case 'realestate': // House
+        shape.moveTo(0, 0.06)
+        shape.lineTo(-0.05, 0)
+        shape.lineTo(-0.05, -0.06)
+        shape.lineTo(0.05, -0.06)
+        shape.lineTo(0.05, 0)
+        shape.lineTo(0, 0.06)
+        shape.moveTo(-0.02, -0.06)
+        shape.lineTo(-0.02, -0.03)
+        shape.lineTo(0.02, -0.03)
+        shape.lineTo(0.02, -0.06)
+        break
+      default: // Service - Gear
+        const teeth = 8
+        for (let i = 0; i < teeth * 2; i++) {
+          const angle = (i * Math.PI) / teeth
+          const r = i % 2 === 0 ? 0.05 : 0.04
+          const x = Math.cos(angle) * r
+          const y = Math.sin(angle) * r
+          if (i === 0) shape.moveTo(x, y)
+          else shape.lineTo(x, y)
+        }
+        shape.closePath()
+    }
+    
+    return new THREE.ShapeGeometry(shape)
+  }, [icon])
+  
+  return (
+    <mesh geometry={iconGeometry}>
+      <meshBasicMaterial
+        color="white"
+        transparent
+        opacity={isHovered || isActive ? 1 : 0.85}
+        side={THREE.DoubleSide}
+      />
+    </mesh>
+  )
+}
+
 function TemplatePlanet({ 
   template, 
   onHover, 
@@ -403,6 +548,11 @@ function TemplatePlanet({
           distance={4}
         />
       )}
+      
+      {/* Planet Icon */}
+      <group>
+        <PlanetIcon icon={template.icon} isHovered={isHovered} isActive={isActive} />
+      </group>
     </group>
   )
 }
