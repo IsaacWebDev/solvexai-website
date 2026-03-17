@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react'
 import { Navigation } from '@/components/Navigation'
-import { GalaxyBackground } from '@/components/GalaxyBackground'
+import { AnimatedGradientMesh } from '@/components/AnimatedGradientMesh'
 import { PhoneMockup } from '@/components/3d/PhoneMockup'
 import { GuaranteeBadge } from '@/components/GuaranteeBadge'
 import { Shield } from 'lucide-react'
@@ -15,7 +15,7 @@ export default function AIReceptionistPage() {
   return (
     <>
       <Navigation />
-      <GalaxyBackground />
+      <AnimatedGradientMesh />
       
       <main className="relative flex justify-center" style={{
         paddingBottom: spacing.section.vertical,
