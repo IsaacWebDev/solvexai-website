@@ -5,6 +5,8 @@ import { useRef, useState, useMemo, useEffect } from 'react'
 import * as THREE from 'three'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Html } from '@react-three/drei'
+import { TemplateModal } from '@/components/modals/TemplateModal'
+import { TEMPLATE_DATA } from '@/lib/templateData'
 import { 
   UtensilsCrossed, 
   Scale, 
@@ -83,7 +85,7 @@ const templates: (Template & { orbit: OrbitConfig })[] = [
     icon: 'fitness'
   },
   {
-    id: 'real-estate',
+    id: 'realestate',
     name: 'Real Estate Luxury',
     description: 'Luxury real estate template with white background and elegant gold accents',
     path: '/templates/real-estate',
@@ -486,10 +488,18 @@ function TemplateGalaxyScene({
 }
 
 export function TemplateGalaxy() {
-  const [selectedTemplate, setSelectedTemplate] = useState<Template | null>(null)
+  const [selectedTemplateId, setSelectedTemplateId] = useState<string | null>(null)
   const [hoveredId, setHoveredId] = useState<string | null>(null)
   
   const hoveredTemplate = templates.find(t => t.id === hoveredId)
+  const selectedTemplateData = selectedTemplateId ? TEMPLATE_DATA[selectedTemplateId] : null
+  
+  const handleTemplateClick = (template: Template) => {
+    // Map planet ID to template data
+    if (TEMPLATE_DATA[template.id]) {
+      setSelectedTemplateId(template.id)
+    }
+  }
   
   return (
     <div className="relative w-full h-[600px]">
@@ -499,15 +509,15 @@ export function TemplateGalaxy() {
         gl={{ antialias: true, alpha: true }}
       >
         <TemplateGalaxyScene
-          onTemplateClick={setSelectedTemplate}
-          activeTemplate={selectedTemplate}
+          onTemplateClick={handleTemplateClick}
+          activeTemplate={selectedTemplateId ? templates.find(t => t.id === selectedTemplateId) || null : null}
           hoveredId={hoveredId}
           setHoveredId={setHoveredId}
         />
       </Canvas>
       
       {/* Hover tooltip */}
-      {hoveredTemplate && !selectedTemplate && (
+      {hoveredTemplate && !selectedTemplateId && (
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
@@ -520,72 +530,13 @@ export function TemplateGalaxy() {
         </motion.div>
       )}
       
-      {/* Template detail card */}
-      <AnimatePresence>
-        {selectedTemplate && (
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9, y: 20 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.9, y: 20 }}
-            className="absolute bottom-8 left-1/2 -translate-x-1/2 
-                       bg-gradient-to-br from-gray-900/95 to-black/95 
-                       backdrop-blur-lg border border-cyan-500/40 
-                       rounded-2xl p-8 max-w-md w-full shadow-2xl z-20"
-          >
-            <button
-              onClick={() => setSelectedTemplate(null)}
-              className="absolute top-4 right-4 text-gray-400 hover:text-white 
-                         transition-colors text-2xl leading-none"
-            >
-              ×
-            </button>
-            
-            <div className="flex items-center gap-4 mb-4">
-              <div
-                className="w-16 h-16 rounded-full flex items-center justify-center"
-                style={{ 
-                  backgroundColor: selectedTemplate.color + '20',
-                  border: `2px solid ${selectedTemplate.color}`
-                }}
-              >
-                {(() => {
-                  const Icon = IconComponents[selectedTemplate.icon]
-                  return <Icon size={32} color={selectedTemplate.color} strokeWidth={2} />
-                })()}
-              </div>
-              <div>
-                <h3 className="text-2xl font-bold text-white mb-1">
-                  {selectedTemplate.name}
-                </h3>
-                <p className="text-sm text-gray-400">Professional Template</p>
-              </div>
-            </div>
-            
-            <p className="text-gray-300 mb-6 leading-relaxed">
-              {selectedTemplate.description}
-            </p>
-            
-            <div className="flex gap-3">
-              <a
-                href={selectedTemplate.path}
-                className="flex-1 bg-gradient-to-r from-cyan-500 to-purple-500 
-                           text-white px-6 py-3 rounded-lg font-semibold 
-                           hover:shadow-lg hover:shadow-cyan-500/50 
-                           transition-all duration-300 text-center"
-              >
-                View Template
-              </a>
-              <button
-                onClick={() => setSelectedTemplate(null)}
-                className="px-6 py-3 border border-gray-600 text-gray-300 
-                           rounded-lg hover:bg-gray-800 transition-colors"
-              >
-                Close
-              </button>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {/* Template Detail Modal */}
+      {selectedTemplateData && (
+        <TemplateModal
+          template={selectedTemplateData}
+          onClose={() => setSelectedTemplateId(null)}
+        />
+      )}
     </div>
   )
 }
