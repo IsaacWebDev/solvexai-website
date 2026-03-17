@@ -104,13 +104,7 @@ export default function TemplatesPage() {
       includes: 'Luxury design, Premium typography, Fully responsive, Ready to deploy',
       gradient: 'from-yellow-800 to-yellow-600',
       image: '/template-mockups/real-estate-luxury-mockup.png',
-      previewUrl: 'https://placeholder-realestate-demo.vercel.app',
-      pageImages: {
-        home: '/template-pages/real-estate-home-page.png',
-        about: '/template-pages/real-estate-about-page.png',
-        services: '/template-pages/real-estate-services-page.png',
-        contact: '/template-pages/real-estate-contact-page.png'
-      }
+      previewUrl: 'https://placeholder-realestate-demo.vercel.app'
     },
     {
       name: 'E-Commerce Clean',
@@ -127,13 +121,7 @@ export default function TemplatesPage() {
       includes: 'Cart functionality, Form validation, Fully responsive, Ready to deploy',
       gradient: 'from-purple-600 to-pink-600',
       image: '/template-mockups/ecommerce-clean-mockup.png',
-      previewUrl: 'https://placeholder-ecommerce-demo.vercel.app',
-      pageImages: {
-        home: '/template-pages/ecommerce-home-page.png',
-        about: '/template-pages/ecommerce-about-page.png',
-        services: '/template-pages/ecommerce-services-page.png',
-        contact: '/template-pages/ecommerce-contact-page.png'
-      }
+      previewUrl: 'https://placeholder-ecommerce-demo.vercel.app'
     },
     {
       name: 'Medical Practice',
@@ -150,13 +138,7 @@ export default function TemplatesPage() {
       includes: 'Professional healthcare design, Smooth animations, Fully responsive, Ready to deploy',
       gradient: 'from-cyan-600 to-blue-600',
       image: '/template-mockups/medical-practice-mockup.png',
-      previewUrl: 'https://placeholder-medical-demo.vercel.app',
-      pageImages: {
-        home: '/template-pages/medical-home-page.png',
-        about: '/template-pages/medical-about-page.png',
-        services: '/template-pages/medical-services-page.png',
-        contact: '/template-pages/medical-contact-page.png'
-      }
+      previewUrl: 'https://placeholder-medical-demo.vercel.app'
     },
     {
       name: 'Construction Pro',
@@ -173,13 +155,7 @@ export default function TemplatesPage() {
       includes: 'Bold professional design, Smooth animations, Fully responsive, Ready to deploy',
       gradient: 'from-gray-700 to-yellow-700',
       image: '/template-mockups/construction-pro-mockup.png',
-      previewUrl: 'https://placeholder-construction-demo.vercel.app',
-      pageImages: {
-        home: '/template-pages/construction-home-page.png',
-        about: '/template-pages/construction-about-page.png',
-        services: '/template-pages/construction-services-page.png',
-        contact: '/template-pages/construction-contact-page.png'
-      }
+      previewUrl: 'https://placeholder-construction-demo.vercel.app'
     },
     {
       name: 'Creative Agency',
@@ -196,13 +172,7 @@ export default function TemplatesPage() {
       includes: 'Modern creative design, Gradient accents, Fully responsive, Ready to deploy',
       gradient: 'from-pink-600 to-purple-600',
       image: '/template-mockups/creative-agency-mockup.png',
-      previewUrl: 'https://placeholder-agency-demo.vercel.app',
-      pageImages: {
-        home: '/template-pages/creative-agency-home-page.png',
-        about: '/template-pages/creative-agency-about-page.png',
-        services: '/template-pages/creative-agency-services-page.png',
-        contact: '/template-pages/creative-agency-contact-page.png'
-      }
+      previewUrl: 'https://placeholder-agency-demo.vercel.app'
     }
   ]
   
