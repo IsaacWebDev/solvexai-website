@@ -17,7 +17,7 @@ import { RealisticJellyfishBG } from '@/components/backgrounds/RealisticJellyfis
 import { InteractiveSpaceBackground } from '@/components/backgrounds/InteractiveSpaceBackground'
 import { SpaceHeroBackground } from '@/components/backgrounds/SpaceHeroBackground'
 import { ImmersiveJellyfishBG } from '@/components/backgrounds/ImmersiveJellyfishBG'
-import { ScrollControlledJellyfish } from '@/components/backgrounds/ScrollControlledJellyfish'
+import { InteractiveGalaxyBG } from '@/components/backgrounds/InteractiveGalaxyBG'
 import { SectionDivider } from '@/components/ui/SectionDivider'
 import { StickyBookCallButton } from '@/components/StickyBookCallButton'
 import dynamic from 'next/dynamic'
@@ -65,8 +65,8 @@ export default function HomePage() {
       <Navigation />
       <StickyBookCallButton />
       
-      {/* Scroll-Controlled Jellyfish Background (global) */}
-      <ScrollControlledJellyfish />
+      {/* Interactive Galaxy Background (global) */}
+      <InteractiveGalaxyBG />
       
       {/* Ghost Cursor Effect */}
       <GhostCursor

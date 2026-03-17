@@ -4,7 +4,18 @@ import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import { useRef, useState, useMemo, useEffect } from 'react'
 import * as THREE from 'three'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Text } from '@react-three/drei'
+import { Html } from '@react-three/drei'
+import { 
+  UtensilsCrossed, 
+  Scale, 
+  Dumbbell, 
+  Cross, 
+  HardHat, 
+  Sparkles, 
+  ShoppingCart, 
+  Home, 
+  Settings 
+} from 'lucide-react'
 
 interface Template {
   id: string
@@ -23,21 +34,8 @@ interface OrbitConfig {
   speed: number
 }
 
-// Icon unicode mapping
-const ICON_MAP: Record<Template['icon'], string> = {
-  restaurant: '🍴',
-  law: '⚖️',
-  fitness: '💪',
-  ecommerce: '🛒',
-  medical: '⚕️',
-  construction: '🔨',
-  agency: '⭐',
-  service: '⚙️',
-  realestate: '🏠'
-}
-
 const templates: (Template & { orbit: OrbitConfig })[] = [
-  // Top Orbit (3 planets - semi-circle arc above)
+  // Top arc: 3 planets (restaurant, construction, law)
   {
     id: 'restaurant',
     name: 'Restaurant Delight',
@@ -72,7 +70,7 @@ const templates: (Template & { orbit: OrbitConfig })[] = [
     icon: 'law'
   },
   
-  // Main Orbit (4 planets - full circle)
+  // Main ring: 4 planets (fitness, real-estate, agency, medical)
   {
     id: 'fitness',
     name: 'Fitness Studio Energy',
@@ -118,7 +116,7 @@ const templates: (Template & { orbit: OrbitConfig })[] = [
     icon: 'medical'
   },
   
-  // Side Orbit (2 planets - vertical tilted ring)
+  // Side ring: 2 planets (ecommerce, service)
   {
     id: 'ecommerce',
     name: 'E-Commerce Clean',
@@ -143,6 +141,19 @@ const templates: (Template & { orbit: OrbitConfig })[] = [
   }
 ]
 
+// Icon component mapping
+const IconComponents = {
+  restaurant: UtensilsCrossed,
+  law: Scale,
+  fitness: Dumbbell,
+  medical: Cross,
+  construction: HardHat,
+  agency: Sparkles,
+  ecommerce: ShoppingCart,
+  realestate: Home,
+  service: Settings
+}
+
 function EnergyParticles() {
   const particlesRef = useRef<THREE.Points>(null)
   
@@ -160,8 +171,7 @@ function EnergyParticles() {
       positions[i * 3 + 1] = radius * Math.sin(phi) * Math.sin(theta)
       positions[i * 3 + 2] = radius * Math.cos(phi)
       
-      const usesCyan = Math.random() > 0.5
-      const color = new THREE.Color(usesCyan ? '#00d0ff' : '#a855f7')
+      const color = new THREE.Color(Math.random() > 0.5 ? '#00d0ff' : '#a855f7')
       colors[i * 3] = color.r
       colors[i * 3 + 1] = color.g
       colors[i * 3 + 2] = color.b
@@ -220,120 +230,24 @@ function SolvexAICore() {
   
   return (
     <group>
-      {/* Wireframe geometric sphere */}
       <mesh ref={meshRef}>
         <icosahedronGeometry args={[0.6, 1]} />
-        <meshBasicMaterial
-          color="#00d0ff"
-          wireframe
-          transparent
-          opacity={0.6}
-        />
+        <meshBasicMaterial color="#00d0ff" wireframe transparent opacity={0.6} />
       </mesh>
       
-      {/* Inner glow - cyan */}
       <mesh>
         <sphereGeometry args={[0.7, 32, 32]} />
-        <meshBasicMaterial
-          color="#00d0ff"
-          transparent
-          opacity={0.3}
-          depthWrite={false}
-        />
+        <meshBasicMaterial color="#00d0ff" transparent opacity={0.3} depthWrite={false} />
       </mesh>
       
-      {/* Outer glow - purple */}
       <mesh ref={glowRef}>
         <sphereGeometry args={[0.9, 32, 32]} />
-        <meshBasicMaterial
-          color="#a855f7"
-          transparent
-          opacity={0.2}
-          depthWrite={false}
-        />
+        <meshBasicMaterial color="#a855f7" transparent opacity={0.2} depthWrite={false} />
       </mesh>
       
       <pointLight color="#00d0ff" intensity={5} distance={12} />
       <pointLight color="#a855f7" intensity={3} distance={10} />
     </group>
-  )
-}
-
-function OrbitRing({ radius, type }: { radius: number, type: 'top' | 'main' | 'side' }) {
-  const line = useMemo(() => {
-    let points: THREE.Vector3[]
-    
-    if (type === 'top') {
-      // Semi-circle arc above the center
-      const curve = new THREE.EllipseCurve(
-        0, 0,
-        radius, radius,
-        Math.PI, 2 * Math.PI, // Top half only
-        false,
-        0
-      )
-      const pts = curve.getPoints(50)
-      points = pts.map(p => new THREE.Vector3(p.x, 1.5, p.y))
-    } else if (type === 'main') {
-      // Full circular orbit
-      const curve = new THREE.EllipseCurve(
-        0, 0,
-        radius, radius,
-        0, 2 * Math.PI,
-        false,
-        0
-      )
-      const pts = curve.getPoints(100)
-      points = pts.map(p => new THREE.Vector3(p.x, 0, p.y))
-    } else {
-      // Side/vertical orbit (tilted 90 degrees)
-      const curve = new THREE.EllipseCurve(
-        0, 0,
-        radius, radius,
-        0, 2 * Math.PI,
-        false,
-        0
-      )
-      const pts = curve.getPoints(100)
-      // Rotate to vertical orientation
-      points = pts.map(p => new THREE.Vector3(0, p.x, p.y))
-    }
-    
-    const geometry = new THREE.BufferGeometry().setFromPoints(points)
-    const material = new THREE.LineBasicMaterial({
-      color: '#00d0ff',
-      transparent: true,
-      opacity: type === 'main' ? 0.25 : 0.15
-    })
-    return new THREE.LineLoop(geometry, material)
-  }, [radius, type])
-  
-  return <primitive object={line} />
-}
-
-function PlanetIcon({ 
-  icon, 
-  isHovered, 
-  isActive 
-}: { 
-  icon: Template['icon']
-  isHovered: boolean
-  isActive: boolean 
-}) {
-  const emoji = ICON_MAP[icon]
-  
-  return (
-    <Text
-      fontSize={0.4}
-      color="#ffffff"
-      anchorX="center"
-      anchorY="middle"
-      outlineWidth={0.02}
-      outlineColor="#000000"
-      outlineOpacity={0.8}
-    >
-      {emoji}
-    </Text>
   )
 }
 
@@ -357,40 +271,38 @@ function TemplatePlanet({
   const orbitContainerRef = useRef<THREE.Group>(null)
   const planetGroupRef = useRef<THREE.Group>(null)
   const meshRef = useRef<THREE.Mesh>(null)
-  const ringRef = useRef<THREE.Mesh>(null)
-  const iconGroupRef = useRef<THREE.Group>(null)
   
   // Calculate static angle position on orbit
   const baseAngle = useMemo(() => {
     if (template.orbit.type === 'top') {
-      // Distribute evenly across top semi-circle (π to 2π)
+      // Top arc: distribute across π to 2π (top half)
       return Math.PI + (index / totalInOrbit) * Math.PI
     } else {
-      // Full circle distribution
+      // Full circle: distribute across 0 to 2π
       return (index / totalInOrbit) * 2 * Math.PI
     }
   }, [index, totalInOrbit, template.orbit.type])
   
   useFrame((state) => {
-    if (!orbitContainerRef.current || !planetGroupRef.current || !iconGroupRef.current) return
+    if (!orbitContainerRef.current || !planetGroupRef.current) return
     
-    // Rotate the ENTIRE orbit container - this makes planets orbit
+    // Rotate orbit container - this makes planets orbit
     orbitContainerRef.current.rotation.y = state.clock.elapsedTime * template.orbit.speed
     
-    // Set planet position based on static angle and orbit type
+    // Calculate position based on orbit type and static angle
     let x = 0, y = 0, z = 0
     
     if (template.orbit.type === 'top') {
-      // Top semi-circle arc
+      // Top arc - semi-circle above center
       x = Math.cos(baseAngle) * template.orbit.radius
       y = 1.5 + Math.abs(Math.sin(baseAngle)) * 0.5
       z = Math.sin(baseAngle) * template.orbit.radius
     } else if (template.orbit.type === 'main') {
-      // Main horizontal ring
+      // Main horizontal ring at y=0
       x = Math.cos(baseAngle) * template.orbit.radius
       y = 0
       z = Math.sin(baseAngle) * template.orbit.radius
-    } else {
+    } else if (template.orbit.type === 'side') {
       // Side vertical ring
       x = Math.sin(baseAngle) * template.orbit.radius * 0.3
       y = Math.cos(baseAngle) * template.orbit.radius
@@ -399,47 +311,27 @@ function TemplatePlanet({
     
     planetGroupRef.current.position.set(x, y, z)
     
-    // Counter-rotate planet group so it doesn't spin with orbit
+    // Counter-rotate so planet doesn't spin with orbit
     planetGroupRef.current.rotation.y = -orbitContainerRef.current.rotation.y
     
-    // Planet gentle self-rotation
+    // Planet self-rotation and scale
     if (meshRef.current) {
       meshRef.current.rotation.y += 0.005
       
-      // Scale animation on hover/active
       const targetScale = (isHovered || isActive) ? 1.4 : 1.0
       meshRef.current.scale.lerp(
         new THREE.Vector3(targetScale, targetScale, targetScale),
         0.15
       )
     }
-    
-    // Ring rotation
-    if (ringRef.current) {
-      ringRef.current.rotation.z += 0.02
-    }
-    
-    // Icon ALWAYS faces camera - this is critical
-    if (iconGroupRef.current) {
-      iconGroupRef.current.lookAt(state.camera.position)
-    }
   })
+  
+  const IconComponent = IconComponents[template.icon]
   
   return (
     <group ref={orbitContainerRef}>
       <group ref={planetGroupRef}>
-        {/* Planet selection ring */}
-        <mesh ref={ringRef} rotation={[Math.PI / 2, 0, 0]}>
-          <ringGeometry args={[0.38, 0.42, 32]} />
-          <meshBasicMaterial
-            color={template.color}
-            transparent
-            opacity={isHovered || isActive ? 0.6 : 0.25}
-            side={THREE.DoubleSide}
-          />
-        </mesh>
-        
-        {/* Planet sphere - CLICKABLE */}
+        {/* Clean glowing sphere */}
         <mesh
           ref={meshRef}
           onPointerOver={(e) => { e.stopPropagation(); onHover(template.id) }}
@@ -460,7 +352,7 @@ function TemplatePlanet({
           />
         </mesh>
         
-        {/* Planet outer glow */}
+        {/* Outer glow */}
         <mesh>
           <sphereGeometry args={[0.38, 24, 24]} />
           <meshBasicMaterial
@@ -471,23 +363,31 @@ function TemplatePlanet({
           />
         </mesh>
         
-        {/* Hover/active light */}
+        {/* Hover light */}
         {(isHovered || isActive) && (
-          <pointLight
-            color={template.color}
-            intensity={4}
-            distance={5}
-          />
+          <pointLight color={template.color} intensity={4} distance={5} />
         )}
         
-        {/* Icon - positioned WELL IN FRONT of sphere, billboard facing camera */}
-        <group ref={iconGroupRef} position={[0, 0, 0.55]}>
-          <PlanetIcon 
-            icon={template.icon} 
-            isHovered={isHovered} 
-            isActive={isActive} 
-          />
-        </group>
+        {/* 2D HTML Icon Overlay */}
+        <Html
+          center
+          distanceFactor={8}
+          style={{
+            pointerEvents: 'none',
+            userSelect: 'none',
+          }}
+        >
+          <div 
+            style={{ 
+              color: '#ffffff',
+              filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.8))',
+              transform: `scale(${isHovered || isActive ? 1.2 : 1})`,
+              transition: 'transform 0.2s ease'
+            }}
+          >
+            <IconComponent size={24} strokeWidth={2.5} />
+          </div>
+        </Html>
       </group>
     </group>
   )
@@ -513,31 +413,30 @@ function TemplateGalaxyScene({
   
   // Group templates by orbit type
   const orbitGroups = useMemo(() => {
-    const groups = {
+    return {
       top: templates.filter(t => t.orbit.type === 'top'),
       main: templates.filter(t => t.orbit.type === 'main'),
       side: templates.filter(t => t.orbit.type === 'side')
     }
-    return groups
   }, [])
   
   return (
     <group>
+      {/* Lighting */}
       <ambientLight intensity={0.4} />
       <directionalLight position={[5, 5, 5]} intensity={0.6} />
       <directionalLight position={[-5, -5, -5]} intensity={0.4} />
       <pointLight position={[0, 10, 0]} intensity={0.5} color="#ffffff" />
       
+      {/* Core */}
       <SolvexAICore />
       
+      {/* Particles */}
       <EnergyParticles />
       
-      {/* Orbit path visualizations */}
-      <OrbitRing radius={4.5} type="top" />
-      <OrbitRing radius={3.2} type="main" />
-      <OrbitRing radius={3.8} type="side" />
+      {/* NO ORBIT RINGS - removed completely */}
       
-      {/* Top orbit planets */}
+      {/* Top arc planets (3) */}
       {orbitGroups.top.map((template, i) => (
         <TemplatePlanet
           key={template.id}
@@ -551,7 +450,7 @@ function TemplateGalaxyScene({
         />
       ))}
       
-      {/* Main orbit planets */}
+      {/* Main ring planets (4) */}
       {orbitGroups.main.map((template, i) => (
         <TemplatePlanet
           key={template.id}
@@ -565,8 +464,8 @@ function TemplateGalaxyScene({
         />
       ))}
       
-      {/* Side orbit planets */}
-      {orbitGroups.side.map((template, i) => (
+      {/* Side ring planets (2) */}
+      {orbitGroups.side.map={(template, i) => (
         <TemplatePlanet
           key={template.id}
           template={template}
@@ -586,14 +485,6 @@ export function TemplateGalaxy() {
   const [selectedTemplate, setSelectedTemplate] = useState<Template | null>(null)
   const [hoveredId, setHoveredId] = useState<string | null>(null)
   
-  const handleTemplateClick = (template: Template) => {
-    setSelectedTemplate(template)
-  }
-  
-  const closeCard = () => {
-    setSelectedTemplate(null)
-  }
-  
   const hoveredTemplate = templates.find(t => t.id === hoveredId)
   
   return (
@@ -604,7 +495,7 @@ export function TemplateGalaxy() {
         gl={{ antialias: true, alpha: true }}
       >
         <TemplateGalaxyScene
-          onTemplateClick={handleTemplateClick}
+          onTemplateClick={setSelectedTemplate}
           activeTemplate={selectedTemplate}
           hoveredId={hoveredId}
           setHoveredId={setHoveredId}
@@ -638,7 +529,7 @@ export function TemplateGalaxy() {
                        rounded-2xl p-8 max-w-md w-full shadow-2xl z-20"
           >
             <button
-              onClick={closeCard}
+              onClick={() => setSelectedTemplate(null)}
               className="absolute top-4 right-4 text-gray-400 hover:text-white 
                          transition-colors text-2xl leading-none"
             >
@@ -647,21 +538,22 @@ export function TemplateGalaxy() {
             
             <div className="flex items-center gap-4 mb-4">
               <div
-                className="w-16 h-16 rounded-full flex items-center justify-center text-3xl"
+                className="w-16 h-16 rounded-full flex items-center justify-center"
                 style={{ 
                   backgroundColor: selectedTemplate.color + '20',
                   border: `2px solid ${selectedTemplate.color}`
                 }}
               >
-                {ICON_MAP[selectedTemplate.icon]}
+                {(() => {
+                  const Icon = IconComponents[selectedTemplate.icon]
+                  return <Icon size={32} color={selectedTemplate.color} strokeWidth={2} />
+                })()}
               </div>
               <div>
                 <h3 className="text-2xl font-bold text-white mb-1">
                   {selectedTemplate.name}
                 </h3>
-                <p className="text-sm text-gray-400">
-                  Professional Template
-                </p>
+                <p className="text-sm text-gray-400">Professional Template</p>
               </div>
             </div>
             
@@ -680,7 +572,7 @@ export function TemplateGalaxy() {
                 View Template
               </a>
               <button
-                onClick={closeCard}
+                onClick={() => setSelectedTemplate(null)}
                 className="px-6 py-3 border border-gray-600 text-gray-300 
                            rounded-lg hover:bg-gray-800 transition-colors"
               >
