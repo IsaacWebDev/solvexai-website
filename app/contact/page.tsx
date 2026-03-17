@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react'
 import { Navigation } from '@/components/Navigation'
-import { VideoBackground } from '@/components/VideoBackground'
+import { AnimatedGradientMesh } from '@/components/AnimatedGradientMesh'
 import { motion, AnimatePresence } from 'framer-motion'
 import { LiquidGlassCard } from '@/components/ui'
 import { Check, Star } from 'lucide-react'
@@ -64,7 +64,7 @@ export default function ContactPage() {
     return (
       <>
         <Navigation />
-        <VideoBackground />
+        <AnimatedGradientMesh />
         
         <main className="relative pb-32 px-4 min-h-screen flex items-center justify-center">
           <motion.div 
@@ -120,7 +120,7 @@ export default function ContactPage() {
   return (
     <>
       <Navigation />
-      <VideoBackground />
+      <AnimatedGradientMesh />
       
       <main className="relative px-4 min-h-screen flex items-center justify-center" style={{ paddingBottom: 'max(8rem, 220px)' }}>
         <div className="max-w-6xl mx-auto w-full flex flex-col gap-20">
