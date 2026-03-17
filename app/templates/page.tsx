@@ -35,7 +35,13 @@ export default function TemplatesPage() {
       includes: 'Dark charcoal/black design, Smooth animations, Fully responsive, Ready to deploy',
       gradient: 'from-orange-600 to-red-600',
       image: '/template-mockups/restaurant-delight-mockup.png',
-      previewUrl: 'https://placeholder-restaurant-demo.vercel.app'
+      previewUrl: 'https://placeholder-restaurant-demo.vercel.app',
+      pageImages: {
+        home: '/template-pages/restaurant-home-page.png',
+        about: '/template-pages/restaurant-about-page.png',
+        services: '/template-pages/restaurant-services-page.png',
+        contact: '/template-pages/restaurant-contact-page.png'
+      }
     },
     {
       name: 'Law Firm Authority',
@@ -319,9 +325,15 @@ interface TemplateCardProps {
   gradient: string
   image?: string
   previewUrl?: string
+  pageImages?: {
+    home?: string
+    about?: string
+    services?: string
+    contact?: string
+  }
 }
 
-function TemplateCard({ name, industry, price, features, includes, gradient, image }: TemplateCardProps) {
+function TemplateCard({ name, industry, price, features, includes, gradient, image, pageImages }: TemplateCardProps) {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
   
@@ -421,7 +433,7 @@ function TemplateCard({ name, industry, price, features, includes, gradient, ima
       {/* Modal */}
       {isModalOpen && (
         <TemplateModal 
-          template={{ name, industry, price, features, includes, gradient }}
+          template={{ name, industry, price, features, includes, gradient, pageImages }}
           onClose={() => setIsModalOpen(false)}
         />
       )}
@@ -451,16 +463,38 @@ function TemplateModal({ template, onClose }: { template: TemplateCardProps; onC
         <h2 className="text-4xl font-bold mb-4">{template.name}</h2>
         <p className="text-gray-400 mb-8">Industry: {template.industry}</p>
         
-        {/* Multi-page Preview Placeholder */}
+        {/* Multi-page Preview */}
         <div className="grid grid-cols-2 gap-4 mb-8">
-          {['Home', 'About', 'Services', 'Contact'].map((page) => (
-            <div 
-              key={page}
-              className={`h-48 bg-gradient-to-br ${template.gradient} rounded-lg flex items-center justify-center`}
-            >
-              <span className="text-white/50 font-semibold">{page} Page</span>
-            </div>
-          ))}
+          {[
+            { name: 'Home', key: 'home' },
+            { name: 'About', key: 'about' },
+            { name: 'Services', key: 'services' },
+            { name: 'Contact', key: 'contact' }
+          ].map((page) => {
+            const pageImage = template.pageImages?.[page.key as keyof typeof template.pageImages]
+            return (
+              <div 
+                key={page.key}
+                className="relative rounded-lg overflow-hidden group cursor-pointer"
+                style={{ height: '300px' }}
+              >
+                {pageImage ? (
+                  <img 
+                    src={pageImage} 
+                    alt={`${page.name} Page`}
+                    className="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-300"
+                  />
+                ) : (
+                  <div className={`w-full h-full bg-gradient-to-br ${template.gradient} flex items-center justify-center`}>
+                    <span className="text-white/50 font-semibold">{page.name} Page</span>
+                  </div>
+                )}
+                <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                  <span className="text-white font-semibold">{page.name} Page</span>
+                </div>
+              </div>
+            )
+          })}
         </div>
         
         {/* Full Feature List */}
