@@ -5,6 +5,7 @@ import { Navigation } from '@/components/Navigation'
 import { AnimatedGradientMesh } from '@/components/AnimatedGradientMesh'
 import { Interactive3DOrb } from '@/components/Interactive3DOrb'
 import { GuaranteeBadge } from '@/components/GuaranteeBadge'
+import { ROIPlayground } from '@/components/interactive/ROIPlayground'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { containers, spacing, typography } from '@/lib/design-system'
@@ -47,14 +48,14 @@ export default function PackagesPage() {
             </p>
           </motion.div>
           
-          {/* 3D Automation Flow Visualization */}
+          {/* Calculate Your Time Back */}
           <motion.div
             style={{ marginBottom: spacing.content.gap }}
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1, delay: 0.3 }}
           >
-            <Interactive3DOrb />
+            <ROIPlayground />
           </motion.div>
           
           {/* Package 1: Templates */}
@@ -216,6 +217,16 @@ export default function PackagesPage() {
               </LiquidGlassButton>
             </Link>
           </LiquidGlassCard>
+
+          {/* 3D Automation Flow Visualization - Moved to Bottom */}
+          <motion.div
+            style={{ marginTop: spacing.content.gap }}
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1, delay: 0.3 }}
+          >
+            <Interactive3DOrb />
+          </motion.div>
         </div>
       </main>
     </>
