@@ -20,9 +20,6 @@ import { ImmersiveJellyfishBG } from '@/components/backgrounds/ImmersiveJellyfis
 import { ScrollControlledJellyfish } from '@/components/backgrounds/ScrollControlledJellyfish'
 import { SectionDivider } from '@/components/ui/SectionDivider'
 import { StickyBookCallButton } from '@/components/StickyBookCallButton'
-import dynamic from 'next/dynamic'
-
-const FluidGlass = dynamic(() => import('@/components/effects/FluidGlass'), { ssr: false })
 
 export default function HomePage() {
   const [showIntro, setShowIntro] = useState(true)
@@ -67,9 +64,6 @@ export default function HomePage() {
       
       {/* Scroll-Controlled Jellyfish Background (global) */}
       <ScrollControlledJellyfish />
-      
-      {/* Fluid Glass Lens Effect */}
-      <FluidGlass />
       
       {/* Main Content - Apple-Style Minimal */}
       <main 
