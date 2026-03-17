@@ -1,5 +1,5 @@
 'use client'
-// Updated Fitness Studio mockup - 2026-03-17
+// Updated Fitness Studio pages - 2026-03-17 17:52
 
 import React, { useState } from 'react'
 import { Navigation } from '@/components/Navigation'
