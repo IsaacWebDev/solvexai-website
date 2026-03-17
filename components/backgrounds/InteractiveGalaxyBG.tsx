@@ -32,12 +32,12 @@ export function InteractiveGalaxyBG() {
         }}
       >
         <Image
-          src="/images/galaxy-bg.jpg"
+          src="/images/galaxy-bg-optimized.webp"
           alt="Galaxy Background"
           fill
           className="object-cover"
           priority
-          quality={100}
+          quality={90}
         />
       </motion.div>
       

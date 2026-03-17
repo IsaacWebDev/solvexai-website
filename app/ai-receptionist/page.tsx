@@ -3,6 +3,7 @@
 import React, { useState } from 'react'
 import { Navigation } from '@/components/Navigation'
 import { AnimatedGradientMesh } from '@/components/AnimatedGradientMesh'
+import { AudioPlayer } from '@/components/AudioPlayer'
 import { PhoneMockup } from '@/components/3d/PhoneMockup'
 import { GuaranteeBadge } from '@/components/GuaranteeBadge'
 import { Shield } from 'lucide-react'
@@ -58,14 +59,40 @@ export default function AIReceptionistPage() {
             </motion.div>
           </div>
           
-          {/* Demo Calls */}
+          {/* Audio Demo Samples */}
           <section className="mb-24">
-            <h2 className="text-4xl font-bold text-center mb-12">How It Sounds</h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <DemoCard title="Restaurant Reservation" duration="45 seconds" />
-              <DemoCard title="Dental Appointment Booking" duration="60 seconds" />
-              <DemoCard title="Service Business FAQs" duration="30 seconds" />
-            </div>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+            >
+              <h2 className="text-4xl font-bold text-center mb-4">Hear It In Action</h2>
+              <p className="text-gray-400 text-center mb-12 max-w-2xl mx-auto">
+                Listen to real AI receptionist calls. Your customers won't know it's not human.
+              </p>
+              
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+                <AudioPlayer
+                  src="/audio/demo-restaurant.mp3"
+                  title="Restaurant Reservation"
+                  description="45-second booking call"
+                />
+                <AudioPlayer
+                  src="/audio/demo-dental.mp3"
+                  title="Dental Appointment"
+                  description="60-second scheduling"
+                />
+                <AudioPlayer
+                  src="/audio/demo-service.mp3"
+                  title="Service Business FAQ"
+                  description="30-second inquiry"
+                />
+              </div>
+              
+              <p className="text-center mt-8 text-sm text-gray-500">
+                🎧 Note: Audio demos are simulated examples. Actual voice can be customized to your brand.
+              </p>
+            </motion.div>
           </section>
           
           {/* Features Deep Dive */}

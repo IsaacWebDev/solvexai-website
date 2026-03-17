@@ -21,6 +21,7 @@ export default function ContactPage() {
   
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitted, setSubmitted] = useState(false)
+  const [errors, setErrors] = useState<Record<string, string>>({})
   
   const handleCheckbox = (value: string) => {
     setFormData(prev => ({
@@ -32,7 +33,27 @@ export default function ContactPage() {
   }
   
   const handleNext = () => {
-    if (step < 3) setStep(step + 1)
+    // Validate current step before proceeding
+    const newErrors: Record<string, string> = {}
+    
+    if (step === 1) {
+      if (!formData.name) newErrors.name = 'Name is required'
+      if (!formData.email) newErrors.email = 'Email is required'
+      else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) newErrors.email = 'Invalid email format'
+      if (formData.interest.length === 0) newErrors.interest = 'Please select at least one interest'
+    } else if (step === 2) {
+      if (!formData.industry) newErrors.industry = 'Industry is required'
+      if (!formData.project) newErrors.project = 'Project description is required'
+    } else if (step === 3) {
+      if (!formData.budget) newErrors.budget = 'Budget is required'
+      if (!formData.timeline) newErrors.timeline = 'Timeline is required'
+    }
+    
+    setErrors(newErrors)
+    
+    if (Object.keys(newErrors).length === 0 && step < 3) {
+      setStep(step + 1)
+    }
   }
   
   const handleBack = () => {
