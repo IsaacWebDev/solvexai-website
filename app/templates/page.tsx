@@ -81,7 +81,7 @@ export default function TemplatesPage() {
       ],
       includes: 'Bold energetic design, Smooth animations, Fully responsive, Ready to deploy',
       gradient: 'from-yellow-600 to-orange-600',
-      image: '/template-mockups/fitness-studio-mockup.png',
+      image: '/template-mockups/fitness-studio-energy-mockup.png',
       previewUrl: 'https://placeholder-fitness-demo.vercel.app',
       pageImages: {
         home: '/template-pages/fitness-home-page.png',
