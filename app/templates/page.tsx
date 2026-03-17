@@ -3,7 +3,7 @@
 import React, { useState } from 'react'
 import { Navigation } from '@/components/Navigation'
 import { VideoBackground } from '@/components/VideoBackground'
-import { TemplateMockup3D } from '@/components/3d/TemplateMockup3D'
+import { TemplateGalaxy } from '@/components/TemplateGalaxy'
 import { GuaranteeBadge } from '@/components/GuaranteeBadge'
 import { TemplatePreviewHover } from '@/components/TemplatePreviewHover'
 import { IndustrySelector } from '@/components/interactive/IndustrySelector'
@@ -238,14 +238,14 @@ export default function TemplatesPage() {
             }} />
           </motion.div>
           
-          {/* 3D Template Mockups */}
+          {/* 3D Template Galaxy */}
           <motion.div
             style={{ marginBottom: spacing.content.gap }}
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1, delay: 0.3 }}
           >
-            <TemplateMockup3D />
+            <TemplateGalaxy />
           </motion.div>
           
           {/* Filter Bar */}
