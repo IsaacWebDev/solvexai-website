@@ -144,8 +144,8 @@ export default function HomePage() {
         </div>
       </main>
       
-      {/* AI Avatar Chatbot - Global */}
-      <AIAvatar />
+      {/* AI Avatar Chatbot - Global (Single Instance) */}
+      <AIAvatar key="global-ai-avatar" />
       
       <style>{`
         @keyframes fadeInContent {

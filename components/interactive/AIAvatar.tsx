@@ -4,13 +4,20 @@ import { useState, useRef, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { X, Send, Sparkles } from 'lucide-react'
 import { LiquidGlassCard } from '@/components/ui'
+import { Sheet } from 'react-modal-sheet'
+import '../../node_modules/react-modal-sheet/dist/styles.css'
 
 export function AIAvatar() {
   const [isOpen, setIsOpen] = useState(false)
   const [messages, setMessages] = useState<Array<{ role: 'user' | 'assistant', content: string }>>([])
   const [input, setInput] = useState('')
   const [isTyping, setIsTyping] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
   const messagesEndRef = useRef<HTMLDivElement>(null)
+  
+  useEffect(() => {
+    setIsMobile(/iPhone|iPad|iPod|Android/i.test(navigator.userAgent))
+  }, [])
   
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
@@ -115,17 +122,18 @@ export function AIAvatar() {
         </motion.button>
       </motion.div>
       
-      {/* Chat Window */}
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            className="fixed bottom-28 right-8 z-50 w-96"
-            initial={{ opacity: 0, y: 20, scale: 0.9 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 20, scale: 0.9 }}
-            transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-          >
-            <LiquidGlassCard intensity="heavy" className="p-0 overflow-hidden shadow-2xl max-h-[600px] flex flex-col">
+      {/* Chat Window - Desktop */}
+      {!isMobile && (
+        <AnimatePresence>
+          {isOpen && (
+            <motion.div
+              className="fixed bottom-28 right-8 z-50 w-96"
+              initial={{ opacity: 0, y: 20, scale: 0.9 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 20, scale: 0.9 }}
+              transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+            >
+              <LiquidGlassCard intensity="heavy" className="p-0 overflow-hidden shadow-2xl max-h-[600px] flex flex-col">
               {/* Header */}
               <div className="bg-gradient-to-r from-blue-500 to-purple-600 p-4 flex items-center justify-between">
                 <div className="flex items-center gap-3">
@@ -253,6 +261,136 @@ export function AIAvatar() {
           </motion.div>
         )}
       </AnimatePresence>
+      )}
+      
+      {/* Chat Window - Mobile (Bottom Sheet) */}
+      {isMobile && (
+        <Sheet 
+          isOpen={isOpen} 
+          onClose={() => setIsOpen(false)}
+          detent="content-height"
+          snapPoints={[600, 400, 0]}
+        >
+          <Sheet.Container>
+            <Sheet.Header />
+            <Sheet.Content>
+              <div className="flex flex-col h-full bg-black/95">
+                {/* Header */}
+                <div className="bg-gradient-to-r from-blue-500 to-purple-600 p-4 flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center">
+                      <Sparkles className="w-5 h-5 text-white" />
+                    </div>
+                    <div>
+                      <div className="text-white font-bold">AI Assistant</div>
+                      <div className="text-white/80 text-xs">Always here to help</div>
+                    </div>
+                  </div>
+                  <button
+                    onClick={() => setIsOpen(false)}
+                    className="text-white/80 hover:text-white transition-colors"
+                  >
+                    <X className="w-5 h-5" />
+                  </button>
+                </div>
+                
+                {/* Messages */}
+                <div className="flex-1 p-4 space-y-4 overflow-y-auto">
+                  {messages.length === 0 && (
+                    <div className="text-center py-8">
+                      <Sparkles className="w-12 h-12 text-purple-400 mx-auto mb-3" />
+                      <p className="text-gray-400 text-sm">
+                        Hey! I'm your AI assistant. Ask me anything about automation!
+                      </p>
+                    </div>
+                  )}
+                  
+                  {messages.map((msg, i) => (
+                    <div
+                      key={i}
+                      className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
+                    >
+                      <div
+                        className={`max-w-[80%] rounded-2xl px-4 py-2 ${
+                          msg.role === 'user'
+                            ? 'bg-gradient-to-r from-blue-500 to-purple-600 text-white'
+                            : 'bg-white/10 text-white border border-white/10'
+                        }`}
+                      >
+                        <p className="text-sm whitespace-pre-line">{msg.content}</p>
+                      </div>
+                    </div>
+                  ))}
+                  
+                  {isTyping && (
+                    <div className="flex justify-start">
+                      <div className="bg-white/10 border border-white/10 rounded-2xl px-4 py-3">
+                        <div className="flex gap-1">
+                          <motion.div
+                            className="w-2 h-2 bg-purple-400 rounded-full"
+                            animate={{ y: [0, -8, 0] }}
+                            transition={{ duration: 0.6, repeat: Infinity, delay: 0 }}
+                          />
+                          <motion.div
+                            className="w-2 h-2 bg-blue-400 rounded-full"
+                            animate={{ y: [0, -8, 0] }}
+                            transition={{ duration: 0.6, repeat: Infinity, delay: 0.2 }}
+                          />
+                          <motion.div
+                            className="w-2 h-2 bg-pink-400 rounded-full"
+                            animate={{ y: [0, -8, 0] }}
+                            transition={{ duration: 0.6, repeat: Infinity, delay: 0.4 }}
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                  
+                  <div ref={messagesEndRef} />
+                </div>
+                
+                {/* Quick Replies */}
+                {messages.length === 0 && (
+                  <div className="px-4 pb-4 space-y-2">
+                    <p className="text-xs text-gray-400 mb-2">Quick questions:</p>
+                    {quickReplies.map((reply, i) => (
+                      <button
+                        key={i}
+                        onClick={() => handleQuickReply(reply)}
+                        className="block w-full text-left text-sm px-3 py-2 rounded-lg bg-white/5 hover:bg-white/10 transition-colors border border-white/10"
+                      >
+                        {reply}
+                      </button>
+                    ))}
+                  </div>
+                )}
+                
+                {/* Input */}
+                <div className="p-4 border-t border-white/10 bg-black/50">
+                  <div className="flex gap-2">
+                    <input
+                      type="text"
+                      value={input}
+                      onChange={(e) => setInput(e.target.value)}
+                      onKeyPress={(e) => e.key === 'Enter' && handleSend()}
+                      placeholder="Ask me anything..."
+                      className="flex-1 bg-white/10 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 text-base"
+                    />
+                    <button
+                      onClick={handleSend}
+                      disabled={!input.trim()}
+                      className="bg-gradient-to-r from-blue-500 to-purple-600 text-white p-3 rounded-xl disabled:opacity-50 min-w-[48px]"
+                    >
+                      <Send className="w-5 h-5" />
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </Sheet.Content>
+          </Sheet.Container>
+          <Sheet.Backdrop onTap={() => setIsOpen(false)} />
+        </Sheet>
+      )}
     </>
   )
 }

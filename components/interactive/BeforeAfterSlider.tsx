@@ -1,11 +1,13 @@
 'use client'
 
+import { useState, useEffect } from 'react'
 import {
   ReactCompareSlider,
   ReactCompareSliderImage
 } from 'react-compare-slider'
 import { motion } from 'framer-motion'
 import { LiquidGlassCard } from '@/components/ui'
+import { ChevronLeft, ChevronRight } from 'lucide-react'
 
 interface BeforeAfterSliderProps {
   beforeImage: string
@@ -26,6 +28,13 @@ export function BeforeAfterSlider({
   afterStats,
   name = 'Client'
 }: BeforeAfterSliderProps) {
+  const [position, setPosition] = useState(50)
+  const [isMobile, setIsMobile] = useState(false)
+  
+  useEffect(() => {
+    setIsMobile(/iPhone|iPad|iPod|Android/i.test(navigator.userAgent))
+  }, [])
+  
   return (
     <LiquidGlassCard intensity="medium" className="p-6 max-w-2xl mx-auto">
       <motion.div
@@ -69,7 +78,8 @@ export function BeforeAfterSlider({
                 </div>
               </div>
             }
-            position={50}
+            position={position}
+            onPositionChange={setPosition}
             style={{
               borderRadius: '12px',
               overflow: 'hidden'
@@ -77,14 +87,45 @@ export function BeforeAfterSlider({
           />
           
           {/* Drag Instruction */}
-          <motion.div
-            className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/50 backdrop-blur-sm px-4 py-2 rounded-full text-xs text-white"
-            initial={{ opacity: 1 }}
-            animate={{ opacity: [1, 0.5, 1] }}
-            transition={{ duration: 2, repeat: Infinity }}
-          >
-            ← Drag to compare →
-          </motion.div>
+          {!isMobile && (
+            <motion.div
+              className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/50 backdrop-blur-sm px-4 py-2 rounded-full text-xs text-white"
+              initial={{ opacity: 1 }}
+              animate={{ opacity: [1, 0.5, 1] }}
+              transition={{ duration: 2, repeat: Infinity }}
+            >
+              ← Drag to compare →
+            </motion.div>
+          )}
+          
+          {/* Mobile Tap Buttons */}
+          {isMobile && (
+            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-3">
+              <motion.button
+                onClick={() => setPosition(0)}
+                className="bg-red-500/80 backdrop-blur-sm text-white px-4 py-2 rounded-full text-xs font-bold flex items-center gap-1"
+                whileTap={{ scale: 0.95 }}
+              >
+                <ChevronLeft className="w-4 h-4" />
+                Before
+              </motion.button>
+              <motion.button
+                onClick={() => setPosition(50)}
+                className="bg-purple-500/80 backdrop-blur-sm text-white px-4 py-2 rounded-full text-xs font-bold"
+                whileTap={{ scale: 0.95 }}
+              >
+                Split
+              </motion.button>
+              <motion.button
+                onClick={() => setPosition(100)}
+                className="bg-green-500/80 backdrop-blur-sm text-white px-4 py-2 rounded-full text-xs font-bold flex items-center gap-1"
+                whileTap={{ scale: 0.95 }}
+              >
+                After
+                <ChevronRight className="w-4 h-4" />
+              </motion.button>
+            </div>
+          )}
         </div>
         
         {/* Stats Comparison */}

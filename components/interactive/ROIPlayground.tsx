@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { LiquidGlassCard } from '@/components/ui'
 import { DollarSign, Clock, Zap } from 'lucide-react'
@@ -8,10 +8,33 @@ import { DollarSign, Clock, Zap } from 'lucide-react'
 export function ROIPlayground() {
   const [hoursPerWeek, setHoursPerWeek] = useState(20)
   const [hourlyRate, setHourlyRate] = useState(50)
+  const [isMobile, setIsMobile] = useState(false)
+  
+  useEffect(() => {
+    setIsMobile(/iPhone|iPad|iPod|Android/i.test(navigator.userAgent))
+  }, [])
   
   const yearlyLoss = hoursPerWeek * hourlyRate * 52
   const automationSavings = yearlyLoss * 0.85 // 85% time saved
   const monthlySavings = automationSavings / 12
+  
+  const hoursSliderRef = useRef<HTMLInputElement>(null)
+  const rateSliderRef = useRef<HTMLInputElement>(null)
+  
+  // Touch handler for mobile
+  const handleTouch = (
+    e: React.TouchEvent<HTMLInputElement>,
+    setter: (value: number) => void,
+    min: number,
+    max: number
+  ) => {
+    const touch = e.touches[0]
+    const slider = e.currentTarget
+    const rect = slider.getBoundingClientRect()
+    const percentage = Math.max(0, Math.min(1, (touch.clientX - rect.left) / rect.width))
+    const value = Math.round(percentage * (max - min) + min)
+    setter(value)
+  }
   
   return (
     <LiquidGlassCard intensity="heavy" className="p-8 max-w-4xl mx-auto">
@@ -35,12 +58,18 @@ export function ROIPlayground() {
             </label>
             <div className="relative">
               <input
+                ref={hoursSliderRef}
                 type="range"
                 min="5"
                 max="40"
                 step="1"
                 value={hoursPerWeek}
                 onChange={(e) => setHoursPerWeek(Number(e.target.value))}
+                onTouchMove={(e) => handleTouch(e, setHoursPerWeek, 5, 40)}
+                aria-label="Hours spent on admin per week"
+                aria-valuemin={5}
+                aria-valuemax={40}
+                aria-valuenow={hoursPerWeek}
                 className="w-full h-2 bg-white/10 rounded-full appearance-none cursor-pointer
                   [&::-webkit-slider-thumb]:appearance-none
                   [&::-webkit-slider-thumb]:w-5
@@ -80,12 +109,18 @@ export function ROIPlayground() {
             </label>
             <div className="relative">
               <input
+                ref={rateSliderRef}
                 type="range"
                 min="25"
                 max="200"
                 step="5"
                 value={hourlyRate}
                 onChange={(e) => setHourlyRate(Number(e.target.value))}
+                onTouchMove={(e) => handleTouch(e, setHourlyRate, 25, 200)}
+                aria-label="Your hourly rate in dollars"
+                aria-valuemin={25}
+                aria-valuemax={200}
+                aria-valuenow={hourlyRate}
                 className="w-full h-2 bg-white/10 rounded-full appearance-none cursor-pointer
                   [&::-webkit-slider-thumb]:appearance-none
                   [&::-webkit-slider-thumb]:w-5
@@ -220,7 +255,7 @@ function CoinRain({ show }: { show: boolean }) {
   
   return (
     <div className="absolute inset-0 pointer-events-none overflow-hidden">
-      {Array.from({ length: 20 }).map((_, i) => (
+      {Array.from({ length: 10 }).map((_, i) => (
         <motion.div
           key={i}
           className="absolute text-2xl"
