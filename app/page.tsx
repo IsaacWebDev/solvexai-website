@@ -20,6 +20,10 @@ import { ImmersiveJellyfishBG } from '@/components/backgrounds/ImmersiveJellyfis
 import { InteractiveGalaxyBG } from '@/components/backgrounds/InteractiveGalaxyBG'
 import { SectionDivider } from '@/components/ui/SectionDivider'
 import { StickyBookCallButton } from '@/components/StickyBookCallButton'
+import { ROIPlayground } from '@/components/interactive/ROIPlayground'
+import { AIAvatar } from '@/components/interactive/AIAvatar'
+import { EmailBeforeAfter } from '@/components/interactive/BeforeAfterSlider'
+import { AutomationScanner } from '@/components/interactive/AutomationScanner'
 import dynamic from 'next/dynamic'
 
 const GhostCursor = dynamic(() => import('@/components/effects/GhostCursor'), { ssr: false })
@@ -111,30 +115,37 @@ export default function HomePage() {
         <OutcomesSimple />
         <SectionDivider />
         
-        {/* 4. ROI CALCULATOR - Interactive engagement */}
-        <ROICalculator />
+        {/* 4. ROI PLAYGROUND - Interactive engagement */}
+        <ROIPlayground />
         <SectionDivider />
         
-        {/* 5. WORKFLOW COMPARISON - Before/After */}
-        <WorkflowComparison />
+        {/* 5. BEFORE/AFTER SLIDER - Visual proof */}
+        <EmailBeforeAfter />
         <SectionDivider />
         
-        {/* 6. TEMPLATES - Products to buy */}
+        {/* 6. AUTOMATION SCANNER - Personalized value */}
+        <AutomationScanner />
+        <SectionDivider />
+        
+        {/* 7. TEMPLATES - Products to buy */}
         <TemplateShowcase />
         <SectionDivider />
         
-        {/* 7. PACKAGES - Service tiers */}
+        {/* 8. PACKAGES - Service tiers */}
         <PricingSimple />
         <SectionDivider />
         
-        {/* 8. COMPARISON TABLE - Why SolveXAI */}
+        {/* 9. COMPARISON TABLE - Why SolveXAI */}
         <ComparisonTable />
         <SectionDivider />
         
-        {/* 9. CTA - Close */}
+        {/* 10. CTA - Close */}
         <CTAMinimal />
         </div>
       </main>
+      
+      {/* AI Avatar Chatbot - Global */}
+      <AIAvatar />
       
       <style>{`
         @keyframes fadeInContent {
