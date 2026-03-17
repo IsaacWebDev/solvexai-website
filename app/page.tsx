@@ -95,7 +95,7 @@ export default function HomePage() {
           <AutomationScanner />
           <SectionDivider />
           
-          <section className="py-20 px-6 relative z-10">
+          <section className="pt-20 pb-8 px-6 relative z-10">
             <div className="text-center mb-12">
               <div className="inline-block">
                 <h2 className="text-5xl font-bold gradient-text">
@@ -108,9 +108,10 @@ export default function HomePage() {
             </div>
             <TemplateGalaxy />
           </section>
-          <SectionDivider />
           
-          <PricingSimple />
+          <div style={{ marginTop: '2rem' }}>
+            <PricingSimple />
+          </div>
           <SectionDivider />
           
           <ComparisonTable />
