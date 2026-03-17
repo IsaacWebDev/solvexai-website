@@ -25,15 +25,16 @@ export default function TemplatesPage() {
       industry: 'Restaurants',
       price: 497,
       features: [
-        'Hero with food photography',
-        'Digital menu with categories',
-        'Online ordering integration',
-        'Table reservation system',
-        'Instagram feed widget'
+        'Dark luxury aesthetic with gold accents',
+        'Full menu preview (starters, mains, desserts)',
+        'Table reservation form with validation',
+        'Featured dishes grid (6 items)',
+        'Customer testimonials & gallery',
+        'Location map & hours section'
       ],
-      includes: 'Contact forms, SEO, Mobile responsive, 1-week setup',
+      includes: 'Dark charcoal/black design, Smooth animations, Fully responsive, Ready to deploy',
       gradient: 'from-orange-600 to-red-600',
-      image: '/template-mockups/restaurant-delight.jpg',
+      image: '/template-mockups/restaurant-delight-mockup.png',
       previewUrl: 'https://placeholder-restaurant-demo.vercel.app'
     },
     {
@@ -41,15 +42,16 @@ export default function TemplatesPage() {
       industry: 'Law Firms',
       price: 797,
       features: [
-        'Professional blue/gold theme',
-        'Case study showcase',
-        'Client intake forms',
-        'Attorney bio pages',
-        'Practice area pages'
+        'Navy blue & gold professional design',
+        '6 practice areas with detail pages',
+        '3 attorney profiles with bios',
+        'Consultation request form',
+        'Firm stats (35+ years, $500M+ won)',
+        'Client testimonials section'
       ],
-      includes: 'Contact forms, SEO, Mobile responsive, 1-week setup',
+      includes: 'Professional typography, Smooth animations, Fully responsive, Ready to deploy',
       gradient: 'from-blue-800 to-blue-600',
-      image: '/template-mockups/law-firm-authority.jpg',
+      image: '/template-mockups/law-firm-authority-mockup.png',
       previewUrl: 'https://placeholder-lawfirm-demo.vercel.app'
     },
     {
@@ -57,15 +59,16 @@ export default function TemplatesPage() {
       industry: 'Fitness',
       price: 597,
       features: [
-        'Vibrant orange/yellow design',
-        'Class schedule with filters',
-        'Online booking system',
-        'Trainer profile pages',
-        'Member portal login'
+        'Dark design with neon green accents',
+        '4 fitness programs with details',
+        '3 trainer profiles with bios',
+        '3-day class schedule grid',
+        '3 membership plans (Basic/Pro/Elite)',
+        'Transformation showcase & testimonials'
       ],
-      includes: 'Contact forms, SEO, Mobile responsive, 1-week setup',
+      includes: 'Bold energetic design, Smooth animations, Fully responsive, Ready to deploy',
       gradient: 'from-yellow-600 to-orange-600',
-      image: '/template-mockups/fitness-studio-energy.jpg',
+      image: '/template-mockups/fitness-studio-mockup.png',
       previewUrl: 'https://placeholder-fitness-demo.vercel.app'
     },
     {
