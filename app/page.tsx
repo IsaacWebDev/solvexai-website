@@ -6,17 +6,10 @@ import { Navigation } from '@/components/Navigation'
 import { AppleHero } from '@/components/sections/AppleHero'
 import { LiveCounter } from '@/components/interactive/LiveCounter'
 import { OutcomesSimple } from '@/components/sections/OutcomesSimple'
-import { ROICalculator } from '@/components/interactive/ROICalculator'
-import { WorkflowComparison } from '@/components/interactive/WorkflowComparison'
 import { TemplateShowcase } from '@/components/sections/TemplateShowcase'
 import { PricingSimple } from '@/components/sections/PricingSimple'
 import { ComparisonTable } from '@/components/sections/ComparisonTable'
 import { CTAMinimal } from '@/components/sections/CTAMinimal'
-import { GalaxyBackground } from '@/components/GalaxyBackground'
-import { RealisticJellyfishBG } from '@/components/backgrounds/RealisticJellyfishBG'
-import { InteractiveSpaceBackground } from '@/components/backgrounds/InteractiveSpaceBackground'
-import { SpaceHeroBackground } from '@/components/backgrounds/SpaceHeroBackground'
-import { ImmersiveJellyfishBG } from '@/components/backgrounds/ImmersiveJellyfishBG'
 import { InteractiveGalaxyBG } from '@/components/backgrounds/InteractiveGalaxyBG'
 import { SectionDivider } from '@/components/ui/SectionDivider'
 import { StickyBookCallButton } from '@/components/StickyBookCallButton'
@@ -30,22 +23,16 @@ export default function HomePage() {
   const [showIntro, setShowIntro] = useState(true)
   const [fadeOut, setFadeOut] = useState(false)
   
-  // Check localStorage for user's first visit
   useEffect(() => {
     const hasVisited = localStorage.getItem('solvexai-visited')
     if (hasVisited === 'true') {
-      setShowIntro(false) // Skip intro for returning visitors
+      setShowIntro(false)
     }
   }, [])
   
   const handleEnter = () => {
-    // Mark as visited
     localStorage.setItem('solvexai-visited', 'true')
-    
-    // Fade out animation
     setFadeOut(true)
-    
-    // Remove intro after animation
     setTimeout(() => {
       setShowIntro(false)
     }, 800)
@@ -66,11 +53,8 @@ export default function HomePage() {
     <div style={{ position: 'relative', minHeight: '100vh' }}>
       <Navigation />
       <StickyBookCallButton />
-      
-      {/* Interactive Galaxy Background (global) */}
       <InteractiveGalaxyBG />
       
-      {/* Ghost Cursor Effect - Galaxy Glow */}
       <div style={{ position: 'fixed', inset: 0, zIndex: 50, pointerEvents: 'none' }}>
         <GhostCursor
           color="#60A5FA"
@@ -88,7 +72,6 @@ export default function HomePage() {
         />
       </div>
       
-      {/* Main Content - Apple-Style Minimal */}
       <main 
         data-no-padding
         className="flex justify-center"
@@ -101,40 +84,31 @@ export default function HomePage() {
         }}
       >
         <div className="w-full max-w-[1920px] flex flex-col gap-20">
-        {/* 1. HERO - Introduction */}
-        <AppleHero />
-        <SectionDivider />
-        
-        {/* 2. LIVE COUNTER - Social proof */}
-        <LiveCounter />
-        <SectionDivider />
-        
-        {/* 3. OUTCOMES - Benefits (Why choose us) */}
-        <OutcomesSimple />
-        <SectionDivider />
-        
-        {/* 4. AUTOMATION SCANNER - Personalized value */}
-        <AutomationScanner />
-        <SectionDivider />
-        
-        {/* 7. TEMPLATES - Products to buy */}
-        <TemplateShowcase />
-        <SectionDivider />
-        
-        {/* 8. PACKAGES - Service tiers */}
-        <PricingSimple />
-        <SectionDivider />
-        
-        {/* 9. COMPARISON TABLE - Why SolveXAI */}
-        <ComparisonTable />
-        <SectionDivider />
-        
-        {/* 10. CTA - Close */}
-        <CTAMinimal />
+          <AppleHero />
+          <SectionDivider />
+          
+          <LiveCounter />
+          <SectionDivider />
+          
+          <OutcomesSimple />
+          <SectionDivider />
+          
+          <AutomationScanner />
+          <SectionDivider />
+          
+          <TemplateShowcase />
+          <SectionDivider />
+          
+          <PricingSimple />
+          <SectionDivider />
+          
+          <ComparisonTable />
+          <SectionDivider />
+          
+          <CTAMinimal />
         </div>
       </main>
       
-      {/* AI Avatar Chatbot - Global (Single Instance) */}
       <AIAvatar key="global-ai-avatar" />
       
       <style>{`
@@ -150,5 +124,3 @@ export default function HomePage() {
     </div>
   )
 }
-
-// Deploy timestamp: 2026-03-17-10-59-14
