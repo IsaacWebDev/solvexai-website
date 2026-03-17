@@ -41,15 +41,18 @@ export function InteractiveGalaxyBG() {
         />
       </motion.div>
       
+      {/* Dark overlay - galaxy is shaded by default */}
+      <div className="absolute inset-0 bg-black/60 pointer-events-none" />
+      
       {/* Gradient overlay for depth */}
       <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/60 pointer-events-none" />
       
-      {/* Subtle vignette */}
+      {/* Strong vignette - darkens edges more */}
       <div 
         className="absolute inset-0 pointer-events-none"
         style={{
-          background: 'radial-gradient(circle at center, transparent 40%, black 100%)',
-          opacity: 0.3
+          background: 'radial-gradient(circle at center, transparent 30%, black 100%)',
+          opacity: 0.6
         }}
       />
     </div>
