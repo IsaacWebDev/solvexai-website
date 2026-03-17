@@ -42,9 +42,9 @@ const templates: (Template & { orbit: OrbitConfig })[] = [
     description: 'Elegant dark luxury restaurant template with gold accents and sophisticated design',
     path: '/templates/restaurant',
     color: '#d4af37',
-    orbitRadius: 4.5,
+    orbitRadius: 5.5,
     orbitSpeed: 0.2,
-    orbit: { type: 'top', radius: 4.5, speed: 0.2 },
+    orbit: { type: 'top', radius: 5.5, speed: 0.2 },
     icon: 'restaurant'
   },
   {
@@ -53,9 +53,9 @@ const templates: (Template & { orbit: OrbitConfig })[] = [
     description: 'Bold construction website with yellow accents and professional industrial design',
     path: '/templates/construction',
     color: '#FDB927',
-    orbitRadius: 4.5,
+    orbitRadius: 5.5,
     orbitSpeed: 0.2,
-    orbit: { type: 'top', radius: 4.5, speed: 0.2 },
+    orbit: { type: 'top', radius: 5.5, speed: 0.2 },
     icon: 'construction'
   },
   {
@@ -64,9 +64,9 @@ const templates: (Template & { orbit: OrbitConfig })[] = [
     description: 'Professional legal services template with navy blue and gold trustworthy aesthetic',
     path: '/templates/law',
     color: '#1B3A4B',
-    orbitRadius: 4.5,
+    orbitRadius: 5.5,
     orbitSpeed: 0.2,
-    orbit: { type: 'top', radius: 4.5, speed: 0.2 },
+    orbit: { type: 'top', radius: 5.5, speed: 0.2 },
     icon: 'law'
   },
   
@@ -77,9 +77,9 @@ const templates: (Template & { orbit: OrbitConfig })[] = [
     description: 'Energetic fitness gym template with navy blue design and athletic aesthetic',
     path: '/templates/fitness',
     color: '#2563eb',
-    orbitRadius: 3.2,
+    orbitRadius: 4.0,
     orbitSpeed: 0.18,
-    orbit: { type: 'main', radius: 3.2, speed: 0.18 },
+    orbit: { type: 'main', radius: 4.0, speed: 0.18 },
     icon: 'fitness'
   },
   {
@@ -88,9 +88,9 @@ const templates: (Template & { orbit: OrbitConfig })[] = [
     description: 'Luxury real estate template with white background and elegant gold accents',
     path: '/templates/real-estate',
     color: '#C9A961',
-    orbitRadius: 3.2,
+    orbitRadius: 4.0,
     orbitSpeed: 0.18,
-    orbit: { type: 'main', radius: 3.2, speed: 0.18 },
+    orbit: { type: 'main', radius: 4.0, speed: 0.18 },
     icon: 'realestate'
   },
   {
@@ -99,9 +99,9 @@ const templates: (Template & { orbit: OrbitConfig })[] = [
     description: 'Modern creative agency with dark background and bold purple-blue gradients',
     path: '/templates/agency',
     color: '#667eea',
-    orbitRadius: 3.2,
+    orbitRadius: 4.0,
     orbitSpeed: 0.18,
-    orbit: { type: 'main', radius: 3.2, speed: 0.18 },
+    orbit: { type: 'main', radius: 4.0, speed: 0.18 },
     icon: 'agency'
   },
   {
@@ -110,9 +110,9 @@ const templates: (Template & { orbit: OrbitConfig })[] = [
     description: 'Clean professional healthcare template with soft blue accents and calming design',
     path: '/templates/medical',
     color: '#4A90E2',
-    orbitRadius: 3.2,
+    orbitRadius: 4.0,
     orbitSpeed: 0.18,
-    orbit: { type: 'main', radius: 3.2, speed: 0.18 },
+    orbit: { type: 'main', radius: 4.0, speed: 0.18 },
     icon: 'medical'
   },
   
@@ -123,9 +123,9 @@ const templates: (Template & { orbit: OrbitConfig })[] = [
     description: 'Apple-style minimal e-commerce template with white background and clean typography',
     path: '/templates/ecommerce',
     color: '#1a1a1a',
-    orbitRadius: 3.8,
+    orbitRadius: 4.6,
     orbitSpeed: 0.22,
-    orbit: { type: 'side', radius: 3.8, speed: 0.22 },
+    orbit: { type: 'side', radius: 4.6, speed: 0.22 },
     icon: 'ecommerce'
   },
   {
@@ -134,9 +134,9 @@ const templates: (Template & { orbit: OrbitConfig })[] = [
     description: 'Professional service business template with versatile design and modern aesthetic',
     path: '/templates/service',
     color: '#00c0ff',
-    orbitRadius: 3.8,
+    orbitRadius: 4.6,
     orbitSpeed: 0.22,
-    orbit: { type: 'side', radius: 3.8, speed: 0.22 },
+    orbit: { type: 'side', radius: 4.6, speed: 0.22 },
     icon: 'service'
   }
 ]
@@ -342,7 +342,7 @@ function TemplatePlanet({
           onPointerOut={() => onHover(null)}
           onClick={(e) => { e.stopPropagation(); onClick(template) }}
         >
-          <sphereGeometry args={[0.28, 32, 32]} />
+          <sphereGeometry args={[0.35, 32, 32]} />
           <meshPhysicalMaterial
             color={template.color}
             emissive={template.color}
@@ -358,7 +358,7 @@ function TemplatePlanet({
         
         {/* Outer glow */}
         <mesh>
-          <sphereGeometry args={[0.38, 24, 24]} />
+          <sphereGeometry args={[0.48, 24, 24]} />
           <meshBasicMaterial
             color={template.color}
             transparent
@@ -492,9 +492,9 @@ export function TemplateGalaxy() {
   const hoveredTemplate = templates.find(t => t.id === hoveredId)
   
   return (
-    <div className="relative w-full h-[700px]">
+    <div className="relative w-full h-[800px]">
       <Canvas
-        camera={{ position: [0, 5, 12], fov: 50 }}
+        camera={{ position: [0, 6, 14], fov: 55 }}
         style={{ background: 'transparent' }}
         gl={{ antialias: true, alpha: true }}
       >
