@@ -459,13 +459,13 @@ function TemplateModal({ template, onClose }: { template: TemplateCardProps; onC
   
   return (
     <div 
-      className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 overflow-y-auto"
+      className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4"
       onClick={onClose}
     >
-      <div onClick={(e) => e.stopPropagation()}>
+      <div onClick={(e) => e.stopPropagation()} className="max-h-[90vh] overflow-y-auto w-full max-w-4xl">
         <LiquidGlassCard 
           intensity="heavy"
-          className="max-w-4xl w-full p-8 my-8"
+          className="w-full p-8"
         >
         {/* Close Button */}
         <button 
@@ -501,13 +501,13 @@ function TemplateModal({ template, onClose }: { template: TemplateCardProps; onC
         </div>
         
         {/* Large Page Preview */}
-        <div className="mb-8 rounded-lg overflow-hidden" style={{ maxHeight: '600px' }}>
+        <div className="mb-8 rounded-lg overflow-hidden" style={{ maxHeight: '500px' }}>
           {template.pageImages?.[selectedPage] ? (
             <img 
               src={template.pageImages[selectedPage]} 
               alt={`${selectedPage} Page`}
               className="w-full h-auto object-contain"
-              style={{ maxHeight: '600px' }}
+              style={{ maxHeight: '500px' }}
             />
           ) : (
             <div className={`w-full h-96 bg-gradient-to-br ${template.gradient} flex items-center justify-center`}>
