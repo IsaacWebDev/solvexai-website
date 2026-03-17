@@ -1,94 +1,101 @@
 /* eslint-disable react/no-unknown-property */
 'use client'
 import * as THREE from 'three';
-import { useRef, useState, useEffect } from 'react';
-import { Canvas, useFrame, useThree } from '@react-three/fiber';
-import { MeshTransmissionMaterial } from '@react-three/drei';
+import { useRef, useState, useEffect, memo, useMemo } from 'react';
+import { Canvas, createPortal, useFrame, useThree } from '@react-three/fiber';
+import {
+ useFBO,
+ useGLTF,
+ MeshTransmissionMaterial,
+} from '@react-three/drei';
 import { easing } from 'maath';
 
-function GlassLens() {
-  const meshRef = useRef<THREE.Mesh>(null);
-  const { viewport, size } = useThree();
-  const [mouse, setMouse] = useState({ x: 0, y: 0 });
+const ModeWrapper = memo(function ModeWrapper({
+ children,
+ glb,
+ geometryKey,
+ lockToBottom = false,
+ followPointer = true,
+ modeProps = {},
+}: any) {
+ const ref = useRef<THREE.Mesh>(null);
+ const { nodes } = useGLTF(glb);
+ const buffer = useFBO();
+ const { viewport: vp } = useThree();
+ const [scene] = useState(() => new THREE.Scene());
 
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      setMouse({
-        x: (e.clientX / window.innerWidth) * 2 - 1,
-        y: -(e.clientY / window.innerHeight) * 2 + 1
-      });
-    };
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, []);
+ useFrame((state, delta) => {
+ if (!ref.current) return;
+   
+ const { gl, viewport, pointer, camera } = state;
+ const v = viewport.getCurrentViewport(camera, [0, 0, 15]);
 
-  useFrame((state, delta) => {
-    if (!meshRef.current) return;
-    
-    const v = viewport.getCurrentViewport(state.camera, [0, 0, 5]);
-    const targetX = (mouse.x * v.width) / 2;
-    const targetY = (mouse.y * v.height) / 2;
-    
-    // Smooth follow with easing
-    easing.damp3(meshRef.current.position, [targetX, targetY, 0], 0.2, delta);
-  });
+ const destX = followPointer ? (pointer.x * v.width) / 2 : 0;
+ const destY = lockToBottom ? -v.height / 2 + 0.2 : followPointer ? (pointer.y * v.height) / 2 : 0;
+ easing.damp3(ref.current.position, [destX, destY, 15], 0.15, delta);
 
-  return (
-    <>
-      {/* Main glass lens sphere */}
-      <mesh ref={meshRef} position={[0, 0, 0]}>
-        <sphereGeometry args={[1.5, 64, 64]} />
-        <MeshTransmissionMaterial
-          // Glass properties for maximum refraction
-          transmission={1}
-          thickness={0.2}
-          roughness={0}
-          ior={1.5}
-          chromaticAberration={0.02}
-          anisotropy={0.2}
-          distortion={0}
-          distortionScale={0}
-          temporalDistortion={0}
-          // Mirror-like properties
-          clearcoat={1}
-          clearcoatRoughness={0}
-          // Color
-          color="#ffffff"
-          attenuationColor="#ffffff"
-          attenuationDistance={0.5}
-          // Performance
-          samples={6}
-          resolution={512}
-        />
-      </mesh>
-    </>
-  );
+ if (modeProps.scale == null) {
+ const maxWorld = v.width * 0.9;
+ ref.current.scale.setScalar(Math.min(0.25, maxWorld));
+ }
+
+ gl.setRenderTarget(buffer);
+ gl.render(scene, camera);
+ gl.setRenderTarget(null);
+ });
+
+ const { scale, ior, thickness, anisotropy, chromaticAberration, ...extraMat } = modeProps;
+
+ return (
+ <>
+ {createPortal(children, scene)}
+ <mesh scale={[vp.width, vp.height, 1]}>
+ <planeGeometry />
+ <meshBasicMaterial map={buffer.texture} transparent />
+ </mesh>
+ <mesh ref={ref} scale={scale ?? 0.25} rotation-x={Math.PI / 2} geometry={(nodes as any)[geometryKey]?.geometry}>
+ <MeshTransmissionMaterial
+ buffer={buffer.texture}
+ ior={ior ?? 1.15}
+ thickness={thickness ?? 5}
+ anisotropy={anisotropy ?? 0.01}
+ chromaticAberration={chromaticAberration ?? 0.1}
+ transmission={1}
+ roughness={0}
+ {...extraMat}
+ />
+ </mesh>
+ </>
+ );
+});
+
+function Lens({ modeProps, ...p }: any) {
+ return <ModeWrapper glb="/assets/3d/lens.glb" geometryKey="Cylinder" followPointer modeProps={modeProps} {...p} />;
 }
 
-export default function FluidGlass() {
-  const [mounted, setMounted] = useState(false);
+export default function FluidGlass({ 
+  mode = 'lens',
+  lensProps = {
+    scale: 0.25,
+    ior: 1.15,
+    thickness: 2,
+    chromaticAberration: 0.05,
+    anisotropy: 0.01
+  }
+}: any) {
+ const [mounted, setMounted] = useState(false);
 
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+ useEffect(() => {
+   setMounted(true);
+ }, []);
 
-  if (!mounted) return null;
+ if (!mounted) return null;
 
-  return (
-    <div className="fixed inset-0 pointer-events-none z-50">
-      <Canvas
-        camera={{ position: [0, 0, 8], fov: 50 }}
-        gl={{
-          alpha: true,
-          antialias: true,
-          powerPreference: 'high-performance'
-        }}
-        style={{ background: 'transparent' }}
-      >
-        <ambientLight intensity={0.5} />
-        <directionalLight position={[10, 10, 5]} intensity={1} />
-        <GlassLens />
-      </Canvas>
-    </div>
-  );
+ return (
+ <div className="fixed inset-0 pointer-events-none z-50">
+ <Canvas camera={{ position: [0, 0, 20], fov: 15 }} gl={{ alpha: true }}>
+ <Lens modeProps={lensProps} />
+ </Canvas>
+ </div>
+ );
 }
