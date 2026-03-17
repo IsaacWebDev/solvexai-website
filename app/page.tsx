@@ -20,9 +20,7 @@ import { ImmersiveJellyfishBG } from '@/components/backgrounds/ImmersiveJellyfis
 import { InteractiveGalaxyBG } from '@/components/backgrounds/InteractiveGalaxyBG'
 import { SectionDivider } from '@/components/ui/SectionDivider'
 import { StickyBookCallButton } from '@/components/StickyBookCallButton'
-import { ROIPlayground } from '@/components/interactive/ROIPlayground'
 import { AIAvatar } from '@/components/interactive/AIAvatar'
-import { EmailBeforeAfter } from '@/components/interactive/BeforeAfterSlider'
 import { AutomationScanner } from '@/components/interactive/AutomationScanner'
 import dynamic from 'next/dynamic'
 
@@ -115,15 +113,7 @@ export default function HomePage() {
         <OutcomesSimple />
         <SectionDivider />
         
-        {/* 4. ROI PLAYGROUND - Interactive engagement */}
-        <ROIPlayground />
-        <SectionDivider />
-        
-        {/* 5. BEFORE/AFTER SLIDER - Visual proof */}
-        <EmailBeforeAfter />
-        <SectionDivider />
-        
-        {/* 6. AUTOMATION SCANNER - Personalized value */}
+        {/* 4. AUTOMATION SCANNER - Personalized value */}
         <AutomationScanner />
         <SectionDivider />
         
