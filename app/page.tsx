@@ -68,19 +68,20 @@ export default function HomePage() {
       {/* Interactive Galaxy Background (global) */}
       <InteractiveGalaxyBG />
       
-      {/* Ghost Cursor Effect */}
+      {/* Ghost Cursor Effect - Galaxy Glow */}
       <GhostCursor
-        color="#8B5CF6"
-        brightness={2}
+        color="#60A5FA"
+        brightness={3}
         edgeIntensity={0}
-        trailLength={50}
-        inertia={0.5}
-        grainIntensity={0.05}
-        bloomStrength={0.1}
-        bloomRadius={1}
-        bloomThreshold={0.025}
-        fadeDelayMs={1000}
-        fadeDurationMs={1500}
+        trailLength={60}
+        inertia={0.6}
+        grainIntensity={0.03}
+        bloomStrength={0.3}
+        bloomRadius={1.5}
+        bloomThreshold={0.015}
+        fadeDelayMs={800}
+        fadeDurationMs={2000}
+        mixBlendMode="screen"
       />
       
       {/* Main Content - Apple-Style Minimal */}

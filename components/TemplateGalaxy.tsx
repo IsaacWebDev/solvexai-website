@@ -465,7 +465,7 @@ function TemplateGalaxyScene({
       ))}
       
       {/* Side ring planets (2) */}
-      {orbitGroups.side.map={(template, i) => (
+      {orbitGroups.side.map((template, i) => (
         <TemplatePlanet
           key={template.id}
           template={template}
