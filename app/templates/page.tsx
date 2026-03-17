@@ -442,6 +442,8 @@ function TemplateCard({ name, industry, price, features, includes, gradient, ima
 }
 
 function TemplateModal({ template, onClose }: { template: TemplateCardProps; onClose: () => void }) {
+  const [selectedPage, setSelectedPage] = useState<'home' | 'about' | 'services' | 'contact'>('home')
+  
   return (
     <div 
       className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 overflow-y-auto"
@@ -463,38 +465,44 @@ function TemplateModal({ template, onClose }: { template: TemplateCardProps; onC
         <h2 className="text-4xl font-bold mb-4">{template.name}</h2>
         <p className="text-gray-400 mb-8">Industry: {template.industry}</p>
         
-        {/* Multi-page Preview */}
-        <div className="grid grid-cols-2 gap-4 mb-8">
+        {/* Page Tabs */}
+        <div className="flex gap-2 mb-4">
           {[
-            { name: 'Home', key: 'home' },
-            { name: 'About', key: 'about' },
-            { name: 'Services', key: 'services' },
-            { name: 'Contact', key: 'contact' }
-          ].map((page) => {
-            const pageImage = template.pageImages?.[page.key as keyof typeof template.pageImages]
-            return (
-              <div 
-                key={page.key}
-                className="relative rounded-lg overflow-hidden group cursor-pointer"
-                style={{ height: '300px' }}
-              >
-                {pageImage ? (
-                  <img 
-                    src={pageImage} 
-                    alt={`${page.name} Page`}
-                    className="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-300"
-                  />
-                ) : (
-                  <div className={`w-full h-full bg-gradient-to-br ${template.gradient} flex items-center justify-center`}>
-                    <span className="text-white/50 font-semibold">{page.name} Page</span>
-                  </div>
-                )}
-                <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                  <span className="text-white font-semibold">{page.name} Page</span>
-                </div>
-              </div>
-            )
-          })}
+            { name: 'Home', key: 'home' as const },
+            { name: 'About', key: 'about' as const },
+            { name: 'Services', key: 'services' as const },
+            { name: 'Contact', key: 'contact' as const }
+          ].map((page) => (
+            <button
+              key={page.key}
+              onClick={() => setSelectedPage(page.key)}
+              className={`px-6 py-2 rounded-lg font-semibold transition-all ${
+                selectedPage === page.key
+                  ? 'bg-purple-600 text-white'
+                  : 'bg-white/5 text-gray-400 hover:bg-white/10'
+              }`}
+            >
+              {page.name}
+            </button>
+          ))}
+        </div>
+        
+        {/* Large Page Preview */}
+        <div className="mb-8 rounded-lg overflow-hidden" style={{ maxHeight: '600px' }}>
+          {template.pageImages?.[selectedPage] ? (
+            <img 
+              src={template.pageImages[selectedPage]} 
+              alt={`${selectedPage} Page`}
+              className="w-full h-auto object-contain"
+              style={{ maxHeight: '600px' }}
+            />
+          ) : (
+            <div className={`w-full h-96 bg-gradient-to-br ${template.gradient} flex items-center justify-center`}>
+              <span className="text-white/50 font-semibold text-2xl">
+                {selectedPage.charAt(0).toUpperCase() + selectedPage.slice(1)} Page
+              </span>
+            </div>
+          )}
         </div>
         
         {/* Full Feature List */}
