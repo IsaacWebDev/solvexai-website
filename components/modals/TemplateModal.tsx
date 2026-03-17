@@ -1,6 +1,7 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { createPortal } from 'react-dom'
 import Link from 'next/link'
 import { LiquidGlassCard, LiquidGlassButton } from '@/components/ui'
 
@@ -26,8 +27,16 @@ interface TemplateModalProps {
 
 export function TemplateModal({ template, onClose }: TemplateModalProps) {
   const [selectedPage, setSelectedPage] = useState<'home' | 'about' | 'services' | 'contact'>('home')
-  
-  return (
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+    return () => setMounted(false)
+  }, [])
+
+  if (!mounted) return null
+
+  const modalContent = (
     <div 
       className="fixed inset-0 bg-black/80 backdrop-blur-sm z-[9999] flex items-center justify-center p-4"
       onClick={onClose}
@@ -133,4 +142,6 @@ export function TemplateModal({ template, onClose }: TemplateModalProps) {
       </div>
     </div>
   )
+
+  return createPortal(modalContent, document.body)
 }
