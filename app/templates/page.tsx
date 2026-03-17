@@ -76,15 +76,16 @@ export default function TemplatesPage() {
       industry: 'Real Estate',
       price: 897,
       features: [
-        'Dark theme with gold accents',
-        'Property listings (grid/map view)',
-        'Virtual tour integration',
-        'Advanced search filters',
-        'Lead capture forms'
+        'White background with gold accents',
+        '6 featured properties with full details',
+        '4 property categories (Villas, Apartments, etc.)',
+        '3 agent profiles with contact buttons',
+        'Property search bar & testimonials',
+        'Stats: $2B+ sold, 25+ years, 50+ markets'
       ],
-      includes: 'Contact forms, SEO, Mobile responsive, 1-week setup',
+      includes: 'Luxury design, Premium typography, Fully responsive, Ready to deploy',
       gradient: 'from-yellow-800 to-yellow-600',
-      image: '/template-mockups/real-estate-luxury.jpg',
+      image: '/template-mockups/real-estate-luxury-mockup.png',
       previewUrl: 'https://placeholder-realestate-demo.vercel.app'
     },
     {
@@ -92,15 +93,16 @@ export default function TemplatesPage() {
       industry: 'E-Commerce',
       price: 997,
       features: [
-        'Minimal white design',
-        'Product catalog with filters',
-        'Shopping cart & checkout',
-        'Inventory management',
-        'Order tracking'
+        'Apple-inspired minimal white design',
+        '8 featured products with ratings',
+        'Working shopping cart system',
+        '4 featured categories with hover effects',
+        'Trust section (shipping, returns, support)',
+        'Newsletter signup & testimonials'
       ],
-      includes: 'Contact forms, SEO, Mobile responsive, 1-week setup',
+      includes: 'Cart functionality, Form validation, Fully responsive, Ready to deploy',
       gradient: 'from-purple-600 to-pink-600',
-      image: '/template-mockups/e-commerce-clean.jpg',
+      image: '/template-mockups/ecommerce-clean-mockup.png',
       previewUrl: 'https://placeholder-ecommerce-demo.vercel.app'
     },
     {
@@ -108,15 +110,16 @@ export default function TemplatesPage() {
       industry: 'Medical',
       price: 797,
       features: [
-        'Calming blue/white theme',
-        'Appointment booking',
-        'Patient portal',
-        'Insurance information',
-        'Service descriptions'
+        'Soft blue accents with clean design',
+        '6 medical services with details',
+        '3 doctor profiles with specialties',
+        'Appointment booking form with validation',
+        '4 trust features & patient testimonials',
+        'Clinic information with hours & map'
       ],
-      includes: 'Contact forms, SEO, Mobile responsive, 1-week setup',
+      includes: 'Professional healthcare design, Smooth animations, Fully responsive, Ready to deploy',
       gradient: 'from-cyan-600 to-blue-600',
-      image: '/template-mockups/medical-practice.jpg',
+      image: '/template-mockups/medical-practice-mockup.png',
       previewUrl: 'https://placeholder-medical-demo.vercel.app'
     },
     {
@@ -124,15 +127,16 @@ export default function TemplatesPage() {
       industry: 'More',
       price: 597,
       features: [
-        'Bold construction theme',
-        'Project portfolio',
-        'Quote request forms',
-        'Before/after galleries',
-        'Service area maps'
+        'Construction yellow accents on dark grey',
+        '6 services (residential, commercial, etc.)',
+        '6 featured projects portfolio grid',
+        '4-step construction process display',
+        'Quote request form & testimonials',
+        'Stats: 500+ projects, 25+ years, 100+ team'
       ],
-      includes: 'Contact forms, SEO, Mobile responsive, 1-week setup',
+      includes: 'Bold professional design, Smooth animations, Fully responsive, Ready to deploy',
       gradient: 'from-gray-700 to-yellow-700',
-      image: '/template-mockups/construction-pro.jpg',
+      image: '/template-mockups/construction-pro-mockup.png',
       previewUrl: 'https://placeholder-construction-demo.vercel.app'
     },
     {
@@ -140,15 +144,16 @@ export default function TemplatesPage() {
       industry: 'More',
       price: 697,
       features: [
-        'Bold typography',
-        'Portfolio showcase',
-        'Case study pages',
-        'Client logo grid',
-        'Team member bios'
+        'Dark theme with purple/blue gradients',
+        '4 services (Web Design, Branding, etc.)',
+        '6 featured work portfolio with overlays',
+        '4-step process (Discovery to Launch)',
+        'Contact form with project type & budget',
+        'Stats: 8+ years, 200+ projects, 50+ clients'
       ],
-      includes: 'Contact forms, SEO, Mobile responsive, 1-week setup',
+      includes: 'Modern creative design, Gradient accents, Fully responsive, Ready to deploy',
       gradient: 'from-pink-600 to-purple-600',
-      image: '/template-mockups/creative-agency.jpg',
+      image: '/template-mockups/creative-agency-mockup.png',
       previewUrl: 'https://placeholder-agency-demo.vercel.app'
     }
   ]
