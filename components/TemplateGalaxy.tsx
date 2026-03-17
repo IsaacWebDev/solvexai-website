@@ -492,7 +492,7 @@ export function TemplateGalaxy() {
   const hoveredTemplate = templates.find(t => t.id === hoveredId)
   
   return (
-    <div className="relative w-full h-[800px]">
+    <div className="relative w-full h-[600px]">
       <Canvas
         camera={{ position: [0, 6, 14], fov: 55 }}
         style={{ background: 'transparent' }}

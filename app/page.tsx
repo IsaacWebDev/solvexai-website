@@ -95,7 +95,7 @@ export default function HomePage() {
           <AutomationScanner />
           <SectionDivider />
           
-          <section className="pt-20 px-6 relative z-10" style={{ paddingBottom: 0, marginBottom: '-4rem' }}>
+          <section className="pt-20 px-6 relative z-10" style={{ paddingBottom: 0, marginBottom: '-8rem' }}>
             <div className="text-center mb-6">
               <div className="inline-block">
                 <h2 className="text-5xl font-bold gradient-text">
