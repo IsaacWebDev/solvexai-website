@@ -76,19 +76,20 @@ export function AutomationScanner() {
   }
   
   return (
-    <LiquidGlassCard intensity="heavy" className="p-8 max-w-4xl mx-auto">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-      >
-        <div className="text-center mb-8">
-          <h2 className="text-3xl font-bold mb-2">
-            🔍 Automation Potential Scanner
-          </h2>
-          <p className="text-gray-400">
-            Tell us your business type and we'll find what can be automated
-          </p>
-        </div>
+    <section className="py-32 px-6 relative z-10 flex justify-center">
+      <LiquidGlassCard intensity="heavy" className="p-8 max-w-4xl w-full">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+        >
+          <div className="text-center mb-8">
+            <h2 className="text-3xl font-bold mb-2">
+              🔍 Automation Potential Scanner
+            </h2>
+            <p className="text-gray-400">
+              Tell us your business type and we'll find what can be automated
+            </p>
+          </div>
         
         {/* Input */}
         <div className="flex gap-3 mb-8">
@@ -206,7 +207,8 @@ export function AutomationScanner() {
             </motion.div>
           )}
         </AnimatePresence>
-      </motion.div>
-    </LiquidGlassCard>
+        </motion.div>
+      </LiquidGlassCard>
+    </section>
   )
 }

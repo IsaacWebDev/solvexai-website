@@ -13,6 +13,7 @@ import { CTAMinimal } from '@/components/sections/CTAMinimal'
 import { InteractiveGalaxyBG } from '@/components/backgrounds/InteractiveGalaxyBG'
 import { SectionDivider } from '@/components/ui/SectionDivider'
 import { StickyBookCallButton } from '@/components/StickyBookCallButton'
+import { AutomationScanner } from '@/components/interactive/AutomationScanner'
 import dynamic from 'next/dynamic'
 
 const GhostCursor = dynamic(() => import('@/components/effects/GhostCursor'), { ssr: false })
@@ -89,6 +90,9 @@ export default function HomePage() {
           <SectionDivider />
           
           <OutcomesSimple />
+          <SectionDivider />
+          
+          <AutomationScanner />
           <SectionDivider />
           
           <TemplateShowcase />
