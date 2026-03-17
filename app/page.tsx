@@ -13,7 +13,6 @@ import { CTAMinimal } from '@/components/sections/CTAMinimal'
 import { InteractiveGalaxyBG } from '@/components/backgrounds/InteractiveGalaxyBG'
 import { SectionDivider } from '@/components/ui/SectionDivider'
 import { StickyBookCallButton } from '@/components/StickyBookCallButton'
-import { AIAvatar } from '@/components/interactive/AIAvatar'
 import { AutomationScanner } from '@/components/interactive/AutomationScanner'
 import dynamic from 'next/dynamic'
 
@@ -108,8 +107,6 @@ export default function HomePage() {
           <CTAMinimal />
         </div>
       </main>
-      
-      <AIAvatar key="global-ai-avatar" />
       
       <style>{`
         @keyframes fadeInContent {
