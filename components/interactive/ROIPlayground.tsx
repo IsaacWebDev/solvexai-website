@@ -37,7 +37,7 @@ export function ROIPlayground() {
   }
   
   return (
-    <LiquidGlassCard intensity="heavy" className="p-8 max-w-4xl mx-auto">
+    <LiquidGlassCard intensity="heavy" className="p-8 max-w-4xl mx-auto w-full">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}

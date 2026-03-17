@@ -239,16 +239,14 @@ export default function TemplatesPage() {
           </motion.div>
 
           {/* Sarah Chen's Transformation */}
-          <section className="flex justify-center w-full" style={{ marginBottom: spacing.content.gap }}>
-            <motion.div
-              className="w-full max-w-7xl"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-            >
-              <EmailBeforeAfter />
-            </motion.div>
-          </section>
+          <motion.div
+            style={{ marginBottom: spacing.content.gap }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          >
+            <EmailBeforeAfter />
+          </motion.div>
           
           {/* Filter Bar */}
           <div className="flex flex-wrap justify-center gap-4 mb-16">

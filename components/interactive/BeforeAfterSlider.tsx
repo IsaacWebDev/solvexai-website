@@ -36,7 +36,7 @@ export function BeforeAfterSlider({
   }, [])
   
   return (
-    <LiquidGlassCard intensity="medium" className="p-6 max-w-2xl mx-auto">
+    <LiquidGlassCard intensity="medium" className="p-6 max-w-2xl mx-auto w-full">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
