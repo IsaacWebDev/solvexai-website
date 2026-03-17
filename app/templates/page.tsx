@@ -476,7 +476,11 @@ function TemplateModal({ template, onClose }: { template: TemplateCardProps; onC
         </button>
         
         <h2 className="text-4xl font-bold mb-4">{template.name}</h2>
-        <p className="text-gray-400 mb-8">Industry: {template.industry}</p>
+        <p className="text-gray-400 mb-4">Industry: {template.industry}</p>
+        
+        {/* Debug - Remove after testing */}
+        {template.pageImages && <p className="text-green-400 text-xs mb-2">✓ Has page images</p>}
+        {!template.pageImages && <p className="text-red-400 text-xs mb-2">✗ No page images</p>}
         
         {/* Page Tabs */}
         <div className="flex gap-2 mb-4">
