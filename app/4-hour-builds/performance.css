@@ -1,0 +1,89 @@
+/* Performance Optimizations for 4-Hour Builds Page */
+
+/* GPU acceleration for glass cards */
+.liquid-glass-card {
+  transform: translate3d(0, 0, 0);
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+}
+
+/* Optimize animations - use transform instead of top/left */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 20px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+/* Reduce animation complexity on low-end devices */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Optimize gradient animations */
+.animated-gradient {
+  contain: paint;
+  will-change: transform;
+}
+
+/* Image lazy loading hint */
+img[loading="lazy"] {
+  content-visibility: auto;
+}
+
+/* Contain expensive operations */
+.case-study-card {
+  contain: layout style paint;
+}
+
+/* Optimize hover effects */
+.hover-scale {
+  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
+}
+
+.hover-scale:hover {
+  transform: scale(1.05) translate3d(0, 0, 0);
+}
+
+/* Mobile gradient fallback (static for better performance) */
+@media (max-width: 768px) {
+  .animated-gradient-mesh {
+    animation: none;
+    background: linear-gradient(135deg, rgb(59, 130, 246, 0.2) 0%, rgb(147, 51, 234, 0.2) 100%);
+  }
+}
+
+/* Prevent layout shift */
+.hero-section {
+  min-height: 600px;
+  contain: layout;
+}
+
+/* Optimize icon rendering */
+svg {
+  shape-rendering: geometricPrecision;
+}
+
+/* Reduce paint area for shadows */
+.glass-card-shadow {
+  box-shadow: 
+    0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+/* Video optimization hint */
+video {
+  contain: paint;
+  object-fit: cover;
+}
