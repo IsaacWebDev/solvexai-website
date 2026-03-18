@@ -9,6 +9,7 @@ export function Navigation() {
   const [isOpen, setIsOpen] = useState(false)
   
   const links = [
+    { href: '/4-hour-builds', label: '4-Hour Builds', badge: 'NEW' },
     { href: '/templates', label: 'Templates' },
     { href: '/packages', label: 'Packages' },
     { href: '/ai-receptionist', label: 'AI Receptionist' },
@@ -30,9 +31,14 @@ export function Navigation() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="text-white/80 hover:text-white transition-colors font-medium"
+                  className="text-white/80 hover:text-white transition-colors font-medium relative"
                 >
                   {link.label}
+                  {link.badge && (
+                    <span className="absolute -top-2 -right-8 bg-gradient-to-r from-blue-500 to-purple-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">
+                      {link.badge}
+                    </span>
+                  )}
                 </Link>
               ))}
               <LiquidGlassButton variant="primary" size="sm">
