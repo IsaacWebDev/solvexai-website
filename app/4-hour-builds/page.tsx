@@ -36,7 +36,7 @@ export default function FourHourBuildsPage() {
   return (
     <>
       {/* Skip to main content link for keyboard users */}
-      <a 
+      <a
         href="#main-content"
         className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-blue-600 focus:text-white focus:rounded-lg focus:outline-none focus:ring-4 focus:ring-blue-400"
       >
@@ -45,14 +45,23 @@ export default function FourHourBuildsPage() {
 
       <Navigation />
       <AnimatedGradientMesh aria-hidden="true" />
+
+      {/* Mobile Sticky CTA */}
+      <div className="fixed bottom-0 left-0 right-0 md:hidden bg-gradient-to-t from-black via-black to-transparent pt-4 pb-6 px-4 z-40">
+        <Link href="/contact" className="w-full block">
+          <LiquidGlassButton variant="primary" size="lg" className="w-full">
+            Book 4-Hour Build
+          </LiquidGlassButton>
+        </Link>
+      </div>
       
-      <main 
+      <main
         id="main-content"
-        className="relative px-4 py-32 min-h-screen"
+        className="relative px-4 py-32 min-h-screen pb-24 md:pb-0"
         role="main"
       >
         <div className="max-w-7xl mx-auto">
-          
+
           {/* Hero Section */}
           <motion.div
             className="text-center mb-20"
@@ -67,7 +76,7 @@ export default function FourHourBuildsPage() {
               <Zap className="w-4 h-4 text-blue-400" aria-hidden="true" />
               <span className="text-sm text-blue-400 font-medium">Proven: Montrez Site Rebuilt in 4 Hours</span>
             </motion.div>
-            
+
             <h1 className="text-6xl md:text-7xl font-bold mb-6">
               <span className="bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
                 Production-Ready Sites
@@ -77,12 +86,12 @@ export default function FourHourBuildsPage() {
                 in 4 Hours, Not 4 Weeks
               </span>
             </h1>
-            
+
             <p className="text-xl text-gray-200 mb-8 max-w-3xl mx-auto">
-              Luxury brands, urgent launches, emergency rebuilds. We deliver in 1 day 
+              Luxury brands, urgent launches, emergency rebuilds. We deliver in 1 day
               what your competitors promise in 1 month.
             </p>
-            
+
             <div className="flex flex-col sm:flex-row gap-4 justify-center" role="group" aria-label="Call to action buttons">
               <Link href="/contact" className="focus:outline-none focus:ring-4 focus:ring-blue-400 rounded-lg">
                 <LiquidGlassButton variant="primary" size="lg" className="group">
@@ -96,9 +105,9 @@ export default function FourHourBuildsPage() {
                 </LiquidGlassButton>
               </Link>
             </div>
-            
+
             {/* Statistics with improved semantics and contrast */}
-            <section 
+            <section
               className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto"
               aria-label="Key performance metrics"
             >
@@ -148,7 +157,7 @@ export default function FourHourBuildsPage() {
               </motion.div>
             </section>
           </motion.div>
-          
+
           {/* Comparison Section */}
           <motion.section
             className="mb-32"
@@ -160,17 +169,17 @@ export default function FourHourBuildsPage() {
             <h2 id="comparison-heading" className="text-4xl font-bold text-center mb-12">
               Traditional vs. 4-Hour Build
             </h2>
-            
+
             <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
               {/* Traditional - Improved contrast and semantics */}
-              <LiquidGlassCard 
-                intensity="medium" 
+              <LiquidGlassCard
+                intensity="medium"
                 className="p-8 border-2 border-red-500/30"
                 role="article"
                 aria-label="Traditional approach disadvantages"
               >
                 <div className="flex items-center gap-3 mb-6">
-                  <div 
+                  <div
                     className="w-12 h-12 rounded-full bg-red-500/20 flex items-center justify-center"
                     aria-hidden="true"
                   >
@@ -181,7 +190,7 @@ export default function FourHourBuildsPage() {
                     <p className="text-sm text-gray-300">Industry Standard</p>
                   </div>
                 </div>
-                
+
                 <ul className="space-y-4" role="list">
                   <li className="flex items-start gap-3">
                     <span className="text-red-300 mt-1 text-xl" aria-label="Disadvantage" role="img">❌</span>
@@ -213,24 +222,24 @@ export default function FourHourBuildsPage() {
                   </li>
                 </ul>
               </LiquidGlassCard>
-              
+
               {/* 4-Hour Build - Improved contrast and semantics */}
-              <LiquidGlassCard 
-                intensity="heavy" 
+              <LiquidGlassCard
+                intensity="heavy"
                 className="p-8 border-2 border-green-500/40 relative overflow-hidden"
                 role="article"
                 aria-label="4-Hour Build advantages - recommended option"
               >
-                <div 
+                <div
                   className="absolute top-4 right-4 bg-gradient-to-r from-green-500 to-emerald-500 text-white text-xs font-bold px-3 py-1 rounded-full"
                   role="status"
                   aria-label="Recommended option"
                 >
                   RECOMMENDED
                 </div>
-                
+
                 <div className="flex items-center gap-3 mb-6">
-                  <div 
+                  <div
                     className="w-12 h-12 rounded-full bg-gradient-to-br from-green-500 to-emerald-500 flex items-center justify-center"
                     aria-hidden="true"
                   >
@@ -241,7 +250,7 @@ export default function FourHourBuildsPage() {
                     <p className="text-sm text-gray-300">SolveXAI System</p>
                   </div>
                 </div>
-                
+
                 <ul className="space-y-4" role="list">
                   <li className="flex items-start gap-3">
                     <CheckCircle className="w-5 h-5 text-green-300 mt-1 flex-shrink-0" aria-label="Advantage" />
@@ -275,7 +284,7 @@ export default function FourHourBuildsPage() {
               </LiquidGlassCard>
             </div>
           </motion.section>
-          
+
           {/* Case Study Section */}
           <motion.section
             id="case-study"
@@ -289,16 +298,16 @@ export default function FourHourBuildsPage() {
               Real Results: Montrez Site Rebuild
             </h2>
             <p className="text-gray-200 text-center mb-12 max-w-2xl mx-auto">
-              Luxury streetwear brand needed complete e-commerce rebuild. 
+              Luxury streetwear brand needed complete e-commerce rebuild.
               We delivered production-ready site in 4 hours.
             </p>
-            
+
             <LiquidGlassCard intensity="heavy" className="p-12 max-w-5xl mx-auto">
               <div className="grid md:grid-cols-2 gap-12">
                 {/* Challenge */}
                 <article aria-labelledby="challenge-heading">
                   <h3 id="challenge-heading" className="text-2xl font-bold mb-6 flex items-center gap-3">
-                    <div 
+                    <div
                       className="w-8 h-8 rounded-full bg-red-500/20 flex items-center justify-center text-red-300 text-sm font-bold"
                       aria-hidden="true"
                     >
@@ -332,11 +341,11 @@ export default function FourHourBuildsPage() {
                     </ul>
                   </div>
                 </article>
-                
+
                 {/* Solution */}
                 <article aria-labelledby="solution-heading">
                   <h3 id="solution-heading" className="text-2xl font-bold mb-6 flex items-center gap-3">
-                    <div 
+                    <div
                       className="w-8 h-8 rounded-full bg-blue-500/20 flex items-center justify-center text-blue-300 text-sm font-bold"
                       aria-hidden="true"
                     >
@@ -371,15 +380,15 @@ export default function FourHourBuildsPage() {
                   </div>
                 </article>
               </div>
-              
+
               {/* Results */}
               <div className="mt-12 pt-12 border-t border-white/10">
                 <h3 className="text-2xl font-bold mb-8 text-center flex items-center justify-center gap-3">
                   <Award className="w-8 h-8 text-yellow-300" aria-hidden="true" />
                   Results
                 </h3>
-                
-                <div 
+
+                <div
                   className="grid grid-cols-2 md:grid-cols-4 gap-8"
                   role="list"
                   aria-label="Project results and metrics"
@@ -405,10 +414,10 @@ export default function FourHourBuildsPage() {
                     <div className="text-xs text-gray-400 mt-1">All passed ✓</div>
                   </div>
                 </div>
-                
+
                 <div className="mt-8 text-center">
-                  <a 
-                    href="https://montrez-site.vercel.app" 
+                  <a
+                    href="https://montrez-site.vercel.app"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-2 text-blue-300 hover:text-blue-200 transition-colors focus:outline-none focus:ring-4 focus:ring-blue-400 rounded-lg px-3 py-2"
@@ -421,7 +430,7 @@ export default function FourHourBuildsPage() {
               </div>
             </LiquidGlassCard>
           </motion.section>
-          
+
           {/* How It Works Section */}
           <motion.section
             className="mb-32"
@@ -433,10 +442,10 @@ export default function FourHourBuildsPage() {
             <h2 id="how-it-works-heading" className="text-4xl font-bold text-center mb-12">
               How the 10-Agent System Works
             </h2>
-            
+
             <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto" role="list">
               <LiquidGlassCard intensity="medium" className="p-6" role="listitem">
-                <div 
+                <div
                   className="w-12 h-12 rounded-full bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center mb-4"
                   aria-hidden="true"
                 >
@@ -444,13 +453,13 @@ export default function FourHourBuildsPage() {
                 </div>
                 <h3 className="text-xl font-bold mb-3">Parallel Execution</h3>
                 <p className="text-gray-200 text-sm">
-                  10 specialist agents work simultaneously: frontend, backend, UI, UX, content, 
+                  10 specialist agents work simultaneously: frontend, backend, UI, UX, content,
                   brand, accessibility, performance, security, and reality-check.
                 </p>
               </LiquidGlassCard>
-              
+
               <LiquidGlassCard intensity="medium" className="p-6" role="listitem">
-                <div 
+                <div
                   className="w-12 h-12 rounded-full bg-gradient-to-br from-green-500 to-emerald-500 flex items-center justify-center mb-4"
                   aria-hidden="true"
                 >
@@ -458,13 +467,13 @@ export default function FourHourBuildsPage() {
                 </div>
                 <h3 className="text-xl font-bold mb-3">Quality Gates</h3>
                 <p className="text-gray-200 text-sm">
-                  Each agent validates specific criteria. Brand-guardian ensures consistency, 
+                  Each agent validates specific criteria. Brand-guardian ensures consistency,
                   security catches vulnerabilities, performance optimizes speed.
                 </p>
               </LiquidGlassCard>
-              
+
               <LiquidGlassCard intensity="medium" className="p-6" role="listitem">
-                <div 
+                <div
                   className="w-12 h-12 rounded-full bg-gradient-to-br from-orange-500 to-red-500 flex items-center justify-center mb-4"
                   aria-hidden="true"
                 >
@@ -472,13 +481,13 @@ export default function FourHourBuildsPage() {
                 </div>
                 <h3 className="text-xl font-bold mb-3">Real-Time Fixes</h3>
                 <p className="text-gray-200 text-sm">
-                  Issues caught immediately. No waiting for revisions. Fixes applied 
+                  Issues caught immediately. No waiting for revisions. Fixes applied
                   during build process. Production-ready output guaranteed.
                 </p>
               </LiquidGlassCard>
             </div>
           </motion.section>
-          
+
           {/* Pricing Section */}
           <motion.section
             className="mb-32"
@@ -493,24 +502,41 @@ export default function FourHourBuildsPage() {
             <p className="text-gray-200 text-center mb-12">
               Fixed price, no hidden fees, production-ready guaranteed
             </p>
-            
-            <LiquidGlassCard 
-              intensity="heavy" 
+
+            <LiquidGlassCard
+              intensity="heavy"
               className="p-12 max-w-2xl mx-auto text-center"
               role="article"
               aria-label="Pricing details"
             >
               <div className="mb-8">
-                <div 
+                <div
                   className="text-6xl font-bold text-transparent bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text mb-2"
                   role="text"
                   aria-label="$5,000 to $10,000"
                 >
                   $5K-10K
                 </div>
-                <div className="text-gray-300">Based on complexity</div>
+                <div className="text-gray-300 mb-6">Based on complexity</div>
+                
+                {/* Pricing Breakdown */}
+                <div className="bg-white/5 rounded-lg p-6 space-y-3 text-left">
+                  <h3 className="text-sm font-bold text-gray-400 uppercase tracking-wide mb-4">Package Tiers</h3>
+                  <div className="flex justify-between py-2 border-b border-white/10">
+                    <span className="text-gray-300 text-sm">Basic: Branding refresh</span>
+                    <span className="text-green-400 font-bold">$5K</span>
+                  </div>
+                  <div className="flex justify-between py-2 border-b border-white/10">
+                    <span className="text-gray-300 text-sm">Standard: E-commerce + auth</span>
+                    <span className="text-green-400 font-bold">$7K</span>
+                  </div>
+                  <div className="flex justify-between py-2">
+                    <span className="text-gray-300 text-sm">Premium: Custom integrations</span>
+                    <span className="text-green-400 font-bold">$10K</span>
+                  </div>
+                </div>
               </div>
-              
+
               <ul className="space-y-4 text-left mb-8" role="list">
                 <li className="flex items-center gap-3">
                   <CheckCircle className="w-5 h-5 text-green-300 flex-shrink-0" aria-hidden="true" />
@@ -533,8 +559,8 @@ export default function FourHourBuildsPage() {
                   <span className="text-gray-200">30-day support included</span>
                 </li>
               </ul>
-              
-              <Link 
+
+              <Link
                 href="/contact"
                 className="focus:outline-none focus:ring-4 focus:ring-blue-400 rounded-lg inline-block w-full"
               >
@@ -542,13 +568,13 @@ export default function FourHourBuildsPage() {
                   Book Your Build Now
                 </LiquidGlassButton>
               </Link>
-              
+
               <p className="text-sm text-gray-300 mt-4">
                 50% up-front, 50% on delivery
               </p>
             </LiquidGlassCard>
           </motion.section>
-          
+
           {/* Final CTA Section */}
           <motion.section
             className="text-center"
@@ -566,7 +592,7 @@ export default function FourHourBuildsPage() {
                 Join luxury brands who refuse to wait 4 weeks for what can be done in 1 day.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center" role="group" aria-label="Final call to action">
-                <Link 
+                <Link
                   href="/contact"
                   className="focus:outline-none focus:ring-4 focus:ring-blue-400 rounded-lg"
                 >
@@ -574,8 +600,8 @@ export default function FourHourBuildsPage() {
                     Book Your 4-Hour Build
                   </LiquidGlassButton>
                 </Link>
-                <a 
-                  href="https://montrez-site.vercel.app" 
+                <a
+                  href="https://montrez-site.vercel.app"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="focus:outline-none focus:ring-4 focus:ring-blue-400 rounded-lg"
@@ -588,7 +614,7 @@ export default function FourHourBuildsPage() {
               </div>
             </LiquidGlassCard>
           </motion.section>
-          
+
         </div>
       </main>
     </>
