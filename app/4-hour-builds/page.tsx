@@ -7,14 +7,49 @@ import { motion } from 'framer-motion'
 import { Clock, Zap, Shield, Award, CheckCircle, ArrowRight } from 'lucide-react'
 import Link from 'next/link'
 import Image from 'next/image'
+import './styles.css'
 
 export default function FourHourBuildsPage() {
+  const structuredData = {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: '4-Hour Website Builds',
+    provider: {
+      '@type': 'Organization',
+      name: 'SolveXAI',
+      url: 'https://solvexai-website.vercel.app'
+    },
+    serviceType: 'Web Development',
+    description: 'Production-ready website development in 4 hours using 10-agent parallel execution system',
+    offers: {
+      '@type': 'Offer',
+      price: '5000-10000',
+      priceCurrency: 'USD',
+      description: 'Fixed-price website development with quality guarantees'
+    },
+    areaServed: 'Worldwide',
+    availableChannel: {
+      '@type': 'ServiceChannel',
+      serviceUrl: 'https://solvexai-website.vercel.app/contact'
+    }
+  }
+  
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
+      <a 
+        href="#main-content" 
+        className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:bg-blue-500 focus:text-white focus:px-4 focus:py-2 focus:rounded-lg"
+      >
+        Skip to main content
+      </a>
       <Navigation />
       <AnimatedGradientMesh />
       
-      <main className="relative px-4 py-32 min-h-screen">
+      <main id="main-content" className="relative px-4 py-32 min-h-screen">
         <div className="max-w-7xl mx-auto">
           
           {/* Hero */}
@@ -35,7 +70,7 @@ export default function FourHourBuildsPage() {
             
             <h1 className="text-6xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
               Production-Ready Sites<br />
-              <span className="text-5xl md:text-6xl bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text">
+              <span className="text-5xl md:text-6xl bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text" role="text">
                 in 4 Hours, Not 4 Weeks
               </span>
             </h1>
@@ -328,10 +363,12 @@ export default function FourHourBuildsPage() {
                   <a 
                     href="https://montrez-site.vercel.app" 
                     target="_blank"
+                    rel="noopener noreferrer"
                     className="inline-flex items-center gap-2 text-blue-400 hover:text-blue-300 transition-colors"
+                    aria-label="View Montrez live site (opens in new tab)"
                   >
                     View Live Site
-                    <ArrowRight className="w-4 h-4" />
+                    <ArrowRight className="w-4 h-4" aria-hidden="true" />
                   </a>
                 </div>
               </div>
@@ -463,7 +500,12 @@ export default function FourHourBuildsPage() {
                     Book Your 4-Hour Build
                   </LiquidGlassButton>
                 </Link>
-                <a href="https://montrez-site.vercel.app" target="_blank">
+                <a 
+                  href="https://montrez-site.vercel.app" 
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="See Montrez site live (opens in new tab)"
+                >
                   <LiquidGlassButton variant="secondary" size="lg">
                     See Montrez Site Live
                   </LiquidGlassButton>
