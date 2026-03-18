@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import IntroScreen from '@/components/IntroScreen'
+import { CinematicEntrance } from '@/components/CinematicEntrance'
 import { Navigation } from '@/components/Navigation'
 import { AppleHero } from '@/components/sections/AppleHero'
 import { LiveCounter } from '@/components/interactive/LiveCounter'
@@ -19,32 +20,27 @@ import dynamic from 'next/dynamic'
 const GhostCursor = dynamic(() => import('@/components/effects/GhostCursor'), { ssr: false })
 
 export default function HomePage() {
-  const [showIntro, setShowIntro] = useState(true)
-  const [fadeOut, setFadeOut] = useState(false)
+  const [showCinematic, setShowCinematic] = useState(true)
   
   useEffect(() => {
     const hasVisited = localStorage.getItem('solvexai-visited')
     if (hasVisited === 'true') {
-      setShowIntro(false)
+      setShowCinematic(false)
     }
   }, [])
   
-  const handleEnter = () => {
+  const handleCinematicComplete = () => {
     localStorage.setItem('solvexai-visited', 'true')
-    setFadeOut(true)
-    setTimeout(() => {
-      setShowIntro(false)
-    }, 800)
+    setShowCinematic(false)
   }
   
-  if (showIntro) {
+  if (showCinematic) {
     return (
-      <div style={{
-        opacity: fadeOut ? 0 : 1,
-        transition: 'opacity 0.8s ease-out'
-      }}>
-        <IntroScreen onEnter={handleEnter} />
-      </div>
+      <CinematicEntrance
+        onComplete={handleCinematicComplete}
+        gateImageUrl="/images/galaxy-bg-optimized.webp"
+        videoUrl="/videos/intro.mp4"
+      />
     )
   }
   
