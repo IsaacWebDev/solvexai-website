@@ -39,7 +39,7 @@ export default function HomePage() {
       <CinematicEntrance
         onComplete={handleCinematicComplete}
         gateImageUrl="/images/galaxy-bg-optimized.webp"
-        videoUrl="/videos/intro.mp4"
+        videoUrl="/backgrounds/neural-network.mp4"
       />
     )
   }
