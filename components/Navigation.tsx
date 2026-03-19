@@ -9,7 +9,6 @@ export function Navigation() {
   const [isOpen, setIsOpen] = useState(false)
   
   const links = [
-    { href: '/4-hour-builds', label: '4-Hour Builds', badge: 'NEW' },
     { href: '/templates', label: 'Templates' },
     { href: '/packages', label: 'Packages' },
     { href: '/ai-receptionist', label: 'AI Receptionist' },
