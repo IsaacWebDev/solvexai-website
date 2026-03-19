@@ -25,7 +25,7 @@ export default function TemplatesPage() {
     {
       name: 'Restaurant Delight',
       industry: 'Restaurants',
-      price: 497,
+      price: 53,
       features: [
         'Dark luxury aesthetic with gold accents',
         'Full menu preview (starters, mains, desserts)',
@@ -48,7 +48,7 @@ export default function TemplatesPage() {
     {
       name: 'Law Firm Authority',
       industry: 'Law Firms',
-      price: 797,
+      price: 67,
       features: [
         'Navy blue & gold professional design',
         '6 practice areas with detail pages',
@@ -71,7 +71,7 @@ export default function TemplatesPage() {
     {
       name: 'Fitness Studio Energy',
       industry: 'Fitness',
-      price: 597,
+      price: 57,
       features: [
         'Dark design with neon green accents',
         '4 fitness programs with details',
@@ -94,7 +94,7 @@ export default function TemplatesPage() {
     {
       name: 'Real Estate Luxury',
       industry: 'Real Estate',
-      price: 897,
+      price: 62,
       features: [
         'White background with gold accents',
         '6 featured properties with full details',
@@ -117,7 +117,7 @@ export default function TemplatesPage() {
     {
       name: 'E-Commerce Clean',
       industry: 'E-Commerce',
-      price: 997,
+      price: 62,
       features: [
         'Apple-inspired minimal white design',
         '8 featured products with ratings',
@@ -140,7 +140,7 @@ export default function TemplatesPage() {
     {
       name: 'Medical Practice',
       industry: 'Medical',
-      price: 797,
+      price: 67,
       features: [
         'Soft blue accents with clean design',
         '6 medical services with details',
@@ -163,7 +163,7 @@ export default function TemplatesPage() {
     {
       name: 'Construction Pro',
       industry: 'More',
-      price: 597,
+      price: 57,
       features: [
         'Construction yellow accents on dark grey',
         '6 services (residential, commercial, etc.)',
@@ -186,7 +186,7 @@ export default function TemplatesPage() {
     {
       name: 'Creative Agency',
       industry: 'More',
-      price: 697,
+      price: 59,
       features: [
         'Dark theme with purple/blue gradients',
         '4 services (Web Design, Branding, etc.)',

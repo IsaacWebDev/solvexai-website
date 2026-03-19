@@ -10,7 +10,7 @@ const templates = [
   {
     name: "Real Estate Luxury",
     subtitle: "Listings + Lead Gen",
-    price: "$897",
+    price: "$62",
     image: "/template-mockups/real-estate-luxury.jpg",
     features: ["Mobile responsive", "2-day delivery", "Free support"],
     demoUrl: "https://real-estate-demo.vercel.app",
@@ -19,7 +19,7 @@ const templates = [
   {
     name: "E-Commerce Clean",
     subtitle: "Store + Checkout",
-    price: "$997",
+    price: "$62",
     image: "/template-mockups/e-commerce-clean.jpg",
     features: ["Mobile responsive", "2-day delivery", "Free support"],
     demoUrl: "https://ecommerce-demo.vercel.app",
@@ -28,7 +28,7 @@ const templates = [
   {
     name: "Medical Practice",
     subtitle: "Appointments + Records",
-    price: "$797",
+    price: "$67",
     image: "/template-mockups/medical-practice.jpg",
     features: ["Mobile responsive", "2-day delivery", "Free support"],
     demoUrl: "https://medical-demo.vercel.app",
@@ -37,7 +37,7 @@ const templates = [
   {
     name: "Restaurant Delight",
     subtitle: "Menu + Online Ordering",
-    price: "$497",
+    price: "$53",
     image: "/template-mockups/restaurant-delight.jpg",
     features: ["Mobile responsive", "3-day delivery", "Free support"],
     demoUrl: "https://restaurant-demo.vercel.app"
@@ -45,7 +45,7 @@ const templates = [
   {
     name: "Law Firm Authority",
     subtitle: "Case Studies + Intake",
-    price: "$697",
+    price: "$67",
     image: "/template-mockups/law-firm-authority.jpg",
     features: ["Mobile responsive", "3-day delivery", "Free support"],
     demoUrl: "https://lawfirm-demo.vercel.app"
@@ -53,7 +53,7 @@ const templates = [
   {
     name: "Fitness Studio Energy",
     subtitle: "Classes + Bookings",
-    price: "$597",
+    price: "$57",
     image: "/template-mockups/fitness-studio-energy.jpg",
     features: ["Mobile responsive", "3-day delivery", "Free support"],
     demoUrl: "https://fitness-demo.vercel.app"
@@ -61,7 +61,7 @@ const templates = [
   {
     name: "Construction Pro",
     subtitle: "Portfolio + Quotes",
-    price: "$597",
+    price: "$57",
     image: "/template-mockups/construction-pro.jpg",
     features: ["Mobile responsive", "3-day delivery", "Free support"],
     demoUrl: "https://construction-demo.vercel.app"
@@ -69,7 +69,7 @@ const templates = [
   {
     name: "Creative Agency",
     subtitle: "Portfolio + Case Studies",
-    price: "$697",
+    price: "$59",
     image: "/template-mockups/creative-agency.jpg",
     features: ["Mobile responsive", "3-day delivery", "Free support"],
     demoUrl: "https://agency-demo.vercel.app"

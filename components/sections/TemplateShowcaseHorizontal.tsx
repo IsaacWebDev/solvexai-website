@@ -14,7 +14,7 @@ export function TemplateShowcaseHorizontal() {
       name: 'Restaurant Delight',
       subtitle: 'Menu + Online Ordering',
       description: 'Beautiful menu displays, online ordering system, table reservations, and delivery integration.',
-      price: '497',
+      price: '53',
       gradient: 'from-orange-600 to-red-600',
       image: '/template-previews/restaurant.jpg',
       features: ['Online Ordering', 'Reservations', 'Menu Management', 'Delivery Integration']
@@ -23,7 +23,7 @@ export function TemplateShowcaseHorizontal() {
       name: 'Law Firm Authority',
       subtitle: 'Case Studies + Intake Forms',
       description: 'Professional presence with case studies, client intake forms, and consultation booking.',
-      price: '797',
+      price: '67',
       gradient: 'from-blue-800 to-blue-600',
       features: ['Case Studies', 'Intake Forms', 'Consultation Booking', 'Attorney Profiles']
     },
@@ -31,7 +31,7 @@ export function TemplateShowcaseHorizontal() {
       name: 'Fitness Studio Energy',
       subtitle: 'Class Schedules + Bookings',
       description: 'Dynamic class schedules, membership management, and online booking system.',
-      price: '597',
+      price: '57',
       gradient: 'from-yellow-600 to-orange-600',
       features: ['Class Schedules', 'Online Booking', 'Memberships', 'Trainer Profiles']
     },
@@ -39,7 +39,7 @@ export function TemplateShowcaseHorizontal() {
       name: 'E-Commerce Clean',
       subtitle: 'Product Pages + Checkout',
       description: 'Complete online store with product management, shopping cart, and secure checkout.',
-      price: '997',
+      price: '62',
       gradient: 'from-purple-600 to-pink-600',
       features: ['Product Catalog', 'Shopping Cart', 'Secure Checkout', 'Inventory Management']
     }
