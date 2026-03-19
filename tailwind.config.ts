@@ -1,5 +1,4 @@
 import type { Config } from "tailwindcss";
-import claymorphismPlugin from './plugins/claymorphism'
 
 export default {
   darkMode: 'class', // Enable dark mode with class strategy
@@ -61,5 +60,5 @@ export default {
       },
     },
   },
-  plugins: [claymorphismPlugin],
+  plugins: [],
 } satisfies Config;
