@@ -34,11 +34,6 @@ export function Navigation() {
                   className="text-white/80 hover:text-white transition-colors font-medium relative"
                 >
                   {link.label}
-                  {link.badge && (
-                    <span className="absolute -top-2 -right-8 bg-gradient-to-r from-blue-500 to-purple-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">
-                      {link.badge}
-                    </span>
-                  )}
                 </Link>
               ))}
               <LiquidGlassButton variant="primary" size="sm">
