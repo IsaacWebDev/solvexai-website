@@ -40,16 +40,17 @@ export const ComparisonTable = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
+          <div 
+            style={{
+              background: 'linear-gradient(135deg, rgba(30, 30, 50, 0.6) 0%, rgba(20, 20, 40, 0.6) 100%)',
+              borderRadius: '1rem',
+              boxShadow: '0 0 40px rgba(139, 92, 246, 0.2)',
+            }}
+          >
           <LiquidGlassCard 
             intensity="heavy" 
             glowColor="#8B5CF6"
             className="p-8 md:p-12 border border-transparent"
-            style={{
-              background: 'linear-gradient(135deg, rgba(30, 30, 50, 0.6) 0%, rgba(20, 20, 40, 0.6) 100%)',
-              borderImage: 'linear-gradient(135deg, rgba(59, 130, 246, 0.5), rgba(168, 85, 247, 0.5)) 1',
-              borderImageSlice: 1,
-              boxShadow: '0 0 40px rgba(139, 92, 246, 0.2)',
-            }}
           >
             {/* Desktop Table View */}
             <div className="hidden md:block overflow-x-auto">
@@ -245,6 +246,7 @@ export const ComparisonTable = () => {
               ))}
             </div>
           </LiquidGlassCard>
+          </div>
         </motion.div>
 
       </div>
