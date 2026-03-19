@@ -6,7 +6,7 @@ import { LiquidGlassCard } from '@/components/ui/LiquidGlassCard';
 
 const comparisonData = [
   { feature: 'Delivery Time', solvexai: '2-7 days', upwork: '2-6 weeks', fiverr: '1-4 weeks' },
-  { feature: 'Price Range', solvexai: '$487-7K', upwork: '$10-50K', fiverr: '$5-20K' },
+  { feature: 'Price Range', solvexai: '$53-7K', upwork: '$10-50K', fiverr: '$5-20K' },
   { feature: 'Maintenance', solvexai: true, upwork: false, fiverr: false },
   { feature: 'Support', solvexai: '24/7', upwork: 'Limited', fiverr: 'Limited' },
   { feature: 'Revisions', solvexai: 'Unlimited', upwork: 'Varies', fiverr: 'Limited' },
