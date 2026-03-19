@@ -60,11 +60,11 @@ export default function FourHourBuildsPage() {
         className="relative px-4 py-32 min-h-screen pb-24 md:pb-0"
         role="main"
       >
-        <div className="max-w-7xl mx-auto">
+        <div className="max-w-7xl mx-auto w-full">
 
           {/* Hero Section */}
           <motion.div
-            className="text-center mb-20"
+            className="text-center mb-20 w-full flex flex-col items-center"
             {...(prefersReducedMotion ? {} : fadeInUp)}
           >
             <motion.div
@@ -160,17 +160,17 @@ export default function FourHourBuildsPage() {
 
           {/* Comparison Section */}
           <motion.section
-            className="mb-32"
+            className="mb-32 w-full flex flex-col items-center"
             initial={prefersReducedMotion ? {} : { opacity: 0 }}
             whileInView={prefersReducedMotion ? {} : { opacity: 1 }}
             viewport={{ once: true }}
             aria-labelledby="comparison-heading"
           >
-            <h2 id="comparison-heading" className="text-4xl font-bold text-center mb-12">
+            <h2 id="comparison-heading" className="text-4xl font-bold text-center mb-12 w-full">
               Traditional vs. 4-Hour Build
             </h2>
 
-            <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+            <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto w-full">
               {/* Traditional - Improved contrast and semantics */}
               <LiquidGlassCard
                 intensity="medium"
@@ -288,21 +288,21 @@ export default function FourHourBuildsPage() {
           {/* Case Study Section */}
           <motion.section
             id="case-study"
-            className="mb-32 scroll-mt-32"
+            className="mb-32 scroll-mt-32 w-full flex flex-col items-center"
             initial={prefersReducedMotion ? {} : { opacity: 0 }}
             whileInView={prefersReducedMotion ? {} : { opacity: 1 }}
             viewport={{ once: true }}
             aria-labelledby="case-study-heading"
           >
-            <h2 id="case-study-heading" className="text-4xl font-bold text-center mb-4">
+            <h2 id="case-study-heading" className="text-4xl font-bold text-center mb-4 w-full">
               Real Results: Montrez Site Rebuild
             </h2>
-            <p className="text-gray-200 text-center mb-12 max-w-2xl mx-auto">
+            <p className="text-gray-200 text-center mb-12 max-w-2xl mx-auto w-full">
               Luxury streetwear brand needed complete e-commerce rebuild.
               We delivered production-ready site in 4 hours.
             </p>
 
-            <LiquidGlassCard intensity="heavy" className="p-12 max-w-5xl mx-auto">
+            <LiquidGlassCard intensity="heavy" className="p-12 max-w-5xl mx-auto w-full">
               <div className="grid md:grid-cols-2 gap-12">
                 {/* Challenge */}
                 <article aria-labelledby="challenge-heading">
@@ -433,17 +433,17 @@ export default function FourHourBuildsPage() {
 
           {/* How It Works Section */}
           <motion.section
-            className="mb-32"
+            className="mb-32 w-full flex flex-col items-center"
             initial={prefersReducedMotion ? {} : { opacity: 0 }}
             whileInView={prefersReducedMotion ? {} : { opacity: 1 }}
             viewport={{ once: true }}
             aria-labelledby="how-it-works-heading"
           >
-            <h2 id="how-it-works-heading" className="text-4xl font-bold text-center mb-12">
+            <h2 id="how-it-works-heading" className="text-4xl font-bold text-center mb-12 w-full">
               How the 10-Agent System Works
             </h2>
 
-            <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto" role="list">
+            <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto w-full" role="list">
               <LiquidGlassCard intensity="medium" className="p-6" role="listitem">
                 <div
                   className="w-12 h-12 rounded-full bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center mb-4"
@@ -490,22 +490,22 @@ export default function FourHourBuildsPage() {
 
           {/* Pricing Section */}
           <motion.section
-            className="mb-32"
+            className="mb-32 w-full flex flex-col items-center"
             initial={prefersReducedMotion ? {} : { opacity: 0 }}
             whileInView={prefersReducedMotion ? {} : { opacity: 1 }}
             viewport={{ once: true }}
             aria-labelledby="pricing-heading"
           >
-            <h2 id="pricing-heading" className="text-4xl font-bold text-center mb-4">
+            <h2 id="pricing-heading" className="text-4xl font-bold text-center mb-4 w-full">
               Simple, Transparent Pricing
             </h2>
-            <p className="text-gray-200 text-center mb-12">
+            <p className="text-gray-200 text-center mb-12 w-full">
               Fixed price, no hidden fees, production-ready guaranteed
             </p>
 
             <LiquidGlassCard
               intensity="heavy"
-              className="p-12 max-w-2xl mx-auto text-center"
+              className="p-12 max-w-2xl mx-auto text-center w-full"
               role="article"
               aria-label="Pricing details"
             >
@@ -577,13 +577,13 @@ export default function FourHourBuildsPage() {
 
           {/* Final CTA Section */}
           <motion.section
-            className="text-center"
+            className="text-center w-full flex flex-col items-center"
             initial={prefersReducedMotion ? {} : { opacity: 0 }}
             whileInView={prefersReducedMotion ? {} : { opacity: 1 }}
             viewport={{ once: true }}
             aria-labelledby="final-cta-heading"
           >
-            <LiquidGlassCard intensity="heavy" className="p-12 max-w-4xl mx-auto">
+            <LiquidGlassCard intensity="heavy" className="p-12 max-w-4xl mx-auto w-full">
               <Shield className="w-16 h-16 text-blue-300 mx-auto mb-6" aria-hidden="true" />
               <h2 id="final-cta-heading" className="text-4xl font-bold mb-4">
                 Ready to Launch in 4 Hours?
