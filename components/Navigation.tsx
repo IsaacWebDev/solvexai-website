@@ -8,6 +8,7 @@ import { LiquidGlassCard, LiquidGlassButton } from '@/components/ui'
 export function Navigation() {
   const [isOpen, setIsOpen] = useState(false)
   
+  // Navigation links without 4-Hour Builds
   const links = [
     { href: '/templates', label: 'Templates' },
     { href: '/packages', label: 'Packages' },
