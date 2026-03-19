@@ -57,6 +57,7 @@ export default function FourHourBuildsPage() {
       
       <main
         id="main-content"
+        data-no-padding
         className="relative px-4 md:px-8 py-32 md:py-40 flex justify-center pb-24 md:pb-0"
         role="main"
       >
