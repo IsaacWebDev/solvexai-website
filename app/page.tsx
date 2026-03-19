@@ -13,7 +13,6 @@ import { ComparisonTable } from '@/components/sections/ComparisonTable'
 import { CTAMinimal } from '@/components/sections/CTAMinimal'
 import { InteractiveGalaxyBG } from '@/components/backgrounds/InteractiveGalaxyBG'
 import { SectionDivider } from '@/components/ui/SectionDivider'
-import { StickyBookCallButton } from '@/components/StickyBookCallButton'
 import { AutomationScanner } from '@/components/interactive/AutomationScanner'
 import dynamic from 'next/dynamic'
 
@@ -47,7 +46,6 @@ export default function HomePage() {
   return (
     <div style={{ position: 'relative', minHeight: '100vh' }}>
       <Navigation />
-      <StickyBookCallButton />
       <InteractiveGalaxyBG />
       
       <div style={{ position: 'fixed', inset: 0, zIndex: 50, pointerEvents: 'none' }}>
