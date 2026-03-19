@@ -186,13 +186,11 @@ export const ComparisonTable = () => {
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.1 }}
                 >
+                  <div style={{ background: 'rgba(30, 30, 50, 0.4)', borderRadius: '1rem' }}>
                   <LiquidGlassCard
                     intensity="medium"
                     glowColor="#8B5CF6"
                     className="p-6"
-                    style={{
-                      background: 'rgba(30, 30, 50, 0.4)',
-                    }}
                   >
                     <h3 className="text-lg font-bold mb-6 text-purple-300">{row.feature}</h3>
                     <div className="grid grid-cols-3 gap-4 text-center text-sm">
@@ -242,6 +240,7 @@ export const ComparisonTable = () => {
                       
                     </div>
                   </LiquidGlassCard>
+                  </div>
                 </motion.div>
               ))}
             </div>
