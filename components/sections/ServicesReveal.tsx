@@ -55,7 +55,7 @@ export function ServicesReveal() {
       icon: 'Palette',
       title: 'Pre-Built Templates',
       description: 'Launch-ready websites for every industry. Choose your design, add your content, go live in 48 hours.',
-      price: 'From $497'
+      price: 'From $53'
     },
     {
       icon: 'Zap',
@@ -73,7 +73,7 @@ export function ServicesReveal() {
       icon: 'MessageSquare',
       title: 'AI Chatbots',
       description: '24/7 customer support that actually understands your customers. Smart, contextual, always available.',
-      price: 'From $497/mo'
+      price: 'From $297/mo'
     },
     {
       icon: 'BarChart3',
