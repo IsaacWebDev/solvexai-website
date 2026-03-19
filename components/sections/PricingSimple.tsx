@@ -10,7 +10,7 @@ const packages = [
     label: "Launch Fast",
     name: "Templates",
     tagline: "Industry-proven automation. Deployed in days.",
-    price: "$497",
+    price: "$53",
     priceNote: "One-time payment",
     
     // Detailed info

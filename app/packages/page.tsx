@@ -63,7 +63,7 @@ export default function PackagesPage() {
             icon={<Palette className="w-16 h-16" style={{ color: '#8B5CF6' }} />}
             title="Website Templates"
             headline="Professional Websites, Zero Hassle"
-            price="$297-$997"
+            price="$52-$67"
             timeline="3-7 days"
             whatYouGet={[
               'Industry-specific design (8 options)',
