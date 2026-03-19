@@ -66,20 +66,24 @@ export default function FourHourBuildsPage() {
           {/* Hero Section */}
           <section className="py-16 flex justify-center">
           <motion.div
-            className="text-center max-w-5xl w-full"
+            className="text-center max-w-5xl w-full mx-auto"
             {...(prefersReducedMotion ? {} : fadeInUp)}
           >
-            <motion.div
-              className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-500/10 to-purple-500/10 border border-blue-500/20 rounded-full px-6 py-2 mb-6"
-              {...pulse}
-              role="status"
-              aria-label="Proven achievement: Montrez site rebuilt in 4 hours"
-            >
-              <Zap className="w-4 h-4 text-blue-400" aria-hidden="true" />
-              <span className="text-sm text-blue-400 font-medium">Proven: Montrez Site Rebuilt in 4 Hours</span>
-            </motion.div>
+            {/* Centered Badge */}
+            <div className="flex justify-center mb-6">
+              <motion.div
+                className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-500/10 to-purple-500/10 border border-blue-500/20 rounded-full px-6 py-2"
+                {...pulse}
+                role="status"
+                aria-label="Proven achievement: Montrez site rebuilt in 4 hours"
+              >
+                <Zap className="w-4 h-4 text-blue-400" aria-hidden="true" />
+                <span className="text-sm text-blue-400 font-medium">Proven: Montrez Site Rebuilt in 4 Hours</span>
+              </motion.div>
+            </div>
 
-            <h1 className="text-6xl md:text-7xl font-bold mb-6">
+            {/* Centered Headline */}
+            <h1 className="text-6xl md:text-7xl font-bold mb-6 text-center">
               <span className="bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
                 Production-Ready Sites
               </span>
@@ -89,12 +93,14 @@ export default function FourHourBuildsPage() {
               </span>
             </h1>
 
-            <p className="text-xl text-gray-200 mb-8 max-w-3xl mx-auto">
+            {/* Centered Subtext */}
+            <p className="text-xl text-gray-200 mb-8 max-w-3xl mx-auto text-center">
               Luxury brands, urgent launches, emergency rebuilds. We deliver in 1 day
               what your competitors promise in 1 month.
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-4 justify-center" role="group" aria-label="Call to action buttons">
+            {/* Centered CTA Buttons */}
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12" role="group" aria-label="Call to action buttons">
               <Link href="/contact" className="focus:outline-none focus:ring-4 focus:ring-blue-400 rounded-lg">
                 <LiquidGlassButton variant="primary" size="lg" className="group">
                   Book Your 4-Hour Build
@@ -108,9 +114,9 @@ export default function FourHourBuildsPage() {
               </Link>
             </div>
 
-            {/* Statistics with improved semantics and contrast */}
+            {/* Centered Statistics */}
             <section
-              className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto"
+              className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto"
               aria-label="Key performance metrics"
             >
               <motion.div
@@ -162,19 +168,18 @@ export default function FourHourBuildsPage() {
           </section>
 
           {/* Comparison Section */}
-          <section className="py-16">
+          <section className="py-16 flex justify-center">
           <motion.div
-            className="flex justify-center"
+            className="w-full max-w-5xl mx-auto"
             initial={prefersReducedMotion ? {} : { opacity: 0 }}
             whileInView={prefersReducedMotion ? {} : { opacity: 1 }}
             viewport={{ once: true }}
           >
-          <div className="w-full max-w-5xl">
             <h2 id="comparison-heading" className="text-4xl font-bold text-center mb-12">
               Traditional vs. 4-Hour Build
             </h2>
 
-            <div className="grid md:grid-cols-2 gap-8">
+            <div className="grid md:grid-cols-2 gap-8 justify-center">
               {/* Traditional - Improved contrast and semantics */}
               <LiquidGlassCard
                 intensity="medium"
