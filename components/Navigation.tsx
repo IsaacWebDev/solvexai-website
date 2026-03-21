@@ -10,6 +10,7 @@ export function Navigation() {
   
   // Navigation links without 4-Hour Builds
   const links = [
+    { href: '/portfolio', label: 'Portfolio' },
     { href: '/templates', label: 'Templates' },
     { href: '/packages', label: 'Packages' },
     { href: '/ai-receptionist', label: 'AI Receptionist' },

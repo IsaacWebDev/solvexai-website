@@ -70,13 +70,20 @@ export default function ContactPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsSubmitting(true)
-    
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1500))
-    
+
+    try {
+      await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData)
+      })
+    } catch {
+      // Silently continue — don't block user even if email fails
+    }
+
     // Mark user as booked (prevents exit-intent popup)
     localStorage.setItem('userBooked', 'true')
-    
+
     setIsSubmitting(false)
     setSubmitted(true)
   }
