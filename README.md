@@ -117,12 +117,18 @@ vercel deploy --prod
 
 ### Environment Variables
 
-For contact form to send emails (optional):
+Add these to Vercel project settings (Settings → Environment Variables):
 
 ```env
-EMAIL_SERVICE_API_KEY=your_sendgrid_or_resend_key
-CONTACT_EMAIL=contact@solvexai.app
+# Required for contact form to send emails to iseniorprimo@gmail.com
+# Get your API key at https://resend.com/api-keys
+RESEND_API_KEY=re_your_key_here
+
+# Optional: override recipient email (defaults to iseniorprimo@gmail.com)
+CONTACT_EMAIL=iseniorprimo@gmail.com
 ```
+
+**Note:** The contact form returns success to the visitor even if no API key is set — it logs to console in that case. Set `RESEND_API_KEY` in Vercel to enable live email delivery.
 
 ---
 
