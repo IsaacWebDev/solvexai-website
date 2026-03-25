@@ -114,7 +114,7 @@ export default function PortfolioPage() {
 
           {/* HERO */}
           <motion.section
-            className="text-center max-w-4xl mx-auto"
+            className="text-center max-w-4xl mx-auto flex flex-col items-center"
             initial="initial"
             animate="animate"
             variants={stagger}
