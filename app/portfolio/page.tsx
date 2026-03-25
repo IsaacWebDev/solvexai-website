@@ -27,6 +27,7 @@ const stagger = {
 const clientProjects = [
   {
     id: 'leafway',
+    isLive: true,
     label: 'Live Project',
     labelColor: 'bg-green-500/20 text-green-400 border border-green-500/30',
     name: 'Leafway',
@@ -56,6 +57,7 @@ const clientProjects = [
   },
   {
     id: 'montrez',
+    isLive: false,
     label: 'In Production',
     labelColor: 'bg-purple-500/20 text-purple-400 border border-purple-500/30',
     name: 'Montrez',
@@ -128,6 +130,24 @@ export default function PortfolioPage() {
               Here's a selection of what we've shipped.
             </motion.p>
 
+            {/* See Our Work CTA */}
+            <motion.div variants={fadeUp} className="mt-8 flex justify-center">
+              <button
+                onClick={() => window.scrollTo({ top: 800, behavior: 'smooth' })}
+                className="flex items-center gap-2 text-white/70 hover:text-white transition-colors group"
+              >
+                <span className="text-sm font-medium">See Our Work</span>
+                <svg 
+                  className="w-5 h-5 animate-bounce group-hover:translate-y-1 transition-transform" 
+                  fill="none" 
+                  stroke="currentColor" 
+                  viewBox="0 0 24 24"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+            </motion.div>
+
             {/* Filter tabs */}
             <motion.div variants={fadeUp} className="flex items-center justify-center gap-3 mt-10">
               {[
@@ -162,7 +182,7 @@ export default function PortfolioPage() {
                 <div className="h-px bg-white/10 w-full" />
               </div>
 
-              <div className="grid grid-cols-1 gap-12">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 {clientProjects.map((project, i) => (
                   <motion.div
                     key={project.id}
@@ -170,8 +190,14 @@ export default function PortfolioPage() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: i * 0.15, duration: 0.6 }}
                   >
-                    <LiquidGlassCard intensity="medium" className={`p-8 md:p-12 border ${project.borderColor}`}>
-                      <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-start">
+                    <LiquidGlassCard intensity="medium" className={`relative p-8 md:p-12 border ${project.borderColor}`}>
+                      {project.isLive && (
+                        <div className="absolute top-4 right-4 bg-green-500 text-white px-3 py-1 rounded-full text-sm font-semibold flex items-center gap-1 z-10">
+                          <span className="w-2 h-2 bg-white rounded-full animate-pulse" />
+                          LIVE PROJECT
+                        </div>
+                      )}
+                      <div className="grid grid-cols-1 gap-10 items-start">
 
                         {/* LEFT: Project Info */}
                         <div className="flex flex-col gap-6">
@@ -223,7 +249,7 @@ export default function PortfolioPage() {
                           </div>
                         </div>
 
-                        {/* RIGHT: Stats + Features */}
+                        {/* Stats + Features */}
                         <div className="flex flex-col gap-8">
                           {/* Stats */}
                           <div className="grid grid-cols-3 gap-4">
@@ -280,7 +306,7 @@ export default function PortfolioPage() {
                 </p>
               </div>
 
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 {templates.map((template, i) => (
                   <motion.div
                     key={template.name + i}
