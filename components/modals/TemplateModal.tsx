@@ -54,11 +54,11 @@ export function TemplateModal({ template, onClose }: TemplateModalProps) {
           ×
         </button>
         
-        <h2 className="text-4xl font-bold mb-4">{template.name}</h2>
-        <p className="text-gray-400 mb-4">Industry: {template.industry}</p>
+        <h2 className="text-4xl font-bold mb-4 text-center">{template.name}</h2>
+        <p className="text-gray-400 mb-6 text-center">Industry: {template.industry}</p>
         
         {/* Page Tabs */}
-        <div className="flex gap-2 mb-4">
+        <div className="flex gap-2 mb-6 justify-center">
           {[
             { name: 'Home', key: 'home' as const },
             { name: 'About', key: 'about' as const },
