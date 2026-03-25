@@ -39,34 +39,34 @@ const CountUp = ({ end, suffix = '' }: { end: number; suffix?: string }) => {
 
 export const OutcomesSimple = () => {
   return (
-    <section className="py-32 px-6 relative z-10 flex justify-center">
+    <section className="py-2xl px-md sm:px-lg relative z-10 flex justify-center">
       <div className="max-w-7xl w-full flex flex-col items-center">
         
         {/* Section header - Centered */}
-        <div className="text-center mb-24 w-full">
-          <h2 className="text-6xl md:text-7xl font-light mb-6">
+        <div className="text-center mb-xl w-full">
+          <h2 className="text-headline font-light mb-md">
             What You Get
           </h2>
-          <p className="text-2xl text-gray-400 font-light max-w-3xl mx-auto">
+          <p className="text-body-lg text-gray-400 font-light max-w-3xl mx-auto">
             Three transformations. Immediate impact.
           </p>
         </div>
         
         {/* 3 Outcomes - Centered grid with liquid glass */}
-        <div className="grid md:grid-cols-3 gap-8 max-w-6xl w-full">
+        <div className="grid md:grid-cols-3 gap-lg max-w-6xl w-full">
           
           {/* Outcome 1 */}
           <LiquidGlassCard 
             intensity="medium" 
-            className="h-full p-12 text-center border border-gray-500/30 hover:border-purple-400/50 transition-all hover:scale-105"
+            className="h-full p-xl text-center border border-gray-500/30 hover:border-purple-400/50 transition-all hover:scale-105"
           >
-            <div className="text-8xl font-light text-purple-400 mb-6">
+            <div className="text-8xl font-light text-purple-400 mb-md">
               <CountUp end={10} suffix="×" />
             </div>
-            <h3 className="text-4xl font-light mb-4">
+            <h3 className="text-title font-light mb-sm">
               Faster
             </h3>
-            <p className="text-xl text-gray-400 font-light leading-relaxed">
+            <p className="text-body text-gray-400 font-light leading-normal">
               Complete in minutes what used to take weeks.
             </p>
           </LiquidGlassCard>
@@ -74,15 +74,15 @@ export const OutcomesSimple = () => {
           {/* Outcome 2 */}
           <LiquidGlassCard 
             intensity="medium" 
-            className="h-full p-12 text-center border border-gray-500/30 hover:border-blue-400/50 transition-all hover:scale-105"
+            className="h-full p-xl text-center border border-gray-500/30 hover:border-blue-400/50 transition-all hover:scale-105"
           >
-            <div className="text-8xl font-light text-blue-400 mb-6">
+            <div className="text-8xl font-light text-blue-400 mb-md">
               <CountUp end={70} suffix="%" />
             </div>
-            <h3 className="text-4xl font-light mb-4">
+            <h3 className="text-title font-light mb-sm">
               Lower Costs
             </h3>
-            <p className="text-xl text-gray-400 font-light leading-relaxed">
+            <p className="text-body text-gray-400 font-light leading-normal">
               Reduce expenses while scaling output.
             </p>
           </LiquidGlassCard>
@@ -90,15 +90,15 @@ export const OutcomesSimple = () => {
           {/* Outcome 3 */}
           <LiquidGlassCard 
             intensity="medium" 
-            className="h-full p-12 text-center border border-gray-500/30 hover:border-cyan-400/50 transition-all hover:scale-105"
+            className="h-full p-xl text-center border border-gray-500/30 hover:border-cyan-400/50 transition-all hover:scale-105"
           >
-            <div className="text-8xl font-light text-cyan-400 mb-6">
+            <div className="text-8xl font-light text-cyan-400 mb-md">
               <CountUp end={0} />
             </div>
-            <h3 className="text-4xl font-light mb-4">
+            <h3 className="text-title font-light mb-sm">
               Human Error
             </h3>
-            <p className="text-xl text-gray-400 font-light leading-relaxed">
+            <p className="text-body text-gray-400 font-light leading-normal">
               Precision execution every single time.
             </p>
           </LiquidGlassCard>

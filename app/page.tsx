@@ -76,7 +76,7 @@ export default function HomePage() {
           animation: 'fadeInContent 0.8s ease-in'
         }}
       >
-        <div className="w-full max-w-[1920px] flex flex-col gap-20">
+        <div className="w-full max-w-container-max flex flex-col gap-2xl">
           <AppleHero />
           <SectionDivider />
           
@@ -89,13 +89,13 @@ export default function HomePage() {
           <AutomationScanner />
           <SectionDivider />
           
-          <section className="pt-20 px-6 relative z-10" style={{ paddingBottom: 0, marginBottom: '-8rem' }}>
-            <div className="text-center mb-6">
+          <section className="pt-xl px-md sm:px-lg relative z-10" style={{ paddingBottom: 0, marginBottom: '-8rem' }}>
+            <div className="text-center mb-md">
               <div className="inline-block">
-                <h2 className="text-5xl font-bold gradient-text">
+                <h2 className="text-title font-bold gradient-text">
                   Template Showcase
                 </h2>
-                <p className="text-gray-400 text-lg mt-2">
+                <p className="text-gray-400 text-body mt-sm">
                   Explore our industry-specific templates in 3D
                 </p>
               </div>

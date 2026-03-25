@@ -1,10 +1,11 @@
 'use client'
 
 import { FloatingOrb } from '@/components/FloatingOrb'
+import { Button } from '@/components/ui/button'
 
 export const AppleHero = () => {
   return (
-    <section className="min-h-screen flex items-center justify-center px-6 relative">
+    <section className="min-h-screen flex items-center justify-center px-md sm:px-lg relative">
       {/* 3D Interactive Orb - Background */}
       <div className="absolute inset-0 flex items-center justify-center opacity-40 pointer-events-none z-[5]">
         <FloatingOrb />
@@ -13,12 +14,12 @@ export const AppleHero = () => {
       {/* Content - Centered */}
       <div className="max-w-5xl text-center relative z-10">
         {/* Eyebrow */}
-        <div className="text-purple-400 text-sm uppercase tracking-wider mb-6 animate-fade-in font-semibold">
+        <div className="text-purple-400 text-caption uppercase tracking-wider mb-md animate-fade-in font-semibold">
           AI That Works While You Sleep
         </div>
         
         {/* Headline - MASSIVE */}
-        <h1 className="text-7xl md:text-9xl font-light tracking-tight mb-8 animate-fade-in-up">
+        <h1 className="text-display font-light tracking-tight mb-lg animate-fade-in-up">
           Reclaim Your
           <br />
           <span className="font-semibold bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
@@ -27,38 +28,38 @@ export const AppleHero = () => {
         </h1>
         
         {/* Subheadline - Outcome focused */}
-        <p className="text-2xl md:text-3xl text-gray-400 font-light leading-relaxed mb-12 max-w-3xl mx-auto animate-fade-in-delay">
+        <p className="text-body-lg text-gray-400 font-light leading-normal mb-xl max-w-3xl mx-auto animate-fade-in-delay">
           Transform weeks of work into minutes.
           <br />
           Your business. Automated. Elevated.
         </p>
         
         {/* Dual CTAs */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-in-delay-2">
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-md animate-fade-in-delay-2">
           {/* Primary CTA */}
-          <button 
-            className="px-16 py-6 bg-white text-black rounded-full text-xl font-semibold hover:scale-105 transition-transform shadow-2xl"
+          <Button 
+            variant="primary"
             onClick={() => {
               window.location.href = '/contact'
             }}
           >
             Book Discovery Call
-          </button>
+          </Button>
           
           {/* Secondary CTA */}
-          <button 
-            className="px-12 py-5 bg-white/10 text-white rounded-full text-lg font-medium hover:bg-white/20 transition-all backdrop-blur-sm border border-white/20"
+          <Button 
+            variant="secondary"
             onClick={() => {
               window.location.href = '/templates'
             }}
           >
             Explore Templates
-          </button>
+          </Button>
         </div>
         
         {/* Scroll indicator - Enhanced */}
-        <div className="mt-24 flex flex-col items-center gap-3 animate-bounce-slow">
-          <div className="text-white text-base font-medium tracking-wide">
+        <div className="mt-2xl flex flex-col items-center gap-sm animate-bounce-slow">
+          <div className="text-white text-small font-medium tracking-wide">
             Scroll to explore
           </div>
           <svg 
