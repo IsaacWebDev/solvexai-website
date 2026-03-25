@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import { createPortal } from 'react-dom'
 import Link from 'next/link'
+import { X } from 'lucide-react'
 import { LiquidGlassCard, LiquidGlassButton } from '@/components/ui'
 
 export interface TemplateModalData {
@@ -12,6 +13,7 @@ export interface TemplateModalData {
   features: string[]
   includes: string
   gradient: string
+  previewUrl?: string
   pageImages?: {
     home?: string
     about?: string
@@ -44,18 +46,27 @@ export function TemplateModal({ template, onClose }: TemplateModalProps) {
       <div onClick={(e) => e.stopPropagation()} className="max-h-[95vh] overflow-y-auto w-full max-w-6xl">
         <LiquidGlassCard 
           intensity="heavy"
-          className="w-full p-8"
+          className="w-full p-8 pb-32"
         >
-        {/* Close Button */}
+        {/* Close Button - Fixed Contrast */}
         <button 
           onClick={onClose}
-          className="float-right text-gray-400 hover:text-white text-3xl leading-none"
+          className="absolute top-4 right-4 text-white bg-black/50 hover:bg-black/70 w-10 h-10 rounded-full flex items-center justify-center transition-colors z-10"
         >
-          ×
+          <X className="w-6 h-6" />
         </button>
         
-        <h2 className="text-4xl font-bold mb-4 text-center">{template.name}</h2>
-        <p className="text-gray-400 mb-6 text-center">Industry: {template.industry}</p>
+        {/* Title + Industry + Price - Side by Side */}
+        <div className="flex items-start justify-between mb-6">
+          <div className="flex-1 text-center">
+            <h2 className="text-4xl font-bold">{template.name}</h2>
+            <p className="text-gray-400">Industry: {template.industry}</p>
+          </div>
+          <div className="text-right">
+            <div className="text-3xl font-bold gradient-text">${template.price}</div>
+            <div className="text-sm text-gray-400">One-time payment</div>
+          </div>
+        </div>
         
         {/* Page Tabs */}
         <div className="flex gap-2 mb-6 justify-center">
@@ -79,17 +90,17 @@ export function TemplateModal({ template, onClose }: TemplateModalProps) {
           ))}
         </div>
         
-        {/* Page Preview - Optimized Size */}
-        <div className="mb-8 rounded-lg overflow-hidden" style={{ maxHeight: '400px' }}>
+        {/* Page Preview */}
+        <div className="mb-8 rounded-lg overflow-hidden" style={{ maxHeight: '450px' }}>
           {template.pageImages?.[selectedPage] ? (
             <img 
               src={template.pageImages[selectedPage]} 
               alt={`${selectedPage} Page`}
               className="w-full h-auto object-contain"
-              style={{ maxHeight: '400px' }}
+              style={{ maxHeight: '450px' }}
             />
           ) : (
-            <div className={`w-full h-80 bg-gradient-to-br ${template.gradient} flex items-center justify-center`}>
+            <div className={`w-full h-96 bg-gradient-to-br ${template.gradient} flex items-center justify-center`}>
               <span className="text-white/50 font-semibold text-2xl">
                 {selectedPage.charAt(0).toUpperCase() + selectedPage.slice(1)} Page
               </span>
@@ -97,8 +108,11 @@ export function TemplateModal({ template, onClose }: TemplateModalProps) {
           )}
         </div>
         
+        {/* Section Divider */}
+        <div className="border-t border-white/10 my-8" />
+        
         {/* Full Feature List */}
-        <h3 className="text-2xl font-bold mb-4">Complete Feature List</h3>
+        <h3 className="text-2xl font-bold mb-4 mt-8">Complete Feature List</h3>
         <ul className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-8">
           {template.features.map((feature, index) => (
             <li key={index} className="flex items-start gap-2 text-gray-300">
@@ -110,29 +124,41 @@ export function TemplateModal({ template, onClose }: TemplateModalProps) {
           ))}
         </ul>
         
-        {/* What's Customizable */}
-        <h3 className="text-2xl font-bold mb-4">What's Customizable</h3>
+        {/* Section Divider */}
+        <div className="border-t border-white/10 my-8" />
+        
+        {/* What's Customizable - Fixed Yellow Highlight */}
+        <h3 className="text-2xl font-bold mb-4 mt-8">What's Customizable</h3>
         <ul className="space-y-2 mb-8 text-gray-300">
-          <li>• Colors and fonts to match your brand</li>
-          <li>• Logo and branding elements</li>
-          <li>• All text and images</li>
-          <li>• Contact information and social links</li>
+          <li className="text-gray-300">• Colors and fonts to match your brand</li>
+          <li className="text-gray-300">• Logo and branding elements</li>
+          <li className="text-gray-300">• All text and images</li>
+          <li className="text-gray-300">• Contact information and social links</li>
         </ul>
         
+        {/* Section Divider */}
+        <div className="border-t border-white/10 my-8" />
+        
         {/* Setup Timeline */}
-        <h3 className="text-2xl font-bold mb-4">Setup Timeline</h3>
+        <h3 className="text-2xl font-bold mb-4 mt-8">Setup Timeline</h3>
         <p className="text-gray-300 mb-8">
           3-7 days from purchase to launch. We handle everything: design customization, 
           content migration, domain setup, and testing.
         </p>
         
-        {/* Sticky Price & CTA Bar */}
+        {/* Sticky CTA Bar with View Live Demo */}
         <div className="sticky bottom-0 left-0 right-0 bg-black/95 backdrop-blur-md border-t border-white/20 p-6 mt-8 flex items-center justify-between rounded-b-lg">
-          <div>
-            <div className="text-4xl font-bold gradient-text">${template.price}</div>
-            <div className="text-sm text-gray-400">One-time payment</div>
-          </div>
-          <Link href="/contact">
+          {template.previewUrl && (
+            <a 
+              href={template.previewUrl} 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-purple-400 hover:text-purple-300 transition-colors font-semibold flex items-center gap-2"
+            >
+              View Live Demo →
+            </a>
+          )}
+          <Link href="/contact" className={template.previewUrl ? '' : 'mx-auto'}>
             <LiquidGlassButton variant="primary" size="lg">
               Purchase This Template
             </LiquidGlassButton>
