@@ -68,10 +68,10 @@ export function TemplateModal({ template, onClose }: TemplateModalProps) {
             <button
               key={page.key}
               onClick={() => setSelectedPage(page.key)}
-              className={`px-6 py-2 rounded-lg font-semibold transition-all ${
+              className={`px-6 py-2 rounded-lg font-semibold transition-colors ${
                 selectedPage === page.key
                   ? 'bg-purple-600 text-white'
-                  : 'bg-white/5 text-gray-400 hover:bg-white/10'
+                  : 'bg-white/5 text-gray-400 hover:bg-white/10 hover:text-white'
               }`}
             >
               {page.name}
@@ -79,17 +79,17 @@ export function TemplateModal({ template, onClose }: TemplateModalProps) {
           ))}
         </div>
         
-        {/* Page Preview */}
-        <div className="mb-8 rounded-lg overflow-hidden" style={{ maxHeight: '500px' }}>
+        {/* Page Preview - Optimized Size */}
+        <div className="mb-8 rounded-lg overflow-hidden" style={{ maxHeight: '400px' }}>
           {template.pageImages?.[selectedPage] ? (
             <img 
               src={template.pageImages[selectedPage]} 
               alt={`${selectedPage} Page`}
               className="w-full h-auto object-contain"
-              style={{ maxHeight: '500px' }}
+              style={{ maxHeight: '400px' }}
             />
           ) : (
-            <div className={`w-full h-96 bg-gradient-to-br ${template.gradient} flex items-center justify-center`}>
+            <div className={`w-full h-80 bg-gradient-to-br ${template.gradient} flex items-center justify-center`}>
               <span className="text-white/50 font-semibold text-2xl">
                 {selectedPage.charAt(0).toUpperCase() + selectedPage.slice(1)} Page
               </span>
@@ -126,8 +126,8 @@ export function TemplateModal({ template, onClose }: TemplateModalProps) {
           content migration, domain setup, and testing.
         </p>
         
-        {/* Price & CTA */}
-        <div className="flex items-center justify-between border-t border-white/10 pt-8">
+        {/* Sticky Price & CTA Bar */}
+        <div className="sticky bottom-0 left-0 right-0 bg-black/95 backdrop-blur-md border-t border-white/20 p-6 mt-8 flex items-center justify-between rounded-b-lg">
           <div>
             <div className="text-4xl font-bold gradient-text">${template.price}</div>
             <div className="text-sm text-gray-400">One-time payment</div>
