@@ -114,7 +114,7 @@ export default function PortfolioPage() {
 
           {/* HERO */}
           <motion.section
-            className="w-full"
+            className="text-center max-w-4xl mx-auto"
             initial="initial"
             animate="animate"
             variants={stagger}
@@ -125,13 +125,13 @@ export default function PortfolioPage() {
             <motion.h1 variants={fadeUp} className="text-5xl md:text-7xl font-light leading-tight mb-8">
               Built for<br />Real Businesses
             </motion.h1>
-            <motion.p variants={fadeUp} className="text-xl text-gray-400 font-light max-w-2xl leading-relaxed">
+            <motion.p variants={fadeUp} className="text-xl text-gray-400 font-light max-w-2xl mx-auto leading-relaxed">
               Every project we deliver is production-ready, mobile-first, and built to generate revenue.
               Here's a selection of what we've shipped.
             </motion.p>
 
             {/* See Our Work CTA */}
-            <motion.div variants={fadeUp} className="mt-8">
+            <motion.div variants={fadeUp} className="mt-8 flex justify-center">
               <button
                 onClick={() => window.scrollTo({ top: 800, behavior: 'smooth' })}
                 className="flex items-center gap-2 text-white/70 hover:text-white transition-colors group"
@@ -149,7 +149,7 @@ export default function PortfolioPage() {
             </motion.div>
 
             {/* Filter tabs */}
-            <motion.div variants={fadeUp} className="flex items-center gap-3 mt-10">
+            <motion.div variants={fadeUp} className="flex items-center justify-center gap-3 mt-10">
               {[
                 { key: 'all', label: 'All Work' },
                 { key: 'clients', label: 'Client Projects' },
@@ -176,10 +176,11 @@ export default function PortfolioPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
+              className="flex flex-col items-center"
             >
-              <div className="mb-10">
+              <div className="mb-10 w-full text-center">
                 <h2 className="text-2xl font-light text-white/60 mb-1">Client Projects</h2>
-                <div className="h-px bg-white/10 w-full" />
+                <div className="h-px bg-white/10 w-full max-w-4xl mx-auto" />
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -293,13 +294,14 @@ export default function PortfolioPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: showClients ? 0.2 : 0 }}
+              className="flex flex-col items-center"
             >
-              <div className="mb-10">
+              <div className="mb-10 w-full text-center">
                 <h2 className="text-2xl font-light text-white/60 mb-1">Template Library</h2>
-                <div className="h-px bg-white/10 w-full" />
+                <div className="h-px bg-white/10 w-full max-w-4xl mx-auto" />
               </div>
 
-              <div className="mb-6">
+              <div className="mb-6 text-center">
                 <p className="text-gray-400 font-light text-base">
                   Pre-built, ready-to-deploy templates for 7+ industries.
                   Launch in 48 hours, not 4 weeks.
