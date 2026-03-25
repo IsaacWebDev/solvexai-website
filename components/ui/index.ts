@@ -1,5 +1,6 @@
 export { LiquidGlassCard } from './LiquidGlassCard'
 export { LiquidGlassButton } from './LiquidGlassButton'
+export { LiquidGlassArrow } from './LiquidGlassArrow'
 export { LiquidCursor } from './LiquidCursor'
 export { LiquidScrollProgress } from './LiquidScrollProgress'
 export { LiquidLoader } from './LiquidLoader'
