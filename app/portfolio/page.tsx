@@ -113,12 +113,13 @@ export default function PortfolioPage() {
         <div className="max-w-6xl w-full flex flex-col gap-24">
 
           {/* HERO */}
-          <motion.section
-            className="text-center max-w-4xl mx-auto"
-            initial="initial"
-            animate="animate"
-            variants={stagger}
-          >
+          <section className="flex justify-center">
+            <motion.div
+              className="text-center max-w-4xl w-full"
+              initial="initial"
+              animate="animate"
+              variants={stagger}
+            >
             <motion.p variants={fadeUp} className="text-sm uppercase tracking-widest text-purple-400 mb-6 font-medium">
               Our Work
             </motion.p>
@@ -168,7 +169,8 @@ export default function PortfolioPage() {
                 </button>
               ))}
             </motion.div>
-          </motion.section>
+          </motion.div>
+          </section>
 
           {/* CLIENT PROJECTS */}
           {showClients && (
