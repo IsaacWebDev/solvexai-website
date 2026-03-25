@@ -126,7 +126,7 @@ export default function PortfolioPage() {
             <motion.h1 variants={fadeUp} className="text-5xl md:text-7xl font-light leading-tight mb-8">
               Built for<br />Real Businesses
             </motion.h1>
-            <motion.p variants={fadeUp} className="text-xl text-gray-400 font-light max-w-2xl mx-auto leading-relaxed">
+            <motion.p variants={fadeUp} className="text-xl text-gray-400 font-light w-full leading-relaxed px-4">
               Every project we deliver is production-ready, mobile-first, and built to generate revenue.
               Here's a selection of what we've shipped.
             </motion.p>
