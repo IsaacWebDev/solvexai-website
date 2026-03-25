@@ -114,7 +114,7 @@ export default function PortfolioPage() {
 
           {/* HERO */}
           <motion.section
-            className="text-center max-w-4xl mx-auto flex flex-col items-center"
+            className="w-full"
             initial="initial"
             animate="animate"
             variants={stagger}
@@ -125,13 +125,13 @@ export default function PortfolioPage() {
             <motion.h1 variants={fadeUp} className="text-5xl md:text-7xl font-light leading-tight mb-8">
               Built for<br />Real Businesses
             </motion.h1>
-            <motion.p variants={fadeUp} className="text-xl text-gray-400 font-light max-w-2xl mx-auto leading-relaxed">
+            <motion.p variants={fadeUp} className="text-xl text-gray-400 font-light max-w-2xl leading-relaxed">
               Every project we deliver is production-ready, mobile-first, and built to generate revenue.
               Here's a selection of what we've shipped.
             </motion.p>
 
             {/* See Our Work CTA */}
-            <motion.div variants={fadeUp} className="mt-8 flex justify-center">
+            <motion.div variants={fadeUp} className="mt-8">
               <button
                 onClick={() => window.scrollTo({ top: 800, behavior: 'smooth' })}
                 className="flex items-center gap-2 text-white/70 hover:text-white transition-colors group"
@@ -149,7 +149,7 @@ export default function PortfolioPage() {
             </motion.div>
 
             {/* Filter tabs */}
-            <motion.div variants={fadeUp} className="flex items-center justify-center gap-3 mt-10">
+            <motion.div variants={fadeUp} className="flex items-center gap-3 mt-10">
               {[
                 { key: 'all', label: 'All Work' },
                 { key: 'clients', label: 'Client Projects' },
