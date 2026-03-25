@@ -310,7 +310,7 @@ export default function PortfolioPage() {
                 </p>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full">
                 {templates.map((template, i) => (
                   <motion.div
                     key={template.name + i}
@@ -321,13 +321,13 @@ export default function PortfolioPage() {
                   >
                     <LiquidGlassCard intensity="light" className="overflow-hidden h-full border border-white/10 hover:border-white/20 transition-all">
                       {/* Placeholder visual */}
-                      <div className={`h-36 md:h-44 bg-gradient-to-br ${template.color} relative flex items-center justify-center`}>
+                      <div className={`h-64 md:h-80 bg-gradient-to-br ${template.color} relative flex items-center justify-center`}>
                         <div className="absolute inset-0 bg-black/30" />
-                        <span className="relative text-white font-semibold text-lg">{template.name.split(' ')[0]}</span>
+                        <span className="relative text-white font-semibold text-2xl">{template.name.split(' ')[0]}</span>
                       </div>
-                      <div className="p-4">
-                        <p className="text-sm font-medium text-white">{template.name}</p>
-                        <p className="text-xs text-gray-400 mt-0.5">{template.industry}</p>
+                      <div className="p-6">
+                        <p className="text-lg font-medium text-white">{template.name}</p>
+                        <p className="text-sm text-gray-400 mt-1">{template.industry}</p>
                       </div>
                     </LiquidGlassCard>
                   </motion.div>
