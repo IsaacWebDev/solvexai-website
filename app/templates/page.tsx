@@ -386,11 +386,7 @@ function TemplateCard({ name, industry, price, features, includes, gradient, ima
       <div
         onMouseEnter={() => setHoveredIndex(0)}
         onMouseLeave={() => setHoveredIndex(null)}
-        style={{
-          transform: hoveredIndex === 0 ? 'translateZ(50px) scale(1.05)' : 'translateZ(0) scale(1)',
-          transformStyle: 'preserve-3d',
-          transition: 'all 0.3s'
-        }}
+        className="transition-transform duration-300 hover:scale-[1.02]"
       >
         <LiquidGlassCard intensity="medium" className="overflow-hidden transition-all duration-500 group">
         {/* Screenshot Preview */}
