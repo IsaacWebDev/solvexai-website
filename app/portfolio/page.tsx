@@ -109,8 +109,8 @@ export default function PortfolioPage() {
       <Navigation />
       <AnimatedGradientMesh />
 
-      <main className="relative px-4 md:px-8 py-32 md:py-40">
-        <div className="max-w-6xl mx-auto flex flex-col gap-24">
+      <main className="relative px-4 md:px-8 py-32 md:py-40 flex justify-center">
+        <div className="max-w-6xl w-full flex flex-col gap-24">
 
           {/* HERO */}
           <motion.section
