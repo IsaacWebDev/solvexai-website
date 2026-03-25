@@ -54,11 +54,11 @@ export function TemplateModal({ template, onClose }: TemplateModalProps) {
           ×
         </button>
         
-        <h2 className="text-4xl font-bold mb-4 text-center">{template.name}</h2>
-        <p className="text-gray-400 mb-6 text-center">Industry: {template.industry}</p>
+        <h2 className="text-3xl font-bold mb-3 text-center">{template.name}</h2>
+        <p className="text-gray-400 mb-4 text-center">Industry: {template.industry}</p>
         
         {/* Page Tabs */}
-        <div className="flex gap-2 mb-6 justify-center">
+        <div className="flex gap-2 mb-4 justify-center">
           {[
             { name: 'Home', key: 'home' as const },
             { name: 'About', key: 'about' as const },
@@ -79,17 +79,17 @@ export function TemplateModal({ template, onClose }: TemplateModalProps) {
           ))}
         </div>
         
-        {/* Large Page Preview */}
-        <div className="mb-8 rounded-lg overflow-hidden" style={{ maxHeight: '500px' }}>
+        {/* Page Preview - Reduced Size */}
+        <div className="mb-6 rounded-lg overflow-hidden" style={{ maxHeight: '300px' }}>
           {template.pageImages?.[selectedPage] ? (
             <img 
               src={template.pageImages[selectedPage]} 
               alt={`${selectedPage} Page`}
               className="w-full h-auto object-contain"
-              style={{ maxHeight: '500px' }}
+              style={{ maxHeight: '300px' }}
             />
           ) : (
-            <div className={`w-full h-96 bg-gradient-to-br ${template.gradient} flex items-center justify-center`}>
+            <div className={`w-full h-64 bg-gradient-to-br ${template.gradient} flex items-center justify-center`}>
               <span className="text-white/50 font-semibold text-2xl">
                 {selectedPage.charAt(0).toUpperCase() + selectedPage.slice(1)} Page
               </span>
@@ -97,12 +97,12 @@ export function TemplateModal({ template, onClose }: TemplateModalProps) {
           )}
         </div>
         
-        {/* Full Feature List */}
-        <h3 className="text-2xl font-bold mb-4">Complete Feature List</h3>
-        <ul className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-8">
+        {/* Full Feature List - Compact Grid */}
+        <h3 className="text-xl font-bold mb-3">Complete Feature List</h3>
+        <ul className="grid grid-cols-1 md:grid-cols-2 gap-2 mb-6">
           {template.features.map((feature, index) => (
-            <li key={index} className="flex items-start gap-2 text-gray-300">
-              <svg className="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+            <li key={index} className="flex items-start gap-2 text-gray-300 text-sm">
+              <svg className="w-4 h-4 text-green-400 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
               </svg>
               {feature}
@@ -110,18 +110,18 @@ export function TemplateModal({ template, onClose }: TemplateModalProps) {
           ))}
         </ul>
         
-        {/* What's Customizable */}
-        <h3 className="text-2xl font-bold mb-4">What's Customizable</h3>
-        <ul className="space-y-2 mb-8 text-gray-300">
+        {/* What's Customizable - Compact */}
+        <h3 className="text-xl font-bold mb-2">What's Customizable</h3>
+        <ul className="space-y-1 mb-4 text-gray-300 text-sm">
           <li>• Colors and fonts to match your brand</li>
           <li>• Logo and branding elements</li>
           <li>• All text and images</li>
           <li>• Contact information and social links</li>
         </ul>
         
-        {/* Setup Timeline */}
-        <h3 className="text-2xl font-bold mb-4">Setup Timeline</h3>
-        <p className="text-gray-300 mb-8">
+        {/* Setup Timeline - Compact */}
+        <h3 className="text-xl font-bold mb-2">Setup Timeline</h3>
+        <p className="text-gray-300 mb-6 text-sm">
           3-7 days from purchase to launch. We handle everything: design customization, 
           content migration, domain setup, and testing.
         </p>
