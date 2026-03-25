@@ -64,25 +64,28 @@ export const LiquidGlassButton: React.FC<LiquidGlassButtonProps> = ({
     return () => mediaQuery.removeEventListener("change", handleChange);
   }, []);
 
-  // Variant styles
+  // Variant styles - Liquid Glass with subtle accents
   const variantStyles = {
     primary: {
-      background: "linear-gradient(135deg, #8B5CF6 0%, #3B82F6 100%)",
-      border: "1px solid rgba(255,255,255,0.2)",
-      shadow: "0 0 20px rgba(139,92,246,0.4)",
-      hoverShadow: "0 0 30px rgba(139,92,246,0.6)",
+      background: "rgba(255, 255, 255, 0.05)",
+      border: "1px solid rgba(255,255,255,0.15)",
+      shadow: "0 8px 32px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.1)",
+      hoverShadow: "0 12px 40px rgba(99, 102, 241, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.2)",
+      accentGradient: "linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(139, 92, 246, 0.1) 50%, rgba(99, 102, 241, 0.1) 100%)",
     },
     secondary: {
       background: "rgba(255,255,255,0.05)",
       border: "1px solid rgba(255,255,255,0.12)",
-      shadow: "0 0 10px rgba(255,255,255,0.1)",
-      hoverShadow: "0 0 20px rgba(255,255,255,0.2)",
+      shadow: "0 8px 32px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.1)",
+      hoverShadow: "0 12px 40px rgba(6, 182, 212, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.2)",
+      accentGradient: "linear-gradient(135deg, rgba(6, 182, 212, 0.1) 0%, rgba(139, 92, 246, 0.1) 50%, rgba(6, 182, 212, 0.1) 100%)",
     },
     ghost: {
       background: "transparent",
       border: "1px solid rgba(255,255,255,0.08)",
       shadow: "none",
-      hoverShadow: "0 0 15px rgba(255,255,255,0.15)",
+      hoverShadow: "0 8px 24px rgba(99, 102, 241, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.15)",
+      accentGradient: "linear-gradient(135deg, rgba(99, 102, 241, 0.08) 0%, rgba(139, 92, 246, 0.08) 50%, rgba(99, 102, 241, 0.08) 100%)",
     },
   };
 
@@ -119,12 +122,30 @@ export const LiquidGlassButton: React.FC<LiquidGlassButtonProps> = ({
 
   const buttonContent = (
     <>
+      {/* Accent glow overlay (shows on hover) */}
+      {!prefersReducedMotion && (
+        <motion.div
+          className="absolute inset-0 pointer-events-none rounded-xl overflow-hidden"
+          style={{
+            background: style.accentGradient,
+            opacity: 0,
+          }}
+          whileHover={{
+            opacity: 1,
+          }}
+          transition={{
+            duration: 0.3,
+            ease: "easeInOut",
+          }}
+        />
+      )}
+
       {/* Flowing gradient overlay (continuous shine) */}
       {!prefersReducedMotion && (
         <motion.div
           className="absolute inset-0 pointer-events-none rounded-xl overflow-hidden"
           style={{
-            background: `linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.15) 50%, transparent 100%)`,
+            background: `linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.08) 50%, transparent 100%)`,
             backgroundSize: "200% 100%",
           }}
           animate={{
@@ -178,20 +199,23 @@ export const LiquidGlassButton: React.FC<LiquidGlassButtonProps> = ({
       background: style.background,
       border: style.border,
       boxShadow: style.shadow,
-      backdropFilter: "blur(12px) saturate(180%)",
-      WebkitBackdropFilter: "blur(12px) saturate(180%)",
+      backdropFilter: "blur(20px) saturate(180%)",
+      WebkitBackdropFilter: "blur(20px) saturate(180%)",
     },
     whileHover: prefersReducedMotion
       ? {}
       : {
-          scale: 1.05,
+          scale: 1.02,
+          y: -2,
+          background: "rgba(255, 255, 255, 0.08)",
+          borderColor: "rgba(255, 255, 255, 0.25)",
           boxShadow: style.hoverShadow,
-          transition: { duration: 0.2 },
+          transition: { duration: 0.3, ease: "easeOut" },
         },
     whileTap: prefersReducedMotion
       ? {}
       : {
-          scale: 0.95,
+          scale: 0.98,
           transition: { duration: 0.1 },
         },
   };
@@ -201,7 +225,10 @@ export const LiquidGlassButton: React.FC<LiquidGlassButtonProps> = ({
       <motion.a
         href={href}
         onClick={handleClick}
-        {...commonProps}
+        className={commonProps.className}
+        style={commonProps.style}
+        whileHover={commonProps.whileHover as any}
+        whileTap={commonProps.whileTap as any}
         role="button"
         tabIndex={0}
         onKeyDown={(e) => {
@@ -219,7 +246,10 @@ export const LiquidGlassButton: React.FC<LiquidGlassButtonProps> = ({
   return (
     <motion.button
       onClick={handleClick}
-      {...commonProps}
+      className={commonProps.className}
+      style={commonProps.style}
+      whileHover={commonProps.whileHover as any}
+      whileTap={commonProps.whileTap as any}
       type="button"
       aria-label={typeof children === "string" ? children : "Button"}
     >
