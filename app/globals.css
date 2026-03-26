@@ -593,3 +593,30 @@ main[data-no-padding] {
     @apply font-sans;
   }
 }
+
+/* Mobile Optimizations */
+@media (max-width: 767px) {
+  /* Disable expensive animations on mobile */
+  .galaxy-background {
+    animation: none !important;
+  }
+  
+  /* Ensure minimum touch targets */
+  a, button, input, select, textarea {
+    min-height: 48px;
+    min-width: 48px;
+  }
+  
+  /* Add padding to body for sticky CTA */
+  body {
+    padding-bottom: 80px;
+  }
+  
+  /* Optimize font sizes for mobile */
+  :root {
+    --text-display: 48px;
+    --text-headline: 36px;
+    --text-title: 32px;
+    --text-subtitle: 24px;
+  }
+}

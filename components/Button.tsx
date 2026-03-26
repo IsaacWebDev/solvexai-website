@@ -11,7 +11,7 @@ interface ButtonProps {
 }
 
 export function Button({ children, href, onClick, variant = 'primary', className = '' }: ButtonProps) {
-  const baseStyles = "relative px-8 py-4 rounded-full font-medium text-lg transition-all duration-300 overflow-hidden group"
+  const baseStyles = "relative px-8 py-4 rounded-full font-medium text-lg transition-all duration-300 overflow-hidden group min-h-[48px] min-w-[48px]"
   
   const variantStyles = variant === 'primary'
     ? "text-white border border-white/15 hover:border-white/25"

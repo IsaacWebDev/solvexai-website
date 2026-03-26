@@ -28,11 +28,37 @@ export function GalaxyBackground() {
   const scrollRef = useRef(0)
   const rafRef = useRef<number | undefined>(undefined)
   const [isMobile, setIsMobile] = useState(false)
-
+  
+  // On mobile, skip canvas entirely and use static background
   useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 768)
+    const checkMobile = () => {
+      const mobile = window.innerWidth < 768
+      setIsMobile(mobile)
+    }
     checkMobile()
     window.addEventListener('resize', checkMobile)
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
+  
+  // Return early on mobile with static background
+  if (isMobile) {
+    return (
+      <div 
+        className="fixed top-0 left-0 w-full h-full -z-10 pointer-events-none"
+        style={{
+          backgroundImage: 'url(/images/galaxy-bg-optimized.webp)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
+          backgroundColor: '#020A12'
+        }}
+      />
+    )
+  }
+
+  useEffect(() => {
+    // Mobile check already handled above
+    if (isMobile) return
 
     const canvas = canvasRef.current
     if (!canvas) return
@@ -283,7 +309,7 @@ export function GalaxyBackground() {
   return (
     <canvas
       ref={canvasRef}
-      className="fixed top-0 left-0 w-full h-full -z-10 pointer-events-none"
+      className="fixed top-0 left-0 w-full h-full -z-10 pointer-events-none galaxy-background"
       style={{
         background: '#020A12'
       }}

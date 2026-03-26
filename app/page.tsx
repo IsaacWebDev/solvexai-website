@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import IntroScreen from '@/components/IntroScreen'
 import { CinematicEntrance } from '@/components/CinematicEntrance'
 import { Navigation } from '@/components/Navigation'
+import { MobileCTA } from '@/components/MobileCTA'
 import { AppleHero } from '@/components/sections/AppleHero'
 import { LiveCounter } from '@/components/interactive/LiveCounter'
 import { OutcomesSimple } from '@/components/sections/OutcomesSimple'
@@ -46,6 +47,7 @@ export default function HomePage() {
   return (
     <div style={{ position: 'relative', minHeight: '100vh' }}>
       <Navigation />
+      <MobileCTA />
       <InteractiveGalaxyBG />
       
       <div style={{ position: 'fixed', inset: 0, zIndex: 50, pointerEvents: 'none' }}>

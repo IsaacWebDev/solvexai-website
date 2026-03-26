@@ -32,7 +32,7 @@ export function Navigation() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="text-white/80 hover:text-white transition-colors font-medium relative"
+                  className="text-white/80 hover:text-white transition-colors font-medium relative min-h-[48px] flex items-center"
                 >
                   {link.label}
                 </Link>
@@ -44,7 +44,7 @@ export function Navigation() {
 
             {/* CENTER: Logo */}
             <div className="absolute left-1/2 transform -translate-x-1/2">
-              <Link href="/" className="flex items-center group">
+              <Link href="/" className="flex items-center group min-h-[48px] min-w-[48px]">
                 <Image
                   src="/logo-molecular-white.png"
                   alt="SolveXAI"
@@ -58,7 +58,7 @@ export function Navigation() {
 
             {/* RIGHT: SolveXAI Text Logo */}
             <div>
-              <Link href="/">
+              <Link href="/" className="min-h-[48px] flex items-center">
                 <Image
                   src="/solvexai-logo-white.png"
                   alt="SolveXAI"
@@ -72,10 +72,10 @@ export function Navigation() {
             
           </div>
 
-          {/* Mobile Layout */}
+          {/* Mobile Layout - Hamburger */}
           <div className="lg:hidden flex items-center justify-between">
             {/* Logo */}
-            <Link href="/" className="flex items-center group">
+            <Link href="/" className="flex items-center group min-h-[48px]">
               <Image
                 src="/logo-text-white.png"
                 alt="SolveXAI"
@@ -86,9 +86,9 @@ export function Navigation() {
               />
             </Link>
             
-            {/* Mobile Menu Button */}
+            {/* Hamburger Button */}
             <button
-              className="text-white p-2"
+              className="text-white p-2 min-h-[48px] min-w-[48px] flex items-center justify-center"
               onClick={() => setIsOpen(!isOpen)}
               aria-label="Toggle menu"
             >
@@ -103,38 +103,70 @@ export function Navigation() {
           </div>
           
         </LiquidGlassCard>
-        
-        {/* Mobile Menu */}
-        <AnimatePresence>
-          {isOpen && (
+      </div>
+
+      {/* Mobile Slide-Out Drawer Menu */}
+      <AnimatePresence>
+        {isOpen && (
+          <>
+            {/* Backdrop */}
             <motion.div
-              className="lg:hidden mt-4"
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.2 }}
+              className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 lg:hidden"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setIsOpen(false)}
+            />
+            
+            {/* Drawer */}
+            <motion.div
+              className="fixed right-0 top-0 bottom-0 w-[280px] bg-[#020A12]/95 backdrop-blur-xl border-l border-white/10 z-50 lg:hidden"
+              initial={{ x: '100%' }}
+              animate={{ x: 0 }}
+              exit={{ x: '100%' }}
+              transition={{ type: 'spring', damping: 30, stiffness: 300 }}
             >
-              <LiquidGlassCard intensity="medium" className="rounded-3xl px-6 py-6">
-                <div className="flex flex-col gap-4">
+              <div className="flex flex-col h-full p-6">
+                {/* Close Button */}
+                <div className="flex justify-end mb-8">
+                  <button
+                    onClick={() => setIsOpen(false)}
+                    className="text-white p-2 min-h-[48px] min-w-[48px] flex items-center justify-center"
+                    aria-label="Close menu"
+                  >
+                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                  </button>
+                </div>
+                
+                {/* Navigation Links */}
+                <div className="flex flex-col gap-2 flex-1">
                   {links.map((link) => (
                     <Link
                       key={link.href}
                       href={link.href}
-                      className="text-white/80 hover:text-white transition-colors font-medium py-2"
+                      className="text-white/80 hover:text-white hover:bg-white/5 transition-all font-medium py-4 px-4 rounded-lg min-h-[48px] flex items-center"
                       onClick={() => setIsOpen(false)}
                     >
                       {link.label}
                     </Link>
                   ))}
-                  <LiquidGlassButton variant="primary" size="md" className="w-full">
-                    <Link href="/contact" onClick={() => setIsOpen(false)}>Get Started</Link>
+                </div>
+                
+                {/* CTA Button */}
+                <div className="mt-auto pt-6 border-t border-white/10">
+                  <LiquidGlassButton variant="primary" size="md" className="w-full min-h-[48px]">
+                    <Link href="/contact" onClick={() => setIsOpen(false)} className="block w-full">
+                      Get Started
+                    </Link>
                   </LiquidGlassButton>
                 </div>
-              </LiquidGlassCard>
+              </div>
             </motion.div>
-          )}
-        </AnimatePresence>
-      </div>
+          </>
+        )}
+      </AnimatePresence>
     </nav>
   )
 }
