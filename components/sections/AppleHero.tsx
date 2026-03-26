@@ -19,10 +19,16 @@ export const AppleHero = () => {
         </div>
         
         {/* Headline - MASSIVE */}
-        <h1 className="text-display font-light tracking-tight mb-lg animate-fade-in-up">
+        <h1 
+          className="font-light tracking-tight mb-lg animate-fade-in-up"
+          style={{ fontSize: 'clamp(48px, 8vw, 96px)', fontWeight: 300, lineHeight: 1.1 }}
+        >
           Reclaim Your
           <br />
-          <span className="font-semibold bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
+          <span 
+            className="bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent"
+            style={{ fontWeight: 600 }}
+          >
             Time
           </span>
         </h1>
