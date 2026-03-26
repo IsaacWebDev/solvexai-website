@@ -2,11 +2,13 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
+import { usePathname } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
 import { LiquidGlassCard, LiquidGlassButton } from '@/components/ui'
 
 export function Navigation() {
   const [isOpen, setIsOpen] = useState(false)
+  const pathname = usePathname()
   
   // Navigation links without 4-Hour Builds
   const links = [
@@ -28,15 +30,30 @@ export function Navigation() {
             
             {/* LEFT: Navigation Links + Get Started */}
             <div className="flex items-center gap-10">
-              {links.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className="text-white/80 hover:text-white transition-colors font-medium relative min-h-[48px] flex items-center"
-                >
-                  {link.label}
-                </Link>
-              ))}
+              {links.map((link) => {
+                const isActive = pathname === link.href;
+                return (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    className={`transition-colors font-medium relative min-h-[48px] flex items-center ${
+                      isActive 
+                        ? 'text-purple-400 font-semibold' 
+                        : 'text-white/80 hover:text-white'
+                    }`}
+                    aria-current={isActive ? 'page' : undefined}
+                  >
+                    {link.label}
+                    {isActive && (
+                      <motion.div
+                        layoutId="activeTab"
+                        className="absolute -bottom-1 left-0 right-0 h-0.5 bg-purple-400 rounded-full"
+                        transition={{ duration: 0.2 }}
+                      />
+                    )}
+                  </Link>
+                );
+              })}
               <LiquidGlassButton variant="primary" size="sm">
                 <Link href="/contact">Get Started</Link>
               </LiquidGlassButton>
@@ -142,16 +159,24 @@ export function Navigation() {
                 
                 {/* Navigation Links */}
                 <div className="flex flex-col gap-2 flex-1">
-                  {links.map((link) => (
-                    <Link
-                      key={link.href}
-                      href={link.href}
-                      className="text-white/80 hover:text-white hover:bg-white/5 transition-all font-medium py-4 px-4 rounded-lg min-h-[48px] flex items-center"
-                      onClick={() => setIsOpen(false)}
-                    >
-                      {link.label}
-                    </Link>
-                  ))}
+                  {links.map((link) => {
+                    const isActive = pathname === link.href;
+                    return (
+                      <Link
+                        key={link.href}
+                        href={link.href}
+                        className={`transition-all font-medium py-4 px-4 rounded-lg min-h-[48px] flex items-center ${
+                          isActive
+                            ? 'text-purple-400 bg-purple-500/10 font-semibold'
+                            : 'text-white/80 hover:text-white hover:bg-white/5'
+                        }`}
+                        onClick={() => setIsOpen(false)}
+                        aria-current={isActive ? 'page' : undefined}
+                      >
+                        {link.label}
+                      </Link>
+                    );
+                  })}
                 </div>
                 
                 {/* CTA Button */}

@@ -38,6 +38,8 @@ interface LiquidGlassButtonProps {
   variant?: "primary" | "secondary" | "ghost";
   size?: "sm" | "md" | "lg";
   className?: string;
+  loading?: boolean;
+  disabled?: boolean;
 }
 
 export const LiquidGlassButton: React.FC<LiquidGlassButtonProps> = ({
@@ -47,6 +49,8 @@ export const LiquidGlassButton: React.FC<LiquidGlassButtonProps> = ({
   variant = "primary",
   size = "md",
   className = "",
+  loading = false,
+  disabled = false,
 }) => {
   const [ripples, setRipples] = useState<Ripple[]>([]);
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
@@ -188,13 +192,23 @@ export const LiquidGlassButton: React.FC<LiquidGlassButtonProps> = ({
         ))}
       </AnimatePresence>
 
+      {/* Loading Spinner */}
+      {loading && (
+        <div className="absolute inset-0 flex items-center justify-center bg-black/20 backdrop-blur-sm rounded-xl z-20">
+          <svg className="animate-spin h-5 w-5 text-white" viewBox="0 0 24 24" aria-label="Loading">
+            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none"/>
+            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"/>
+          </svg>
+        </div>
+      )}
+
       {/* Content */}
       <span className="relative z-10 font-medium">{children}</span>
     </>
   );
 
   const commonProps = {
-    className: `relative overflow-hidden rounded-xl ${sizeStyles[size]} ${className}`,
+    className: `relative overflow-hidden rounded-xl ${sizeStyles[size]} ${className} ${(disabled || loading) ? 'opacity-50 cursor-not-allowed' : ''}`,
     style: {
       background: style.background,
       border: style.border,
@@ -202,7 +216,7 @@ export const LiquidGlassButton: React.FC<LiquidGlassButtonProps> = ({
       backdropFilter: "blur(20px) saturate(180%)",
       WebkitBackdropFilter: "blur(20px) saturate(180%)",
     },
-    whileHover: prefersReducedMotion
+    whileHover: prefersReducedMotion || disabled || loading
       ? {}
       : {
           scale: 1.02,
@@ -212,7 +226,7 @@ export const LiquidGlassButton: React.FC<LiquidGlassButtonProps> = ({
           boxShadow: style.hoverShadow,
           transition: { duration: 0.3, ease: "easeOut" },
         },
-    whileTap: prefersReducedMotion
+    whileTap: prefersReducedMotion || disabled || loading
       ? {}
       : {
           scale: 0.98,

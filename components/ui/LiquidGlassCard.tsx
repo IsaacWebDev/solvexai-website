@@ -118,7 +118,10 @@ export const LiquidGlassCard: React.FC<LiquidGlassCardProps> = ({
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       whileHover={
-        prefersReducedMotion ? {} : { scale: 1.02, transition: { duration: 0.3 } }
+        prefersReducedMotion ? {} : { scale: 1.02, transition: { duration: 0.2 } }
+      }
+      whileTap={
+        prefersReducedMotion ? {} : { scale: 0.98, transition: { duration: 0.1 } }
       }
       role="region"
       aria-label="Glass card"

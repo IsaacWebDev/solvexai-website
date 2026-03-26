@@ -23,6 +23,25 @@ export default function ContactPage() {
   const [submitted, setSubmitted] = useState(false)
   const [errors, setErrors] = useState<Record<string, string>>({})
   
+  // Real-time validation helper
+  const validateField = (name: string, value: string | string[]) => {
+    if (name === 'email' && typeof value === 'string') {
+      if (!value) return 'Email is required'
+      if (!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(value)) {
+        return 'Please enter a valid email address'
+      }
+    }
+    if (name === 'name' && typeof value === 'string') {
+      if (!value) return 'Name is required'
+      if (value.length < 2) return 'Name must be at least 2 characters'
+    }
+    if (name === 'project' && typeof value === 'string') {
+      if (!value) return 'Project description is required'
+      if (value.length < 10) return 'Please provide more details (at least 10 characters)'
+    }
+    return ''
+  }
+  
   const handleCheckbox = (value: string) => {
     setFormData(prev => ({
       ...prev,

@@ -62,12 +62,17 @@ export default function ServiceCard({
         className="h-full"
       >
         <motion.div
-          className={`service-card glass-card p-8 text-center h-full flex flex-col relative overflow-hidden ${
+          className={`service-card glass-card p-8 text-center h-full flex flex-col relative overflow-hidden transition-all duration-200 ${
             featured ? 'border-[#00F0FF]/30' : ''
           }`}
           whileHover={{
             y: -8,
-            transition: { duration: 0.3 }
+            scale: 1.02,
+            transition: { duration: 0.2 }
+          }}
+          whileTap={{
+            scale: 0.98,
+            transition: { duration: 0.1 }
           }}
         >
           {/* Background circuit pattern */}

@@ -18,7 +18,13 @@ export function Card({ children, delay = 0, className = '' }: CardProps) {
       transition={{ duration: 0.6, delay }}
       whileHover={{ 
         y: -8,
-        boxShadow: '0 20px 40px rgba(139, 92, 246, 0.3)'
+        scale: 1.02,
+        boxShadow: '0 20px 40px rgba(139, 92, 246, 0.3)',
+        transition: { duration: 0.2 }
+      }}
+      whileTap={{ 
+        scale: 0.98,
+        transition: { duration: 0.1 }
       }}
       style={{
         background: 'rgba(255, 255, 255, 0.05)',
