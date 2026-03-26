@@ -9,7 +9,7 @@ import { ExitIntentPopupNew } from '@/components/ExitIntentPopupNew'
 import { LiveChatWidget } from '@/components/LiveChatWidget'
 import { FloatingActionMenu } from '@/components/FloatingActionMenu'
 import { CursorGlow } from '@/components/effects/CursorGlow'
-import { PageTransition } from '@/components/PageTransition'
+// import { PageTransition } from '@/components/PageTransition' // Disabled - causes black screen bug
 import { cn } from "@/lib/utils";
 
 const geist = Geist({subsets:['latin'],variable:'--font-sans'});
@@ -92,9 +92,7 @@ export default function RootLayout({
         <LiveChatWidget />
         <FloatingActionMenu />
         <ExitIntentPopupNew />
-        <PageTransition>
-          {children}
-        </PageTransition>
+        {children}
         <Analytics />
       </body>
     </html>
