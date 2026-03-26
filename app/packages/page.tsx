@@ -32,8 +32,10 @@ export default function PackagesPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <h1 className="font-bold" style={{ 
-              fontSize: typography.h1,
+            <h1 style={{ 
+              fontSize: 'clamp(40px, 5vw, 56px)',
+              fontWeight: 700,
+              lineHeight: 1.2,
               marginBottom: spacing.element.margin
             }}>
               Choose Your Automation Level

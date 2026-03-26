@@ -18,8 +18,7 @@ export default function AIReceptionistPage() {
       <Navigation />
       <AnimatedGradientMesh />
       
-      <main className="relative flex justify-center" style={{
-        paddingBottom: spacing.section.vertical,
+      <main className="relative flex justify-center py-[120px]" style={{
         paddingLeft: spacing.section.horizontal,
         paddingRight: spacing.section.horizontal
       }}>

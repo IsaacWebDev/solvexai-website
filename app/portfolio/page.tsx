@@ -123,7 +123,7 @@ export default function PortfolioPage() {
             <motion.p variants={fadeUp} className="text-sm uppercase tracking-widest text-purple-400 mb-6 font-medium">
               Our Work
             </motion.p>
-            <motion.h1 variants={fadeUp} className="text-5xl md:text-7xl font-light leading-tight mb-8">
+            <motion.h1 variants={fadeUp} className="font-light mb-8" style={{ fontSize: 'clamp(40px, 5vw, 56px)', fontWeight: 700, lineHeight: 1.2 }}>
               Built for<br />Real Businesses
             </motion.h1>
             <motion.p variants={fadeUp} className="text-xl text-gray-400 font-light w-full leading-relaxed px-4">

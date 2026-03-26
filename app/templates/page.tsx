@@ -253,8 +253,7 @@ export default function TemplatesPage() {
         </motion.div>
       )}
       
-      <main className="relative flex justify-center" style={{
-        paddingBottom: spacing.section.vertical,
+      <main className="relative flex justify-center py-[120px]" style={{
         paddingLeft: spacing.section.horizontal,
         paddingRight: spacing.section.horizontal
       }}>
@@ -267,7 +266,7 @@ export default function TemplatesPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <h1 className="font-bold mb-6" style={{ fontSize: typography.h1 }}>
+            <h1 className="mb-6" style={{ fontSize: 'clamp(40px, 5vw, 56px)', fontWeight: 700, lineHeight: 1.2 }}>
               Professional Websites, Ready in Days
             </h1>
             <p className="text-gray-300 mb-8" style={{ 
