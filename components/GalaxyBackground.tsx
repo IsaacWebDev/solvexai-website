@@ -299,7 +299,6 @@ export function GalaxyBackground() {
 
     return () => {
       window.removeEventListener('resize', resizeCanvas)
-      window.removeEventListener('resize', checkMobile)
       window.removeEventListener('mousemove', handleMouseMove)
       window.removeEventListener('scroll', handleScroll)
       if (rafRef.current) cancelAnimationFrame(rafRef.current)
