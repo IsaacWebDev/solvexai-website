@@ -10,6 +10,7 @@ import { LiveChatWidget } from '@/components/LiveChatWidget'
 import { FloatingActionMenu } from '@/components/FloatingActionMenu'
 import { CursorGlow } from '@/components/effects/CursorGlow'
 // import { PageTransition } from '@/components/PageTransition' // Disabled - causes black screen bug
+import { SkipNav } from '@/components/SkipNav'
 import { cn } from "@/lib/utils";
 
 const geist = Geist({subsets:['latin'],variable:'--font-sans'});
@@ -18,6 +19,7 @@ const inter = Inter({
   subsets: ['latin'],
   variable: '--font-inter',
   display: 'swap',
+  preload: true,
 })
 
 export const metadata: Metadata = {
@@ -85,6 +87,7 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       </head>
       <body className={inter.className}>
+        <SkipNav />
         <SmoothScroll />
         <LiquidCursor />
         <LiquidScrollProgress />

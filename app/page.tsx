@@ -8,7 +8,6 @@ import { MobileCTA } from '@/components/MobileCTA'
 import { AppleHero } from '@/components/sections/AppleHero'
 import { LiveCounter } from '@/components/interactive/LiveCounter'
 import { OutcomesSimple } from '@/components/sections/OutcomesSimple'
-import { TemplateGalaxy } from '@/components/TemplateGalaxy'
 import { PricingSimple } from '@/components/sections/PricingSimple'
 import { ComparisonTable } from '@/components/sections/ComparisonTable'
 import { CTAMinimal } from '@/components/sections/CTAMinimal'
@@ -17,7 +16,16 @@ import { SectionDivider } from '@/components/ui/SectionDivider'
 import { AutomationScanner } from '@/components/interactive/AutomationScanner'
 import dynamic from 'next/dynamic'
 
+// Dynamic imports for heavy components
 const GhostCursor = dynamic(() => import('@/components/effects/GhostCursor'), { ssr: false })
+const TemplateGalaxy = dynamic(() => import('@/components/TemplateGalaxy').then(mod => mod.TemplateGalaxy), {
+  loading: () => (
+    <div className="h-[500px] bg-gray-900/30 animate-pulse rounded-lg flex items-center justify-center" role="status" aria-label="Loading templates">
+      <span className="text-gray-400">Loading templates...</span>
+    </div>
+  ),
+  ssr: false,
+})
 
 export default function HomePage() {
   const [showCinematic, setShowCinematic] = useState(true)
@@ -68,6 +76,8 @@ export default function HomePage() {
       </div>
       
       <main 
+        id="main-content"
+        role="main"
         data-no-padding
         className="flex justify-center"
         style={{
@@ -79,7 +89,9 @@ export default function HomePage() {
         }}
       >
         <div className="w-full max-w-container-max flex flex-col gap-2xl">
-          <AppleHero />
+          <section aria-labelledby="hero-heading">
+            <AppleHero />
+          </section>
           <SectionDivider />
           
           <LiveCounter />
